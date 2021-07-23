@@ -1,7 +1,11 @@
 const router = require('express').Router();
 
 const { userController } = require('../controllers');
+const { dynamicMiddleware } = require('../middlewares');
+const { userValidator } = require('../validators');
 
-router.post('/', userController.createUser);
+router.post('/',
+    dynamicMiddleware.checkIsBodyDataValid(userValidator.createUser),
+    userController.createUser);
 
 module.exports = router;

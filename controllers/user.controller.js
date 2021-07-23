@@ -9,6 +9,8 @@ module.exports = {
                 firstname, lastname, email, role, password
             } = req.body;
 
+            // validatorRole.validRole(role);
+
             const hashedPassword = await passwordHasher.hash(password);
             const newUser = await User.create({
                 ...req.body,
