@@ -4,7 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import errorImg from "../../assets/messages-icons/error.png";
 import {login} from "../../actions/user";
 
-import {LoginButton, LoginContainer, LoginError, LoginForm, LoginInput, LoginLabel, LoginTitle} from "./Login.style";
+import {LoginButton, LoginContainer, LoginError, LoginForm, LoginTitle} from "./Login.style";
+import {Input, Label} from "../Inputs/CreateInputs.style";
 
 const Login = () => {
     const loginError = useSelector(({userReducer: {loginError}}) => loginError);
@@ -23,20 +24,22 @@ const Login = () => {
                     Incorrect email or password
                 </LoginError>
 
-                <LoginLabel>Email</LoginLabel>
-                <LoginInput
+                <Label>Email</Label>
+                <Input
                     id='email'
                     name='email'
                     type='email'
                     value={email}
+                    required
                     onChange={({target: {value}}) => setEmail(value)}/>
 
-                <LoginLabel>Password</LoginLabel>
-                <LoginInput
+                <Label>Password</Label>
+                <Input
                     id='password'
                     name='password'
                     type='password'
                     value={password}
+                    required
                     onChange={({target: {value}}) => setPassword(value)}/>
 
                 <LoginButton onClick={() => dispatch(login(email, password))}>Log in</LoginButton>

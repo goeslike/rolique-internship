@@ -3,7 +3,7 @@ import { SET_USER, LOGOUT, LOGIN_ERROR } from '../action-types';
 const initialState = {
     currentUser: {},
     loginError: '',
-    isAuth: false
+    isAuth: true
 }
 
 const reducer = (state = initialState, action) => {

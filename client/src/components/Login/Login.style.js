@@ -41,35 +41,6 @@ const LoginTitle = styled.div`
   opacity: 0.9;
 `;
 
-const LoginInput = styled.input`
-  width: 100%;
-  height: 32px;
-  
-  padding: 0 0 0 12px;
-
-  outline: none;
-  
-  border: 1px solid #BFBFBF;
-  border-radius: 6px;
-  
-  &:focus {
-    border: 1px solid rgba(255, 101, 14, 0.5);
-    filter: drop-shadow(0 0 rgba(255, 101, 14, 0.25));
-  }
-`;
-
-const LoginLabel = styled.div`
-  width: 100%;
-  height: 17px;
-  
-  margin: 0 0 8px 0;
-  
-  font-weight: normal;
-  font-size: 14px;
-  
-  color: rgba(0, 0, 0, 0.6);
-`;
-
 const LoginButton = styled.button`
   width: 100%;
   height: 33px;
@@ -110,14 +81,12 @@ const LoginError = styled.div`
   & img {
     margin: 0 8px 0 0;
   }
-`
+`;
 
 export {
     LoginContainer,
     LoginForm,
     LoginTitle,
-    LoginInput,
-    LoginLabel,
     LoginButton,
     LoginError
 };
