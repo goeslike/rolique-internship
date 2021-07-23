@@ -18,6 +18,7 @@ module.exports = {
 
     // BAD REQUEST
     BAD_REQUEST: {
+        message: 'Body has not valid value',
         customCode: 4000
     },
     WRONG_EMAIL_OR_PASSWORD: {
@@ -67,10 +68,6 @@ module.exports = {
     NOT_VALID_ACTIVATE_TOKEN: {
         customCode: 4012,
         message: 'Not valid activate token'
-    },
-    NOT_VALID_RESET_PASSWORD_TOKEN: {
-        customCode: 4013,
-        message: 'Not valid reset_password  token'
     },
     // PAYLOAD_TOO_LARGE
     FILE_TOO_LARGE: {
