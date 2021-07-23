@@ -9,8 +9,10 @@ const { apiRouter } = require('./routes');
 
 const app = express();
 
+const urlAtlas = 'mongodb+srv://admin_test:admin@testproject.v6ryu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
 function _mongooseConnector() {
-    mongoose.connect('mongodb://localhost:27017/hw-4', { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(urlAtlas, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 _mongooseConnector();
 
