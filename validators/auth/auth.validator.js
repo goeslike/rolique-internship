@@ -7,7 +7,7 @@ module.exports = {
             .regex(regexp.EMAIL_REGEXP)
             .required(),
         password: Joi.string()
-            .regex(regexp.PASSWORD_REGEXP)
+            // .regex(regexp.PASSWORD_REGEXP)
             .required(),
     })
 };

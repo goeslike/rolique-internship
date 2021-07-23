@@ -5,9 +5,9 @@ const {
 } = require('../errors');
 
 module.exports = {
-    checkIsBodyDataValid: (validatorType, validatorName) => async (req, res, next) => {
+    checkIsBodyDataValid: (validatorName) => async (req, res, next) => {
         try {
-            const { error } = await [validatorType][validatorName].validate(req.body);
+            const { error } = await validatorName.validate(req.body);
 
             if (error) {
                 throw new ErrorHandler(errorCodesEnum.BAD_REQUEST, error.details[0].message, BAD_REQUEST.customCode);

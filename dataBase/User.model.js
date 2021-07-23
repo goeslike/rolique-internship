@@ -20,14 +20,16 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        required: true
+        // required: true,
+        default: 'employee'
     },
     password: {
         type: String,
+        required: true
     },
     phone: {
         type: String,
-
+        required: true
     }
 }, { timestamps: true });
 
