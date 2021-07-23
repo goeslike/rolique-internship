@@ -3,12 +3,20 @@ const { regexp } = require('../../constants');
 
 module.exports = {
     createUser: Joi.object().keys({
-        name: Joi.string()
+        firstName: Joi.string()
+            .required()
+            .min(2)
+            .max(47),
+        lastName: Joi.string()
             .required()
             .min(2)
             .max(47),
         email: Joi.string()
             .regex(regexp.EMAIL_REGEXP)
+            .required(),
+        phone: Joi.number()
+            .required(),
+        role: Joi.string()
             .required(),
         password: Joi.string()
             .regex(regexp.PASSWORD_REGEXP)
@@ -18,11 +26,16 @@ module.exports = {
     }),
 
     updateUser: Joi.object().keys({
-        name: Joi.string()
+        firstName: Joi.string()
+            .min(2)
+            .max(47),
+        lastName: Joi.string()
             .min(2)
             .max(47),
         email: Joi.string()
             .regex(regexp.EMAIL_REGEXP),
+        phone: Joi.number(),
+        role: Joi.string(),
         password: Joi.string()
             .regex(regexp.PASSWORD_REGEXP)
             .min(6)

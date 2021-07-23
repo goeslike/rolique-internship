@@ -10,7 +10,7 @@ const { apiRouter } = require('./routes');
 const app = express();
 
 function _mongooseConnector() {
-    mongoose.connect('впиши тут базу даних', { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect('mongodb://localhost:27017/test-drive', { useNewUrlParser: true, useUnifiedTopology: true });
 }
 _mongooseConnector();
 
