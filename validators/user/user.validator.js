@@ -15,7 +15,7 @@ module.exports = {
             .regex(regexp.EMAIL_REGEXP)
             .required(),
         phone: Joi.string()
-            .regex(regexp.PHONE_REGEXP)
+            // .regex(regexp.PHONE_REGEXP)
             .required(),
         role: Joi.string()
             .required(),
