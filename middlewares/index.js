@@ -1,3 +1,5 @@
 module.exports = {
-    dynamicMiddleware: require('./check.data.dynamic.middleware')
+    authMiddleware: require('./auth.middleware'),
+    dynamicMiddleware: require('./check.data.dynamic.middleware'),
+    userMiddleware: require('./user.middleware')
 };

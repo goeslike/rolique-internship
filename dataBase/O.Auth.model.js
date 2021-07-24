@@ -2,11 +2,11 @@ const { Schema, model } = require('mongoose');
 const { dataBaseTablesEnum } = require('../constants');
 
 const oAuthSchema = new Schema({
-    accessToken: {
+    access_token: {
         type: String,
         required: true
     },
-    refreshToken: {
+    refresh_token: {
         type: String,
         required: true
     },
