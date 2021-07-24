@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 const { config: { PORT } } = require('./configs');
 
 const Sentry = require('./logger/sentry');
-const { apiRouter } = require('./routes');
+const { apiRouter, authRouter } = require('./routes');
+
+const {corsMiddleware} = require('./middlewares');
 
 const app = express();
 
@@ -15,11 +17,13 @@ function _mongooseConnector() {
 }
 _mongooseConnector();
 
+app.use(corsMiddleware);
 app.use(Sentry.Handlers.errorHandler());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/auth', authRouter);
 app.use('/', apiRouter);
 
 // eslint-disable-next-line no-unused-vars
