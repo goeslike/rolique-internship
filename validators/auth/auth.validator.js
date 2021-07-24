@@ -8,6 +8,6 @@ module.exports = {
             .required(),
         password: Joi.string()
             // .regex(regexp.PASSWORD_REGEXP)
-            .required(),
+            .required()
     })
 };
