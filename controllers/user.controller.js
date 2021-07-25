@@ -1,13 +1,13 @@
 const { passwordHasher } = require('../helpers');
 const { User } = require('../dataBase');
+const { userService } = require('../services');
+const { normalizer } = require('../helpers');
+const { statusCodesEnum } = require('../constants');
 
 module.exports = {
     createUser: async (req, res, next) => {
         try {
-            const {
-                // eslint-disable-next-line no-unused-vars
-                firstname, lastname, email, role, password
-            } = req.body;
+            const { password } = req.body;
 
             // validatorRole.validRole(role);
 
@@ -18,6 +18,7 @@ module.exports = {
             });
 
             res.json(newUser);
+            // res.status(statusCodesEnum.CREATED).json(constants.USER_IS_CREATED);
 
             next();
         } catch (error) {
@@ -25,9 +26,10 @@ module.exports = {
         }
     },
 
-    getAllUser: async (req, res, next) => {
+    getAllUsers: async (req, res, next) => {
         try {
-            const users = await User.find({});
+            const findUsers = await userService.findAll();
+            const users = await normalizer(findUsers);
 
             res.json(users);
         } catch (error) {
@@ -37,12 +39,13 @@ module.exports = {
 
     updateUser: async (req, res, next) => {
         try {
-            // eslint-disable-next-line no-unused-vars
-            const { email, name } = req.user;
+            const { params: { id }, body, body: { password } } = req;
 
-            await User.findByIdAndUpdate(req.params.userId, req.body);
+            const hashedPassword = await passwordHasher.hash(password);
 
-            res.json(`user id:${req.params.userId} updated`);
+            await userService.updateOne(id, { ...body, password: hashedPassword });
+
+            res.status(statusCodesEnum.OK).json(`user id:${id} is updated`);
         } catch (error) {
             next(error);
         }
