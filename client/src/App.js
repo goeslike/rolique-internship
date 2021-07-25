@@ -8,8 +8,6 @@ function App() {
     const isAuth = useSelector(({userReducer: {isAuth}}) => isAuth);
     const routes = useRoutes(isAuth);
 
-    console.log('IS AUTH', isAuth)
-
     return (
         <div className="App">
             <Router>

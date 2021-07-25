@@ -4,7 +4,7 @@ const initialState = {
     currentUser: {},
     loginError: '',
     isAuth: true
-}
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
         case LOGIN_ERROR: {
             return {
                 ...state,
-                loginError: action.payload.error
+                loginError: action.payload
             }
         }
 

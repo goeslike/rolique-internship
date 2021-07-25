@@ -20,7 +20,7 @@ const SidebarContainer = styled.div`
     border-top: 1px solid rgba(255, 255, 255, 0.3);
   }
   
-  & a:active {
+  & a:hover {
     background-color: rgba(255, 101, 14, 1);
   }
 `;

@@ -4,13 +4,6 @@ const UserWrapper = styled.div`
   width: 100%;
 `;
 
-const UserHeader = styled.header`
-  height: 80px;
-  width: 100%;
-
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-`;
-
 const UserContainer = styled.div`
   width: 100%;
   
@@ -48,7 +41,6 @@ const UserSectionTitle = styled.h3`
 `;
 
 export {
-    UserHeader,
     UserWrapper,
     UserContainer,
     UserFirstSection,

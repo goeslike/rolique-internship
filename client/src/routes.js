@@ -2,16 +2,16 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import LoginPage from './pages/LoginPage';
-import CreateUserPage from "./pages/CreateUserPage";
+import UsersPage from "./pages/UsersPage";
 
 const useRoutes = isAuthenticated => {
     if (isAuthenticated) {
         return (
             <Switch>
-                <Route path='/create-user' exect>
-                    <CreateUserPage />
+                <Route path='/users' exect>
+                    <UsersPage />
                 </Route>
-                <Redirect to='/create-user'/>
+                <Redirect to={'/users'} />
             </Switch>
         );
     }

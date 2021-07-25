@@ -8,12 +8,17 @@ import {LoginButton, LoginContainer, LoginError, LoginForm, LoginTitle} from "./
 import {Input, Label} from "../Inputs/CreateInputs.style";
 
 const Login = () => {
+    const dispatch = useDispatch();
     const loginError = useSelector(({userReducer: {loginError}}) => loginError);
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [form, setForm] = useState({
+        email: '',
+        password: ''
+    });
 
-    const dispatch = useDispatch();
+    const changeFormHandler = event => {
+        setForm({ ...form, [event.target.name]: event.target.value });
+    };
 
     return (
         <LoginContainer>
@@ -21,7 +26,7 @@ const Login = () => {
                 <LoginTitle>Log into your account</LoginTitle>
                 <LoginError style={{display: loginError ? 'flex' : 'none'}}>
                     <img src={errorImg} alt="error-img"/>
-                    Incorrect email or password
+                    { loginError }
                 </LoginError>
 
                 <Label>Email</Label>
@@ -29,21 +34,20 @@ const Login = () => {
                     id='email'
                     name='email'
                     type='email'
-                    value={email}
-                    required
-                    onChange={({target: {value}}) => setEmail(value)}/>
+                    value={form.email}
+                    onChange={changeFormHandler}/>
 
                 <Label>Password</Label>
                 <Input
                     id='password'
                     name='password'
                     type='password'
-                    value={password}
-                    required
-                    onChange={({target: {value}}) => setPassword(value)}/>
+                    value={form.password}
+                    onChange={changeFormHandler}/>
 
-                <LoginButton onClick={() => dispatch(login(email, password))}>Log in</LoginButton>
+                <LoginButton type='button' onClick={() => dispatch(login(form))}>Log in</LoginButton>
             </LoginForm>
+
         </LoginContainer>
     );
 };
