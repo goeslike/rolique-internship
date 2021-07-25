@@ -1,13 +1,15 @@
 const express = require('express');
 require('dotenv').config();
 const mongoose = require('mongoose');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const morgan = require('morgan');
 
-const { config: { PORT, URL_ATLAS } } = require('./configs');
+const { config: { PORT, URL_ATLAS, SERVER_RATE_LIMITS } } = require('./configs');
 
 const Sentry = require('./logger/sentry');
 const { apiRouter, authRouter } = require('./routes');
-
-const {corsMiddleware} = require('./middlewares');
+const { corsMiddleware } = require('./middlewares');
 
 const app = express();
 
@@ -16,8 +18,16 @@ function _mongooseConnector() {
 }
 _mongooseConnector();
 
+const serverRequestRateLimit = rateLimit({
+    windowMs: SERVER_RATE_LIMITS.period,
+    max: SERVER_RATE_LIMITS.maxRequests
+});
+
 app.use(corsMiddleware);
 app.use(Sentry.Handlers.errorHandler());
+app.use(serverRequestRateLimit);
+app.use(helmet());
+app.use(morgan('dev'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
