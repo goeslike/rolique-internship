@@ -8,9 +8,9 @@ module.exports = {
     JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'REFRESH_SECRET',
     JWT_REFRESH_SECRET_LIFETIME: process.env.JWT_REFRESH_SECRET_LIFETIME || '30d',
 
-    INTERN_USER_ROLE: process.env.INTERN_USER_ROLE || '',
-    INTERN_USER_FIRST_NAME: process.env.INTERN_USER_FIRST_NAME || '',
-    INTERN_USER_LAST_NAME: process.env.INTERN_USER_LAST_NAME || '',
-    INTERN_USER_EMAIL: process.env.INTERN_USER_EMAIL || '',
-    INTERN_USER_PASSWORD: process.env.INTERN_USER_PASSWORD || ''
+    INTERN_USER_ROLE: process.env.INTERN_USER_ROLE || 'admin',
+    INTERN_USER_FIRST_NAME: process.env.INTERN_USER_FIRST_NAME || 'Admin',
+    INTERN_USER_LAST_NAME: process.env.INTERN_USER_LAST_NAME || 'Rolique',
+    INTERN_USER_EMAIL: process.env.INTERN_USER_EMAIL || 'admin@rolique.io',
+    INTERN_USER_PASSWORD: process.env.INTERN_USER_PASSWORD || 'p@aS$ww0rD'
 };
