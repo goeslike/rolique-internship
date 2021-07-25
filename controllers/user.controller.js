@@ -28,8 +28,14 @@ module.exports = {
 
     getAllUsers: async (req, res, next) => {
         try {
+            const { role } = req.userId;
             const findUsers = await userService.findAll();
             const users = await normalizer(findUsers);
+
+            if (role !== 'admin') {
+                const allowedUsers = users.filter((user) => user.role !== 'admin');
+                return res.json(allowedUsers);
+            }
 
             res.json(users);
         } catch (error) {

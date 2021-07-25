@@ -8,7 +8,9 @@ const {
     actionEnum: { CREATE, UPDATE }
 } = require('../constants');
 
-router.get('/', userController.getAllUsers);
+router.get('/',
+    authMiddleware.checkAccessToken,
+    userController.getAllUsers);
 router.post('/',
     authMiddleware.checkAccessToken,
     accessMiddleware.checkRole([
