@@ -96,9 +96,9 @@ module.exports = {
         customCode: 4030,
         message: 'Access denied'
     },
-    FORBIDDEN_USER_NOT_CONFIRMED: {
-        customCode: 4031,
-        message: 'User is not confirmed'
+    CREATE_ADMIN_IS_FORBIDDEN: {
+        customCode: 4053,
+        message: 'CREAT ADMIN ROLE IS FORBIDDEN'
     },
     // SERVER_ERROR
     WRONG_ACTION: {
