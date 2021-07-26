@@ -1,5 +1,5 @@
 module.exports = {
     ErrorHandler: require('./ErrorHandler'),
-    errorCustomCodes: require('./error.customCodes'),
+    errorMassages: require('./error.massages'),
     errorCodesEnum: require('./errorCodes.enum'),
 };

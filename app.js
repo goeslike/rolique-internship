@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 require('dotenv').config();
 const mongoose = require('mongoose');
 
@@ -7,7 +8,7 @@ const { config: { PORT, URL_ATLAS } } = require('./configs');
 const Sentry = require('./logger/sentry');
 const { apiRouter, authRouter } = require('./routes');
 
-const {corsMiddleware} = require('./middlewares');
+const { corsMiddleware } = require('./middlewares');
 
 const app = express();
 
@@ -18,10 +19,11 @@ _mongooseConnector();
 
 app.use(corsMiddleware);
 app.use(Sentry.Handlers.errorHandler());
-
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 
+app.use(fileUpload({}));
 app.use('/auth', authRouter);
 app.use('/', apiRouter);
 
