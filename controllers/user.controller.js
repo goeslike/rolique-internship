@@ -1,22 +1,38 @@
 const { passwordHasher } = require('../helpers');
-const { User } = require('../dataBase');
-const { userService } = require('../services');
+const { fileService, userService } = require('../services');
+const { statusCode } = require('../constants');
 const { normalizer } = require('../helpers');
 const { statusCodesEnum } = require('../constants');
 
 module.exports = {
     createUser: async (req, res, next) => {
         try {
-            const { password } = req.body;
+            const {
+                photos: [avatar],
+                body: {
+                    password,
+                }
+            } = req;
 
             const hashedPassword = await passwordHasher.hash(password);
-            const newUser = await User.create({
+            const newUser = await userService.createUser({
                 ...req.body,
                 password: hashedPassword
             });
 
-            res.json(newUser);
-            // res.status(statusCodesEnum.CREATED).json(constants.USER_IS_CREATED);
+            const { _id } = newUser;
+
+            if (avatar) {
+                const {
+                    finalPath,
+                    filePath
+                } = await fileService.createFileDir('users', avatar.name, _id, 'photos');
+
+                await avatar.mv(finalPath);
+                await userService.updateUser({ _id }, { avatar: filePath, avatars: filePath });
+            }
+
+            res.status(statusCode.OK).json(newUser);
 
             next();
         } catch (error) {
@@ -56,5 +72,11 @@ module.exports = {
         } catch (error) {
             next(error);
         }
+    },
+
+    getUserById: (req, res) => {
+        const { user } = req;
+
+        res.status(statusCode.OK).json(user);
     },
 };

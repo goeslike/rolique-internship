@@ -36,98 +36,104 @@ const CreateUser = () => {
 
     const sendUser = async () => {
         await createUser(form);
-        setForm({firstName: '',
+        setForm({
+            firstName: '',
             lastName: '',
             email: '',
             phone: '',
             role: '',
-            password: ''})
+            password: ''
+        });
     };
 
     return (
         <UserWrapper>
             <CreateHeader title='Create Internal User' buttonText='Save Changes' func={sendUser}/>
 
-            <UserContainer>
-                <UserFirstSection>
-                    <UserSectionTitle>General</UserSectionTitle>
+            <form id={'create-form'}>
+                <UserContainer>
+                    <UserFirstSection>
+                        <UserSectionTitle>General</UserSectionTitle>
 
-                    <Label>Profile Picture</Label>
-                    <PictureInput
-                        id='profilePicture'
-                        name='profilePicture'
-                        type='file'/>
+                        <Label>Profile Picture</Label>
+                        <PictureInput
+                            id='profilePicture'
+                            name='profilePicture'
+                            type='file'/>
 
-                    <Label>First Name</Label>
-                    <Input
-                        id='firstName'
-                        name='firstName'
-                        type='text'
-                        required
-                        value={form.firstName}
-                        onChange={changeFormHandler}/>
+                        <Label>First Name</Label>
+                        <Input
+                            id='firstName'
+                            name='firstName'
+                            type='text'
+                            required
+                            value={form.firstName}
+                            onChange={changeFormHandler}/>
 
-                    <Label>Last Name</Label>
-                    <Input
-                        id='lastName'
-                        name='lastName'
-                        type='text'
-                        required
-                        value={form.lastName}
-                        onChange={changeFormHandler}/>
+                        <Label>Last Name</Label>
+                        <Input
+                            id='lastName'
+                            name='lastName'
+                            type='text'
+                            required
+                            value={form.lastName}
+                            onChange={changeFormHandler}/>
 
-                    <Label>Email</Label>
-                    <Input
-                        id='email'
-                        name='email'
-                        type='email'
-                        required
-                        value={form.email}
-                        onChange={changeFormHandler}/>
+                        <Label>Email</Label>
+                        <Input
+                            id='email'
+                            name='email'
+                            type='email'
+                            required
+                            value={form.email}
+                            onChange={changeFormHandler}/>
 
-                    <Label>Phone</Label>
-                    <Input
-                        id='phone'
-                        name='phone'
-                        type='tel'
-                        value={form.phone}
-                        onChange={changeFormHandler}/>
+                        <Label>Phone</Label>
+                        <Input
+                            id='phone'
+                            name='phone'
+                            type='tel'
+                            value={form.phone}
+                            min
+                            onChange={changeFormHandler}/>
 
-                </UserFirstSection>
+                    </UserFirstSection>
 
-                <UserSecondSection>
-                    <UserSectionTitle>
-                        Role & Permissions
-                        <img src={infoIcon} alt="infoIcon"/>
-                    </UserSectionTitle>
+                    <UserSecondSection>
+                        <UserSectionTitle>
+                            Role & Permissions
+                            <img src={infoIcon} alt="infoIcon"/>
+                        </UserSectionTitle>
 
-                    <Label>Role</Label>
-                    <Select
-                        id='select'
-                        name='role'
-                        type='select'
-                        value={'Select...'}
-                        required
-                        onChange={changeFormHandler}>
-                        {/*<option value='' disabled selected hidden>Select...</option>*/}
-                        <option value='Admin'>Admin</option>
-                        <option value='Manager'>Manager</option>
-                        <option value='Employee'>Employee</option>
-                    </Select>
+                        <Label>Role</Label>
+                        <Select
+                            id='select'
+                            name='role'
+                            type='select'
+                            value={form.role}
+                            required
+                            onChange={changeFormHandler}>
+                            <option value='' disabled selected hidden>Select...</option>
+                            <option value='Admin'>Admin</option>
+                            <option value='Manager'>Manager</option>
+                            <option value='Employee'>Employee</option>
+                        </Select>
 
-                    <UserSectionTitle>Password</UserSectionTitle>
+                        <UserSectionTitle>Password</UserSectionTitle>
 
-                    <Label>Set Password</Label>
-                    <Input
-                        id='password'
-                        name='password'
-                        type='password'
-                        required
-                        value={form.password}
-                        onChange={changeFormHandler}/>
+                        <Label>Set Password</Label>
+                        <Input
+                            id='password'
+                            name='password'
+                            type='password'
+                            required
+                            value={form.password}
+                            onChange={changeFormHandler}/>
 
-                </UserSecondSection>
-            </UserContainer>
+                    </UserSecondSection>
+                </UserContainer>
+            </form>
+
         </UserWrapper>
     );
 };

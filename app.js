@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
@@ -38,6 +39,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(fileUpload({}));
 app.use('/auth', authRouter);
 app.use('/', apiRouter);
 

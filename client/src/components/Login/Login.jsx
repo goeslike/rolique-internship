@@ -1,28 +1,32 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
 
 import errorImg from "../../assets/messages-icons/error.png";
+
 import {login} from "../../actions/user";
+import {loginSchema} from '../../validators/user-schema';
 
 import {LoginButton, LoginContainer, LoginError, LoginForm, LoginTitle} from "./Login.style";
-import {Input, Label} from "../Inputs/CreateInputs.style";
+import {HelperText, Input, Label} from "../Inputs/CreateInputs.style";
 
 const Login = () => {
     const dispatch = useDispatch();
     const loginError = useSelector(({userReducer: {loginError}}) => loginError);
 
-    const [form, setForm] = useState({
-        email: '',
-        password: ''
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        mode: 'onBlur',
+        resolver: yupResolver(loginSchema),
     });
-
-    const changeFormHandler = event => {
-        setForm({ ...form, [event.target.name]: event.target.value });
+    console.log(errors)
+    const sendData = (data) => {
+        dispatch(login(data));
     };
 
     return (
         <LoginContainer>
-            <LoginForm>
+            <LoginForm onSubmit={handleSubmit(sendData)} noValidate>
                 <LoginTitle>Log into your account</LoginTitle>
                 <LoginError style={{display: loginError ? 'flex' : 'none'}}>
                     <img src={errorImg} alt="error-img"/>
@@ -30,24 +34,25 @@ const Login = () => {
                 </LoginError>
 
                 <Label>Email</Label>
+                {errors?.email?.message && <HelperText>{errors?.email?.message}</HelperText>}
                 <Input
+                    {...register('email', {required: true})}
                     id='email'
-                    name='email'
                     type='email'
-                    value={form.email}
-                    onChange={changeFormHandler}/>
+                    error={!!errors.firstName}
+                />
 
                 <Label>Password</Label>
+                {errors?.password?.message && <HelperText>{errors?.password?.message}</HelperText>}
                 <Input
+                    {...register('password', {required: true})}
                     id='password'
-                    name='password'
                     type='password'
-                    value={form.password}
-                    onChange={changeFormHandler}/>
+                    error={!!errors.loginPassword}
+                />
 
-                <LoginButton type='button' onClick={() => dispatch(login(form))}>Log in</LoginButton>
+                <LoginButton type={'submit'}>Log in</LoginButton>
             </LoginForm>
-
         </LoginContainer>
     );
 };

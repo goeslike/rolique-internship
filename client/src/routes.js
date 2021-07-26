@@ -4,8 +4,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import UsersPage from "./pages/UsersPage";
 
-const useRoutes = isAuthenticated => {
-    if (isAuthenticated) {
+const useRoutes = isAuth => {
+    if (isAuth) {
         return (
             <Switch>
                 <Route path='/users' exect>

@@ -46,4 +46,4 @@ export {
     UserFirstSection,
     UserSecondSection,
     UserSectionTitle
-}
+};

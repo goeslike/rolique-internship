@@ -1,8 +1,9 @@
 const {
     ErrorHandler,
     errorCodesEnum,
-    errorCustomCodes: { BAD_REQUEST }
+    errorMassages: { BAD_REQUEST, RECORD_NOT_FOUND }
 } = require('../errors');
+const { userService } = require('../services');
 
 module.exports = {
     checkIsBodyDataValid: (validatorName) => async (req, res, next) => {
@@ -13,6 +14,22 @@ module.exports = {
                 throw new ErrorHandler(errorCodesEnum.BAD_REQUEST, error.details[0].message, BAD_REQUEST.customCode);
             }
 
+            next();
+        } catch (err) {
+            next(err);
+        }
+    },
+    checkIsUserDataExist: (paramName, searchIn = 'body', dataKey = paramName) => async (req, res, next) => {
+        try {
+            const value = req[searchIn][paramName];
+
+            const user = await userService.findOneByParams({ [dataKey]: value });
+
+            if (!user) {
+                throw new ErrorHandler(errorCodesEnum.NOT_FOUND, RECORD_NOT_FOUND.message, RECORD_NOT_FOUND.customCode);
+            }
+
+            req.user = user;
             next();
         } catch (err) {
             next(err);
