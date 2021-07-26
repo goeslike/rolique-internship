@@ -9,8 +9,6 @@ module.exports = {
         try {
             const { password } = req.body;
 
-            // validatorRole.validRole(role);
-
             const hashedPassword = await passwordHasher.hash(password);
             const newUser = await User.create({
                 ...req.body,
@@ -29,7 +27,7 @@ module.exports = {
     getAllUsers: async (req, res, next) => {
         try {
             const { role } = req.userId;
-            const findUsers = await userService.findAll();
+            const findUsers = await userService.findAll(req.query);
             const users = await normalizer(findUsers);
 
             if (role !== 'admin') {
@@ -47,9 +45,12 @@ module.exports = {
         try {
             const { params: { id }, body, body: { password } } = req;
 
-            const hashedPassword = await passwordHasher.hash(password);
+            if (password) {
+                const hashedPassword = await passwordHasher.hash(password);
+                await userService.updateOne(id, { ...body, password: hashedPassword });
+            }
 
-            await userService.updateOne(id, { ...body, password: hashedPassword });
+            await userService.updateOne(id, { ...body });
 
             res.status(statusCodesEnum.OK).json(`user id:${id} is updated`);
         } catch (error) {

@@ -4,12 +4,16 @@ const mongoose = require('mongoose');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const cors = require('cors');
 
-const { config: { PORT, URL_ATLAS, SERVER_RATE_LIMITS } } = require('./configs');
+const {
+    config: {
+        ALLOWED_ORIGIN, PORT, SERVER_RATE_LIMITS, URL_ATLAS
+    }
+} = require('./configs');
 
 const Sentry = require('./logger/sentry');
 const { apiRouter, authRouter } = require('./routes');
-const { corsMiddleware } = require('./middlewares');
 
 const app = express();
 
@@ -23,7 +27,9 @@ const serverRequestRateLimit = rateLimit({
     max: SERVER_RATE_LIMITS.maxRequests
 });
 
-app.use(corsMiddleware);
+// eslint-disable-next-line no-use-before-define
+app.use(cors({ origin: configureCors }));
+
 app.use(Sentry.Handlers.errorHandler());
 app.use(serverRequestRateLimit);
 app.use(helmet());
@@ -49,3 +55,17 @@ app.use('*', (err, req, res, next) => {
 app.listen(5000, () => {
     console.log(`App has been started on port ${PORT}...`);
 });
+
+function configureCors(origin, callback) {
+    const whiteList = ALLOWED_ORIGIN.split(';');
+
+    if (!origin) { // FOR postman
+        return callback(null, true);
+    }
+
+    if (!whiteList.includes(origin)) {
+        return callback(new Error('Cors not allowed'), false);
+    }
+
+    return callback(null, true);
+}
