@@ -1,16 +1,28 @@
 const { ErrorHandler, errorCodesEnum, errorCustomCodes } = require('../errors');
 
 module.exports = {
-    checkRole: (whoHaveAccess = []) => (req, res, next) => {
+    checkRole: (whoHaveAccess = [], action = '') => (req, res, next) => {
         try {
-            const { userId } = req;
+            const { userId, params: { id } } = req;
 
             if (!whoHaveAccess.length) {
                 return next();
             }
+            switch (action) {
+                case 'create':
 
-            if (!whoHaveAccess.includes(userId.role)) {
-                throw new ErrorHandler(errorCodesEnum.FORBIDDEN, errorCustomCodes.FORBIDDEN);
+                    if (!whoHaveAccess.includes(userId.role)) {
+                        throw new ErrorHandler(errorCodesEnum.FORBIDDEN, errorCustomCodes.FORBIDDEN);
+                    }
+                    break;
+
+                case 'update':
+                    if (!whoHaveAccess.includes(userId.role)) {
+                        if (userId.role === 'employee' && userId._id !== id) { // employee can edit his own profile
+                            throw new ErrorHandler(errorCodesEnum.FORBIDDEN, errorCustomCodes.FORBIDDEN);
+                        }
+                    }
+                    break;
             }
 
             next();

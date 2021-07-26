@@ -29,8 +29,12 @@ const userSchema = new Schema({
     },
     phone: {
         type: String,
-        required: true
+        // required: true
     }
-}, { timestamps: true });
+}, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
+
+userSchema.virtual('name').get(function() {
+    return `${this.firstname} ${this.lastname}`;
+});
 
 module.exports = model(dataBaseTablesEnum.USER, userSchema);
