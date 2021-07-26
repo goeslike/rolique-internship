@@ -1,11 +1,18 @@
 const { User } = require('../dataBase');
+const { queryBuilder, normalizer } = require('../helpers');
 
 module.exports = {
     createUser: (userObject) => User.create(userObject),
-
     findOneByParams: (params) => User.findOne(params),
 
-    updateUser: (query, updateInfo) => User.updateOne(query, updateInfo),
+    findAll: async (query = {}) => {
+        const { filterObject, sort } = queryBuilder(query, 'user');
 
-    getAllUsers: () => User.find({}),
+        const users = await User.find(filterObject).sort(sort);
+        return users;
+    },
+
+    updateOne: async (id, updateObject) => {
+        await User.findByIdAndUpdate(id, { $set: updateObject });
+    }
 };

@@ -13,12 +13,16 @@ module.exports = {
         await passwordHasher.compare(password, user.password);
 
         const { access_token, refresh_token } = tokenizer();
-
-        await O_Auth.create({ access_token, refresh_token, user: user._id });
+        await O_Auth.create({
+            access_token,
+            refresh_token,
+            user: user._id
+        });
 
         return {
             access_token,
-            refresh_token
+            refresh_token,
+            currentUser: user.role
         };
     },
     refreshToken: async (user, _id) => {
