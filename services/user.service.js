@@ -7,5 +7,5 @@ module.exports = {
 
     updateUser: (query, updateInfo) => User.updateOne(query, updateInfo),
 
-    getAllUsers: () => User.find({ isDeleted: false }),
+    getAllUsers: () => User.find({}),
 };

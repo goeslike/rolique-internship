@@ -1,9 +1,7 @@
 module.exports = {
-    // NOT FOUND
     USER_NOT_FOUND: {
         customCode: 4040,
         message: 'User with such id or email not exist'
-
     },
     NOT_EXIST_USER_WITH_SUCH_TOKEN: {
         customCode: 4041
@@ -16,8 +14,6 @@ module.exports = {
         customCode: 4043,
         message: 'Root email credentials are not defined!'
     },
-
-    // BAD REQUEST
     BAD_REQUEST: {
         message: 'Body has not valid value',
         customCode: 4000
@@ -54,7 +50,6 @@ module.exports = {
         customCode: 4009,
         message: 'Wrong password'
     },
-    // UNAUTHORIZED
     NOT_VALID_TOKEN: {
         customCode: 4010,
         message: 'Not valid token'
@@ -63,33 +58,6 @@ module.exports = {
         customCode: 4011,
         message: 'Not valid refresh token'
     },
-    NOT_VALID_ACTIVATE_TOKEN: {
-        customCode: 4012,
-        message: 'Not valid activate token'
-    },
-    // PAYLOAD_TOO_LARGE
-    FILE_TOO_LARGE: {
-        customCode: 4130,
-        message: 'File too large'
-    },
-    //    NOT_ALLOWED
-    ONLY_ONE_FILE_ALLOWED_UPLOAD: {
-        customCode: 4051,
-        message: 'Only one photo is  allowed to be upload'
-    },
-    THIS_MIMETYPE_NOT_ALLOWED: {
-        customCode: 4052,
-        message: 'THIS MIMETYPE NOT ALLOWED'
-    },
-    THIS_PHOTO_MIMETYPE_NOT_ALLOWED: {
-        customCode: 4052,
-        message: 'THIS PHOTO MIMETYPE NOT ALLOWED'
-    },
-    THIS_DOC_MIMETYPE_NOT_ALLOWED: {
-        customCode: 4052,
-        message: 'THIS DOC MIMETYPE NOT ALLOWED'
-    },
-    // FORBIDDEN
     FORBIDDEN: {
         customCode: 4030,
         message: 'Access denied'
@@ -98,7 +66,6 @@ module.exports = {
         customCode: 4053,
         message: 'CREAT ADMIN ROLE IS FORBIDDEN'
     },
-    // SERVER_ERROR
     WRONG_ACTION: {
         customCode: 5000,
         message: 'Wrong action'
