@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "server": "nodemon app.js",
+    "seeding": "node seed.script.js",
+    "server": "concurrently \"npm run seeding\" \"nodemon app.js\"",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
@@ -27,9 +28,10 @@
     "helmet": "^4.6.0",
     "joi": "^17.4.1",
     "jsonwebtoken": "^8.5.1",
-    "uuid": "^8.3.2",
+    "mongodb": "^4.0.1",
     "mongoose": "^5.13.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/express-rate-limit": "^5.1.3",

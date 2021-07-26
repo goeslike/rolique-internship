@@ -1,4 +1,5 @@
 module.exports = {
     USER: 'users',
-    O_AUTH: 'O_Auth'
+    O_AUTH: 'O_Auth',
+    DB_NAME: 'myFirstDatabase'
 };

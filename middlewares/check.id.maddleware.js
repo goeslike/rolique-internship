@@ -3,10 +3,10 @@ const { statusCode } = require('../constants');
 const { userIdValidator } = require('../validators');
 
 module.exports = {
-    checkIsUserIdValid: (req, res, next) => {
+    checkIsRequestIdValid: (req, res, next) => {
         try {
-            const { userId } = req.params;
-            const isUserIdValid = userIdValidator(userId);
+            const { id } = req.params;
+            const isUserIdValid = userIdValidator(id);
 
             if (!isUserIdValid) {
                 throw new ErrorHandler(statusCode.BAD_REQUEST, BAD_REQUEST_ID.message, BAD_REQUEST_ID.customCode);

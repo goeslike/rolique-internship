@@ -1,7 +1,11 @@
 const bcrypt = require('bcrypt');
-const ErrorHandler = require('../errors');
-const { errorCodesEnum, errorCustomCodes } = require('../errors');
-const { constants } = require('../constants');
+const {
+    ErrorHandler,
+    errorMassages: {
+        WRONG_EMAIL_OR_PASSWORD
+    }
+} = require('../errors');
+const { statusCode } = require('../constants');
 
 module.exports = {
     compare: async (hashedPassword, password) => {
@@ -9,9 +13,9 @@ module.exports = {
 
         if (!isPasswordMatched) {
             throw new ErrorHandler(
-                errorCodesEnum.NOT_FOUND,
-                constants.PASSWORD_IS_INVALID,
-                errorCustomCodes.USER_NOT_FOUND.customCode
+                statusCode.BAD_REQUEST,
+                WRONG_EMAIL_OR_PASSWORD.message,
+                WRONG_EMAIL_OR_PASSWORD.customCode
             );
         }
     },
