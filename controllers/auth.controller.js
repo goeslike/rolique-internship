@@ -1,5 +1,4 @@
 const { authService } = require('../services');
-const { statusCodesEnum } = require('../constants');
 
 module.exports = {
     authUser: async (req, res, next) => {
@@ -21,17 +20,5 @@ module.exports = {
         } catch (e) {
             next(e);
         }
-    },
-    logoutUser: async (req, res, next) => {
-        try {
-            const { infoTokens } = req;
-
-            await authService.removeTokens(infoTokens);
-
-            res.sendStatus(statusCodesEnum.NO_CONTENT);
-        } catch (e) {
-            next(e);
-        }
     }
-
 };
