@@ -2,11 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import useRoutes from "./routes";
-import {useSelector} from "react-redux";
 
 function App() {
-    const isAuth = useSelector(({userReducer: {isAuth}}) => isAuth);
-    const routes = useRoutes(isAuth);
+    const routes = useRoutes(localStorage.getItem('accessToken'));
 
     return (
         <div className="App">

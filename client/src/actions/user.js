@@ -1,35 +1,25 @@
 import axios from "axios";
 import {loginError, setUser} from "../redux/action-creators";
 
-const BASE_URL = 'http://localhost:3000/';
+const BASE_URL = 'http://localhost:5000/';
 
 const createUser = async (form) => {
     try {
-        console.log(form)
-        const response = await axios.post(BASE_URL, 'users', form);
+        await axios.post(BASE_URL, 'users', form);
     } catch (e) {
-        alert(e);
+        console.log(e);
     }
 };
 
 const login = (form) => {
     return async (dispatch) => {
         try {
-            const { email, password } = form;
-
-            if (!email && !password) {
-                throw new Error('please fill in all fields');
-            }
-
             dispatch(loginError(''));
 
-            const response = await axios.post(BASE_URL + 'auth/login', {
-                email,
-                password
-            });
+            const response = await axios.post(BASE_URL + 'auth/login', form);
 
-            dispatch(setUser(response.data.user));
-            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('accessToken', response.data.access_token);
+            localStorage.setItem('refreshToken', response.data.refresh_token);
         } catch (e) {
             dispatch(loginError(e.message));
         }

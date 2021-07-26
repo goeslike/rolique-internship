@@ -79,9 +79,19 @@ const Select = styled.select`
   }
 `;
 
+const HelperText = styled.p`
+  width: 100%;
+  
+  font-weight: normal;
+  font-size: 12px;
+
+  color: #DA1414;
+`
+
 export {
     Input,
     Label,
     PictureInput,
-    Select
+    Select,
+    HelperText
 };
