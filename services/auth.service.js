@@ -1,13 +1,14 @@
-const { ErrorHandler, errorCodesEnum, errorCustomCodes } = require('../errors');
+const { ErrorHandler, errorMassages } = require('../errors');
 const { passwordHasher, tokenizer } = require('../helpers');
 const { O_Auth, User } = require('../dataBase');
+const { statusCode } = require('../constants');
 
 module.exports = {
     authUser: async (email, password) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            throw new ErrorHandler(errorCodesEnum.NOT_FOUND, errorCustomCodes.USER_NOT_FOUND);
+            throw new ErrorHandler(statusCode.NOT_FOUND, errorMassages.USER_NOT_FOUND);
         }
 
         await passwordHasher.compare(password, user.password);

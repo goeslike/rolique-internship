@@ -1,9 +1,9 @@
 const {
     ErrorHandler,
-    errorCodesEnum,
     errorMassages: { BAD_REQUEST, RECORD_NOT_FOUND }
 } = require('../errors');
 const { userService } = require('../services');
+const { statusCode } = require('../constants');
 
 module.exports = {
     checkIsBodyDataValid: (validatorName) => async (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports = {
             const { error } = await validatorName.validate(req.body);
 
             if (error) {
-                throw new ErrorHandler(errorCodesEnum.BAD_REQUEST, error.details[0].message, BAD_REQUEST.customCode);
+                throw new ErrorHandler(statusCode.BAD_REQUEST, error.details[0].message, BAD_REQUEST.customCode);
             }
 
             next();
@@ -26,7 +26,7 @@ module.exports = {
             const user = await userService.findOneByParams({ [dataKey]: value });
 
             if (!user) {
-                throw new ErrorHandler(errorCodesEnum.NOT_FOUND, RECORD_NOT_FOUND.message, RECORD_NOT_FOUND.customCode);
+                throw new ErrorHandler(statusCode.NOT_FOUND, RECORD_NOT_FOUND.message, RECORD_NOT_FOUND.customCode);
             }
 
             req.user = user;

@@ -1,8 +1,6 @@
-const { passwordHasher } = require('../helpers');
+const { normalizer, passwordHasher } = require('../helpers');
 const { fileService, userService } = require('../services');
 const { statusCode } = require('../constants');
-const { normalizer } = require('../helpers');
-const { statusCodesEnum } = require('../constants');
 
 module.exports = {
     createUser: async (req, res, next) => {
@@ -29,7 +27,7 @@ module.exports = {
                 } = await fileService.createFileDir('users', avatar.name, _id, 'photos');
 
                 await avatar.mv(finalPath);
-                await userService.updateUser({ _id }, { avatar: filePath, avatars: filePath });
+                await userService.updateOne({ _id }, { avatar: filePath, avatars: filePath });
             }
 
             res.status(statusCode.OK).json(newUser);
@@ -68,7 +66,7 @@ module.exports = {
 
             await userService.updateOne(id, { ...body });
 
-            res.status(statusCodesEnum.OK).json(`user id:${id} is updated`);
+            res.status(statusCode.OK).json(`user id:${id} is updated`);
         } catch (error) {
             next(error);
         }

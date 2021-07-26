@@ -1,4 +1,5 @@
-const { ErrorHandler, errorCodesEnum, errorCustomCodes } = require('../errors');
+const { ErrorHandler, errorMassages } = require('../errors');
+const { statusCode } = require('../constants');
 
 module.exports = {
     checkRole: (whoHaveAccess = [], action = '') => (req, res, next) => {
@@ -12,14 +13,14 @@ module.exports = {
                 case 'create':
 
                     if (!whoHaveAccess.includes(userId.role)) {
-                        throw new ErrorHandler(errorCodesEnum.FORBIDDEN, errorCustomCodes.FORBIDDEN);
+                        throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.FORBIDDEN);
                     }
                     break;
 
                 case 'update':
                     if (!whoHaveAccess.includes(userId.role)) {
                         if (userId.role === 'employee' && userId._id !== id) { // employee can edit his own profile
-                            throw new ErrorHandler(errorCodesEnum.FORBIDDEN, errorCustomCodes.FORBIDDEN);
+                            throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.FORBIDDEN);
                         }
                     }
                     break;
@@ -35,7 +36,7 @@ module.exports = {
             const { body: { role }, userId } = req;
 
             if (userId.role === 'manager' && role === 'admin') {
-                throw new ErrorHandler(errorCodesEnum.FORBIDDEN, errorCustomCodes.CREATE_ADMIN_IS_FORBIDDEN);
+                throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.CREATE_ADMIN_IS_FORBIDDEN);
             }
 
             next();

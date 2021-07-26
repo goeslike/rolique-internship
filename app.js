@@ -14,7 +14,7 @@ const {
 } = require('./configs');
 
 const Sentry = require('./logger/sentry');
-const { apiRouter, authRouter } = require('./routes');
+const { apiRouter } = require('./routes');
 
 const app = express();
 
@@ -40,7 +40,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(fileUpload({}));
-app.use('/auth', authRouter);
 app.use('/', apiRouter);
 
 // eslint-disable-next-line no-unused-vars

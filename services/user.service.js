@@ -1,5 +1,5 @@
 const { User } = require('../dataBase');
-const { queryBuilder, normalizer } = require('../helpers');
+const { queryBuilder } = require('../helpers');
 
 module.exports = {
     createUser: (userObject) => User.create(userObject),

@@ -10,10 +10,6 @@ module.exports = {
         message: 'Record not found',
         customCode: 4042
     },
-    CREDENTIALS_NOT_DEFINED: {
-        customCode: 4043,
-        message: 'Root email credentials are not defined!'
-    },
     BAD_REQUEST: {
         message: 'Body has not valid value',
         customCode: 4000
