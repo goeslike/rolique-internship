@@ -70,11 +70,5 @@ module.exports = {
         } catch (error) {
             next(error);
         }
-    },
-
-    getUserById: (req, res) => {
-        const { user } = req;
-
-        res.status(statusCode.OK).json(user);
-    },
+    }
 };

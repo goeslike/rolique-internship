@@ -17,31 +17,29 @@ const {
 router.get('/',
     authMiddleware.checkAccessToken,
     userController.getAllUsers);
+
 router.post('/',
-    authMiddleware.checkAccessToken,
-    accessMiddleware.checkRole([
-        ADMIN,
-        MANAGER
-    ], CREATE),
+    // authMiddleware.checkAccessToken,
+    // accessMiddleware.checkRole([
+    //     ADMIN,
+    //     MANAGER
+    // ], CREATE),
+    // accessMiddleware.isManager, //  manager неможе створити admin
     imageMiddleware.checkImage,
     imageMiddleware.checkAvatar,
     dynamicMiddleware.checkIsBodyDataValid(userValidator.createUser),
-    accessMiddleware.isManager, //  manager неможе створити admin
     userController.createUser);
-router.post('/:id',
+
+router.put('/:id',
+    checkIdValid.checkIsRequestIdValid,
     authMiddleware.checkAccessToken,
     accessMiddleware.checkRole([
         ADMIN,
         MANAGER,
         EMPLOYEE
     ], UPDATE),
-    dynamicMiddleware.checkIsBodyDataValid(userValidator.updateUser),
     accessMiddleware.isManager, // можна пробувити передати роль на фронт а він уже робить роль admin disabled ?
+    dynamicMiddleware.checkIsBodyDataValid(userValidator.updateUser),
     userController.updateUser);
-
-router.get('/:userId', // по якому параметру шукати юзера, щоб відображати деталі інфлуенсера?
-    checkIdValid.checkIsUserIdValid,
-    dynamicMiddleware.checkIsUserDataExist('userId', 'params', '_id'),
-    userController.getUserById);
 
 module.exports = router;
