@@ -8,7 +8,8 @@ module.exports = {
     NOT_EXIST_USER_WITH_SUCH_TOKEN: {
         customCode: 4041
     },
-    NOT_EXIST_USER_WITH_SUCH_ID: {
+    RECORD_NOT_FOUND: {
+        message: 'Record not found',
         customCode: 4042
     },
     CREDENTIALS_NOT_DEFINED: {
@@ -29,20 +30,17 @@ module.exports = {
         customCode: 4002,
         message: 'Token is required'
     },
-    REFRESH_TOKEN_IS_REQUIRED: {
-        customCode: 4003,
-        message: 'Refresh token is required'
+    LARGE_FILE_SIZE: {
+        message: (name) => `File ${name}  is too big`,
+        customCode: 4003
     },
-    ACTIVATE_TOKEN_IS_REQUIRED: {
-        customCode: 4004,
-        message: 'Activate token is required'
+    AVATAR_ERROR: {
+        massages: 'Choose only one photo for avatar',
+        customCode: 4004
     },
-    RESET_PASSWORD_TOKEN_IS_REQUIRED: {
-        customCode: 4005,
-        message: 'Reset_password token is required'
-    },
-    NOT_VALID_FILE: {
-        customCode: 4006
+    BAD_REQUEST_ID: {
+        message: 'UserID has not valid value',
+        customCode: 4005
     },
     USER_ALREADY_REGISTERED: {
         customCode: 4007,

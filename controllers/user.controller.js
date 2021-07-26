@@ -1,23 +1,38 @@
 const { passwordHasher } = require('../helpers');
-const { User } = require('../dataBase');
+const { fileService, userService } = require('../services');
+const { statusCode } = require('../constants');
 
 module.exports = {
     createUser: async (req, res, next) => {
         try {
             const {
-                // eslint-disable-next-line no-unused-vars
-                firstname, lastname, email, role, password
-            } = req.body;
+                photos: [avatar],
+                body: {
+                    password,
+                }
+            } = req;
 
             // validatorRole.validRole(role);
 
             const hashedPassword = await passwordHasher.hash(password);
-            const newUser = await User.create({
+            const newUser = await userService.createUser({
                 ...req.body,
                 password: hashedPassword
             });
 
-            res.json(newUser);
+            const { _id } = newUser;
+
+            if (avatar) {
+                const {
+                    finalPath,
+                    filePath
+                } = await fileService.createFileDir('users', avatar.name, _id, 'photos');
+
+                await avatar.mv(finalPath);
+                await userService.updateUser({ _id }, { avatar: filePath, avatars: filePath });
+            }
+
+            res.status(statusCode.OK).json(newUser);
 
             next();
         } catch (error) {
@@ -25,9 +40,9 @@ module.exports = {
         }
     },
 
-    getAllUser: async (req, res, next) => {
+    getAllUsers: async (req, res, next) => {
         try {
-            const users = await User.find({});
+            const users = await userService.getAllUsers({});
 
             res.json(users);
         } catch (error) {
@@ -37,14 +52,19 @@ module.exports = {
 
     updateUser: async (req, res, next) => {
         try {
-            // eslint-disable-next-line no-unused-vars
-            const { email, name } = req.user;
+            const { params: { userId }, body } = req;
 
-            await User.findByIdAndUpdate(req.params.userId, req.body);
+            await userService.updateUser({ userId }, body);
 
-            res.json(`user id:${req.params.userId} updated`);
+            res.status(statusCode.UPDATED).json(`user id:${userId} updated`);
         } catch (error) {
             next(error);
         }
+    },
+
+    getUserById: (req, res) => {
+        const { user } = req;
+
+        res.status(statusCode.OK).json(user);
     },
 };
