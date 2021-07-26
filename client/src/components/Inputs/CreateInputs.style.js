@@ -22,18 +22,6 @@ const Input = styled.input`
   }
 `;
 
-const PictureInput = styled.input`
-  width: 64px;
-  height: 64px;
-  
-  margin: 0 0 24px;
-  
-  cursor: pointer;
-  
-  border: 1px dashed rgba(197, 146, 165, 0.8);
-  border-radius: 50%;
-`;
-
 const Label = styled.div`
   width: 100%;
   height: 17px;
@@ -45,6 +33,44 @@ const Label = styled.div`
   
   color: rgba(0, 0, 0, 0.6);
 `;
+
+const FileLabel = styled.label`
+  display: block;
+  position: relative;
+
+  width: 64px;
+  height: 64px;
+
+  margin: 0 0 24px;
+
+  cursor: pointer;
+
+  border: 1px dashed rgba(197, 146, 165, 0.8);
+  border-radius: 50%;
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    background-color: #D0A7B6;
+    height: 1px;
+    top: 50%;
+    left: 26px;
+    right: 26px;
+    z-index: 1000;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    background-color: #D0A7B6;
+    width: 1px;
+    left: 50%;
+    top: 26px;
+    bottom: 26px;
+    z-index: 1000;
+  }
+`
 
 const Select = styled.select`
   width: 100%;
@@ -91,7 +117,7 @@ const HelperText = styled.p`
 export {
     Input,
     Label,
-    PictureInput,
+    FileLabel,
     Select,
     HelperText
 };

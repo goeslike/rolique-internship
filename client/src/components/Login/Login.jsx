@@ -19,7 +19,7 @@ const Login = () => {
         mode: 'onBlur',
         resolver: yupResolver(loginSchema),
     });
-    console.log(errors)
+
     const sendData = (data) => {
         dispatch(login(data));
     };
@@ -39,7 +39,7 @@ const Login = () => {
                     {...register('email', {required: true})}
                     id='email'
                     type='email'
-                    error={!!errors.firstName}
+                    error={!!errors.email}
                 />
 
                 <Label>Password</Label>
