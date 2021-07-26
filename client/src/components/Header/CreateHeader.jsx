@@ -11,7 +11,7 @@ const CreateHeader = ({title, buttonText, func}) => {
                 <Link to={'/users'}><img src={redirectIcon} alt="redirectIcon"/></Link>
                 { title }
             </HeaderTitle>
-            <HeaderButton type='submit' form={'create-form'} onClick={()=>func}>{ buttonText }</HeaderButton>
+            <HeaderButton type='submit' form={'create-form'}>{ buttonText }</HeaderButton>
         </Header>
     );
 };

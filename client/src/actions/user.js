@@ -1,5 +1,5 @@
 import axios from "axios";
-import {loginError, setUser} from "../redux/action-creators";
+import {loginError} from "../redux/action-creators";
 
 const BASE_URL = 'http://localhost:5000/';
 

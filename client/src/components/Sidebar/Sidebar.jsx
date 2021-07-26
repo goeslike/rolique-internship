@@ -1,5 +1,4 @@
 import React from 'react';
-import {useLocation} from "react-router-dom";
 import { Link } from "react-router-dom";
 import {SidebarContainer, SidebarLogo} from './Sidebar.style';
 
@@ -9,9 +8,6 @@ import compaignIcon from '../../assets/links-icons/compaign.png';
 import influencerIcon from '../../assets/links-icons/influencer.png';
 
 const Sidebar = ({user, compaign, influencer}) => {
-    const location = useLocation();
-    console.log(location.pathname)
-
     return (
         <SidebarContainer>
             <SidebarLogo src={logo} alt='logo'/>

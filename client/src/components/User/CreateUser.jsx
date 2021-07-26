@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
-import infoIcon from '../../assets/info-icon.png';
+import React from 'react';
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
-import {createUser} from '../../actions/user';
+import infoIcon from '../../assets/info-icon.png';
 
 import {
     UserWrapper,
@@ -12,90 +14,86 @@ import {
 } from './CreateUser.style';
 
 import {
+    FileLabel,
+    HelperText,
     Input,
     Label,
-    PictureInput,
     Select
 } from "../Inputs/CreateInputs.style";
 
+import {createSchema} from "../../validators/user-schema";
 import CreateHeader from '../Header/CreateHeader';
+import {createUser} from "../../actions/user";
 
 const CreateUser = () => {
-    const [form, setForm] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        role: '',
-        password: ''
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        mode: 'onBlur',
+        resolver: yupResolver(createSchema),
     });
 
-    const changeFormHandler = event => {
-        setForm({ ...form, [event.target.name]: event.target.value });
+    const normalizePhoneNumber = (value) => {
+        const phoneNumber = parsePhoneNumberFromString(value)
+        if(!phoneNumber){
+            return value
+        }
+
+        return (
+            phoneNumber.formatInternational()
+        );
     };
 
-    const sendUser = async () => {
-        await createUser(form);
-        setForm({
-            firstName: '',
-            lastName: '',
-            email: '',
-            phone: '',
-            role: '',
-            password: ''
-        });
+    const sendData = async (data) => {
+        await createUser(data);
     };
 
     return (
         <UserWrapper>
-            <CreateHeader title='Create Internal User' buttonText='Save Changes' func={sendUser}/>
+            <CreateHeader title='Create Internal User' buttonText='Save Changes'/>
 
-            <form id={'create-form'}>
+            <form id={'create-form'} onSubmit={handleSubmit(sendData)} noValidate>
                 <UserContainer>
                     <UserFirstSection>
                         <UserSectionTitle>General</UserSectionTitle>
 
                         <Label>Profile Picture</Label>
-                        <PictureInput
+                        <Input
+                            style={{display: 'none'}}
+                            {...register('profilePicture', {required: true})}
                             id='profilePicture'
-                            name='profilePicture'
-                            type='file'/>
+                            type='file'
+                            accept='image/*'/>
+                        <FileLabel for='profilePicture' />
 
                         <Label>First Name</Label>
+                        {errors?.firstName?.message && <HelperText>{errors?.firstName?.message}</HelperText>}
                         <Input
+                            {...register('firstName', {required: true})}
                             id='firstName'
-                            name='firstName'
-                            type='text'
-                            required
-                            value={form.firstName}
-                            onChange={changeFormHandler}/>
+                            type='text'/>
 
                         <Label>Last Name</Label>
+                        {errors?.lastName?.message && <HelperText>{errors?.lastName?.message}</HelperText>}
                         <Input
+                            {...register('lastName', {required: true})}
                             id='lastName'
-                            name='lastName'
-                            type='text'
-                            required
-                            value={form.lastName}
-                            onChange={changeFormHandler}/>
+                            type='text'/>
 
                         <Label>Email</Label>
+                        {errors?.email?.message && <HelperText>{errors?.email?.message}</HelperText>}
                         <Input
+                            {...register('email', {required: true})}
                             id='email'
-                            name='email'
-                            type='email'
-                            required
-                            value={form.email}
-                            onChange={changeFormHandler}/>
+                            type='email'/>
 
                         <Label>Phone</Label>
+                        {errors?.phone?.message && <HelperText>{errors?.phone?.message}</HelperText>}
                         <Input
+                            {...register('phone', {required: true})}
                             id='phone'
-                            name='phone'
                             type='tel'
-                            value={form.phone}
-                            min
-                            onChange={changeFormHandler}/>
+                            onChange={(event) => {
+                                event.target.value = normalizePhoneNumber(event.target.value);
+                            }}/>
 
                     </UserFirstSection>
 
@@ -106,13 +104,11 @@ const CreateUser = () => {
                         </UserSectionTitle>
 
                         <Label>Role</Label>
+                        {errors?.role?.message && <HelperText>{errors?.role?.message}</HelperText>}
                         <Select
-                            id='select'
-                            name='role'
-                            type='select'
-                            value={form.role}
-                            required
-                            onChange={changeFormHandler}>
+                            {...register('role', {required: true})}
+                            id='role'
+                            type='select'>
                             <option value='' disabled selected hidden>Select...</option>
                             <option value='Admin'>Admin</option>
                             <option value='Manager'>Manager</option>
@@ -122,13 +118,11 @@ const CreateUser = () => {
                         <UserSectionTitle>Password</UserSectionTitle>
 
                         <Label>Set Password</Label>
+                        {errors?.password?.message && <HelperText>{errors?.password?.message}</HelperText>}
                         <Input
+                            {...register('password', {required: true})}
                             id='password'
-                            name='password'
-                            type='password'
-                            required
-                            value={form.password}
-                            onChange={changeFormHandler}/>
+                            type='password'/>
 
                     </UserSecondSection>
                 </UserContainer>
