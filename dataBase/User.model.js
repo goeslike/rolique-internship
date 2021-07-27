@@ -9,13 +9,10 @@ const userSchema = new Schema({
     firstname: {
         type: String,
         required: true,
-        index: true
     },
     lastname: {
         type: String,
         required: true,
-        index: true
-
     },
     email: {
         type: String,
@@ -38,6 +35,5 @@ const userSchema = new Schema({
 userSchema.virtual('name').get(function() {
     return `${this.firstname} ${this.lastname}`;
 });
-userSchema.index({ firstname: 'text', lastname: 'text' });
 
 module.exports = model(dataBaseTablesEnum.USER, userSchema);

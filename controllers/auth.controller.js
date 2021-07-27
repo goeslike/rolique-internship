@@ -1,4 +1,5 @@
 const { authService, userService } = require('../services');
+const { statusCode } = require('../constants');
 
 module.exports = {
     authUser: async (req, res, next) => {
@@ -7,8 +8,7 @@ module.exports = {
             const tokens = await authService.authUser(email, password);
             const currentUser = await userService.findOneByParams({ email });
 
-            console.log(currentUser);
-            res.status(200).json({ tokens, currentUser: currentUser.role });
+            res.status(statusCode.OK).json({ tokens, currentUser: currentUser.role });
         } catch (e) {
             next(e);
         }

@@ -20,8 +20,7 @@ const app = express();
 
 function _mongooseConnector() {
     mongoose.connect(URL_ATLAS, {
-        useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true
-    });
+        useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 }
 _mongooseConnector();
 
