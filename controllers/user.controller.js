@@ -59,7 +59,7 @@ module.exports = {
         try {
             const { id } = req.params;
 
-            const user = await userService.findOneByParams(id);
+            const user = await userService.findOneByParams({ _id: id });
 
             res.json(user);
         } catch (error) {

@@ -19,6 +19,7 @@ module.exports = {
     checkImage: (req, res, next) => {
         try {
             const files = Object.values(req.files);
+            console.log(files);
 
             const images = [];
 

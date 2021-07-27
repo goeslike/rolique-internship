@@ -3,7 +3,7 @@ const { User } = require('../dataBase');
 
 module.exports = {
     createUser: (userObject) => User.create(userObject),
-    findOneByParams: (params) => User.findById(params),
+    findOneByParams: (params) => User.findOne(params),
 
     findAll: async (query = {}) => {
         // const { filterObject, sort } = queryBuilder(query, 'user');
@@ -11,7 +11,8 @@ module.exports = {
         await User.ensureIndexes({ firstname: 'text', lastname: 'text' });
 
         if (query.name) {
-            const users = await User.find({ $text: { $search: query.name } }, (() => {}));
+            const users = await User.find({ $text: { $search: query.name } }, (() => {
+            }));
             return users;
         }
 
