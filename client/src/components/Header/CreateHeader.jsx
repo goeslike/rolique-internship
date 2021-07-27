@@ -2,16 +2,22 @@ import React from 'react';
 import {Header, HeaderButton, HeaderTitle} from "./Header.style";
 
 import redirectIcon from '../../assets/redirect-icon.png';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
-const CreateHeader = ({title, buttonText, func}) => {
+const CreateHeader = ({title, buttonText, form}) => {
+    const history = useHistory();
+
+    const goBack = () => {
+        history.goBack();
+    }
+
     return (
         <Header>
             <HeaderTitle>
-                <Link to={'/users'}><img src={redirectIcon} alt="redirectIcon"/></Link>
+                <img onClick={goBack} src={redirectIcon} alt="redirectIcon"/>
                 { title }
             </HeaderTitle>
-            <HeaderButton type='submit' form={'create-form'}>{ buttonText }</HeaderButton>
+            <HeaderButton type='submit' form={form}>{ buttonText }</HeaderButton>
         </Header>
     );
 };

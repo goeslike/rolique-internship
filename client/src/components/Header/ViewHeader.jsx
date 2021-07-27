@@ -1,14 +1,20 @@
 import React from 'react';
 import {Header, HeaderTitle, HeaderSelect} from "./Header.style";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 const ViewHeader = ({title}) => {
+    const history = useHistory();
+
+    const redirect = () => {
+        history.push('/users/create')
+    }
+
     return (
         <Header>
             <HeaderTitle>
                 {title}
             </HeaderTitle>
-            <Link to={'/users/create'}>create user</Link>
+            <div style={{cursor: 'pointer'}} onClick={redirect}>create user</div>
             {/*<HeaderSelect>*/}
             {/*    <option value='' disabled selected hidden>Create New</option>*/}
             {/*    <option value='Compaign'>*/}
