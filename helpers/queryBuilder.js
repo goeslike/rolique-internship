@@ -1,18 +1,31 @@
 module.exports = (query = {}, model = '') => {
-    const {
-        sortBy = 'age', order = 'asc', ...filters
-    } = query;
+    const { ...filters } = query;
     const keys = Object.keys(filters);
-    const orderBy = order === 'asc' ? -1 : 1;
-    const sort = { [sortBy]: orderBy };
     const filterObject = {};
 
     if (model === 'user') {
         keys.forEach((key) => {
             switch (key) {
                 case 'name':
-                    filterObject.firstname = { $regex: filters.name, $options: 'i' }; // todo serch index text
-                    // filterObject.firstname = { $text: { $search: filters.name } }; // error
+                    const regex = new RegExp(query.name, 'i');
+
+                    const pipeline = [
+                        {
+                            $project: {
+                                name: {
+                                    $concat: [
+                                        '$firstname',
+                                        ' ',
+                                        '$lastname'
+                                    ]
+                                },
+                                doc: '$$ROOT'
+                            }
+                        },
+                        { $match: { name: regex } }
+                    ];
+                    filterObject.pipeline = pipeline;
+
                     break;
                 default:
                     filterObject[key] = filters[key];
@@ -44,6 +57,5 @@ module.exports = (query = {}, model = '') => {
 
     return {
         filterObject,
-        sort
     };
 };
