@@ -15,7 +15,6 @@ const {
 } = require('../constants');
 
 router.get('/',
-    // authMiddleware.checkAccessToken,
     userController.getAllUsers);
 
 router.get('/:id',
