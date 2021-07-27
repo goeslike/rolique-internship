@@ -4,7 +4,7 @@ module.exports = {
     URL_ATLAS: process.env.URL_ATLAS || 'mongodb+srv://admin_test:admin@testproject.v6ryu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
 
     JWT_SECRET: process.env.JWT_SECRET || 'SECRET',
-    JWT_SECRET_LIFETIME: process.env.JWT_SECRET_LIFETIME || '10m',
+    JWT_SECRET_LIFETIME: process.env.JWT_SECRET_LIFETIME || '30m',
     JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'REFRESH_SECRET',
     JWT_REFRESH_SECRET_LIFETIME: process.env.JWT_REFRESH_SECRET_LIFETIME || '30d',
 

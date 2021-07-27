@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const { ErrorHandler, errorCodesEnum, errorCustomCodes } = require('../errors');
+const { ErrorHandler, errorMassages } = require('../errors');
 const { config: { JWT_SECRET, JWT_REFRESH_SECRET } } = require('../configs');
+const { statusCode } = require('../constants');
 
 const jwtVerify = async (action, token) => {
     let isValid;
@@ -10,7 +11,7 @@ const jwtVerify = async (action, token) => {
         case 'access':
             isValid = await jwt.verify(token, JWT_SECRET, (err) => {
                 if (err) {
-                    throw new ErrorHandler(errorCodesEnum.BAD_REQUEST, errorCustomCodes.NOT_VALID_TOKEN);
+                    throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.NOT_VALID_TOKEN);
                 }
             });
             break;
@@ -18,13 +19,13 @@ const jwtVerify = async (action, token) => {
         case 'refresh':
             isValid = await jwt.verify(token, JWT_REFRESH_SECRET, (err) => {
                 if (err) {
-                    throw new ErrorHandler(errorCodesEnum.BAD_REQUEST, errorCustomCodes.NOT_VALID_REFRESH_TOKEN);
+                    throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.NOT_VALID_REFRESH_TOKEN);
                 }
             });
             break;
 
         default:
-            throw new ErrorHandler(errorCodesEnum.SERVER_ERROR, errorCustomCodes.WRONG_ACTION);
+            throw new ErrorHandler(statusCode.SERVER_ERROR, errorMassages.WRONG_ACTION);
     }
     return isValid;
 };

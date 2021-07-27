@@ -22,8 +22,8 @@ async function seedDB() {
 
     const admin = {
         role: INTERN_USER_ROLE,
-        first_name: INTERN_USER_FIRST_NAME,
-        last_name: INTERN_USER_LAST_NAME,
+        firstname: INTERN_USER_FIRST_NAME,
+        lastname: INTERN_USER_LAST_NAME,
         email: INTERN_USER_EMAIL,
         password: hashedPassword
     };

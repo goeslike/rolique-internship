@@ -19,7 +19,9 @@ const { apiRouter } = require('./routes');
 const app = express();
 
 function _mongooseConnector() {
-    mongoose.connect(URL_ATLAS, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+    mongoose.connect(URL_ATLAS, {
+        useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true
+    });
 }
 _mongooseConnector();
 

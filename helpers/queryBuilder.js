@@ -12,6 +12,7 @@ module.exports = (query = {}, model = '') => {
             switch (key) {
                 case 'name':
                     filterObject.firstname = { $regex: filters.name, $options: 'i' }; // todo serch index text
+                    // filterObject.firstname = { $text: { $search: filters.name } }; // error
                     break;
                 default:
                     filterObject[key] = filters[key];
