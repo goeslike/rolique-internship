@@ -8,7 +8,7 @@ module.exports = {
         const user = await User.findOne({ email });
 
         if (!user) {
-            throw new ErrorHandler(statusCode.NOT_FOUND, errorMassages.USER_NOT_FOUND);
+            throw new ErrorHandler(statusCode.NOT_FOUND, errorMassages.RECORD_NOT_FOUND);
         }
 
         await passwordHasher.compare(password, user.password);
