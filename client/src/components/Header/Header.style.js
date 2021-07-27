@@ -11,6 +11,7 @@ const Header = styled.header`
   padding: 0 68px 0 32px;
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 `;
 
 const HeaderTitle = styled.h2`
@@ -19,8 +20,9 @@ const HeaderTitle = styled.h2`
   
   color: rgba(21, 21, 21, 1);
   
-  & a {
+  & img {
     margin-right: 20px;
+    cursor: pointer;
   }
 `;
 

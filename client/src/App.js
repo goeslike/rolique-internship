@@ -4,7 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import useRoutes from "./routes";
 
 function App() {
-    const routes = useRoutes(localStorage.getItem('accessToken'));
+    const token = localStorage.getItem('accessToken')
+    const routes = useRoutes(token);
 
     return (
         <div className="App">

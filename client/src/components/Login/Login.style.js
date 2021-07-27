@@ -7,8 +7,6 @@ const LoginContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background-color: #E5E5E5;
 `;
 
 const LoginForm = styled.form`

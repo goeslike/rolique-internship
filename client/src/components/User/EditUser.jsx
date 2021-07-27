@@ -1,34 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
-
-import infoIcon from '../../assets/info-icon.png';
-
-import {
-    UserWrapper,
-    UserContainer,
-    UserFirstSection,
-    UserSecondSection,
-    UserSectionTitle
-} from './CreateUser.style';
-
-import {
-    FileLabel,
-    HelperText,
-    Input,
-    Label,
-    Select
-} from "../Inputs/CreateInputs.style";
+import {parsePhoneNumberFromString} from "libphonenumber-js";
 
 import {createSchema} from "../../validators/user-schema";
-import CreateHeader from '../Header/CreateHeader';
-import {createUser} from "../../actions/user";
+import CreateHeader from "../Header/CreateHeader";
+import {getUser} from "../../actions/user";
 
-const CreateUser = () => {
+import infoIcon from "../../assets/info-icon.png";
+
+import {UserContainer, UserFirstSection, UserSecondSection, UserSectionTitle, UserWrapper} from "./CreateUser.style";
+import {FileLabel, HelperText, Input, Label, Select} from "../Inputs/CreateInputs.style";
+
+const EditUser = () => {
+    const {id} = useParams();
+    const dispatch = useDispatch();
+    const user = useSelector(({userReducer: {user}}) => user);
+
+    console.log('U S E R', user)
+
+    useEffect(() => {
+        dispatch(getUser(id));
+    }, []);
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(createSchema),
+        defaultValues: user
     });
 
     const normalizePhoneNumber = (value) => {
@@ -42,15 +42,15 @@ const CreateUser = () => {
         );
     };
 
-    const sendData = async (data) => {
-        await createUser(data);
-    };
+    const sendEditData = () => {
+
+    }
 
     return (
         <UserWrapper>
-            <CreateHeader title='Create Internal User' buttonText='Save Changes' form='create-form'/>
+            <CreateHeader title='Edit Internal User' buttonText='Save Changes' form='edit-form'/>
 
-            <form id={'create-form'} onSubmit={handleSubmit(sendData)} noValidate>
+            <form id={'edit-form'} onSubmit={handleSubmit(sendEditData)} noValidate>
                 <UserContainer>
                     <UserFirstSection>
                         <UserSectionTitle>General</UserSectionTitle>
@@ -68,14 +68,14 @@ const CreateUser = () => {
                         {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}
                         <Input
                             {...register('firstname', {required: true})}
-                            id='firstname'
+                            id='firstName'
                             type='text'/>
 
                         <Label>Last Name</Label>
-                        {errors?.lastName?.message && <HelperText>{errors?.lastName?.message}</HelperText>}
+                        {errors?.lastname?.message && <HelperText>{errors?.lastname?.message}</HelperText>}
                         <Input
-                            {...register('lastName', {required: true})}
-                            id='lastName'
+                            {...register('lastname', {required: true})}
+                            id='lastname'
                             type='text'/>
 
                         <Label>Email</Label>
@@ -110,7 +110,7 @@ const CreateUser = () => {
                             id='role'
                             type='select'>
                             <option value='' disabled selected hidden>Select...</option>
-                            <option value='Admin'>Admin</option>
+                            <option value='admin'>Admin</option>
                             <option value='Manager'>Manager</option>
                             <option value='Employee'>Employee</option>
                         </Select>
@@ -127,9 +127,8 @@ const CreateUser = () => {
                     </UserSecondSection>
                 </UserContainer>
             </form>
-
         </UserWrapper>
     );
 };
 
-export default CreateUser;
+export default EditUser;
