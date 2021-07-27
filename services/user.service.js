@@ -3,7 +3,7 @@ const { queryBuilder } = require('../helpers');
 
 module.exports = {
     createUser: (userObject) => User.create(userObject),
-    findOneByParams: (params) => User.findOne(params),
+    findOneByParams: (params) => User.findById(params),
 
     findAll: async (query = {}) => {
         const { filterObject, sort } = queryBuilder(query, 'user');

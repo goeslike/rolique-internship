@@ -55,6 +55,18 @@ module.exports = {
         }
     },
 
+    getUserById: async (req, res, next) => {
+        try {
+            const { id } = req.params;
+
+            const user = await userService.findOneByParams(id);
+
+            res.json(user);
+        } catch (error) {
+            next(error);
+        }
+    },
+
     updateUser: async (req, res, next) => {
         try {
             const { params: { id }, body, body: { password } } = req;

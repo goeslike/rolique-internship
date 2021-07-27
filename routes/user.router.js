@@ -18,6 +18,10 @@ router.get('/',
     authMiddleware.checkAccessToken,
     userController.getAllUsers);
 
+router.get('/:id',
+    // authMiddleware.checkAccessToken,
+    userController.getUserById);
+
 router.post('/',
     // authMiddleware.checkAccessToken,
     // accessMiddleware.checkRole([
