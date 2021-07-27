@@ -23,7 +23,6 @@ module.exports = {
         return {
             access_token,
             refresh_token,
-            currentUser: user.role
         };
     },
     refreshToken: async (user, _id) => {
