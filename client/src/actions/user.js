@@ -5,15 +5,23 @@ import {setUsers} from "../redux/action-creators/users-action-creators";
 const BASE_URL = 'http://localhost:5000/';
 
 const createUser = async (form) => {
+    const token = localStorage.getItem('accessToken');
+
+    const config = {
+        headers: {Authorization: token}
+    };
+
     try {
         console.log(form)
-        await axios.post(BASE_URL + 'users', form);
+        await axios.post(BASE_URL + 'users', form, config);
     } catch (e) {
         console.log(e);
     }
 };
 
 const login = (data) => {
+
+    console.log('L O G I N')
     return async (dispatch) => {
         try {
             dispatch(loginError(''));
@@ -22,8 +30,8 @@ const login = (data) => {
 
             console.log(response.data);
 
-            localStorage.setItem('accessToken', response.data.access_token);
-            localStorage.setItem('refreshToken', response.data.refresh_token);
+            localStorage.setItem('accessToken', response.data.tokens.access_token);
+            localStorage.setItem('refreshToken', response.data.tokens.refresh_token);
         } catch (e) {
             dispatch(loginError(e.message));
         }
@@ -31,13 +39,16 @@ const login = (data) => {
 };
 
 const getUsers = () => {
+    const token = localStorage.getItem('accessToken');
+
+    const config = {
+        headers: {Authorization: token}
+    };
+
     return async (dispatch) => {
         try {
-            const token = localStorage.getItem('accessToken');
 
-            const response = await axios.get(BASE_URL + 'users', {
-                headers: {Authorization: token}
-            });
+            const response = await axios.get(BASE_URL + 'users', config);
 
             console.log(response.data)
 

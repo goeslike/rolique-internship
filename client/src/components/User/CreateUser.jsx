@@ -32,16 +32,16 @@ const CreateUser = () => {
         resolver: yupResolver(createSchema),
     });
 
-    const normalizePhoneNumber = (value) => {
-        const phoneNumber = parsePhoneNumberFromString(value)
-        if(!phoneNumber){
-            return value
-        }
-
-        return (
-            phoneNumber.formatInternational()
-        );
-    };
+    // const normalizePhoneNumber = (value) => {
+    //     const phoneNumber = parsePhoneNumberFromString(value)
+    //     if(!phoneNumber){
+    //         return value
+    //     }
+    //
+    //     return (
+    //         phoneNumber.formatInternational()
+    //     );
+    // };
 
     const sendData = async (data) => {
         await createUser(data);
@@ -92,9 +92,10 @@ const CreateUser = () => {
                             {...register('phone', {required: true})}
                             id='phone'
                             type='tel'
-                            onChange={(event) => {
-                                event.target.value = normalizePhoneNumber(event.target.value);
-                            }}/>
+                            // onChange={(event) => {
+                            //     event.target.value = normalizePhoneNumber(event.target.value);
+                            // }}
+                            />
 
                     </UserFirstSection>
 
@@ -111,7 +112,7 @@ const CreateUser = () => {
                             id='role'
                             type='select'>
                             <option value='' disabled selected hidden>Select...</option>
-                            <option value='Admin'>Admin</option>
+                            <option value='admin'>Admin</option>
                             <option value='Manager'>Manager</option>
                             <option value='Employee'>Employee</option>
                         </Select>
