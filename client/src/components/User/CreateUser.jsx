@@ -58,11 +58,11 @@ const CreateUser = () => {
                         <Label>Profile Picture</Label>
                         <Input
                             style={{display: 'none'}}
-                            {...register('profilePicture', {required: true})}
-                            id='profilePicture'
+                            {...register('avatar', {required: true})}
+                            id='avatar'
                             type='file'
                             accept='image/*'/>
-                        <FileLabel for='profilePicture' />
+                        <FileLabel for='avatar' />
 
                         <Label>First Name</Label>
                         {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}
@@ -72,10 +72,10 @@ const CreateUser = () => {
                             type='text'/>
 
                         <Label>Last Name</Label>
-                        {errors?.lastName?.message && <HelperText>{errors?.lastName?.message}</HelperText>}
+                        {errors?.lastname?.message && <HelperText>{errors?.lastname?.message}</HelperText>}
                         <Input
-                            {...register('lastName', {required: true})}
-                            id='lastName'
+                            {...register('lastname', {required: true})}
+                            id='lastname'
                             type='text'/>
 
                         <Label>Email</Label>

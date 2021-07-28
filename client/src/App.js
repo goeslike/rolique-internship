@@ -5,7 +5,7 @@ import useRoutes from "./routes";
 
 function App() {
     const token = localStorage.getItem('accessToken')
-    const routes = useRoutes(token);
+    const routes = useRoutes(true);
 
     return (
         <div className="App">

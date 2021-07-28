@@ -20,6 +20,8 @@ const login = (data) => {
 
             const response = await axios.post(BASE_URL + 'auth/login', data);
 
+            console.log(response.data);
+
             localStorage.setItem('accessToken', response.data.access_token);
             localStorage.setItem('refreshToken', response.data.refresh_token);
         } catch (e) {

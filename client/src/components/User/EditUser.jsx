@@ -58,11 +58,11 @@ const EditUser = () => {
                         <Label>Profile Picture</Label>
                         <Input
                             style={{display: 'none'}}
-                            {...register('profilePicture', {required: true})}
-                            id='profilePicture'
+                            {...register('avatar', {required: true})}
+                            id='avatar'
                             type='file'
                             accept='image/*'/>
-                        <FileLabel for='profilePicture' />
+                        <FileLabel for='avatar' />
 
                         <Label>First Name</Label>
                         {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}

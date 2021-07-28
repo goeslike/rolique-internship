@@ -43,32 +43,8 @@ const HeaderButton = styled.button`
   background: linear-gradient(to right, rgba(255, 101, 14, 1), rgba(255, 101, 14, 1));
 `;
 
-const HeaderSelect = styled.select`
-  width: auto;
-  height: 33px;
-  
-  padding: 8px 16px 8px 32px;
-
-  font-weight: normal;
-  font-size: 14px;
-  
-  color: #ffffff;
-  
-  border-radius: 8px;
-  border: none;
-  
-  outline: none;
-  
-  background: linear-gradient(to right, rgba(255, 101, 14, 1), rgba(255, 101, 14, 1));
-  
-  & option {
-    color: #000000;
-  }
-`
-
 export {
     Header,
     HeaderTitle,
     HeaderButton,
-    HeaderSelect
 };
