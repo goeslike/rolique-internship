@@ -10,7 +10,8 @@ import {
     UserContainer,
     UserFirstSection,
     UserSecondSection,
-    UserSectionTitle
+    UserSectionTitle,
+    InfoIcon
 } from './CreateUser.style';
 
 import {
@@ -100,7 +101,7 @@ const CreateUser = () => {
                     <UserSecondSection>
                         <UserSectionTitle>
                             Role & Permissions
-                            <img src={infoIcon} alt="infoIcon"/>
+                            <span><InfoIcon src={infoIcon} alt="infoIcon"/></span>
                         </UserSectionTitle>
 
                         <Label>Role</Label>

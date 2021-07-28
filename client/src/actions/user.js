@@ -72,5 +72,6 @@ export {
     login,
     createUser,
     getUsers,
-    getUser
+    getUser,
+    updateUser
 };

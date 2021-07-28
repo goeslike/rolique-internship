@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 
-import arrowUpper from '../assets/dropdown/uper.png';
-import arrowDown from '../assets/dropdown/down.png';
+import arrowUpper from '../../assets/dropdown/uper.png';
+import arrowDown from '../../assets/dropdown/down.png';
 
 import {
     CreateDropdow,

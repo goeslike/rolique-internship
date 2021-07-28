@@ -7,7 +7,7 @@ import {parsePhoneNumberFromString} from "libphonenumber-js";
 
 import {createSchema} from "../../validators/user-schema";
 import CreateHeader from "../Header/CreateHeader";
-import {getUser} from "../../actions/user";
+import {getUser, updateUser} from "../../actions/user";
 
 import infoIcon from "../../assets/info-icon.png";
 
@@ -18,8 +18,6 @@ const EditUser = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const user = useSelector(({userReducer: {user}}) => user);
-
-    console.log('U S E R', user)
 
     useEffect(() => {
         dispatch(getUser(id));
@@ -42,9 +40,9 @@ const EditUser = () => {
         );
     };
 
-    const sendEditData = () => {
-
-    }
+    const sendEditData = async (data) => {
+        await updateUser(data);
+    };
 
     return (
         <UserWrapper>

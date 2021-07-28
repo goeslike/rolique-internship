@@ -35,9 +35,50 @@ const UserSectionTitle = styled.h3`
   
   color: rgba(21, 21, 21, 1);
   
-  & img {
-    margin: 0 0 0 10px;
+  & span {
+    display: flex;
+    align-items: center;
+    
+    position: relative;
+    
+    &:hover::before {
+      content: '';
+      display: block;
+      
+      position: absolute;
+      
+      top: 120%;
+      left: 30%;
+      
+      z-index: 1000;
+
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 10px 12px 10px;
+      border-color: transparent transparent rgba(0, 0, 0, .8) transparent;
+    }
+    
+    &:hover::after {
+      content: '';
+      display: block;
+      
+      position: absolute;
+
+      top: 190%;
+      left: -142px;
+      
+      width: 327px;
+      height: 244px;
+      
+      background-color: rgba(0, 0, 0, .8);
+      border-radius: 8px;
+    }
   }
+`;
+
+const InfoIcon = styled.img`
+  margin: 0 0 0 10px;
 `;
 
 export {
@@ -45,5 +86,6 @@ export {
     UserContainer,
     UserFirstSection,
     UserSecondSection,
-    UserSectionTitle
+    UserSectionTitle,
+    InfoIcon
 };

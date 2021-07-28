@@ -2,7 +2,7 @@ import { LOGOUT, LOGIN_ERROR, SET_USER } from '../action-types';
 
 const initialState = {
     loginError: '',
-    currentUser: {},
+    currentUserRole: '',
     user: {},
     isAuth: false
 };
