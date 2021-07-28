@@ -9,7 +9,7 @@ module.exports = {
             const user = await userService.findOneByParams({ email });
 
             if (!user) {
-                return next(new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.USER_NOT_FOUND));
+                return next(new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.RECORD_NOT_FOUND));
             }
 
             req.user = user;
