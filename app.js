@@ -15,12 +15,16 @@ const {
 
 const Sentry = require('./logger/sentry');
 const { apiRouter } = require('./routes');
+// const cronRun = require('./cron-jobs');
 
 const app = express();
 
 function _mongooseConnector() {
     mongoose.connect(URL_ATLAS, {
-        useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+    });
 }
 _mongooseConnector();
 
@@ -56,6 +60,7 @@ app.use('*', (err, req, res, next) => {
 
 app.listen(5000, () => {
     console.log(`App has been started on port ${PORT}...`);
+    // cronRun();
 });
 
 function configureCors(origin, callback) {
