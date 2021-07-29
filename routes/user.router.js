@@ -18,16 +18,16 @@ router.get('/',
     userController.getAllUsers);
 
 router.get('/:id',
-    // authMiddleware.checkAccessToken,
+    authMiddleware.checkAccessToken,
     userController.getUserById);
 
 router.post('/',
-    // authMiddleware.checkAccessToken,
-    // accessMiddleware.checkRole([
-    //     ADMIN,
-    //     MANAGER
-    // ], CREATE),
-    // accessMiddleware.isManager, //  manager неможе створити admin
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkRole([
+        ADMIN,
+        MANAGER
+    ], CREATE),
+    accessMiddleware.isManager, //  manager неможе створити admin
     imageMiddleware.checkImage,
     imageMiddleware.checkAvatar,
     dynamicMiddleware.checkIsBodyDataValid(userValidator.createUser),
@@ -43,6 +43,8 @@ router.put('/:id',
     ], UPDATE),
     accessMiddleware.isManager, // можна пробувити передати роль на фронт а він уже робить роль admin disabled ?
     dynamicMiddleware.checkIsBodyDataValid(userValidator.updateUser),
+    imageMiddleware.checkImage,
+    imageMiddleware.checkAvatar,
     userController.updateUser);
 
 module.exports = router;
