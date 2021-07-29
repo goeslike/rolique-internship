@@ -34,7 +34,6 @@ module.exports = {
             refresh_token
         };
     },
-    removeTokens: (id) => O_Auth.findByIdAndDelete(id),
-    getTokensByParams: (findObject) => O_Auth.find(findObject),
-    removeTokenByParams: (params) => O_Auth.findByIdAndDelete(params)
+    removeTokenByParams: (params) => O_Auth.findByIdAndDelete(params),
+    removeTokens: (id) => O_Auth.findByIdAndDelete(id)
 };

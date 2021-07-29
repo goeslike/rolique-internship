@@ -15,7 +15,7 @@ const {
 
 const Sentry = require('./logger/sentry');
 const { apiRouter } = require('./routes');
-// const cronRun = require('./cron-jobs');
+const cronRun = require('./cron-jobs');
 
 const app = express();
 
@@ -60,7 +60,7 @@ app.use('*', (err, req, res, next) => {
 
 app.listen(5000, () => {
     console.log(`App has been started on port ${PORT}...`);
-    // cronRun();
+    cronRun();
 });
 
 function configureCors(origin, callback) {

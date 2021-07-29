@@ -16,9 +16,9 @@ const oAuthSchema = new Schema({
     }
 }, { timestamps: true });
 
-oAuthSchema.pre('find', function() {
-    this.populate('user');
-});
+// oAuthSchema.pre('find', function() {
+//     this.populate('user');
+// });
 oAuthSchema.pre('findOne', function() {
     this.populate('user');
 });

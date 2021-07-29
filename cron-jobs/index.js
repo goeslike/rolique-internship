@@ -1,10 +1,12 @@
 const cron = require('node-cron');
-const deleteOldTokens = require('./deleteOldTokens');
+const deleteTokensWhereUserNull = require('./deleteTokensWhereUserNull');
+const deleteTokensWithSomeUsers = require('./deleteTokensWithSomeUsers');
 
 module.exports = () => {
     cron.schedule('* * * * *', async () => {
         console.log('CRON RUN');
-        await deleteOldTokens();
+        await deleteTokensWhereUserNull();
+        await deleteTokensWithSomeUsers();
         console.log('CRON STOP');
     });
 };
