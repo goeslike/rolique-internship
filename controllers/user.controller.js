@@ -1,6 +1,7 @@
 const { normalizer, passwordHasher } = require('../helpers');
 const { fileService, userService } = require('../services');
 const { statusCode } = require('../constants');
+const { constants: { FOLDER_NAME: { USER } } } = require('../constants');
 
 module.exports = {
     createUser: async (req, res, next) => {
@@ -21,13 +22,8 @@ module.exports = {
             const { _id } = newUser;
 
             if (avatar) {
-                const {
-                    finalPath,
-                    filePath
-                } = await fileService.createFileDir('users', avatar.name, _id, 'photos');
-
-                await avatar.mv(finalPath);
-                await userService.updateOne({ _id }, { avatar: filePath, avatars: filePath });
+                const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, USER);
+                await userService.updateOne({ _id }, { avatar: cloudResponse.url });
             }
 
             res.status(statusCode.OK).json(newUser);

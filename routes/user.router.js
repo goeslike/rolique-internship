@@ -22,12 +22,12 @@ router.get('/:id',
     userController.getUserById);
 
 router.post('/',
-    authMiddleware.checkAccessToken,
-    accessMiddleware.checkRole([
-        ADMIN,
-        MANAGER
-    ], CREATE),
-    accessMiddleware.isManager, //  manager неможе створити admin
+    // authMiddleware.checkAccessToken,
+    // accessMiddleware.checkRole([
+    //     ADMIN,
+    //     MANAGER
+    // ], CREATE),
+    // accessMiddleware.isManager, //  manager неможе створити admin
     imageMiddleware.checkImage,
     imageMiddleware.checkAvatar,
     dynamicMiddleware.checkIsBodyDataValid(userValidator.createUser),

@@ -1,3 +1,7 @@
 module.exports = {
-    AUTHORIZATION: 'Authorization'
+    AUTHORIZATION: 'Authorization',
+    FOLDER_NAME: {
+        USER: '/user/',
+        INFLUENCER: '/influencer/'
+    }
 };
