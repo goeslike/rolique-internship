@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import LoginPage from './pages/LoginPage';
 import UsersPage from "./pages/UsersPage";
+import InfluencersPage from "./pages/InfluencersPage";
 
 const useRoutes = isAuth => {
     if (isAuth) {
@@ -10,6 +11,9 @@ const useRoutes = isAuth => {
             <Switch>
                 <Route path='/users' exect>
                     <UsersPage />
+                </Route>
+                <Route path='/influencers' exect>
+                    <InfluencersPage />
                 </Route>
                 <Redirect to={'/users'} />
             </Switch>

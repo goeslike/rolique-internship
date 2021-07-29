@@ -32,16 +32,16 @@ const CreateUser = () => {
         resolver: yupResolver(createSchema),
     });
 
-    // const normalizePhoneNumber = (value) => {
-    //     const phoneNumber = parsePhoneNumberFromString(value)
-    //     if(!phoneNumber){
-    //         return value
-    //     }
-    //
-    //     return (
-    //         phoneNumber.formatInternational()
-    //     );
-    // };
+    const normalizePhoneNumber = (value) => {
+        const phoneNumber = parsePhoneNumberFromString(value)
+        if(!phoneNumber){
+            return value
+        }
+
+        return (
+            phoneNumber.formatInternational()
+        );
+    };
 
     const sendData = async (data) => {
         await createUser(data);
@@ -49,7 +49,7 @@ const CreateUser = () => {
 
     return (
         <UserWrapper>
-            <CreateHeader title='Create Internal User' buttonText='Save Changes' form='create-form'/>
+            <CreateHeader title='Create Internal User' form='create-form'/>
 
             <form id={'create-form'} onSubmit={handleSubmit(sendData)} noValidate>
                 <UserContainer>

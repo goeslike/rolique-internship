@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const Input = styled.input`
-  width: 100%;
+  width: 408px;
   height: 32px;
   
-  padding: 0 0 0 12px;
+  padding: 0 12px 0 12px;
   margin: 0 0 16px 0;
 
   outline: none;
@@ -22,8 +22,26 @@ const Input = styled.input`
   }
 `;
 
+const SocialInput = styled.input`
+  width: 184px;
+  height: 32px;
+
+  padding: 0 0 0 12px;
+  margin: 0 0 16px 0;
+
+  outline: none;
+
+  border: 1px solid #BFBFBF;
+  border-radius: 6px;
+
+  &:focus {
+    border: 1px solid rgba(255, 101, 14, 0.5);
+    filter: drop-shadow(0 0 rgba(255, 101, 14, 0.25));
+  }
+`;
+
 const Label = styled.div`
-  width: 100%;
+  width: auto;
   height: 17px;
   
   margin: 0 0 8px 0;
@@ -119,5 +137,6 @@ export {
     Label,
     FileLabel,
     Select,
-    HelperText
+    HelperText,
+    SocialInput
 };
