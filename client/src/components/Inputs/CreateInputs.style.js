@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import serchIcon from '../../assets/logo/logo.png';
 
 const Input = styled.input`
   width: 408px;
@@ -130,7 +131,32 @@ const HelperText = styled.p`
   font-size: 12px;
 
   color: #DA1414;
-`
+`;
+
+const SearchInput = styled.input`
+  width: 296px;
+  height: 32px;
+  
+  padding: 0 0 0 10px;
+  margin: 0 0 16px;
+
+  outline: none;
+
+  background-color: #fff;
+
+  border: 1px solid #BFBFBF;
+  border-radius: 6px;
+
+  font-weight: normal;
+  font-size: 14px;
+
+  color: rgba(0, 0, 0, 0.6);
+
+  &:focus {
+    border: 1px solid rgba(255, 101, 14, 0.5);
+    filter: drop-shadow(0 0 rgba(255, 101, 14, 0.25));
+  }
+`;
 
 export {
     Input,
@@ -138,5 +164,6 @@ export {
     FileLabel,
     Select,
     HelperText,
-    SocialInput
+    SocialInput,
+    SearchInput
 };

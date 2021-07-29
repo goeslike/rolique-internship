@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 
@@ -8,6 +8,7 @@ import ViewHeader from '../Header/ViewHeader';
 import {getUser, getUsers} from "../../actions/user";
 
 import {UsersWrapper, UsersContainer, UsersTable, UsersTD, UsersTR} from "./Users.style";
+import {SearchInput} from "../Inputs/CreateInputs.style";
 
 const Users = () => {
     const history = useHistory();
@@ -25,12 +26,13 @@ const Users = () => {
     const getUserById = async (id) => {
         await dispatch(getUser(id));
     }
-
+    const [searchName, setSearchName] = useState('');
     return (
         <UsersWrapper>
             <ViewHeader title='Users' />
 
             <UsersContainer>
+                <SearchInput type={'text'} placeholder={'Search'} onChange={e => setSearchName(e.target.value)}/>
 
                 <UsersTable>
                     <thead style={{marginBottom: '5px'}}>
@@ -44,7 +46,17 @@ const Users = () => {
                     </thead>
 
                     <tbody>
-                        {users.map(user => {
+                        {users.filter(user => {
+                            if (searchName === '') {
+                                return user
+                            }
+                            if (
+                                user.firstname.toLowerCase().includes(searchName.toLowerCase()) ||
+                                user.lastname.toLowerCase().includes(searchName.toLowerCase())
+                            ) {
+                                return user
+                            }
+                        }).map(user => {
                             return (
                                 <UsersTR key={user.id}>
                                     <UsersTD style={{width: '250px'}}>

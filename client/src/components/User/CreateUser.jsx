@@ -92,9 +92,9 @@ const CreateUser = () => {
                             {...register('phone', {required: true})}
                             id='phone'
                             type='tel'
-                            // onChange={(event) => {
-                            //     event.target.value = normalizePhoneNumber(event.target.value);
-                            // }}
+                            onChange={(event) => {
+                                event.target.value = normalizePhoneNumber(event.target.value);
+                            }}
                             />
 
                     </UserFirstSection>
