@@ -17,21 +17,11 @@ cloudinary.config({
 module.exports = {
     uploadFile: (file, folder) => cloudinary.uploader.upload(file, { folder }),
 
-    // createFileDir: async (dirName, fileName, itemId, fileType) => {
-    //     const pathWithoutStatic = path.join(dirName, itemId.toString(), fileType);
-    //     const fileDirectory = path.join(process.cwd(), 'static', pathWithoutStatic);
-    //
-    //     const fileExtension = fileName.split('.')
-    //         .pop();
-    //     const newFileName = `${uuid()}.${fileExtension}`;
-    //
-    //     const finalPath = path.join(fileDirectory, newFileName);
-    //
-    //     await mkdirPromise(fileDirectory, { recursive: true });
-    //
-    //     return {
-    //         finalPath,
-    //         filePath: path.join(pathWithoutStatic, newFileName)
-    //     };
-    // }
+    deleteFile: async (filePath, folderAsset) => {
+        const pathArray = filePath.split('.')
+            .slice(-2, -1)[0];
+        const arr = pathArray.split('/');
+        arr.reverse();
+        await cloudinary.uploader.destroy(`${folderAsset}${arr[0]}`);
+    }
 };

@@ -1,13 +1,24 @@
-const { normalizer, passwordHasher } = require('../helpers');
-const { fileService, userService } = require('../services');
+const {
+    normalizer,
+    passwordHasher
+} = require('../helpers');
+const {
+    fileService,
+    userService
+} = require('../services');
 const { statusCode } = require('../constants');
-const { constants: { FOLDER_NAME: { USER } } } = require('../constants');
+const {
+    constants: {
+        FOLDER_NAME: { USER },
+        FOLDER_ASSETS: { USER_DELETE }
+    }
+} = require('../constants');
 
 module.exports = {
     createUser: async (req, res, next) => {
         try {
             const {
-                photos: [avatar],
+                avatar,
                 body: {
                     password,
                 }
@@ -26,7 +37,8 @@ module.exports = {
                 await userService.updateOne({ _id }, { avatar: cloudResponse.url });
             }
 
-            res.status(statusCode.OK).json(newUser);
+            res.status(statusCode.OK)
+                .json(newUser);
 
             next();
         } catch (error) {
@@ -59,16 +71,33 @@ module.exports = {
 
     updateUser: async (req, res, next) => {
         try {
-            const { params: { id }, body, body: { password } } = req;
+            const {
+                params: { id },
+                body,
+                body: { password },
+                avatar
+            } = req;
+            const checkUser = await userService.findOneByParams({ email: body.email });
 
             if (password) {
                 const hashedPassword = await passwordHasher.hash(password);
-                await userService.updateOne(id, { ...body, password: hashedPassword });
+                await userService.updateOne(id, {
+                    ...body,
+                    password: hashedPassword
+                });
+            }
+            if (avatar) {
+                if (checkUser.avatar) {
+                    await fileService.deleteFile(checkUser.avatar, USER_DELETE);
+                }
+                const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, USER);
+                await userService.updateOne(id, { avatar: cloudResponse.url });
             }
 
             await userService.updateOne(id, { ...body });
 
-            res.status(statusCode.OK).json(`user id:${id} is updated`);
+            res.status(statusCode.OK)
+                .json(`user id:${id} is updated`);
         } catch (error) {
             next(error);
         }
