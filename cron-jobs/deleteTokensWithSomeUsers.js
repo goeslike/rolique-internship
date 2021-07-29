@@ -5,10 +5,8 @@ module.exports = async () => {
     const tokens = await O_Auth.find();
     const set = new Set();
 
-    // console.log(tokens.length);
-
     const reduce = tokens.reduce((acc, value) => {
-        if (value <= dayjs(new Date()).subtract(20, 'days').format()) {
+        if (value <= dayjs(new Date()).subtract(30, 'days').format()) {
             set.add(value._id);
             return acc;
         }
@@ -36,6 +34,5 @@ module.exports = async () => {
 
     for (const value of set) {
         await O_Auth.findByIdAndDelete(value);
-        // console.log(`${value} is deleted`);
     }
 };

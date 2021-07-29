@@ -3,7 +3,7 @@ const deleteTokensWhereUserNull = require('./deleteTokensWhereUserNull');
 const deleteTokensWithSomeUsers = require('./deleteTokensWithSomeUsers');
 
 module.exports = () => {
-    cron.schedule('* * * * *', async () => {
+    cron.schedule('*/30 * * * *', async () => {
         console.log('CRON RUN');
         await deleteTokensWhereUserNull();
         await deleteTokensWithSomeUsers();
