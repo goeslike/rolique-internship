@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import editIcon from '../../assets/edit-icon.png';
 
 import ViewHeader from '../Header/ViewHeader';
-import {getUsers} from "../../actions/user";
+import {getUser, getUsers} from "../../actions/user";
 
 import {UsersWrapper, UsersContainer, UsersTable, UsersTD, UsersTR} from "./Users.style";
 
@@ -21,6 +21,10 @@ const Users = () => {
     const redirect = (id) => {
         history.push(`/users/edit/id${id}`);
     };
+
+    const getUserById = async (id) => {
+        await dispatch(getUser(id));
+    }
 
     return (
         <UsersWrapper>
@@ -50,7 +54,10 @@ const Users = () => {
                                     <UsersTD style={{width: '225px'}}>{user.email}</UsersTD>
                                     <UsersTD style={{width: '215px'}}>{user.role}</UsersTD>
                                     <UsersTD style={{width: '295px'}}>{user.phone}</UsersTD>
-                                    <UsersTD onClick={() => redirect(user.id)} style={{width: '28px'}}>
+                                    <UsersTD onClick={async() => {
+                                        await getUserById(user.id)
+                                        redirect(user.id)
+                                    }} style={{width: '28px'}}>
                                         <img src={editIcon} alt='editIcon' />
                                     </UsersTD>
                                 </UsersTR>

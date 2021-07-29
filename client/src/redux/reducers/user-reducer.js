@@ -1,14 +1,34 @@
-import { LOGOUT, LOGIN_ERROR, SET_USER } from '../action-types';
+import {
+    LOGOUT,
+    LOGIN_ERROR,
+    SET_LOGGED_USER_ROLE,
+    SET_ACCESS_TOKEN,
+    SET_USER
+} from '../action-types';
 
 const initialState = {
     loginError: '',
     currentUserRole: '',
-    user: {},
-    isAuth: false
+    accessToken: '',
+    user: {}
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_LOGGED_USER_ROLE: {
+            return {
+                ...state,
+                currentUserRole: action.payload,
+            }
+        }
+
+        case SET_ACCESS_TOKEN: {
+            return {
+                ...state,
+                accessToken: action.payload
+            }
+        }
+
         case SET_USER: {
             return {
                 ...state,
@@ -21,8 +41,6 @@ const reducer = (state = initialState, action) => {
             return  {
                 ...state,
                 currentUser: {},
-                isAuth: false,
-
             }
         }
 

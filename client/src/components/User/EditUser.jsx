@@ -1,13 +1,12 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import React from 'react';
+import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {parsePhoneNumberFromString} from "libphonenumber-js";
 
 import {createSchema} from "../../validators/user-schema";
 import CreateHeader from "../Header/CreateHeader";
-import {getUser, updateUser} from "../../actions/user";
+import {updateUser} from "../../actions/user";
 
 import infoIcon from "../../assets/info-icon.png";
 
@@ -15,18 +14,20 @@ import {UserContainer, UserFirstSection, UserSecondSection, UserSectionTitle, Us
 import {FileLabel, HelperText, Input, Label, Select} from "../Inputs/CreateInputs.style";
 
 const EditUser = () => {
-    const {id} = useParams();
-    const dispatch = useDispatch();
     const user = useSelector(({userReducer: {user}}) => user);
 
-    useEffect(() => {
-        dispatch(getUser(id));
-    }, []);
+    const defaultValues = {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        phone: user?.phone,
+        role: user.role,
+    };
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(createSchema),
-        defaultValues: user
+        defaultValues: defaultValues
     });
 
     const normalizePhoneNumber = (value) => {

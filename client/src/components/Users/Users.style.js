@@ -6,7 +6,7 @@ const UsersWrapper = styled.div`
 
 const UsersContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: auto;
   
   padding: 24px 68px 0 28px;
 `;

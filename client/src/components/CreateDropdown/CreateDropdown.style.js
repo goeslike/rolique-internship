@@ -47,12 +47,15 @@ const CreateDropdownItem = styled.div`
   display: flex;
   align-items: center;
   
-  padding: 10px 10px;
-  
   cursor: pointer;
   transition: all 0.2s;
   
   & a {
+    width: 100%;
+    height: 100%;
+
+    padding: 10px 10px;
+
     text-decoration: none;
     font-weight: 400;
     font-size: 14px;
