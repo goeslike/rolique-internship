@@ -44,7 +44,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(fileUpload({}));
+app.use(fileUpload({ useTempFiles: true }));
 app.use('/', apiRouter);
 
 // eslint-disable-next-line no-unused-vars

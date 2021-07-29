@@ -19,5 +19,10 @@ module.exports = {
     SERVER_RATE_LIMITS: {
         period: 15 * 60 * 1000, // 15 minutes
         maxRequests: 1000
-    }
+    },
+
+    CLOUDINARY_URL: process.env.CLOUDINARY_URL || 'cloudinary://112271864237133:kYVdgdr_Lb0u2NY11GiDRvcwrmc@nataliia',
+    CLOUD_NAME: process.env.CLOUD_NAME || 'nataliia',
+    API_KEY_CLOUD: process.env.API_KEY_CLOUD || '112271864237133',
+    API_SECRET_CLOUD: process.env.API_SECRET_CLOUD || 'kYVdgdr_Lb0u2NY11GiDRvcwrmc'
 };
