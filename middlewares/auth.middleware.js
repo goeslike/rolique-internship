@@ -14,7 +14,7 @@ module.exports = {
 
             await jwtVerifyHelper.jwtVerify('access', access_token);
 
-            const tokens = await O_Auth.findOne({ access_token });
+            const tokens = await O_Auth.findOne({ access_token }).select('+password');
 
             if (!tokens) {
                 throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.NOT_VALID_TOKEN);

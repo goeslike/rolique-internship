@@ -1,7 +1,4 @@
-const {
-    normalizer,
-    passwordHasher
-} = require('../helpers');
+const { passwordHasher } = require('../helpers');
 const {
     fileService,
     userService
@@ -49,8 +46,7 @@ module.exports = {
 
     getAllUsers: async (req, res, next) => {
         try {
-            const findUsers = await userService.findAll(req.query);
-            const users = await normalizer(findUsers);
+            const users = await userService.findAll(req.query);
 
             res.json(users);
         } catch (error) {

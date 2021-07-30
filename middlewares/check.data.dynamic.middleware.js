@@ -27,7 +27,7 @@ module.exports = {
             if (!user) {
                 throw new ErrorHandler(statusCode.NOT_FOUND, RECORD_NOT_FOUND.message, RECORD_NOT_FOUND.customCode);
             }
-
+            console.log(user);
             req.user = user;
             next();
         } catch (err) {

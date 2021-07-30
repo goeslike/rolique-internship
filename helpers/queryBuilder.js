@@ -8,24 +8,12 @@ module.exports = (query = {}, model = '') => {
             switch (key) {
                 case 'name':
                     const regex = new RegExp(query.name, 'i');
-
-                    const pipeline = [
-                        {
-                            $project: {
-                                name: {
-                                    $concat: [
-                                        '$firstname',
-                                        ' ',
-                                        '$lastname'
-                                    ]
-                                },
-                                doc: '$$ROOT'
-                            }
-                        },
-                        { $match: { name: regex } }
-                    ];
-                    filterObject.pipeline = pipeline;
-
+                    filterObject.name = {
+                        $or: [
+                            { firstname: { $regex: regex } },
+                            { lastname: { $regex: regex } }
+                        ]
+                    };
                     break;
                 default:
                     filterObject[key] = filters[key];

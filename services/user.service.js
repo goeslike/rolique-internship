@@ -8,12 +8,11 @@ module.exports = {
     findAll: async (query = {}) => {
         if (query.name) {
             const { filterObject } = queryBuilder(query, 'user');
-
-            const user = await User.aggregate(filterObject.pipeline, (() => {}));
-            return user;
+            const users = await User.find(filterObject.name).select('-password');
+            return users;
         }
 
-        const users = await User.find();
+        const users = await User.find().select('-password');
 
         return users;
     },

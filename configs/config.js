@@ -18,7 +18,7 @@ module.exports = {
 
     SERVER_RATE_LIMITS: {
         period: 15 * 60 * 1000, // 15 minutes
-        maxRequests: 1000
+        maxRequests: 10000
     },
 
     CLOUDINARY_URL: process.env.CLOUDINARY_URL || 'cloudinary://112271864237133:kYVdgdr_Lb0u2NY11GiDRvcwrmc@nataliia',
