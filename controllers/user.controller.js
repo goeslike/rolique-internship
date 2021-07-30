@@ -23,6 +23,7 @@ module.exports = {
                     password,
                 }
             } = req;
+            console.log(avatar);
 
             const hashedPassword = await passwordHasher.hash(password);
             const newUser = await userService.createUser({
@@ -77,7 +78,7 @@ module.exports = {
                 body: { password },
                 avatar
             } = req;
-            const checkUser = await userService.findOneByParams({ email: body.email });
+            const checkUser = await userService.findOneByParams({ _id: id });
 
             if (password) {
                 const hashedPassword = await passwordHasher.hash(password);

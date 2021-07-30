@@ -58,7 +58,7 @@ module.exports = {
                 throw new ErrorHandler(BAD_REQUEST, AVATAR_ERROR.massages, AVATAR_ERROR.customCode);
             }
 
-            const { avatar } = req.photos;
+            const [avatar] = req.photos;
             req.avatar = avatar;
 
             next();
