@@ -4,4 +4,5 @@ module.exports = {
     passwordHasher: require('./password.hasher'),
     queryBuilder: require('./queryBuilder'),
     tokenizer: require('./tokenizer'),
+    conector: require('./conector_DB')
 };
