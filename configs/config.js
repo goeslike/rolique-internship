@@ -25,6 +25,6 @@ module.exports = {
     CLOUD_NAME: process.env.CLOUD_NAME || 'nataliia',
     API_KEY_CLOUD: process.env.API_KEY_CLOUD || '112271864237133',
     API_SECRET_CLOUD: process.env.API_SECRET_CLOUD || 'kYVdgdr_Lb0u2NY11GiDRvcwrmc',
-    INSTAGRAM_LOGIN: process.env.INSTAGRAM_LOGIN || 'your instagram name',
-    INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD || 'instagram password'
+    INSTAGRAM_LOGIN: process.env.INSTAGRAM_LOGIN || 'kokos_alina20',
+    INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD || '1234567890poiuytrewq'
 };

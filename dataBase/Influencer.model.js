@@ -5,12 +5,6 @@ const {
 
 const { dataBaseTablesEnum } = require('../constants');
 
-const socialProfilesSchema = new Schema({
-    social_profile: String,
-    social_profile_followers: Number,
-    social_profile_type: String, // треба вказувати тим соц.акаутну інфлуенсера
-});
-
 const InfluencerSchema = new Schema({
     avatar: {
         type: String
@@ -31,8 +25,15 @@ const InfluencerSchema = new Schema({
         type: String,
         required: true
     },
-    social_profiles: [socialProfilesSchema],
-
+    socialProfiles: {
+        type: Map,
+        of: new Schema({
+            username: { type: String, required: true },
+            followers: { type: Number }
+        },
+        { _id: false }),
+        default: {}
+    }
 }, {
     timestamps: true,
     toObject: { virtuals: true },

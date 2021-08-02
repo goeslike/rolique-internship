@@ -1,30 +1,34 @@
 const {
     instagramService,
-    fileService
+    fileService,
+    influencerService
 } = require('../services');
-const { constants: { FOLDER_NAME: { INFLUENCER } } } = require('../constants');
+const { constants: { FOLDER_NAME: { INFLUENCER } }, statusCode: { CREATED } } = require('../constants');
 
 module.exports = {
     createInfluencer: async (req, res, next) => {
         try {
             const {
-                avatar,
-                body: { social_profiles }
+                body, files: { avatar }
             } = req;
 
             if (avatar) {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
                 req.body = {
-                    ...req.body,
+                    ...body,
                     avatar: cloudResponse.url
                 };
             }
 
-            const instagramAccount = social_profiles.find((profile) => profile.social_profile_type === 'instagram');
-            if (instagramAccount) {
-                const images = await instagramService.getImagesData(instagramAccount.social_profile);
+            const influencer = await influencerService.createInfluencer(body);
+            console.log(influencer.socialProfiles.get('instagram'));
+
+            if (body.instagram) {
+                const images = await instagramService.getImagesData(body.instagram);
                 res.json(images);
             }
+
+            res.status(CREATED).json(`Influencer ${body.firstName} ${body.lastName} was created`);
         } catch (error) {
             next(error);
         }
