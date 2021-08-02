@@ -29,7 +29,7 @@ const InfluencerSchema = new Schema({
         type: Map,
         of: new Schema({
             username: { type: String, required: true },
-            followers: { type: Number }
+            followers: { type: String }
         },
         { _id: false }),
         default: {}
