@@ -9,7 +9,7 @@ const cors = require('cors');
 
 const { _mongooseConnector } = require('./helpers/conector_DB');
 
-const { ALLOWED_ORIGIN, PORT, SERVER_RATE_LIMITS } = require('./configs/config');
+const { ALLOWED_ORIGIN, PORT } = require('./configs/config');
 
 const Sentry = require('./logger/sentry');
 const { apiRouter } = require('./routes');
