@@ -52,8 +52,8 @@ const getUsers = () => {
         } catch (e) {
             console.log(e);
         }
-    }
-}
+    };
+};
 
 const getUser = (id) => {
     return async (dispatch) => {
@@ -63,8 +63,8 @@ const getUser = (id) => {
         } catch (e) {
             console.log(e);
         }
-    }
-}
+    };
+};
 
 const updateUser = async (id, data) => {
     try {
@@ -72,12 +72,22 @@ const updateUser = async (id, data) => {
     } catch (e) {
         console.log(e);
     }
-}
+};
+
+const logOut = () => {
+    return (dispatch) => {
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('refreshToken')
+
+        dispatch(setAccessToken(''));
+    };
+};
 
 export {
     login,
     createUser,
     getUsers,
     getUser,
-    updateUser
+    updateUser,
+    logOut
 };

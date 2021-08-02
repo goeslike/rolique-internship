@@ -15,7 +15,6 @@ const LoginForm = styled.form`
 
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   
   padding: 23px 32px 56px;
 
@@ -26,6 +25,8 @@ const LoginForm = styled.form`
 `;
 
 const LoginTitle = styled.div`
+  width: 100%;
+  text-align: center;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;

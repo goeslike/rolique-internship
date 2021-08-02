@@ -80,7 +80,7 @@ const CreateUser = () => {
                             {...register('firstname', {required: true})}
                             id='firstname'
                             type='text'
-                            // required={errors?.firstname}
+                            required={errors?.firstname}
                         />
 
                         <Label>Last Name</Label>
@@ -89,7 +89,7 @@ const CreateUser = () => {
                             {...register('lastname', {required: true})}
                             id='lastname'
                             type='text'
-                            // required={errors?.lastname}
+                            required={errors?.lastname}
                         />
 
                         <Label>Email</Label>
@@ -98,7 +98,7 @@ const CreateUser = () => {
                             {...register('email', {required: true})}
                             id='email'
                             type='email'
-                            // required={errors?.email}
+                            required={errors?.email}
                         />
 
                         <Label>Phone</Label>
@@ -126,7 +126,7 @@ const CreateUser = () => {
                             {...register('role', {required: true})}
                             id='role'
                             type='select'
-                            // required={errors?.role}
+                            required={errors?.role}
                         >
                             {/*<option value='' disabled selected hidden>Select...</option>*/}
                             <option value='admin'>Admin</option>
@@ -142,7 +142,7 @@ const CreateUser = () => {
                             {...register('password', {required: true})}
                             id='password'
                             type='password'
-                            // required={errors?.password}
+                            required={errors?.password}
                         />
 
                     </UserSecondSection>

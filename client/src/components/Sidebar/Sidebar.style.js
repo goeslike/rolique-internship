@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 const SidebarContainer = styled.div`
   width: 40px;
-  height: 100vh;
-  min-height: 100%;
+  min-height: 100vh;
 
   background-color: #121033;
   
@@ -30,8 +29,7 @@ const SidebarLogo = styled.img`
   margin: 23px 9px 20px 10px;
 `;
 
-
 export {
     SidebarContainer,
     SidebarLogo
-}
+};
