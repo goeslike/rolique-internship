@@ -3,17 +3,22 @@ import * as yup from 'yup';
 const createSchema = yup.object().shape({
     firstname: yup
         .string()
-        // .string.min(2, 'First name must be longer than 2 characters')
-        // .string.max(30, 'First name must be shorter than 30 characters')
         .matches(/^([^0-9]*)$/, 'First name should not contain numbers')
         .required('First name is a required field'),
     lastname: yup
         .string()
-        // .string.min(2, 'First name must be longer than 2 characters')
-        // .string.max(30, 'First name must be shorter than 30 characters')
         .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
         .required('Last name is a required field'),
-    birthdate: yup.date()
+    instagram: yup
+        .string()
+        .matches( /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+            'Enter correct url!'),
+    instagramFollowers: yup
+        .string()
+        .when('instagram', {
+            is: String,
+            then: yup.string().required()
+        })
 });
 
 export {

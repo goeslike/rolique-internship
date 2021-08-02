@@ -34,7 +34,10 @@ const createSchema = yup.object().shape({
         .matches(/^([+]?[0-9\s-\(\)]{3,25})*$/i),
     role: yup
         .string()
-        .required('Role is a required field')
+        .required('Role is a required field'),
+    avatar: yup.mixed().test('File size', 'File is too large', (value) => {
+        return value
+    })
 });
 
 export {
