@@ -5,7 +5,7 @@ import {BASE_URL} from '../constants';
 import {loginError, setAccessToken, setLoggedUser, setUser} from "../redux/action-creators";
 import {setUsers} from "../redux/action-creators/users-action-creators";
 
-const createUser = async (form) => {
+const createUser = async (data) => {
     const token = localStorage.getItem('accessToken');
 
     const config = {
@@ -13,7 +13,7 @@ const createUser = async (form) => {
     };
 
     try {
-        await axios.post(BASE_URL + 'users', form, config);
+        await axios.post(BASE_URL + 'users', data, config);
     } catch (e) {
         console.log(e);
     }

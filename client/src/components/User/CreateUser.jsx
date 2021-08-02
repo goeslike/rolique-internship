@@ -45,9 +45,15 @@ const CreateUser = () => {
 
     const sendData = async (data) => {
         const formData = new FormData();
-        await formData.append('avatar', data.avatar[0]);
 
-        await createUser({data, formData});
+        for (let key in data) {
+            if (key === 'avatar') {
+                formData.append(key, data[key][0])
+            }
+            formData.append(key, data[key])
+        }
+
+        await createUser(formData);
     };
 
     return (
