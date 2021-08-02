@@ -23,7 +23,7 @@ const InfluencerSchema = new Schema({
     },
     profession: {
         type: String,
-        required: true
+        // required: true
     },
     socialProfiles: {
         type: Map,

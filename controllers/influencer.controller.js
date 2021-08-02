@@ -3,7 +3,8 @@ const {
     fileService,
     influencerService
 } = require('../services');
-const { constants: { FOLDER_NAME: { INFLUENCER } }, statusCode: { CREATED } } = require('../constants');
+const { FOLDER_NAME: { INFLUENCER } } = require('../constants/constants');
+const { CREATED } = require('../constants/response.status.enum');
 
 module.exports = {
     createInfluencer: async (req, res, next) => {
@@ -20,13 +21,16 @@ module.exports = {
                 };
             }
 
-            const influencer = await influencerService.createInfluencer(body);
-            console.log(influencer.socialProfiles.get('instagram'));
+            // if (body.instagram) {
+            //     const images = await instagramService.getImagesData(body.instagram);
+            //     req.body = {
+            //         ...body,
+            //         instagramPhotos: images
+            //     };
+            //     // res.json(images);
+            // }
 
-            if (body.instagram) {
-                const images = await instagramService.getImagesData(body.instagram);
-                res.json(images);
-            }
+            await influencerService.createInfluencer(req.body);
 
             res.status(CREATED).json(`Influencer ${body.firstName} ${body.lastName} was created`);
         } catch (error) {
