@@ -41,8 +41,9 @@ const EditUser = () => {
         );
     };
 
-    const sendEditData = async (data) => {
+    const sendEditData = async (data, e) => {
         await updateUser(data);
+        e.target.reset();
     };
 
     return (

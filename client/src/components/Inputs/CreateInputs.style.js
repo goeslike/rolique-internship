@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import serchIcon from '../../assets/logo/logo.png';
 
 const Input = styled.input`
   width: 408px;
@@ -38,6 +37,10 @@ const SocialInput = styled.input`
   &:focus {
     border: 1px solid rgba(255, 101, 14, 0.5);
     filter: drop-shadow(0 0 rgba(255, 101, 14, 0.25));
+  }
+
+  &:required {
+    border: 1px solid #DA1414;
   }
 `;
 

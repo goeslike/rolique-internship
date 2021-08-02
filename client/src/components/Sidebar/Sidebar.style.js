@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const SidebarContainer = styled.div`
   width: 40px;
   height: 100vh;
+  min-height: 100%;
 
   background-color: #121033;
   

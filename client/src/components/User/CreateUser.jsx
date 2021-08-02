@@ -27,7 +27,7 @@ import CreateHeader from '../Header/CreateHeader';
 import {createUser} from "../../actions/user";
 
 const CreateUser = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(createSchema),
     });
@@ -44,7 +44,10 @@ const CreateUser = () => {
     };
 
     const sendData = async (data) => {
-        await createUser(data);
+        const formData = new FormData();
+        await formData.append('avatar', data.avatar[0]);
+
+        await createUser({data, formData});
     };
 
     return (
@@ -59,32 +62,38 @@ const CreateUser = () => {
                         <Label>Profile Picture</Label>
                         <Input
                             style={{display: 'none'}}
-                            {...register('avatar', {required: true})}
+                            {...register('avatar')}
                             id='avatar'
                             type='file'
                             accept='image/*'/>
-                        <FileLabel for='avatar' />
+                        <FileLabel htmlFor='avatar' />
 
                         <Label>First Name</Label>
                         {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}
                         <Input
                             {...register('firstname', {required: true})}
                             id='firstname'
-                            type='text'/>
+                            type='text'
+                            // required={errors?.firstname}
+                        />
 
                         <Label>Last Name</Label>
                         {errors?.lastname?.message && <HelperText>{errors?.lastname?.message}</HelperText>}
                         <Input
                             {...register('lastname', {required: true})}
                             id='lastname'
-                            type='text'/>
+                            type='text'
+                            // required={errors?.lastname}
+                        />
 
                         <Label>Email</Label>
                         {errors?.email?.message && <HelperText>{errors?.email?.message}</HelperText>}
                         <Input
                             {...register('email', {required: true})}
                             id='email'
-                            type='email'/>
+                            type='email'
+                            // required={errors?.email}
+                        />
 
                         <Label>Phone</Label>
                         {errors?.phone?.message && <HelperText>{errors?.phone?.message}</HelperText>}
@@ -110,8 +119,10 @@ const CreateUser = () => {
                         <Select
                             {...register('role', {required: true})}
                             id='role'
-                            type='select'>
-                            <option value='' disabled selected hidden>Select...</option>
+                            type='select'
+                            // required={errors?.role}
+                        >
+                            {/*<option value='' disabled selected hidden>Select...</option>*/}
                             <option value='admin'>Admin</option>
                             <option value='manager'>Manager</option>
                             <option value='employee'>Employee</option>
@@ -124,7 +135,9 @@ const CreateUser = () => {
                         <Input
                             {...register('password', {required: true})}
                             id='password'
-                            type='password'/>
+                            type='password'
+                            // required={errors?.password}
+                        />
 
                     </UserSecondSection>
                 </UserContainer>

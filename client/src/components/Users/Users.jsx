@@ -17,7 +17,7 @@ const Users = () => {
 
     useEffect(() => {
         dispatch(getUsers());
-    }, []);
+    }, [dispatch]);
 
     const redirect = (id) => {
         history.push(`/users/edit/id${id}`);
@@ -50,18 +50,16 @@ const Users = () => {
                             if (searchName === '') {
                                 return user
                             }
-                            if (
-                                user.firstname.toLowerCase().includes(searchName.toLowerCase()) ||
-                                user.lastname.toLowerCase().includes(searchName.toLowerCase())
-                            ) {
+                            if (user.firstname.toLowerCase().includes(searchName.toLowerCase())) {
                                 return user
                             }
+                            return user
                         }).map(user => {
                             return (
                                 <UsersTR key={user.id}>
                                     <UsersTD style={{width: '250px'}}>
                                         {user.avatar && <img src={user.avatar} alt=''/>}
-                                        {user.name} {user.lastname}
+                                        {user.name}
                                     </UsersTD>
                                     <UsersTD style={{width: '225px'}}>{user.email}</UsersTD>
                                     <UsersTD style={{width: '215px'}}>{user.role}</UsersTD>
