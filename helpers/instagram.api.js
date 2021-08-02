@@ -1,9 +1,7 @@
 const { IgApiClient } = require('instagram-private-api');
 
-// const { INSTAGRAM_LOGIN, INSTAGRAM_PASSWORD } = require('../configs/config');
+const { INSTAGRAM_LOGIN, INSTAGRAM_PASSWORD } = require('../configs/config');
 // --- тут вписати логін і пароль існуючого інстаграм акаунту
-const INSTAGRAM_LOGIN = 'nata.test.dev';
-const INSTAGRAM_PASSWORD = '12345qwertyui';
 
 module.exports = (function() {
     const apiClient = new IgApiClient();
