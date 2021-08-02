@@ -2,7 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 require('dotenv').config();
 
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -19,16 +19,16 @@ const app = express();
 
 _mongooseConnector();
 
-const serverRequestRateLimit = rateLimit({
-    windowMs: SERVER_RATE_LIMITS.period,
-    max: SERVER_RATE_LIMITS.maxRequests
-});
+// const serverRequestRateLimit = rateLimit({
+//     windowMs: SERVER_RATE_LIMITS.period,
+//     max: SERVER_RATE_LIMITS.maxRequests
+// });
 
 // eslint-disable-next-line no-use-before-define
 app.use(cors({ origin: configureCors }));
 
 app.use(Sentry.Handlers.errorHandler());
-app.use(serverRequestRateLimit);
+// app.use(serverRequestRateLimit);
 app.use(helmet());
 app.use(morgan('dev'));
 
