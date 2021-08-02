@@ -1,5 +1,7 @@
 module.exports = {
     authService: require('./auth.service'),
-    userService: require('./user.service'),
-    fileService: require('./file.service')
+    fileService: require('./file.service'),
+    instagramService: require('./instagram.service'),
+    influencerService: require('./influencer.service'),
+    userService: require('./user.service')
 };

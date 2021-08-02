@@ -2,20 +2,18 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 require('dotenv').config();
 const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
 
 const {
-    config: {
         ALLOWED_ORIGIN, PORT, SERVER_RATE_LIMITS, URL_ATLAS
-    }
-} = require('./configs');
+} = require('./configs/config');
 
 const Sentry = require('./logger/sentry');
 const { apiRouter } = require('./routes');
-const cronRun = require('./cron-jobs');
+// const cronRun = require('./cron-jobs');
 
 const app = express();
 
@@ -28,16 +26,16 @@ function _mongooseConnector() {
 }
 _mongooseConnector();
 
-const serverRequestRateLimit = rateLimit({
-    windowMs: SERVER_RATE_LIMITS.period,
-    max: SERVER_RATE_LIMITS.maxRequests
-});
+// const serverRequestRateLimit = rateLimit({
+//     windowMs: SERVER_RATE_LIMITS.period,
+//     max: SERVER_RATE_LIMITS.maxRequests
+// });
 
 // eslint-disable-next-line no-use-before-define
 app.use(cors({ origin: configureCors }));
 
 app.use(Sentry.Handlers.errorHandler());
-app.use(serverRequestRateLimit);
+// app.use(serverRequestRateLimit);
 app.use(helmet());
 app.use(morgan('dev'));
 
@@ -60,7 +58,7 @@ app.use('*', (err, req, res, next) => {
 
 app.listen(5000, () => {
     console.log(`App has been started on port ${PORT}...`);
-    cronRun();
+    // cronRun();
 });
 
 function configureCors(origin, callback) {
