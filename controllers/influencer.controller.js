@@ -10,25 +10,22 @@ module.exports = {
     createInfluencer: async (req, res, next) => {
         try {
             const {
-                body, files: { avatar }
+                avatar,
+                body
             } = req;
 
             if (avatar) {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
-                req.body = {
-                    ...body,
-                    avatar: cloudResponse.url
-                };
+                req.body.avatar = cloudResponse.url;
             }
 
-            // if (body.instagram) {
-            //     const images = await instagramService.getImagesData(body.instagram);
-            //     req.body = {
-            //         ...body,
-            //         instagramPhotos: images
-            //     };
-            //     // res.json(images);
-            // }
+            if (body.instagram) {
+                const images = await instagramService.getImagesData(body.instagram);
+                // req.body = {
+                //     ...body,
+                //     instagramPhotos: images
+                // };
+            }
 
             await influencerService.createInfluencer(req.body);
 
