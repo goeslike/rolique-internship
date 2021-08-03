@@ -1,4 +1,7 @@
 const cloudinary = require('cloudinary').v2;
+const DatauriParser = require('datauri/parser');
+
+const parser = new DatauriParser();
 
 const {
     config: {
@@ -14,8 +17,20 @@ cloudinary.config({
     api_secret: API_SECRET_CLOUD
 });
 
+
 module.exports = {
     uploadFile: (file, folder) => cloudinary.uploader.upload(file, { folder }),
+
+    uploadBinaryFile: async (file, folder) => {
+        const mimetype = file.type;
+
+        const binaryText = await file.arrayBuffer();
+        const buffer = await Buffer.from(binaryText);
+
+        const image = parser.format(mimetype, buffer);
+
+        return cloudinary.uploader.upload(image.content, { folder });
+    },
 
     deleteFile: async (filePath, folderAsset) => {
         const pathArray = filePath.split('.')

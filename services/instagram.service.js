@@ -26,16 +26,22 @@ module.exports = {
                 }
             }
         }
-        const arrayPromiseFile = [];
+        const binaryInstagramPhotos = [];
 
         for (const promise of accountImagePromises) {
             const filePromise = fetch(promise.imageUrl)
                 .then((data) => data.blob());
-            arrayPromiseFile.push(filePromise);
+            binaryInstagramPhotos.push(filePromise);
         }
 
-        await Promise.all(arrayPromiseFile);
+        await Promise.all(binaryInstagramPhotos);
+        // const array = [];
+        // for (const binaryInstagramPhoto of binaryInstagramPhotos) {
+        //     const item = await binaryInstagramPhoto
+        //     array.push(item)
+        // }
 
-        return arrayPromiseFile;
+        return binaryInstagramPhotos;
+        // return array
     }
 };
