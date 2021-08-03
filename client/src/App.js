@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setAccessToken} from "./redux/action-creators";
 
 function App() {
+    localStorage.setItem('accessToken', 'response.data.tokens.access_token');
     const dispatch = useDispatch();
     const accessToken = useSelector(({userReducer: {accessToken}}) => accessToken);
 

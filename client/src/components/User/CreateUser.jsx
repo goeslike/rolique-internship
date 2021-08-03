@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
@@ -11,7 +11,8 @@ import {
     UserFirstSection,
     UserSecondSection,
     UserSectionTitle,
-    InfoIcon
+    InfoIcon,
+    PreviewImg
 } from './CreateUser.style';
 
 import {
@@ -23,11 +24,27 @@ import {
 } from "../Inputs/CreateInputs.style";
 
 import {createSchema} from "../../validators/user-schema";
-import CreateHeader from '../Header/CreateHeader';
 import {createUser} from "../../actions/user";
 
+import CreateHeader from '../Header/CreateHeader';
+
 const CreateUser = () => {
-    const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
+    const [image, setImage] = useState();
+    const [preview, setPreview] = useState();
+
+    useEffect(() => {
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result);
+            }
+            reader.readAsDataURL(image);
+        } else {
+            setPreview(null)
+        }
+    }, [image]);
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(createSchema),
     });
@@ -44,6 +61,7 @@ const CreateUser = () => {
     };
 
     const sendData = async (data) => {
+        setPreview(null);
         const formData = new FormData();
 
         for (let key in data) {
@@ -54,6 +72,7 @@ const CreateUser = () => {
         }
 
         await createUser(formData);
+        reset();
     };
 
     return (
@@ -71,8 +90,18 @@ const CreateUser = () => {
                             {...register('avatar')}
                             id='avatar'
                             type='file'
-                            accept='image/*'/>
-                        <FileLabel htmlFor='avatar' />
+                            accept='image/*'
+                            onChange={(event) => {
+                                const file = event.target.files[0];
+                                if (file) {
+                                    setImage(file);
+                                } else {
+                                    setImage(null);
+                                }
+                            }}
+                        />
+                        <FileLabel style={{backgroundImage: `url(${preview})`}} htmlFor='avatar' />
+
 
                         <Label>First Name</Label>
                         {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}
@@ -128,7 +157,7 @@ const CreateUser = () => {
                             type='select'
                             required={errors?.role}
                         >
-                            {/*<option value='' disabled selected hidden>Select...</option>*/}
+                            <option value='' disabled selected hidden>Select...</option>
                             <option value='admin'>Admin</option>
                             <option value='manager'>Manager</option>
                             <option value='employee'>Employee</option>

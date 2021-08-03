@@ -31,7 +31,7 @@ const createSchema = yup.object().shape({
         .min(8, 'Password is too short - should be 8 chars minimum.'),
     phone: yup
         .string()
-        .matches(/^([+]?[0-9\s-\(\)]{3,25})*$/i),
+        .matches(/^([+]?[0-9\s-]{3,25})*$/i),
     role: yup
         .string()
         .required('Role is a required field'),

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Header, HeaderTitle} from "./Header.style";
-import CreateDropdown from "../CreateDropdown/CreateDropdown";
+import CreateDropdown from "../Dropdown/CreateDropdown";
 
 const ViewHeader = ({title}) => {
     return (
