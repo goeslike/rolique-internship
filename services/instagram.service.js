@@ -34,14 +34,11 @@ module.exports = {
             binaryInstagramPhotos.push(filePromise);
         }
 
-        await Promise.all(binaryInstagramPhotos);
-        // const array = [];
-        // for (const binaryInstagramPhoto of binaryInstagramPhotos) {
-        //     const item = await binaryInstagramPhoto
-        //     array.push(item)
-        // }
-
-        return binaryInstagramPhotos;
-        // return array
+        const arrayOfImages = [];
+        for (const imagePromise of binaryInstagramPhotos) {
+            const image = await imagePromise;
+            arrayOfImages.push(image);
+        }
+        return arrayOfImages;
     }
 };
