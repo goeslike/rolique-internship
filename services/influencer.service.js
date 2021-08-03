@@ -20,4 +20,9 @@ module.exports = {
         return newInfluencer;
     },
 
+    findOneByParams: (params) => Influencer.findOne(params),
+
+    updateOne: async (id, updateObject) => {
+        await Influencer.findByIdAndUpdate(id, { $set: updateObject });
+    }
 };
