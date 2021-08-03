@@ -20,6 +20,7 @@ module.exports = {
             }
 
             if (body.instagram) {
+                // eslint-disable-next-line no-unused-vars
                 const images = await instagramService.getImagesData(body.instagram);
                 // req.body = {
                 //     ...body,
@@ -29,7 +30,29 @@ module.exports = {
 
             await influencerService.createInfluencer(req.body);
 
-            res.status(CREATED).json(`Influencer ${body.firstName} ${body.lastName} was created`);
+            res.status(CREATED).json(`Influencer ${body.firstName} ${body.lastName} was created `);
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    getInfluencerById: async (req, res, next) => {
+        try {
+            const { id } = req.params;
+
+            const influencer = await influencerService.findOneByParams({ _id: id });
+
+            res.json(influencer);
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    getAllInfluencers: async (req, res, next) => {
+        try {
+            const influencers = await influencerService.getAllInfluencers(req.query);
+
+            res.json(influencers);
         } catch (error) {
             next(error);
         }

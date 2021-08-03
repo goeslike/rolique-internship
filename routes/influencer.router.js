@@ -11,6 +11,12 @@ const { CREATE } = require('../constants/action.enum');
 const { influencerController } = require('../controllers');
 const { influencerValidator } = require('../validators');
 
+router.get('/',
+    influencerController.getAllInfluencers);
+
+router.get('/:id',
+    influencerController.getInfluencerById);
+
 router.post('/',
     // authMiddleware.checkAccessToken,
     // accessMiddleware.checkRole([
