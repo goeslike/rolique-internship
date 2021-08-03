@@ -1,29 +1,44 @@
+const fetch = require('node-fetch');
+
 const { instagramApi } = require('../helpers');
 
 module.exports = {
     getImagesData: async (username) => {
-        const accountImages = [];
+        const accountImagePromises = [];
         const ig = await instagramApi.getInstagramData();
         const client = await ig.user.searchExact(username);
         if (!client) {
-            return accountImages;
+            return accountImagePromises;
         }
         const clientFeed = await ig.feed.user(
             client.pk
         );
         const page = await clientFeed.items();
         for (const post of page) {
-            if (accountImages.length < 12) {
+            if (accountImagePromises.length < 12) {
                 if (post.carousel_media) {
                     for (const item of post.carousel_media) {
-                        accountImages.push({ imgUrl: item.image_versions2.candidates[0].url });
+                        accountImagePromises.push({ imageUrl: item.image_versions2.candidates[0].url });
                     }
                 }
                 if (post.image_versions2) {
-                    accountImages.push({ imgUrl: post.image_versions2.candidates[0].url });
+                    accountImagePromises.push({ imageUrl: post.image_versions2.candidates[0].url });
                 }
             }
         }
-        return accountImages;
+        const binaryInstagramPhotos = [];
+
+        for (const promise of accountImagePromises) {
+            const filePromise = fetch(promise.imageUrl)
+                .then((data) => data.blob());
+            binaryInstagramPhotos.push(filePromise);
+        }
+
+        const arrayOfImages = [];
+        for (const imagePromise of binaryInstagramPhotos) {
+            const image = await imagePromise;
+            arrayOfImages.push(image);
+        }
+        return arrayOfImages;
     }
 };
