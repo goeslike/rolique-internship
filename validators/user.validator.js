@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { regexp } = require('../../constants');
+const { regexp } = require('../constants');
 
 module.exports = {
     createUser: Joi.object().keys({
