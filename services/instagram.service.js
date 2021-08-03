@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 const { instagramApi } = require('../helpers');
 
 module.exports = {
@@ -16,11 +18,19 @@ module.exports = {
             if (accountImages.length < 12) {
                 if (post.carousel_media) {
                     for (const item of post.carousel_media) {
-                        accountImages.push({ imgUrl: item.image_versions2.candidates[0].url });
+                        const filePromise = fetch(item.image_versions2.candidates[0].url)
+                            .then((data) => data.blob());
+                        const file = await filePromise;
+                        console.log(file);
+                        accountImages.push({ image: file });
                     }
                 }
                 if (post.image_versions2) {
-                    accountImages.push({ imgUrl: post.image_versions2.candidates[0].url });
+                    const filePromise = fetch(post.image_versions2.candidates[0].url)
+                        .then((data) => data.blob());
+                    const file = await filePromise;
+                    console.log(file);
+                    accountImages.push({ image: file });
                 }
             }
         }
