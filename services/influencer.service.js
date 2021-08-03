@@ -33,4 +33,6 @@ module.exports = {
     },
 
     findOneByParams: (params) => Influencer.findOne(params),
+
+    isInfluencerPresent: (param) => Influencer.exists(param),
 };

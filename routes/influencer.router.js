@@ -4,7 +4,8 @@ const {
     accessMiddleware,
     authMiddleware,
     dynamicMiddleware,
-    imageMiddleware
+    imageMiddleware,
+    influencer
 } = require('../middlewares');
 const { ADMIN, MANAGER } = require('../constants/roles.enum');
 const { CREATE } = require('../constants/action.enum');
@@ -15,6 +16,7 @@ router.get('/',
     influencerController.getAllInfluencers);
 
 router.get('/:id',
+    influencer.checkIsInfluencerExists,
     influencerController.getInfluencerById);
 
 router.post('/',
