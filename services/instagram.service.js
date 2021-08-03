@@ -21,7 +21,6 @@ module.exports = {
                         const filePromise = fetch(item.image_versions2.candidates[0].url)
                             .then((data) => data.blob());
                         const file = await filePromise;
-                        console.log(file);
                         accountImages.push({ image: file });
                     }
                 }
@@ -29,7 +28,6 @@ module.exports = {
                     const filePromise = fetch(post.image_versions2.candidates[0].url)
                         .then((data) => data.blob());
                     const file = await filePromise;
-                    console.log(file);
                     accountImages.push({ image: file });
                 }
             }
