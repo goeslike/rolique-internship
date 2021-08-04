@@ -8,6 +8,7 @@ const {
     FOLDER_NAME: { INFLUENCER },
     FOLDER_ASSETS: { INFLUENCER_DELETE }
 } = require('../constants/constants');
+const { UPDATED } = require('../constants/response.status.enum');
 
 module.exports = {
     createInfluencer: async (req, res, next) => {
@@ -51,7 +52,7 @@ module.exports = {
                 avatar
             } = req;
 
-            const findInfluencer = influencerService.findOneByParams({ _id: id });
+            const findInfluencer = await influencerService.findOneByParams({ _id: id });
 
             if (avatar) {
                 if (findInfluencer.avatar) {
@@ -63,27 +64,26 @@ module.exports = {
 
             if (body.instagram) {
                 if (findInfluencer.instagramPhotos) {
-                    const account = findInfluencer.socialProfiles.get('instagram');
                     const array = findInfluencer.instagramPhotos;
 
                     for (const item of array) {
-                        await fileService.deleteFile(item.photo, `${INFLUENCER_DELETE}${account.instagram}`);
+                        await fileService.deleteFile(item.photo, INFLUENCER_DELETE);
                     }
 
                     const images = await instagramService.getImagesData(body.instagram);
 
                     const photos = [];
                     for (const image of images) {
-                        const photo = await fileService.uploadBinaryFile(image, `${INFLUENCER}${body.instagram}`);
+                        const photo = await fileService.uploadBinaryFile(image, INFLUENCER_DELETE);
                         photos.push({ photo: photo.url });
                     }
                     req.body.instagramPhotos = photos;
                 }
             }
 
-            await influencerService.updateOne(id, { ...body });
+            await influencerService.updateOne(id, { ...req.body });
 
-            res.status(200)
+            res.status(UPDATED)
                 .json(`influencer id:${id} is updated`);
         } catch (error) {
             next(error);
