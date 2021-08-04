@@ -1,6 +1,6 @@
 module.exports = {
     PORT: process.env.PORT || 3000,
-    SENTRY_DSN: process.env.SENTRY_DSN || '',
+    SENTRY_DSN: process.env.SENTRY_DSN || 'https://0644e63b2e03416fa2c2f755ad4f2c8c@o926642.ingest.sentry.io/5876207',
     URL_ATLAS: process.env.URL_ATLAS || 'mongodb+srv://admin_test:admin@testproject.v6ryu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
 
     JWT_SECRET: process.env.JWT_SECRET || 'SECRET',

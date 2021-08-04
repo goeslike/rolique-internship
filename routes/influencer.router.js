@@ -13,11 +13,11 @@ const { influencerController } = require('../controllers');
 // const { influencerValidator } = require('../validators');
 
 router.post('/',
-    // authMiddleware.checkAccessToken,
-    // accessMiddleware.checkRole([
-    //     ADMIN,
-    //     MANAGER
-    // ], CREATE),
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkRole([
+        ADMIN,
+        MANAGER
+    ], CREATE),
     imageMiddleware.checkImage,
     imageMiddleware.checkAvatar,
     // dynamicMiddleware.checkIsBodyDataValid(influencerValidator.createInfluencer),
