@@ -6,7 +6,7 @@ import {parsePhoneNumberFromString} from "libphonenumber-js";
 
 import {createSchema} from "../../validators/user-schema";
 import CreateHeader from "../Header/CreateHeader";
-import {updateUser} from "../../actions/user";
+import { createUser, updateUser } from '../../actions/user';
 
 import infoIcon from "../../assets/info-icon.png";
 
@@ -14,6 +14,7 @@ import {UserContainer, UserFirstSection, UserSecondSection, UserSectionTitle, Us
 import {FileLabel, HelperText, Input, Label, Select} from "../Inputs/CreateInputs.style";
 
 const EditUser = () => {
+    const adminAccess = useSelector(({roleReducer: {adminAccess}}) => adminAccess);
     const user = useSelector(({userReducer: {user}}) => user);
 
     const defaultValues = {
@@ -110,7 +111,7 @@ const EditUser = () => {
                             id='role'
                             type='select'>
                             <option value='' disabled selected hidden>Select...</option>
-                            <option value='admin'>Admin</option>
+                            {adminAccess && <option value='admin'>Admin</option>}
                             <option value='Manager'>Manager</option>
                             <option value='Employee'>Employee</option>
                         </Select>

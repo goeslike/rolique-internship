@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { useSelector } from 'react-redux';
 
 import infoIcon from '../../assets/info-icon.png';
 
@@ -31,6 +32,8 @@ import CreateHeader from '../Header/CreateHeader';
 const CreateUser = () => {
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
+
+    const adminAccess = useSelector(({roleReducer: {adminAccess}}) => adminAccess);
 
     useEffect(() => {
         if (image) {
@@ -158,7 +161,7 @@ const CreateUser = () => {
                             required={errors?.role}
                         >
                             <option value='' disabled selected hidden>Select...</option>
-                            <option value='admin'>Admin</option>
+                            {adminAccess && <option value='admin'>Admin</option>}
                             <option value='manager'>Manager</option>
                             <option value='employee'>Employee</option>
                         </Select>

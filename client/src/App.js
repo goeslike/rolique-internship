@@ -2,23 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import useRoutes from "./routes";
-import {useDispatch, useSelector} from "react-redux";
-import {setAccessToken} from "./redux/action-creators";
+import { CheckUser } from './helpers/checkUser';
 
 function App() {
-    localStorage.setItem('accessToken', 'response.data.tokens.access_token');
-    const dispatch = useDispatch();
-    const accessToken = useSelector(({userReducer: {accessToken}}) => accessToken);
-
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-        dispatch(setAccessToken(token));
-    }
-
-    const routes = useRoutes(accessToken);
-
-    // localStorage.removeItem('accessToken')
-    // localStorage.removeItem('refreshToken')
+    const routes = useRoutes(CheckUser());
 
     return (
         <div className="App">
