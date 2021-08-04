@@ -25,6 +25,7 @@ module.exports = {
                 //     ...body,
                 //     instagramPhotos: images
                 // };
+                console.log(images);
             }
 
             await influencerService.createInfluencer(req.body);

@@ -16,12 +16,12 @@ module.exports = {
             .required(),
         phone: Joi.string(),
         // .regex(regexp.PHONE_REGEXP)
-        // .required(),
         role: Joi.string()
             .required(),
         password: Joi.string()
             .regex(regexp.PASSWORD_REGEXP)
             .required()
+        // avatar: Joi.any()
     }),
 
     updateUser: Joi.object().keys({
