@@ -28,7 +28,7 @@ module.exports = {
 
                 const photos = [];
                 for (const image of images) {
-                    const photo = await fileService.uploadBinaryFile(image, `${INFLUENCER}${body.instagram}`);
+                    const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
                     photos.push({ photo: photo.url });
                 }
                 req.body.instagramPhotos = photos;
