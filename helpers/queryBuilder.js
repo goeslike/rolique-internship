@@ -1,5 +1,3 @@
-// const { Influencer } = require('../dataBase');
-
 module.exports = (query = {}, model = '') => {
     const { ...filters } = query;
     const keys = Object.keys(filters);
@@ -23,25 +21,37 @@ module.exports = (query = {}, model = '') => {
         });
     }
 
-    if (model === 'influencers') {
+    if (model === 'influencer') {
         keys.forEach((key) => {
             switch (key) {
                 case 'name':
-                    // const x = Influencer.aggregate([{
-                    //     $project: {
-                    //         socialProfiles: {
-                    //             socialProfiles: '$socialProfiles',
-                    //         },
-                    //     }
-                    // }]);
                     const regex = new RegExp(query.name, 'i');
                     filterObject.name = {
                         $or: [
-                            { firstname: { $regex: regex } },
-                            { lastname: { $regex: regex } },
-                            // { socialProfiles: { $regex: regex } }
+                            { firstName: { $regex: regex } },
+                            { lastName: { $regex: regex } },
+                            // { socialProfiles: { instagram: { username: { $regex: regex } } } }
                         ]
                     };
+                    const pipeline = [
+                        {
+                            $project: {
+                                username: {
+                                    $concat: [
+                                        '$socialProfiles.instagram.username',
+                                        ''
+                                    ]
+                                },
+                                doc: '$$ROOT'
+                            }
+                        },
+                        {
+                            $match: {
+                                username: { $regex: regex }
+                            }
+                        }
+                    ];
+                    filterObject.pipeline = pipeline;
                     break;
                 default:
                     filterObject[key] = filters[key];
