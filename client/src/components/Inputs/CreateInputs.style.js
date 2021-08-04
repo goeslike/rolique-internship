@@ -69,6 +69,10 @@ const FileLabel = styled.label`
 
   border: 1px dashed rgba(197, 146, 165, 0.8);
   border-radius: 50%;
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
 
   &::after {
     content: "";
@@ -98,7 +102,7 @@ const Select = styled.select`
   width: 100%;
   height: 32px;
 
-  padding: 0 0 0 12px;
+  padding: 0 12px;
   margin: 0 0 16px 0;
 
   outline: none;

@@ -8,7 +8,6 @@ import {
 
 const initialState = {
     loginError: '',
-    currentUserRole: '',
     accessToken: '',
     user: {}
 };

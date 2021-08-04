@@ -1,14 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {Header, HeaderTitle} from "./Header.style";
-import CreateDropdown from "../CreateDropdown/CreateDropdown";
+import CreateDropdown from "../Dropdown/CreateDropdown";
 
 const ViewHeader = ({title}) => {
+    const employeeAccess = useSelector(({roleReducer: {employeeAccess}}) => employeeAccess);
+
     return (
         <Header>
             <HeaderTitle>
                 {title}
             </HeaderTitle>
-            <CreateDropdown />
+            {!employeeAccess && <CreateDropdown />}
         </Header>
     );
 };

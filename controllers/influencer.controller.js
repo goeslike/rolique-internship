@@ -3,8 +3,12 @@ const {
     fileService,
     influencerService
 } = require('../services');
-const { FOLDER_NAME: { INFLUENCER } } = require('../constants/constants');
 const { CREATED } = require('../constants/response.status.enum');
+const {
+    FOLDER_NAME: { INFLUENCER },
+    FOLDER_ASSETS: { INFLUENCER_DELETE }
+} = require('../constants/constants');
+const { UPDATED } = require('../constants/response.status.enum');
 
 module.exports = {
     createInfluencer: async (req, res, next) => {
@@ -21,16 +25,66 @@ module.exports = {
 
             if (body.instagram) {
                 const images = await instagramService.getImagesData(body.instagram);
-                // req.body = {
-                //     ...body,
-                //     instagramPhotos: images
-                // };
-                console.log(images);
+
+                const photos = [];
+                for (const image of images) {
+                    const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
+                    photos.push({ photo: photo.url });
+                }
+                req.body.instagramPhotos = photos;
             }
 
             await influencerService.createInfluencer(req.body);
 
-            res.status(CREATED).json(`Influencer ${body.firstName} ${body.lastName} was created`);
+            res.status(CREATED)
+                .json(`Influencer ${body.firstName} ${body.lastName} was created`);
+        } catch (error) {
+            console.log(error);
+            next(error);
+        }
+    },
+
+    updateInfluencer: async (req, res, next) => {
+        try {
+            const {
+                params: { id },
+                body,
+                avatar
+            } = req;
+
+            const findInfluencer = await influencerService.findOneByParams({ _id: id });
+
+            if (avatar) {
+                if (findInfluencer.avatar) {
+                    await fileService.deleteFile(findInfluencer.avatar, INFLUENCER_DELETE);
+                }
+                const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
+                await influencerService.updateOne(id, { avatar: cloudResponse.url });
+            }
+
+            if (body.instagram) {
+                if (findInfluencer.instagramPhotos) {
+                    const array = findInfluencer.instagramPhotos;
+
+                    for (const item of array) {
+                        await fileService.deleteFile(item.photo, INFLUENCER_DELETE);
+                    }
+
+                    const images = await instagramService.getImagesData(body.instagram);
+
+                    const photos = [];
+                    for (const image of images) {
+                        const photo = await fileService.uploadBinaryFile(image, INFLUENCER_DELETE);
+                        photos.push({ photo: photo.url });
+                    }
+                    req.body.instagramPhotos = photos;
+                }
+            }
+
+            await influencerService.updateOne(id, { ...req.body });
+
+            res.status(UPDATED)
+                .json(`influencer id:${id} is updated`);
         } catch (error) {
             next(error);
         }

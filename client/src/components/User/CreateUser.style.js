@@ -81,11 +81,26 @@ const InfoIcon = styled.img`
   margin: 0 0 0 10px;
 `;
 
+const PreviewImg = styled.img`
+  display: block;
+  position: relative;
+
+  width: 64px;
+  height: 64px;
+
+  margin: 0 0 24px;
+
+  cursor: pointer;
+  
+  border-radius: 50%;
+`;
+
 export {
     UserWrapper,
     UserContainer,
     UserFirstSection,
     UserSecondSection,
     UserSectionTitle,
-    InfoIcon
+    InfoIcon,
+    PreviewImg
 };

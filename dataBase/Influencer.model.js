@@ -9,7 +9,7 @@ const InfluencerSchema = new Schema({
     avatar: {
         type: String
     },
-    instagramPhotos: [String],
+    instagramPhotos: Array,
     firstName: {
         type: String,
         required: true
@@ -23,7 +23,7 @@ const InfluencerSchema = new Schema({
     },
     profession: {
         type: String,
-        // required: true
+        required: true
     },
     socialProfiles: {
         type: Map,

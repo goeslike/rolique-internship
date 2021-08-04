@@ -5,6 +5,7 @@ module.exports = {
         INFLUENCER: '/influencer/'
     },
     FOLDER_ASSETS: {
-        USER_DELETE: 'user/'
+        USER_DELETE: 'user/',
+        INFLUENCER_DELETE: 'influencer/'
     }
 };
