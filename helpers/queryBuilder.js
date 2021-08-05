@@ -1,3 +1,5 @@
+// const { Influencer } = require('../dataBase');
+
 module.exports = (query = {}, model = '') => {
     const { ...filters } = query;
     const keys = Object.keys(filters);
