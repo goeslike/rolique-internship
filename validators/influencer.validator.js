@@ -3,6 +3,7 @@ const Joi = require('joi');
 module.exports = {
     createInfluencer: Joi.object()
         .keys({
+            avatar: Joi.any(),
             firstName: Joi.string()
                 .required()
                 .min(3)
@@ -17,7 +18,8 @@ module.exports = {
             instagram: Joi.string()
                 .min(3)
                 .max(25),
-            instagramFollowers: Joi.string(),
+            instagramFollowers: Joi.string()
+                .when('instagram', { is: true, then: Joi.required() }),
             youTube: Joi.string()
                 .min(3)
                 .max(25),
@@ -38,7 +40,8 @@ module.exports = {
                 .min(3)
                 .max(25),
             blogFollowers: Joi.string(),
-        }),
+        }).and('instagram', 'instagramFollowers')
+        .and('facebook', 'facebookFollowers'),
     updateInfluencer: Joi.object()
         .keys({
             firstName: Joi.string()
