@@ -36,6 +36,5 @@ module.exports = {
         const influencer = await Influencer.findByIdAndUpdate(id, { $set: updateObject });
 
         await socialProfilesSave(updateObject, influencer);
-    },
-
+    }
 };

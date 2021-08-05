@@ -3,12 +3,13 @@ const {
     fileService,
     influencerService
 } = require('../services');
-const { CREATED } = require('../constants/response.status.enum');
+const { CREATED, UPDATED } = require('../constants/response.status.enum');
 const {
+    INFLUENCER_IS_CREATED,
+    INFLUENCER_IS_UPDATED,
     FOLDER_NAME: { INFLUENCER },
     FOLDER_ASSETS: { INFLUENCER_DELETE }
 } = require('../constants/constants');
-const { UPDATED } = require('../constants/response.status.enum');
 
 module.exports = {
     createInfluencer: async (req, res, next) => {
@@ -35,7 +36,7 @@ module.exports = {
             await influencerService.createInfluencer(req.body);
 
             res.status(CREATED)
-                .json(`Influencer ${body.firstName} ${body.lastName} was created`);
+                .json(INFLUENCER_IS_CREATED);
         } catch (error) {
             next(error);
         }
@@ -103,7 +104,7 @@ module.exports = {
             await influencerService.updateOne(id, { ...req.body });
 
             res.status(UPDATED)
-                .json(`influencer id:${id} is updated`);
+                .json(INFLUENCER_IS_UPDATED);
         } catch (error) {
             next(error);
         }

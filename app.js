@@ -4,14 +4,14 @@ require('dotenv').config();
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
+const swaggerUI = require('swagger-ui-express');
 
 const { _mongooseConnector } = require('./helpers/conector_DB');
-
 const { config: { PORT }, configureCors, serverRequestRateLimit } = require('./configs');
-
 const Sentry = require('./logger/sentry');
 const { apiRouter } = require('./routes');
 const cronRun = require('./cron-jobs');
+const swaggerDoc = require('./docs/swagger.json');
 
 const app = express();
 
@@ -36,6 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(fileUpload({ useTempFiles: true }));
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 app.use('/', apiRouter);
 
 // eslint-disable-next-line no-unused-vars

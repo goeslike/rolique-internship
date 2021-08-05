@@ -1,0 +1,812 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "InternshipRolique",
+    "description": "Swagger documentation for InternshipRolique project (c) Team of interns"
+  },
+  "paths": {
+  "/users": {
+    "get": {
+      "tags": [
+        "Users"
+      ],
+      "description": "Get all users",
+      "operationId": "getAllUsers",
+      "responses":{
+        "200": {
+          "description": "All users success",
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#definitions/user"
+            }
+          }
+        },
+        "403": {
+          "description": "Cors not allowed",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "description": "Error message",
+                "type": "string",
+                "example": "Cors not allowed"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "tags": [
+        "Users"
+      ],
+      "description": "Create user",
+      "operationId": "createUser",
+      "parameters": [
+        {
+          "name": "firstname",
+          "in": "formData",
+          "required": true,
+          "type": "string",
+          "example": "User"
+        },
+        {
+          "name": "lastname",
+          "in": "formData",
+          "required": true,
+          "type": "string",
+          "example": "Unique"
+        },
+        {
+          "name": "email",
+          "in": "formData",
+          "required": true,
+          "type": "string",
+          "example": "email@expamle.com"
+        },
+        {
+          "name": "password",
+          "in": "formData",
+          "required": true,
+          "type": "string",
+          "example": "vklglig$gutlfiugiyf"
+        },
+        {
+          "name": "phone",
+          "in": "formData",
+          "required": false,
+          "type": "number",
+          "example": "38 096 000 00 00"
+        },
+        {
+          "name": "role",
+          "in": "formData",
+          "required": true,
+          "type": "string",
+          "example": "admin"
+        },
+        {
+          "name": "avatar",
+          "in": "formData",
+          "required": false,
+          "type": "file",
+          "example": "some_photo-5657887_1280.jpg"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Create user success",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "example": "User is created"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "description": "Error message",
+                "type": "string",
+                "example": "Body has not valid value"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+    "/users/:id": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Update user",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          },
+          {
+            "name": "id",
+            "in": "params",
+            "required": true,
+            "type": "string",
+            "example": "60c8dd888ebfc910896528eb"
+          },
+          {
+            "name": "firstname",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "User"
+          },
+          {
+            "name": "lastname",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "User"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "update_email@expamle.com"
+          },
+          {
+            "name": "phone",
+            "in": "formData",
+            "required": false,
+            "type": "number",
+            "example": "38 096 000 00 00"
+          },
+          {
+            "name": "role",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "manager"
+          },
+          {
+            "name": "avatar",
+            "in": "formData",
+            "required": false,
+            "type": "file",
+            "example": "updated_photo-5657887_1280.jpg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update user success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User is updated"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Error message",
+                  "type": "string",
+                  "example": "Body has not valid value"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get user",
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          },
+          {
+            "name": "id",
+            "in": "params",
+            "required": true,
+            "type": "string",
+            "example": "60bcde5be151d0debbdfcdef"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get user success",
+            "schema": {
+                "$ref": "#definitions/user"
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Error message",
+                  "type": "string",
+                  "example": "Something went wrong"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/influencers": {
+      "get": {
+        "tags": [
+          "Influencers"
+        ],
+        "description": "Get all influencers",
+        "operationId": "getAllInfluencers",
+        "responses": {
+          "200": {
+            "description": "All influencers success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#definitions/influencer"
+              }
+            }
+          },
+          "400": {
+            "description": "Something went wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Error message",
+                  "type": "string",
+                  "example": "Something went wrong"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Influencers"
+        ],
+        "description": "Create influencer",
+        "operationId": "createInfluencer",
+        "parameters": [
+          {
+            "name": "firstname",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "User"
+          },
+          {
+            "name": "lastname",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "Unique"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "email@expamle.com"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "vklglig$gutlfiugiyf"
+          },
+          {
+            "name": "phone",
+            "in": "formData",
+            "required": false,
+            "type": "number",
+            "example": "38 096 000 00 00"
+          },
+          {
+            "name": "avatar",
+            "in": "formData",
+            "required": false,
+            "type": "file",
+            "example": "some_photo-5657887_1280.jpg"
+          },
+          {
+            "name": "instagram",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "insta.official_page"
+          },
+          {
+            "name": "instagramFollowers",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "30000"
+          },
+          {
+            "name": "facebook",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "fb.official_page"
+          },
+          {
+            "name": "facebookFollowers",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "3000"
+          },
+          {
+            "name": "youTube",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "youTube.official"
+          },
+          {
+            "name": "youTubeFollowers",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "40000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create influencer success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Influencer is created"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Error message",
+                  "type": "string",
+                  "example": "Body has not valid value"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/influencers/:id": {
+      "get": {
+        "tags": [
+          "Influencers"
+        ],
+        "description": "Get influencer",
+        "operationId": "getInfluencer",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          },
+          {
+            "name": "id",
+            "in": "params",
+            "required": true,
+            "type": "string",
+            "example": "60bcde5be151d0debbdfcdef"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get influencers success",
+            "schema": {
+              "$ref": "#definitions/influencer"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Error message",
+                  "type": "string",
+                  "example": "Param ID has not valid value"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Influencers"
+        ],
+        "description": "Update influencer",
+        "operationId": "updateInfluencer",
+        "parameters": [  {
+          "name": "access_token",
+          "in": "header",
+          "required": true,
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+        },
+          {
+            "name": "id",
+            "in": "params",
+            "required": true,
+            "type": "string",
+            "example": "60c8dd888ebfc910896528eb"
+          },
+          {
+            "name": "firstname",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "User"
+          },
+          {
+            "name": "lastname",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "Unique"
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "email@expamle.com"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "vklglig$gutlfiugiyf"
+          },
+          {
+            "name": "phone",
+            "in": "formData",
+            "required": false,
+            "type": "number",
+            "example": "38 096 000 00 00"
+          },
+          {
+            "name": "avatar",
+            "in": "formData",
+            "required": false,
+            "type": "file",
+            "example": "some_photo-5657887_1280.jpg"
+          },
+          {
+            "name": "instagram",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "insta.official_page"
+          },
+          {
+            "name": "instagramFollowers",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "30000"
+          },
+          {
+            "name": "facebook",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "fb.official_page"
+          },
+          {
+            "name": "facebookFollowers",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "3000"
+          },
+          {
+            "name": "youTube",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "youTube.official"
+          },
+          {
+            "name": "youTubeFollowers",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "example": "40000"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Update influencer success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Influencer is updated"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Error message",
+                  "type": "string",
+                  "example": "Create admin role is forbidden"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Create authorization tokens",
+        "operationId": "createAuthTokens",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "example": "someEmail.example1@gmail.com"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "type": "string",
+            "example": "bdflSKJBFD447dG"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auth tokens is created",
+            "schema": {
+              "$ref": "#definitions/o_auth"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Error message",
+                  "type": "string",
+                  "example": "Wrong email or password"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Create new authorization tokens",
+        "operationId": "createNewAuthTokens",
+        "parameters":[
+          {
+            "name": "refresh_token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjM3NzYxNDYsImV4cCI6MTYyMzc3Njc0Nn0.BxrhEqOQ7JwlPQ5K5bsi_2Iai8aX4yigzHtU66sdbNE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auth tokens is created",
+            "schema": {
+              "$ref": "#definitions/o_auth"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Error message",
+                  "type": "string",
+                  "example": "Not valid refresh token"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "60bcde5be151d0debbdfcdef"
+        },
+        "firstname": {
+          "type": "string",
+          "example": "User"
+        },
+        "lastname": {
+          "type": "string",
+          "example": "Unique"
+        },
+        "email": {
+          "type": "string",
+          "example": "uniqueEmail.2021@gmail.com"
+        },
+        "role": {
+          "type": "string",
+          "example": "admin"
+        },
+        "phone": {
+          "type": "number",
+          "example": "38 096 000 00 00"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-08-05T11:06:34.943+00:00"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-08-06T11:06:34.943+00:00"
+        },
+        "__v": {
+          "type": "integer",
+          "example": "0"
+        },
+        "avatar": {
+          "type": "string",
+          "example": "http://res.cloudinary.com/nataliia/image/upload/v1628007746/user/h9tyrj6uweygh88oonrb.jpg"
+        }
+      }
+    },
+    "influencer": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "60bcde5be151d0debbdfcdef"
+        },
+        "firstname": {
+          "type": "string",
+          "example": "User"
+        },
+        "lastname": {
+          "type": "string",
+          "example": "Unique"
+        },
+        "email": {
+          "type": "string",
+          "example": "uniqueEmail.2021@gmail.com"
+        },
+        "phone": {
+          "type": "number",
+          "example": "38 096 000 00 00"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-08-05T11:06:34.943+00:00"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-08-06T11:06:34.943+00:00"
+        },
+        "__v": {
+          "type": "integer",
+          "example": "0"
+        },
+        "avatar": {
+          "type": "string",
+          "example": "http://res.cloudinary.com/nataliia/image/upload/v1628007746/user/h9tyrj6uweygh88oonrb.jpg"
+        },
+        "instagramPhotos": {
+          "type": "array",
+          "example": [
+            {
+              "photo": "http://res.cloudinary.com/nataliia/image/upload/v1628098999/influencer/jlkh98wrhyjjq6ssuxt4.jpg"
+            }
+          ]
+        },
+        "socialProfiles": {
+          "type": "object",
+          "properties": {
+            "instagram": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "insta.official"
+                },
+                "followers": {
+                  "type": "string",
+                  "example": "3500"
+                }
+              }
+            }
+          }
+        }
+
+      }
+    },
+    "o_auth": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "sting",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjQzNTU5MTgsImV4cCI6MTYyNDM1NjUxOH0.7R52L13Hc9yimmS1miDspqG7b4kDvMXLLESyskC2oFA"
+        },
+        "refresh_token": {
+          "type": "sting",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MjQzNTU5MTgsImV4cCI6MTYyNjk0NzkxOH0.mro02twpZUH_vYFLchtI8SQ_U6AmP4Iyoku2gxIT2ew"
+        }
+      }
+    }
+  }
+}

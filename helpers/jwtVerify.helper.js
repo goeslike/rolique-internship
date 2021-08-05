@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const { ErrorHandler, errorMassages } = require('../errors');
+const { ErrorHandler, errorMassages: { NOT_VALID_TOKEN, NOT_VALID_REFRESH_TOKEN, WRONG_ACTION } } = require('../errors');
 const { config: { JWT_SECRET, JWT_REFRESH_SECRET } } = require('../configs');
-const { statusCode } = require('../constants');
+const { BAD_REQUEST, SERVER_ERROR } = require('../constants/response.status.enum');
 
 const jwtVerify = async (action, token) => {
     let isValid;
@@ -11,7 +11,7 @@ const jwtVerify = async (action, token) => {
         case 'access':
             isValid = await jwt.verify(token, JWT_SECRET, (err) => {
                 if (err) {
-                    throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.NOT_VALID_TOKEN);
+                    throw new ErrorHandler(BAD_REQUEST, NOT_VALID_TOKEN.message);
                 }
             });
             break;
@@ -19,13 +19,13 @@ const jwtVerify = async (action, token) => {
         case 'refresh':
             isValid = await jwt.verify(token, JWT_REFRESH_SECRET, (err) => {
                 if (err) {
-                    throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.NOT_VALID_REFRESH_TOKEN);
+                    throw new ErrorHandler(BAD_REQUEST, NOT_VALID_REFRESH_TOKEN.message);
                 }
             });
             break;
 
         default:
-            throw new ErrorHandler(statusCode.SERVER_ERROR, errorMassages.WRONG_ACTION);
+            throw new ErrorHandler(SERVER_ERROR, WRONG_ACTION.message);
     }
     return isValid;
 };

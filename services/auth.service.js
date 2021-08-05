@@ -1,14 +1,14 @@
-const { ErrorHandler, errorMassages } = require('../errors');
+const { ErrorHandler, errorMassages: { RECORD_NOT_FOUND } } = require('../errors');
 const { passwordHasher, tokenizer } = require('../helpers');
 const { O_Auth, User } = require('../dataBase');
-const { statusCode } = require('../constants');
+const { statusCode: { NOT_FOUND } } = require('../constants');
 
 module.exports = {
     authUser: async (email, password) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            throw new ErrorHandler(statusCode.NOT_FOUND, errorMassages.RECORD_NOT_FOUND);
+            throw new ErrorHandler(NOT_FOUND, RECORD_NOT_FOUND.message);
         }
 
         await passwordHasher.compare(password, user.password);

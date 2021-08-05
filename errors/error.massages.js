@@ -45,5 +45,8 @@ module.exports = {
     },
     CORS_NOT_ALLOWED: {
         message: 'Cors not allowed'
+    },
+    SERVER_ERROR: {
+        message: 'Server error'
     }
 };

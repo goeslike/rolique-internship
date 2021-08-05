@@ -3,7 +3,7 @@ const {
     fileService,
     userService
 } = require('../services');
-const { statusCode } = require('../constants');
+const { statusCode, constants: { USER_IS_CREATED, USER_IS_UPDATED } } = require('../constants');
 const {
     constants: {
         FOLDER_NAME: { USER },
@@ -36,7 +36,7 @@ module.exports = {
             }
 
             res.status(statusCode.OK)
-                .json(newUser);
+                .json(USER_IS_CREATED);
 
             next();
         } catch (error) {
@@ -94,7 +94,7 @@ module.exports = {
             await userService.updateOne(id, { ...body });
 
             res.status(statusCode.OK)
-                .json(`user id:${id} is updated`);
+                .json(USER_IS_UPDATED);
         } catch (error) {
             next(error);
         }
