@@ -22,7 +22,6 @@ module.exports = {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
                 req.body.avatar = cloudResponse.url;
             }
-
             if (body.instagram) {
                 const images = await instagramService.getImagesData(body.instagram);
 
@@ -33,13 +32,33 @@ module.exports = {
                 }
                 req.body.instagramPhotos = photos;
             }
-
             await influencerService.createInfluencer(req.body);
 
             res.status(CREATED)
                 .json(`Influencer ${body.firstName} ${body.lastName} was created`);
         } catch (error) {
-            console.log(error);
+            next(error);
+        }
+    },
+
+    getInfluencerById: async (req, res, next) => {
+        try {
+            const { id } = req.params;
+
+            const influencer = await influencerService.findOneByParams({ _id: id });
+
+            res.json(influencer);
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    getAllInfluencers: async (req, res, next) => {
+        try {
+            const influencers = await influencerService.getAllInfluencers(req.query);
+
+            res.json(influencers);
+        } catch (error) {
             next(error);
         }
     },

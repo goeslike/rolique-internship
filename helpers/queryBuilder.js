@@ -21,6 +21,44 @@ module.exports = (query = {}, model = '') => {
         });
     }
 
+    if (model === 'influencer') {
+        keys.forEach((key) => {
+            switch (key) {
+                case 'name':
+                    const regex = new RegExp(query.name, 'i');
+                    filterObject.name = {
+                        $or: [
+                            { firstName: { $regex: regex } },
+                            { lastName: { $regex: regex } },
+                            // { socialProfiles: { instagram: { username: { $regex: regex } } } }
+                        ]
+                    };
+                    const pipeline = [
+                        {
+                            $project: {
+                                username: {
+                                    $concat: [
+                                        '$socialProfiles.instagram.username',
+                                        ''
+                                    ]
+                                },
+                                doc: '$$ROOT'
+                            }
+                        },
+                        {
+                            $match: {
+                                username: { $regex: regex }
+                            }
+                        }
+                    ];
+                    filterObject.pipeline = pipeline;
+                    break;
+                default:
+                    filterObject[key] = filters[key];
+            }
+        });
+    }
+
     if (model === 'campaign') {
         keys.forEach((key) => {
             switch (key) {

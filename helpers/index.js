@@ -5,5 +5,5 @@ module.exports = {
     passwordHasher: require('./password.hasher'),
     queryBuilder: require('./queryBuilder'),
     tokenizer: require('./tokenizer'),
-    socialProfilesSave: require('./socialProfilesSave')
+    socialProfilesSave: require('./socialProfilesSave'),
 };

@@ -5,5 +5,7 @@ module.exports = {
     checkIdValid: require('./check.id.maddleware'),
     dynamicMiddleware: require('./check.data.dynamic.middleware'),
     imageMiddleware: require('./check.image.middleware'),
-    userMiddleware: require('./user.middleware')
+    userMiddleware: require('./user.middleware'),
+    influencer: require('./isInfluenserPresent')
+
 };

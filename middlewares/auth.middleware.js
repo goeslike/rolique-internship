@@ -9,7 +9,7 @@ module.exports = {
             const access_token = req.get(constants.AUTHORIZATION);
 
             if (!access_token) {
-                throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.TOKEN_IS_REQUIRED);
+                throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.TOKEN_IS_REQUIRED.message);
             }
 
             await jwtVerifyHelper.jwtVerify('access', access_token);
@@ -17,7 +17,7 @@ module.exports = {
             const tokens = await O_Auth.findOne({ access_token }).select('+password');
 
             if (!tokens) {
-                throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.NOT_VALID_TOKEN);
+                throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.NOT_VALID_TOKEN.message);
             }
 
             req.infoTokens = tokens._id;
@@ -32,7 +32,7 @@ module.exports = {
             const refresh_token = req.get(constants.AUTHORIZATION);
 
             if (!refresh_token) {
-                throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.TOKEN_IS_REQUIRED);
+                throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.TOKEN_IS_REQUIRED.message);
             }
 
             await jwtVerifyHelper.jwtVerify('refresh', refresh_token);
@@ -40,7 +40,7 @@ module.exports = {
             const tokens = await O_Auth.findOne({ refresh_token });
 
             if (!tokens) {
-                throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.NOT_VALID_REFRESH_TOKEN);
+                throw new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.NOT_VALID_REFRESH_TOKEN.message);
             }
 
             req.tokenInfo = tokens;
