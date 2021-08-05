@@ -40,6 +40,7 @@ const Login = () => {
                     id='email'
                     type='email'
                     error={!!errors.email}
+                    required={errors?.firstname}
                 />
 
                 <Label>Password</Label>
@@ -49,6 +50,7 @@ const Login = () => {
                     id='password'
                     type='password'
                     error={!!errors.loginPassword}
+                    required={errors?.lastname}
                 />
 
                 <LoginButton type={'submit'}>Log in</LoginButton>

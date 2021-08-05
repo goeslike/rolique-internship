@@ -2,8 +2,8 @@ import axios from "axios";
 
 import {BASE_URL} from '../constants';
 
-import {loginError, setAccessToken, setLoggedUser, setUser} from "../redux/action-creators";
-import {setUsers} from "../redux/action-creators/users-action-creators";
+import {loginError, setAccessToken, setUser} from "../redux/action-creators";
+import {setUsers} from '../redux/action-creators';
 
 const createUser = async (data) => {
     const token = localStorage.getItem('accessToken');

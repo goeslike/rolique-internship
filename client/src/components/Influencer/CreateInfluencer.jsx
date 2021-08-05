@@ -8,6 +8,7 @@ import {
     InfluencerSectionTitle,
     InfluencerSocial
 } from "./CreateInfluencer.style";
+
 import {FileLabel, HelperText, Input, Label, SocialInput} from "../Inputs/CreateInputs.style";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -19,7 +20,7 @@ const CreateInfluencer = () => {
         resolver: yupResolver(createSchema),
     });
 
-    const sendData = (data, e) => {
+    const sendData = (data) => {
         console.log(data);
     }
 
@@ -37,14 +38,18 @@ const CreateInfluencer = () => {
                         <Input
                             {...register('firstname', {required: true})}
                             id='firstname'
-                            type='text'/>
+                            type='text'
+                            required={errors?.firstname}
+                        />
 
                         <Label>Last Name</Label>
                         {errors?.lastname?.message && <HelperText>{errors?.lastname?.message}</HelperText>}
                         <Input
                             {...register('lastname', {required: true})}
                             id='lastname'
-                            type='text'/>
+                            type='text'
+                            required={errors?.lastname}
+                        />
 
                         <Label>Birthdate</Label>
                         <Input
@@ -53,7 +58,13 @@ const CreateInfluencer = () => {
                             type='date' />
 
                         <Label>Profession</Label>
-                        <Input />
+                        {errors?.profession?.message && <HelperText>{errors?.profession?.message}</HelperText>}
+                        <Input
+                            {...register('profession', {required: true})}
+                            id='profession'
+                            type='text'
+                            required={errors.profession}
+                        />
 
                         <Label>Profile Picture</Label>
                         <Input
@@ -70,11 +81,11 @@ const CreateInfluencer = () => {
                         <InfluencerSocial>
                             <div>
                                 <Label>Instagram</Label>
-                                {errors?.instagram?.message && <HelperText>{errors?.instagram?.message}</HelperText>}
                                 <SocialInput
                                     {...register('instagram')}
                                     id='instagram'
-                                    type='url'
+                                    type='text'
+                                    required={errors.instagram}
                                 />
                             </div>
                             <div>
@@ -82,7 +93,7 @@ const CreateInfluencer = () => {
                                 <SocialInput
                                     {...register('instagramFollowers')}
                                     id='instagramFollowers'
-                                    type='url'
+                                    type='number'
                                     required={errors.instagramFollowers}/>
                             </div>
                         </InfluencerSocial>
@@ -90,55 +101,100 @@ const CreateInfluencer = () => {
                         <InfluencerSocial>
                             <div>
                                 <Label>YouTube</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('youtube')}
+                                    id='youtube'
+                                    type='text'
+                                    required={errors.youtube}
+                                />
                             </div>
                             <div>
                                 <Label>YouTube Followers</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('youtubeFollowers')}
+                                    id='youtubeFollowers'
+                                    type='number'
+                                    required={errors.youtubeFollowers}/>
                             </div>
                         </InfluencerSocial>
 
                         <InfluencerSocial>
                             <div>
                                 <Label>Facebook</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('facebook')}
+                                    id='facebook'
+                                    type='text'
+                                    required={errors.facebook}
+                                />
                             </div>
                             <div>
                                 <Label>Facebook Followers</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('facebookFollowers')}
+                                    id='facebookFollowers'
+                                    type='number'
+                                    required={errors.facebookFollowers}/>
                             </div>
                         </InfluencerSocial>
 
                         <InfluencerSocial>
                             <div>
                                 <Label>Tiktok</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('tiktok')}
+                                    id='tiktok'
+                                    type='text'
+                                    required={errors.tiktok}
+                                />
                             </div>
                             <div>
                                 <Label>Tiktok Followers</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('tiktokFollowers')}
+                                    id='tiktokFollowers'
+                                    type='number'
+                                    required={errors.tiktokFollowers}/>
                             </div>
                         </InfluencerSocial>
 
                         <InfluencerSocial>
                             <div>
                                 <Label>Twitter</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('twitter')}
+                                    id='twitter'
+                                    type='text'
+                                    required={errors.twitter}
+                                />
                             </div>
                             <div>
                                 <Label>Twitter Followers</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('twitterFollowers')}
+                                    id='twitterFollowers'
+                                    type='number'
+                                    required={errors.twitterFollowers}/>
                             </div>
                         </InfluencerSocial>
 
                         <InfluencerSocial>
                             <div>
                                 <Label>Blog</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('blog')}
+                                    id='blog'
+                                    type='text'
+                                    required={errors.blog}
+                                />
                             </div>
                             <div>
                                 <Label>Blog Followers</Label>
-                                <SocialInput />
+                                <SocialInput
+                                    {...register('blogFollowers')}
+                                    id='blogFollowers'
+                                    type='number'
+                                    required={errors.blogFollowers}/>
                             </div>
                         </InfluencerSocial>
 

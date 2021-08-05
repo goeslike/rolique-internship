@@ -34,6 +34,11 @@ const SocialInput = styled.input`
   border: 1px solid #BFBFBF;
   border-radius: 6px;
 
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  
   &:focus {
     border: 1px solid rgba(255, 101, 14, 0.5);
     filter: drop-shadow(0 0 rgba(255, 101, 14, 0.25));

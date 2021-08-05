@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -6,7 +6,7 @@ import {parsePhoneNumberFromString} from "libphonenumber-js";
 
 import {createSchema} from "../../validators/user-schema";
 import CreateHeader from "../Header/CreateHeader";
-import { createUser, updateUser } from '../../actions/user';
+import { updateUser } from '../../actions/user';
 
 import infoIcon from "../../assets/info-icon.png";
 
@@ -14,6 +14,9 @@ import {UserContainer, UserFirstSection, UserSecondSection, UserSectionTitle, Us
 import {FileLabel, HelperText, Input, Label, Select} from "../Inputs/CreateInputs.style";
 
 const EditUser = () => {
+    const [image, setImage] = useState();
+    const [preview, setPreview] = useState();
+
     const adminAccess = useSelector(({roleReducer: {adminAccess}}) => adminAccess);
     const user = useSelector(({userReducer: {user}}) => user);
 
@@ -25,7 +28,7 @@ const EditUser = () => {
         role: user.role,
     };
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(createSchema),
         defaultValues: defaultValues
@@ -42,9 +45,30 @@ const EditUser = () => {
         );
     };
 
-    const sendEditData = async (data, e) => {
-        await updateUser(data);
-        e.target.reset();
+    useEffect(() => {
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result);
+            }
+            reader.readAsDataURL(image);
+        } else {
+            setPreview(null)
+        }
+    }, [image]);
+
+    const sendEditData = async (data) => {
+        const formData = new FormData();
+
+        for (let key in data) {
+            if (key === 'avatar') {
+                formData.append(key, data[key][0])
+            }
+            formData.append(key, data[key])
+        }
+
+        await updateUser(formData);
+        reset();
     };
 
     return (
@@ -59,11 +83,20 @@ const EditUser = () => {
                         <Label>Profile Picture</Label>
                         <Input
                             style={{display: 'none'}}
-                            {...register('avatar', {required: true})}
+                            {...register('avatar')}
                             id='avatar'
                             type='file'
-                            accept='image/*'/>
-                        <FileLabel for='avatar' />
+                            accept='image/*'
+                            onChange={(event) => {
+                                const file = event.target.files[0];
+                                if (file) {
+                                    setImage(file);
+                                } else {
+                                    setImage(null);
+                                }
+                            }}
+                        />
+                        <FileLabel style={{backgroundImage: `url(${preview ? preview : user.avatar})`}} htmlFor='avatar' />
 
                         <Label>First Name</Label>
                         {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
@@ -13,7 +13,6 @@ import {
     UserSecondSection,
     UserSectionTitle,
     InfoIcon,
-    PreviewImg
 } from './CreateUser.style';
 
 import {
@@ -104,7 +103,6 @@ const CreateUser = () => {
                             }}
                         />
                         <FileLabel style={{backgroundImage: `url(${preview})`}} htmlFor='avatar' />
-
 
                         <Label>First Name</Label>
                         {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}
