@@ -15,7 +15,6 @@ module.exports = {
             throw new ErrorHandler(
                 statusCode.BAD_REQUEST,
                 WRONG_EMAIL_OR_PASSWORD.message,
-                WRONG_EMAIL_OR_PASSWORD.customCode
             );
         }
     },

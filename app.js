@@ -3,29 +3,23 @@ const fileUpload = require('express-fileupload');
 require('dotenv').config();
 const helmet = require('helmet');
 const morgan = require('morgan');
-const cors = require('cors');
+// const cors = require('cors');
 const swaggerUI = require('swagger-ui-express');
 
 const { _mongooseConnector } = require('./helpers/conector_DB');
-const { config: { PORT }, configureCors, serverRequestRateLimit } = require('./configs');
+const { config: { PORT }, serverRequestRateLimit } = require('./configs');
 const Sentry = require('./logger/sentry');
 const { apiRouter } = require('./routes');
 const cronRun = require('./cron-jobs');
 const swaggerDoc = require('./docs/swagger.json');
+const { corsMiddleware } = require('./middlewares');
 
 const app = express();
 
 _mongooseConnector();
 
-app.use(cors({
-    origin: configureCors,
-    methods: [
-        'GET',
-        'POST',
-        'PUT',
-        'DELETE'
-    ],
-}));
+// app.use(cors({ origin: configureCors }));
+app.use('*', corsMiddleware);
 
 app.use(Sentry.Handlers.errorHandler());
 app.use(serverRequestRateLimit);

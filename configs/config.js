@@ -15,6 +15,7 @@ module.exports = {
     INTERN_USER_PASSWORD: process.env.INTERN_USER_PASSWORD || 'p@aS$ww0rD',
 
     ALLOWED_ORIGIN: process.env.ALLOWED_ORIGIN || 'http://localhost:4200;http://localhost:3000',
+    ALLOWED_METHODS: process.env.ALLOWED_METHODS || 'GET;POST;PUT;DELETE',
 
     SERVER_RATE_LIMITS: {
         period: 15 * 60 * 1000, // 15 minutes
