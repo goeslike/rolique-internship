@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
-import { useSelector } from 'react-redux';
+import {parsePhoneNumberFromString} from 'libphonenumber-js'
+import {useSelector} from 'react-redux';
 
 import infoIcon from '../../assets/info-icon.png';
 
@@ -46,14 +46,14 @@ const CreateUser = () => {
         }
     }, [image]);
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const {register, handleSubmit, formState: {errors}, reset} = useForm({
         mode: 'onBlur',
         resolver: yupResolver(createSchema),
     });
 
     const normalizePhoneNumber = (value) => {
-        const phoneNumber = parsePhoneNumberFromString(value)
-        if(!phoneNumber){
+        const phoneNumber = parsePhoneNumberFromString(value);
+        if (!phoneNumber) {
             return value
         }
 
@@ -102,7 +102,7 @@ const CreateUser = () => {
                                 }
                             }}
                         />
-                        <FileLabel style={{backgroundImage: `url(${preview})`}} htmlFor='avatar' />
+                        <FileLabel style={{backgroundImage: `url(${preview})`}} htmlFor='avatar'/>
 
                         <Label>First Name</Label>
                         {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}
@@ -140,14 +140,27 @@ const CreateUser = () => {
                             onChange={(event) => {
                                 event.target.value = normalizePhoneNumber(event.target.value);
                             }}
-                            />
+                        />
 
                     </UserFirstSection>
 
                     <UserSecondSection>
                         <UserSectionTitle>
                             Role & Permissions
-                            <span><InfoIcon src={infoIcon} alt="infoIcon"/></span>
+                            <span>
+                                <InfoIcon src={infoIcon} alt="infoIcon"/>
+                                <div>
+                                    <p>1. Admin</p>
+                                    <p>Can create/manage internal/external users, set Sedcards App limits for clients,
+                                    set Budget/Client CPM visibility for Employees.</p>
+                                    <p>2. Manager</p>
+                                    <p>Can create/manage internal/external users, but not internal Admins, set Sedcards
+                                    App limits for clients, set Budget/Client CPM visibility for Employees.</p>
+                                    <p>3. Employees</p>
+                                    <p>Can see internal/external users, edit his own profile, see Budget/Client CPMs
+                                    when allowed.</p>
+                                </div>
+                            </span>
                         </UserSectionTitle>
 
                         <Label>Role</Label>

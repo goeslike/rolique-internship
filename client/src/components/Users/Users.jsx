@@ -68,7 +68,10 @@ const Users = () => {
                                         await getUserById(user.id)
                                         redirect(user.id)
                                     }} style={{width: '28px'}}>
-                                        <img src={editIcon} alt='editIcon' />
+                                        <span>
+                                            <div>Edit User</div>
+                                            <img src={editIcon} alt='editIcon' />
+                                        </span>
                                     </UsersTD>
                                 </UsersTR>
                             );

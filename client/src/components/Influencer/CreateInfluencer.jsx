@@ -1,4 +1,6 @@
 import React from 'react';
+import {useForm} from "react-hook-form";
+
 import CreateHeader from "../Header/CreateHeader";
 
 import {
@@ -10,7 +12,6 @@ import {
 } from "./CreateInfluencer.style";
 
 import {FileLabel, HelperText, Input, Label, SocialInput} from "../Inputs/CreateInputs.style";
-import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {createSchema} from "../../validators/influencer-schema";
 
@@ -22,6 +23,10 @@ const CreateInfluencer = () => {
 
     const sendData = (data) => {
         console.log(data);
+    };
+
+    const dotSeparator = (value) => {
+
     }
 
     return (
@@ -72,7 +77,7 @@ const CreateInfluencer = () => {
                             {...register('avatar', {required: true})}
                             id='influencer-avater'
                             type='file'/>
-                        <FileLabel for={'influencer-avater'}/>
+                        <FileLabel htmlFor={'influencer-avater'}/>
                     </InfluencerSection>
 
                     <InfluencerSection>
@@ -93,8 +98,11 @@ const CreateInfluencer = () => {
                                 <SocialInput
                                     {...register('instagramFollowers')}
                                     id='instagramFollowers'
-                                    type='number'
-                                    required={errors.instagramFollowers}/>
+                                    type='string'
+                                    required={errors.instagramFollowers}
+                                    onChange={(event) => {
+                                        event.target.value = dotSeparator(event.target.value);
+                                    }}/>
                             </div>
                         </InfluencerSocial>
 

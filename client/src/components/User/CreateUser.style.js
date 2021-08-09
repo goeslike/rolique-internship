@@ -40,6 +40,32 @@ const UserSectionTitle = styled.h3`
     align-items: center;
     
     position: relative;
+
+    margin: 0 0 0 10px;
+    
+    & div {
+      width: 372px;
+      height: auto;
+      
+      display: none;
+      
+      padding: 12px 16px;
+
+      background-color: rgba(0, 0, 0, .8);
+      border-radius: 8px;
+      
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(238, 238, 238, 1);
+
+      position: absolute;
+
+      top: 195%;
+      left: -175px;
+      
+      transition: all .5s linear;
+    }
     
     &:hover::before {
       content: '';
@@ -48,7 +74,7 @@ const UserSectionTitle = styled.h3`
       position: absolute;
       
       top: 120%;
-      left: 30%;
+      left: 0;
       
       z-index: 1000;
 
@@ -59,26 +85,14 @@ const UserSectionTitle = styled.h3`
       border-color: transparent transparent rgba(0, 0, 0, .8) transparent;
     }
     
-    &:hover::after {
-      content: '';
+    &:hover div {
       display: block;
-      
-      position: absolute;
-
-      top: 190%;
-      left: -142px;
-      
-      width: 327px;
-      height: 244px;
-      
-      background-color: rgba(0, 0, 0, .8);
-      border-radius: 8px;
     }
   }
 `;
 
 const InfoIcon = styled.img`
-  margin: 0 0 0 10px;
+
 `;
 
 const PreviewImg = styled.img`
