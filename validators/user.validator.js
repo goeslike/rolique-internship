@@ -20,7 +20,8 @@ module.exports = {
             .required(),
         password: Joi.string()
             .regex(regexp.PASSWORD_REGEXP)
-            .required()
+            .required(),
+        avatar: Joi.any()
     }),
 
     updateUser: Joi.object().keys({
