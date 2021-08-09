@@ -1,12 +1,5 @@
-const {
-    mimeTypes: {
-        IMAGES_MIMETYPES,
-        IMAGES_MAX_SIZE
-    },
-    statusCode: {
-        BAD_REQUEST
-    }
-} = require('../constants');
+const { BAD_REQUEST } = require('../constants/response.status.enum');
+const { IMAGES_MIMETYPES, IMAGES_MAX_SIZE } = require('../constants/mime.types.enum');
 const {
     ErrorHandler,
     errorMassages: {
@@ -35,7 +28,7 @@ module.exports = {
 
                 if (IMAGES_MIMETYPES.includes(mimetype)) {
                     if (size > IMAGES_MAX_SIZE) {
-                        throw new ErrorHandler(BAD_REQUEST, LARGE_FILE_SIZE.message(name), LARGE_FILE_SIZE.customCode);
+                        throw new ErrorHandler(BAD_REQUEST, LARGE_FILE_SIZE.message(name));
                     }
 
                     images.push(filesData[i]);
@@ -55,7 +48,7 @@ module.exports = {
             }
 
             if (req.photos.length > 1) {
-                throw new ErrorHandler(BAD_REQUEST, AVATAR_ERROR.massages, AVATAR_ERROR.customCode);
+                throw new ErrorHandler(BAD_REQUEST, AVATAR_ERROR.massages);
             }
 
             const [avatar] = req.photos;

@@ -21,7 +21,6 @@ module.exports = {
         password: Joi.string()
             .regex(regexp.PASSWORD_REGEXP)
             .required()
-        // avatar: Joi.any()
     }),
 
     updateUser: Joi.object().keys({

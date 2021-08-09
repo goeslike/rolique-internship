@@ -1,6 +1,6 @@
 const {
     ErrorHandler,
-    errorMassages: { BAD_REQUEST, RECORD_NOT_FOUND }
+    errorMassages: { RECORD_NOT_FOUND }
 } = require('../errors');
 const { userService } = require('../services');
 const { statusCode } = require('../constants');
@@ -10,7 +10,7 @@ module.exports = {
         try {
             const { error } = await validatorName.validate(req.body);
             if (error) {
-                throw new ErrorHandler(statusCode.BAD_REQUEST, error.details[0].message, BAD_REQUEST.customCode);
+                throw new ErrorHandler(statusCode.BAD_REQUEST, error.details[0].message);
             }
 
             next();
@@ -25,9 +25,8 @@ module.exports = {
             const user = await userService.findOneByParams({ [dataKey]: value });
 
             if (!user) {
-                throw new ErrorHandler(statusCode.NOT_FOUND, RECORD_NOT_FOUND.message, RECORD_NOT_FOUND.customCode);
+                throw new ErrorHandler(statusCode.NOT_FOUND, RECORD_NOT_FOUND.message);
             }
-            console.log(user);
             req.user = user;
             next();
         } catch (err) {

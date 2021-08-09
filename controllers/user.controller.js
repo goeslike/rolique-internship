@@ -1,15 +1,11 @@
 const { passwordHasher } = require('../helpers');
+const { fileService, userService } = require('../services');
 const {
-    fileService,
-    userService
-} = require('../services');
-const { statusCode, constants: { USER_IS_CREATED, USER_IS_UPDATED } } = require('../constants');
-const {
-    constants: {
-        FOLDER_NAME: { USER },
-        FOLDER_ASSETS: { USER_DELETE }
-    }
-} = require('../constants');
+    FOLDER_NAME: { USER },
+    FOLDER_ASSETS: { USER_DELETE },
+    USER_IS_CREATED, USER_IS_UPDATED
+} = require('../constants/constants');
+const { statusCode } = require('../constants');
 
 module.exports = {
     createUser: async (req, res, next) => {
@@ -20,7 +16,6 @@ module.exports = {
                     password,
                 }
             } = req;
-            console.log(avatar);
 
             const hashedPassword = await passwordHasher.hash(password);
             const newUser = await userService.createUser({

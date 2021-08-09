@@ -9,7 +9,7 @@ module.exports = {
             const isUserIdValid = userValidator.idUser.validate(id);
 
             if (!isUserIdValid) {
-                throw new ErrorHandler(statusCode.BAD_REQUEST, BAD_REQUEST_ID.message, BAD_REQUEST_ID.customCode);
+                throw new ErrorHandler(statusCode.BAD_REQUEST, BAD_REQUEST_ID.message);
             }
             next();
         } catch (err) {
