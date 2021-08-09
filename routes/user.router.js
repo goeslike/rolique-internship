@@ -27,7 +27,7 @@ router.post('/',
         ADMIN,
         MANAGER
     ], CREATE),
-    accessMiddleware.isManager, //  manager неможе створити admin
+    accessMiddleware.isManager,
     imageMiddleware.checkImage,
     imageMiddleware.checkAvatar,
     dynamicMiddleware.checkIsBodyDataValid(userValidator.createUser),
@@ -41,7 +41,7 @@ router.put('/:id',
         MANAGER,
         EMPLOYEE
     ], UPDATE),
-    accessMiddleware.isManager, // можна пробувити передати роль на фронт а він уже робить роль admin disabled ?
+    accessMiddleware.isManager,
     dynamicMiddleware.checkIsBodyDataValid(userValidator.updateUser),
     imageMiddleware.checkImage,
     imageMiddleware.checkAvatar,
