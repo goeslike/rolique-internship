@@ -19,7 +19,7 @@ module.exports = {
 
                 case 'update':
                     if (!whoHaveAccess.includes(userId.role)) {
-                        if (userId.role === 'employee' && userId._id !== id) { // employee can edit his own profile
+                        if (userId.role === 'employee' && userId._id !== id) {
                             throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.FORBIDDEN);
                         }
                     }
