@@ -30,8 +30,6 @@ module.exports = {
 
     findOneByParams: (params) => Influencer.findOne(params),
 
-    isInfluencerPresent: (param) => Influencer.exists(param),
-
     updateOne: async (id, updateObject) => {
         const influencer = await Influencer.findByIdAndUpdate(id, { $set: updateObject });
 

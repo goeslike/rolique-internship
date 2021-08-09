@@ -42,16 +42,10 @@ module.exports = {
         }
     },
 
-    getInfluencerById: async (req, res, next) => {
-        try {
-            const { id } = req.params;
+    getInfluencerById: (req, res) => {
+        const { influencer } = req;
 
-            const influencer = await influencerService.findOneByParams({ _id: id });
-
-            res.json(influencer);
-        } catch (error) {
-            next(error);
-        }
+        res.json(influencer);
     },
 
     getAllInfluencers: async (req, res, next) => {

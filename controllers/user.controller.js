@@ -1,9 +1,13 @@
 const { passwordHasher } = require('../helpers');
-const { fileService, userService } = require('../services');
+const {
+    fileService,
+    userService
+} = require('../services');
 const {
     FOLDER_NAME: { USER },
     FOLDER_ASSETS: { USER_DELETE },
-    USER_IS_CREATED, USER_IS_UPDATED
+    USER_IS_CREATED,
+    USER_IS_UPDATED
 } = require('../constants/constants');
 const { statusCode } = require('../constants');
 
@@ -49,16 +53,10 @@ module.exports = {
         }
     },
 
-    getUserById: async (req, res, next) => {
-        try {
-            const { id } = req.params;
+    getUserById: (req, res) => {
+        const { user } = req;
 
-            const user = await userService.findOneByParams({ _id: id });
-
-            res.json(user);
-        } catch (error) {
-            next(error);
-        }
+        res.json(user);
     },
 
     updateUser: async (req, res, next) => {
