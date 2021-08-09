@@ -1,0 +1,5 @@
+const SET_INFLUENCERS = 'SET_INFLUENCERS';
+
+export {
+    SET_INFLUENCERS
+};
