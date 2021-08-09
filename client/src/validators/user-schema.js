@@ -36,6 +36,7 @@ const createSchema = yup.object().shape({
         .string()
         .required('Role is a required field'),
     avatar: yup.mixed().test('File size', 'File is too large', (value) => {
+        console.log(value)
         return value
     })
 });

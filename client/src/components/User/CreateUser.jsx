@@ -42,7 +42,7 @@ const CreateUser = () => {
             }
             reader.readAsDataURL(image);
         } else {
-            setPreview(null)
+            setPreview(null);
         }
     }, [image]);
 
@@ -68,6 +68,7 @@ const CreateUser = () => {
 
         for (let key in data) {
             if (key === 'avatar') {
+                console.log(data[key])
                 formData.append(key, data[key][0])
             }
             formData.append(key, data[key])
@@ -93,8 +94,9 @@ const CreateUser = () => {
                             id='avatar'
                             type='file'
                             accept='image/*'
-                            onChange={(event) => {
+                            onInput={(event) => {
                                 const file = event.target.files[0];
+                                console.log(event.target.files[0])
                                 if (file) {
                                     setImage(file);
                                 } else {
@@ -171,7 +173,7 @@ const CreateUser = () => {
                             type='select'
                             required={errors?.role}
                         >
-                            <option value='' disabled selected hidden>Select...</option>
+                            {/*<option value='' disabled selected hidden>Select...</option>*/}
                             {adminAccess && <option value='admin'>Admin</option>}
                             <option value='manager'>Manager</option>
                             <option value='employee'>Employee</option>
