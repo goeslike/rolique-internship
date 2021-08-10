@@ -27,7 +27,6 @@ const Users = () => {
     const getUserById = async (id) => {
         await dispatch(getUser(id));
     };
-
     const [searchName, setSearchName] = useState('');
     return (
         <UsersWrapper>
@@ -55,7 +54,7 @@ const Users = () => {
                             if (searchName === '') {
                                 return user
                             }
-                            if (user.firstname.toLowerCase().includes(searchName.toLowerCase())) {
+                            if (user.name.toLowerCase().includes(searchName.toLowerCase())) {
                                 return user
                             }
                         }).map(user => {
