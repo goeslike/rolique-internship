@@ -26,7 +26,8 @@ const Users = () => {
 
     const getUserById = async (id) => {
         await dispatch(getUser(id));
-    }
+    };
+
     const [searchName, setSearchName] = useState('');
     return (
         <UsersWrapper>

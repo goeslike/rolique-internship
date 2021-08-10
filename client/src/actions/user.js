@@ -55,9 +55,15 @@ const getUsers = () => {
 };
 
 const getUser = (id) => {
+    const token = localStorage.getItem('accessToken');
+
+    const config = {
+        headers: {Authorization: token}
+    };
+
     return async (dispatch) => {
         try {
-            const response = await axios.get(BASE_URL + `users/${id}`);
+            const response = await axios.get(BASE_URL + `users/${id}`, config);
             dispatch(setUser(response.data));
         } catch (e) {
             console.log(e);
