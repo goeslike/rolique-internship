@@ -66,8 +66,13 @@ const getUser = (id) => {
 };
 
 const updateUser = async (id, data) => {
+    const token = localStorage.getItem('accessToken');
+
+    const config = {
+        headers: {Authorization: token}
+    };
     try {
-        await axios.put(BASE_URL + `users/${id}`, data);
+        await axios.put(BASE_URL + `users/${id}`, data, config);
     } catch (e) {
         console.log(e);
     }
