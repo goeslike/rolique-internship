@@ -65,8 +65,8 @@ const CreateInfluencer = () => {
 
                         <Label>Birthdate</Label>
                         <Input
-                            {...register('date', {required: true})}
-                            id='date'
+                            {...register('birthdate', {required: true})}
+                            id='birthdate'
                             type='date' />
 
                         <Label>Profession</Label>
