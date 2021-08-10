@@ -99,10 +99,7 @@ const CreateInfluencer = () => {
                                     {...register('instagramFollowers')}
                                     id='instagramFollowers'
                                     type='string'
-                                    required={errors.instagramFollowers}
-                                    onChange={(event) => {
-                                        event.target.value = dotSeparator(event.target.value);
-                                    }}/>
+                                    required={errors.instagramFollowers}/>
                             </div>
                         </InfluencerSocial>
 
