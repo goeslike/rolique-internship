@@ -16,6 +16,15 @@ const getInfluencers = () => {
     };
 };
 
+const createInfluencer = async (data) => {
+    try {
+        await axios.post(BASE_URL + 'influencers', data);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 export {
-    getInfluencers
+    getInfluencers,
+    createInfluencer
 };

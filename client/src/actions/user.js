@@ -38,15 +38,9 @@ const login = (data) => {
 };
 
 const getUsers = () => {
-    const token = localStorage.getItem('accessToken');
-
-    const config = {
-        headers: {Authorization: token}
-    };
-
     return async (dispatch) => {
         try {
-            const response = await axios.get(BASE_URL + 'users', config);
+            const response = await axios.get(BASE_URL + 'users');
             dispatch(setUsers(response.data));
         } catch (e) {
             console.log(e);

@@ -1,5 +1,6 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
+import { createInfluencers } from '../../actions/influencer';
 
 import CreateHeader from "../Header/CreateHeader";
 
@@ -16,18 +17,24 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {createSchema} from "../../validators/influencer-schema";
 
 const CreateInfluencer = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(createSchema),
     });
 
-    const sendData = (data) => {
-        console.log(data);
+    const sendData = async (data) => {
+        const formData = new FormData();
+
+        for (let key in data) {
+            if (key === 'avatar') {
+                formData.append(key, data[key][0])
+            }
+            formData.append(key, data[key])
+        }
+
+        await createInfluencers(formData);
+        reset();
     };
-
-    const dotSeparator = (value) => {
-
-    }
 
     return (
         <InfluencerWrapper>
