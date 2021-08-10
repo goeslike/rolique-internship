@@ -55,7 +55,7 @@ const Users = () => {
                             if (searchName === '') {
                                 return user
                             }
-                            if (user.firstname.toLowerCase().includes(searchName.toLowerCase())) {
+                            if (user.name.toLowerCase().includes(searchName.toLowerCase())) {
                                 return user
                             }
                         }).map(user => {
