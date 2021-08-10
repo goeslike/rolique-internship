@@ -19,6 +19,10 @@ module.exports = {
                 body
             } = req;
 
+            if (!avatar) {
+                req.body.avatar = undefined;
+            }
+
             if (avatar) {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
                 req.body.avatar = cloudResponse.url;
@@ -67,6 +71,10 @@ module.exports = {
             } = req;
 
             const findInfluencer = await influencerService.findOneByParams({ _id: id });
+
+            if (!avatar) {
+                req.body.avatar = findInfluencer.avatar;
+            }
 
             if (avatar) {
                 if (findInfluencer.avatar) {

@@ -21,6 +21,10 @@ module.exports = {
                 }
             } = req;
 
+            if (!avatar) {
+                req.body.avatar = undefined;
+            }
+
             const hashedPassword = await passwordHasher.hash(password);
             const newUser = await userService.createUser({
                 ...req.body,
@@ -69,6 +73,10 @@ module.exports = {
             } = req;
             const checkUser = await userService.findOneByParams({ _id: id });
 
+            if (!avatar) {
+                req.body.avatar = checkUser.avatar;
+            }
+
             if (password) {
                 const hashedPassword = await passwordHasher.hash(password);
                 await userService.updateOne(id, {
@@ -76,6 +84,7 @@ module.exports = {
                     password: hashedPassword
                 });
             }
+
             if (avatar) {
                 if (checkUser.avatar) {
                     await fileService.deleteFile(checkUser.avatar, USER_DELETE);

@@ -14,8 +14,8 @@ module.exports = {
         email: Joi.string()
             .regex(regexp.EMAIL_REGEXP)
             .required(),
-        phone: Joi.string(),
-        // .regex(regexp.PHONE_REGEXP)
+        phone: Joi.string()
+            .regex(regexp.PHONE_REGEXP),
         role: Joi.string()
             .required(),
         password: Joi.string()
@@ -33,16 +33,12 @@ module.exports = {
             .max(47),
         email: Joi.string()
             .regex(regexp.EMAIL_REGEXP),
-        phone: Joi.number(),
+        phone: Joi.string(),
         role: Joi.string(),
         password: Joi.string()
             .regex(regexp.PASSWORD_REGEXP)
             .min(6)
-            .max(69)
-    }),
-
-    idUser: Joi.string()
-        .min(24)
-        .max(24)
-        .id()
+            .max(69),
+        avatar: Joi.any()
+    })
 };
