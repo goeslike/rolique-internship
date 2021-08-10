@@ -12,6 +12,9 @@ const createSchema = yup.object().shape({
     profession: yup
         .string()
         .required('Profession is a required field'),
+    data: yup
+        .date()
+        .notRequired(),
 
     instagram: yup
         .string()
