@@ -19,7 +19,7 @@ _mongooseConnector();
 
 app.use(cors({ origin: configureCors }));
 app.use(Sentry.Handlers.errorHandler());
-// app.use(serverRequestRateLimit);
+app.use(serverRequestRateLimit);
 app.use(helmet());
 app.use(morgan('dev'));
 
