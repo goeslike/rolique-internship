@@ -71,6 +71,7 @@ const updateUser = async (id, data) => {
     const config = {
         headers: {Authorization: token}
     };
+
     try {
         await axios.put(BASE_URL + `users/${id}`, data, config);
     } catch (e) {
@@ -80,8 +81,9 @@ const updateUser = async (id, data) => {
 
 const logOut = () => {
     return (dispatch) => {
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('refreshToken')
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('role');
 
         dispatch(setAccessToken(''));
     };

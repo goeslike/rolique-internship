@@ -68,7 +68,6 @@ const CreateUser = () => {
 
         for (let key in data) {
             if (key === 'avatar') {
-                console.log(data[key])
                 formData.append(key, data[key][0])
             }
             formData.append(key, data[key])
@@ -96,7 +95,6 @@ const CreateUser = () => {
                             accept='image/*'
                             onInput={(event) => {
                                 const file = event.target.files[0];
-                                console.log(event.target.files[0])
                                 if (file) {
                                     setImage(file);
                                 } else {
