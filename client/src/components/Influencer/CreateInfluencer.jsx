@@ -1,6 +1,6 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-import { createInfluencers } from '../../actions/influencer';
+import { createInfluencer } from '../../actions/influencer';
 
 import CreateHeader from "../Header/CreateHeader";
 
@@ -32,7 +32,7 @@ const CreateInfluencer = () => {
             formData.append(key, data[key])
         }
 
-        await createInfluencers(formData);
+        await createInfluencer(formData);
         reset();
     };
 

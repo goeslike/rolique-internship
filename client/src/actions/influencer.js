@@ -17,8 +17,14 @@ const getInfluencers = () => {
 };
 
 const createInfluencer = async (data) => {
+    const token = localStorage.getItem('accessToken');
+
+    const config = {
+        headers: {Authorization: token}
+    };
+
     try {
-        await axios.post(BASE_URL + 'influencers', data);
+        await axios.post(BASE_URL + 'influencers', data, config);
     } catch (e) {
         console.log(e);
     }
