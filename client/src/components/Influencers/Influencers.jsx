@@ -14,7 +14,7 @@ import {
     InfluencersTR
 } from './Influencers.style';
 
-const Influensers = () => {
+const Influencers = () => {
     const dispatch = useDispatch();
     // const influencers = useSelector(({influencersReducer: {influencers}}) => influencers);
 
@@ -49,4 +49,4 @@ const Influensers = () => {
     );
 };
 
-export default Influensers;
+export default Influencers;

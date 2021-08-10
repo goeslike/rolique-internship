@@ -34,6 +34,8 @@ const CreateDropdownContent = styled.div`
   top: 120%;
   left: 0;
   
+  z-index: 1000;
+  
   background: #fff;
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   
