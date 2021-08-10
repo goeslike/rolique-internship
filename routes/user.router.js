@@ -4,7 +4,6 @@ const { userController } = require('../controllers');
 const {
     accessMiddleware,
     authMiddleware,
-    checkIdValid,
     dynamicMiddleware,
     imageMiddleware
 } = require('../middlewares');
@@ -35,7 +34,7 @@ router.post('/',
     userController.createUser);
 
 router.put('/:id',
-    checkIdValid.checkIsRequestIdValid,
+    // checkIdValid.checkIsRequestIdValid,
     authMiddleware.checkAccessToken,
     accessMiddleware.checkRole([
         ADMIN,

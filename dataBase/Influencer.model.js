@@ -20,6 +20,7 @@ const InfluencerSchema = new Schema({
     },
     birthdate: {
         type: Date,
+        empty: true
     },
     profession: {
         type: String,

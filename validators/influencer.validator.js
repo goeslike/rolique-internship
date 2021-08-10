@@ -19,13 +19,12 @@ module.exports = {
                 .min(3)
                 .max(25),
             instagramFollowers: Joi.string()
-                .when('instagram', {
-                    is: true,
-                    then: Joi.required()
-                }),
-            youTube: Joi.string()
-                .min(3)
-                .max(25),
+                .empty(''),
+                // .when('instagram', {
+                //     is: true,
+                //     then: Joi.required()
+                // }),
+            youTube: Joi.string(),
             youTubeFollowers: Joi.string(),
             facebook: Joi.string()
                 .min(3)
@@ -43,9 +42,9 @@ module.exports = {
                 .min(3)
                 .max(25),
             blogFollowers: Joi.string(),
-        })
-        .and('instagram', 'instagramFollowers')
-        .and('facebook', 'facebookFollowers'),
+        }),
+        // .and('instagram', 'instagramFollowers')
+        // .and('facebook', 'facebookFollowers'),
     updateInfluencer: Joi.object()
         .keys({
             avatar: Joi.any(),

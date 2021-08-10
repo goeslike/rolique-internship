@@ -29,9 +29,10 @@ const CreateInfluencer = () => {
             if (key === 'avatar') {
                 formData.append(key, data[key][0])
             }
-            formData.append(key, data[key])
+            if (data[key] !== '') {
+                formData.append(key, data[key])
+            }
         }
-
         await createInfluencer(formData);
         reset();
     };
@@ -114,7 +115,7 @@ const CreateInfluencer = () => {
                             <div>
                                 <Label>YouTube</Label>
                                 <SocialInput
-                                    {...register('youtube')}
+                                    {...register('youTube')}
                                     id='youtube'
                                     type='text'
                                     required={errors.youtube}
@@ -123,7 +124,7 @@ const CreateInfluencer = () => {
                             <div>
                                 <Label>YouTube Followers</Label>
                                 <SocialInput
-                                    {...register('youtubeFollowers')}
+                                    {...register('youTubeFollowers')}
                                     id='youtubeFollowers'
                                     type='number'
                                     required={errors.youtubeFollowers}/>

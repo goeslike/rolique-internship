@@ -31,17 +31,17 @@ const createSchema = yup.object().shape({
             then: yup.string().required()
         }),
 
-    youtube: yup
+    youTube: yup
         .string()
         .notRequired()
-        .when('youtubeFollowers', {
+        .when('youTubeFollowers', {
             is: String,
             then: yup.string().required()
         }),
     youtubeFollowers: yup
         .string()
         .notRequired()
-        .when('youtube', {
+        .when('youTube', {
             is: String,
             then: yup.string().required()
         }),
