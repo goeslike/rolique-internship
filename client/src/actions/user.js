@@ -26,8 +26,9 @@ const login = (data) => {
 
             const response = await axios.post(BASE_URL + 'auth/login', data);
             dispatch(setAccessToken(response.data.tokens.access_token));
+            console.log(response.data.currentUser);
 
-            localStorage.setItem('role', 'employee');
+            localStorage.setItem('role', response.data.currentUser);
             localStorage.setItem('accessToken', response.data.tokens.access_token);
             localStorage.setItem('refreshToken', response.data.tokens.refresh_token);
         } catch (e) {

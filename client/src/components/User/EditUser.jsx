@@ -67,7 +67,7 @@ const EditUser = () => {
             formData.append(key, data[key])
         }
 
-        await updateUser(formData);
+        await updateUser(user.id, formData);
         reset();
     };
 
@@ -87,7 +87,7 @@ const EditUser = () => {
                             id='avatar'
                             type='file'
                             accept='image/*'
-                            onChange={(event) => {
+                            onInput={(event) => {
                                 const file = event.target.files[0];
                                 if (file) {
                                     setImage(file);
@@ -143,7 +143,7 @@ const EditUser = () => {
                             {...register('role', {required: true})}
                             id='role'
                             type='select'>
-                            <option value='' disabled selected hidden>Select...</option>
+                            {/*<option value='' disabled selected hidden>Select...</option>*/}
                             {adminAccess && <option value='admin'>Admin</option>}
                             <option value='Manager'>Manager</option>
                             <option value='Employee'>Employee</option>

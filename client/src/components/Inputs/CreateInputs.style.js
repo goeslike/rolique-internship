@@ -145,11 +145,24 @@ const HelperText = styled.p`
   color: #DA1414;
 `;
 
+const Search = styled.div`
+  position: relative;
+`;
+
+const SearchIcon = styled.img`
+  position: absolute;
+  
+  top: 10px;
+  left: 10px;
+  
+  z-index: 1000;
+`;
+
 const SearchInput = styled.input`
   width: 296px;
   height: 32px;
   
-  padding: 0 0 0 10px;
+  padding: 0 0 0 28px;
   margin: 0 0 16px;
 
   outline: none;
@@ -177,5 +190,7 @@ export {
     Select,
     HelperText,
     SocialInput,
-    SearchInput
+    SearchInput,
+    Search,
+    SearchIcon
 };

@@ -3,12 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 
 import editIcon from '../../assets/edit-icon.png';
+import searchIcon from '../../assets/search-icon.png';
 
 import ViewHeader from '../Header/ViewHeader';
 import {getUser, getUsers} from "../../actions/user";
 
 import {UsersWrapper, UsersContainer, UsersTable, UsersTD, UsersTR} from "./Users.style";
-import {SearchInput} from "../Inputs/CreateInputs.style";
+import { Search, SearchIcon, SearchInput } from '../Inputs/CreateInputs.style';
 
 const Users = () => {
     const history = useHistory();
@@ -32,7 +33,10 @@ const Users = () => {
             <ViewHeader title='Users' />
 
             <UsersContainer>
-                <SearchInput type={'text'} placeholder={'Search'} onChange={e => setSearchName(e.target.value)}/>
+                <Search>
+                    <SearchInput type={'text'} placeholder={'Search'} onChange={e => setSearchName(e.target.value)}/>
+                    <SearchIcon src={searchIcon} alt={'searchIcon'} />
+                </Search>
 
                 <UsersTable>
                     <thead style={{marginBottom: '5px'}}>
@@ -53,7 +57,6 @@ const Users = () => {
                             if (user.firstname.toLowerCase().includes(searchName.toLowerCase())) {
                                 return user
                             }
-                            return user
                         }).map(user => {
                             return (
                                 <UsersTR key={user.id}>
