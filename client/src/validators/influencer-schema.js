@@ -15,12 +15,14 @@ const createSchema = yup.object().shape({
 
     instagram: yup
         .string()
+        .notRequired()
         .when('instagramFollowers', {
             is: String,
             then: yup.string().required()
         }),
     instagramFollowers: yup
         .string()
+        .notRequired()
         .when('instagram', {
             is: String,
             then: yup.string().required()
@@ -28,12 +30,14 @@ const createSchema = yup.object().shape({
 
     youtube: yup
         .string()
+        .notRequired()
         .when('youtubeFollowers', {
             is: String,
             then: yup.string().required()
         }),
     youtubeFollowers: yup
         .string()
+        .notRequired()
         .when('youtube', {
             is: String,
             then: yup.string().required()
@@ -41,12 +45,14 @@ const createSchema = yup.object().shape({
 
     facebook: yup
         .string()
+        .notRequired()
         .when('facebookFollowers', {
             is: String,
             then: yup.string().required()
         }),
     facebookFollowers: yup
         .string()
+        .notRequired()
         .when('facebook', {
             is: String,
             then: yup.string().required()
@@ -54,12 +60,14 @@ const createSchema = yup.object().shape({
 
     tiktok: yup
         .string()
+        .notRequired()
         .when('tiktokFollowers', {
             is: String,
             then: yup.string().required()
         }),
     tiktokFollowers: yup
         .string()
+        .notRequired()
         .when('tiktok', {
             is: String,
             then: yup.string().required()
@@ -67,12 +75,14 @@ const createSchema = yup.object().shape({
 
     twitter: yup
         .string()
+        .notRequired()
         .when('twitterFollowers', {
             is: String,
             then: yup.string().required()
         }),
     twitterFollowers: yup
         .string()
+        .notRequired()
         .when('twitter', {
             is: String,
             then: yup.string().required()
@@ -80,12 +90,14 @@ const createSchema = yup.object().shape({
 
     blog: yup
         .string()
+        .notRequired()
         .when('blogFollowers', {
             is: String,
             then: yup.string().required()
         }),
     blogFollowers: yup
         .string()
+        .notRequired()
         .when('blog', {
             is: String,
             then: yup.string().required().matches(/(\$[0-9.]+(\.[0-9]{2})?)/)
