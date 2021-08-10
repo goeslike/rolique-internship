@@ -9,7 +9,6 @@ module.exports = {
         if (query.name) {
             const { filterObject } = queryBuilder(query, 'user');
             const users = await User.find(filterObject.name).select('-password');
-            console.log(users);
             return users;
         }
 
