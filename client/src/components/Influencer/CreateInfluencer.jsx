@@ -48,8 +48,8 @@ const CreateInfluencer = () => {
                         <Label>First Name</Label>
                         {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}
                         <Input
-                            {...register('firstname', {required: true})}
-                            id='firstname'
+                            {...register('firstName', {required: true})}
+                            id='firstName'
                             type='text'
                             required={errors?.firstname}
                         />
@@ -57,8 +57,8 @@ const CreateInfluencer = () => {
                         <Label>Last Name</Label>
                         {errors?.lastname?.message && <HelperText>{errors?.lastname?.message}</HelperText>}
                         <Input
-                            {...register('lastname', {required: true})}
-                            id='lastname'
+                            {...register('lastName', {required: true})}
+                            id='lastName'
                             type='text'
                             required={errors?.lastname}
                         />
