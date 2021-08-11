@@ -16,6 +16,7 @@ const Users = () => {
     const dispatch = useDispatch();
 
     const users = useSelector(({usersReducer: {users}}) => users);
+    const employeeAccess = useSelector(({roleReducer: {employeeAccess}}) => employeeAccess);
 
     const [searchName, setSearchName] = useState('');
 
@@ -70,6 +71,7 @@ const Users = () => {
                                     <UsersTD style={{width: '225px'}}>{user.email}</UsersTD>
                                     <UsersTD style={{width: '215px'}}>{user.role}</UsersTD>
                                     <UsersTD style={{width: '295px'}}>{user.phone}</UsersTD>
+                                    {!employeeAccess &&
                                     <UsersTD onClick={async() => {
                                         await getUserById(user.id)
                                         redirect(user.id)
@@ -79,6 +81,7 @@ const Users = () => {
                                             <img src={editIcon} alt='editIcon' />
                                         </span>
                                     </UsersTD>
+                                    }
                                 </UsersTR>
                             );
                         })}
