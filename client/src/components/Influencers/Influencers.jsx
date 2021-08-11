@@ -67,7 +67,7 @@ const Influencers = () => {
                                 <InfluencersTR key={influencer.id}>
                                     <InfluencersTD style={{width: '250px'}}>
                                         {influencer.avatar && <img src={influencer.avatar} alt=''/>}
-                                        {'@' + influencer.socialProfiles.instagram.username}
+                                        {'@' + influencer.socialProfiles?.instagram?.username}
                                     </InfluencersTD>
 
                                     <InfluencersTD style={{width: '225px'}}>
@@ -77,7 +77,7 @@ const Influencers = () => {
                                     <InfluencersTD style={{width: '215px'}}>
                                         {influencer.socialProfiles.instagram &&
                                         <a
-                                            href={`https://www.instagram.com/${influencer.socialProfiles.instagram.username}`}
+                                            href={`https://www.instagram.com/${influencer.socialProfiles?.instagram?.username}`}
                                             target={'_blank'}
                                             rel="noreferrer">
                                             <InfluencerSocialIcon src={instagramIcon} alt={'instagramIcon'}/>
