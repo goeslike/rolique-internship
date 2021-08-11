@@ -51,22 +51,12 @@ const CreateUser = () => {
         resolver: yupResolver(createSchema),
     });
 
-    const normalizePhoneNumber = (value) => {
-        const phoneNumber = parsePhoneNumberFromString(value);
-        if (!phoneNumber) {
-            return value
-        }
-
-        return (
-            phoneNumber.formatInternational()
-        );
-    };
-
     const sendData = async (data) => {
         setPreview(null);
         const formData = new FormData();
 
         for (let key in data) {
+            console.log(data[key]);
             if (key === 'avatar') {
                 formData.append(key, data[key][0])
             }
@@ -137,9 +127,6 @@ const CreateUser = () => {
                             {...register('phone', {required: true})}
                             id='phone'
                             type='tel'
-                            onChange={(event) => {
-                                event.target.value = normalizePhoneNumber(event.target.value);
-                            }}
                         />
 
                     </UserFirstSection>

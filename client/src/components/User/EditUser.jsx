@@ -34,17 +34,6 @@ const EditUser = () => {
         defaultValues: defaultValues
     });
 
-    const normalizePhoneNumber = (value) => {
-        const phoneNumber = parsePhoneNumberFromString(value)
-        if(!phoneNumber){
-            return value
-        }
-
-        return (
-            phoneNumber.formatInternational()
-        );
-    };
-
     useEffect(() => {
         if (image) {
             const reader = new FileReader();
@@ -126,9 +115,7 @@ const EditUser = () => {
                             {...register('phone', {required: true})}
                             id='phone'
                             type='tel'
-                            onChange={(event) => {
-                                event.target.value = normalizePhoneNumber(event.target.value);
-                            }}/>
+                        />
 
                     </UserFirstSection>
 
