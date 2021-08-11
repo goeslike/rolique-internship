@@ -43,10 +43,10 @@ const CreateInfluencer = () => {
 
         for (let key in data) {
             if (key === 'avatar') {
-                formData.append(key, data[key][0])
+                formData.append(key, data[key][0]);
             }
             if (data[key] !== '') {
-                formData.append(key, data[key])
+                formData.append(key, data[key]);
             }
         }
         await createInfluencer(formData);

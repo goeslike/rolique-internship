@@ -56,9 +56,11 @@ const CreateUser = () => {
 
         for (let key in data) {
             if (key === 'avatar') {
-                formData.append(key, data[key][0])
+                formData.append(key, data[key][0]);
             }
-            formData.append(key, data[key])
+            if (data[key] !== '') {
+                formData.append(key, data[key]);
+            }
         }
 
         await createUser(formData);
