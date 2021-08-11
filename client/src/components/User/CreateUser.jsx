@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {parsePhoneNumberFromString} from 'libphonenumber-js'
 import {useSelector} from 'react-redux';
 
 import infoIcon from '../../assets/info-icon.png';
@@ -56,7 +55,6 @@ const CreateUser = () => {
         const formData = new FormData();
 
         for (let key in data) {
-            console.log(data[key]);
             if (key === 'avatar') {
                 formData.append(key, data[key][0])
             }

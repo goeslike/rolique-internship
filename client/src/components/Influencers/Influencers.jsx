@@ -7,7 +7,6 @@ import twitterIcon from '../../assets/social-icons/twitter.png';
 import youtubeIcon from '../../assets/social-icons/youtube.png';
 import facebookIcon from '../../assets/social-icons/facebook.png';
 import tiktokIcon from '../../assets/social-icons/tiktok.png';
-import instagramStoriesIcon from '../../assets/social-icons/instagram-stories.png';
 
 import ViewHeader from "../Header/ViewHeader";
 
@@ -62,6 +61,7 @@ const Influencers = () => {
                             if (influencer.socialProfiles.instagram.username.toLowerCase().includes(searchName.toLowerCase())) {
                                 return influencer
                             }
+                            return influencer
                         }).map(influencer => {
                             return (
                                 <InfluencersTR key={influencer.id}>
@@ -78,23 +78,29 @@ const Influencers = () => {
                                         {influencer.socialProfiles.instagram &&
                                         <a
                                             href={`https://www.instagram.com/${influencer.socialProfiles.instagram.username}`}
-                                            target={'_blank'}>
+                                            target={'_blank'}
+                                            rel="noreferrer">
                                             <InfluencerSocialIcon src={instagramIcon} alt={'instagramIcon'}/>
                                         </a>}
 
                                         {influencer.socialProfiles.twitter &&
-                                        <a href={influencer.twitter} target={'_blank'}>
+                                        <a href={influencer.twitter} target={'_blank'} rel="noreferrer">
                                             <InfluencerSocialIcon src={twitterIcon} alt={'twitterIcon'}/>
                                         </a>}
 
                                         {influencer.socialProfiles.youtube &&
-                                        <a href={influencer.socialProfiles.youtube} target={'_blank'}>
+                                        <a href={influencer.socialProfiles.youtube} target={'_blank'} rel="noreferrer">
                                             <InfluencerSocialIcon src={youtubeIcon} alt={'youtubeIcon'}/>
                                         </a>}
 
                                         {influencer.socialProfiles.facebook &&
-                                        <a href={influencer.socialProfiles.facebook} target={'_blank'}>
+                                        <a href={influencer.socialProfiles.facebook} target={'_blank'} rel="noreferrer">
                                             <InfluencerSocialIcon src={facebookIcon} alt={'facebookIcon'}/>
+                                        </a>}
+
+                                        {influencer.socialProfiles.tiktok &&
+                                        <a href={influencer.socialProfiles.tiktok} target={'_blank'} rel="noreferrer">
+                                            <InfluencerSocialIcon src={tiktokIcon} alt={'tiktokIcon'}/>
                                         </a>}
 
                                     </InfluencersTD>

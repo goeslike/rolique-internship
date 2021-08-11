@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {parsePhoneNumberFromString} from "libphonenumber-js";
 
 import {createSchema} from "../../validators/user-schema";
 import CreateHeader from "../Header/CreateHeader";

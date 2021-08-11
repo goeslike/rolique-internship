@@ -61,6 +61,7 @@ const Users = () => {
                             if (user.name.toLowerCase().includes(searchName.toLowerCase())) {
                                 return user
                             }
+                            return user
                         }).map(user => {
                             return (
                                 <UsersTR key={user.id}>
