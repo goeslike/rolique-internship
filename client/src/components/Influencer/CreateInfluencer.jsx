@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useForm} from "react-hook-form";
 import { createInfluencer } from '../../actions/influencer';
 
@@ -17,12 +17,28 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {createSchema} from "../../validators/influencer-schema";
 
 const CreateInfluencer = () => {
+    const [image, setImage] = useState();
+    const [preview, setPreview] = useState();
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(createSchema),
     });
 
+    useEffect(() => {
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result);
+            }
+            reader.readAsDataURL(image);
+        } else {
+            setPreview(null);
+        }
+    }, [image]);
+
     const sendData = async (data) => {
+        setPreview(null);
         const formData = new FormData();
 
         for (let key in data) {
@@ -84,8 +100,17 @@ const CreateInfluencer = () => {
                             style={{display: 'none'}}
                             {...register('avatar', {required: true})}
                             id='influencer-avater'
-                            type='file'/>
-                        <FileLabel htmlFor={'influencer-avater'}/>
+                            type='file'
+                            onInput={(event) => {
+                                const file = event.target.files[0];
+                                if (file) {
+                                    setImage(file);
+                                } else {
+                                    setImage(null);
+                                }
+                            }}
+                        />
+                        <FileLabel style={{backgroundImage: `url(${preview})`}} htmlFor={'influencer-avater'}/>
                     </InfluencerSection>
 
                     <InfluencerSection>
