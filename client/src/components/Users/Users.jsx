@@ -14,7 +14,10 @@ import { Search, SearchIcon, SearchInput } from '../Inputs/CreateInputs.style';
 const Users = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+
     const users = useSelector(({usersReducer: {users}}) => users);
+
+    const [searchName, setSearchName] = useState('');
 
     useEffect(() => {
         dispatch(getUsers());
@@ -27,7 +30,7 @@ const Users = () => {
     const getUserById = async (id) => {
         await dispatch(getUser(id));
     };
-    const [searchName, setSearchName] = useState('');
+
     return (
         <UsersWrapper>
             <ViewHeader title='Users' />
