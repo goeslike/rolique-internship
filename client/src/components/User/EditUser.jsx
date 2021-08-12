@@ -133,8 +133,8 @@ const EditUser = () => {
                             type='select'>
                             {/*<option value='' disabled selected hidden>Select...</option>*/}
                             {adminAccess && <option value='admin'>Admin</option>}
-                            <option value='Manager'>Manager</option>
-                            <option value='Employee'>Employee</option>
+                            <option value='manager'>Manager</option>
+                            <option value='employee'>Employee</option>
                         </Select>
 
                         <UserSectionTitle>Password</UserSectionTitle>
