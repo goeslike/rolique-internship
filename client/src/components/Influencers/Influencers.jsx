@@ -71,7 +71,7 @@ const Influencers = () => {
                                     </InfluencersTD>
 
                                     <InfluencersTD style={{width: '225px'}}>
-                                        {influencer.firstName + influencer.lastName}
+                                        {influencer.firstName + ' ' + influencer.lastName}
                                     </InfluencersTD>
 
                                     <InfluencersTD style={{width: '215px'}}>

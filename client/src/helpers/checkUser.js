@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setAccessToken, setAdmin, setEmployee, setManager } from '../redux/action-creators';
-// localStorage.setItem('accessToken', 'qwrewqer');
-// localStorage.setItem('role', 'admin')
+
 export const CheckUser = () => {
     const dispatch = useDispatch();
     const accessToken = useSelector(({userReducer: {accessToken}}) => accessToken);

@@ -2,7 +2,7 @@ import axios from "axios";
 
 import {BASE_URL} from '../constants';
 
-import {loginError, setAccessToken, setUser} from "../redux/action-creators";
+import { loginError, setAccessToken, setAdmin, setEmployee, setManager, setUser } from '../redux/action-creators';
 import {setUsers} from '../redux/action-creators';
 
 const createUser = async (data) => {
@@ -26,11 +26,16 @@ const login = (data) => {
 
             const response = await axios.post(BASE_URL + 'auth/login', data);
             dispatch(setAccessToken(response.data.tokens.access_token));
-            console.log(response.data.currentUser);
 
             localStorage.setItem('role', response.data.currentUser);
             localStorage.setItem('accessToken', response.data.tokens.access_token);
             localStorage.setItem('refreshToken', response.data.tokens.refresh_token);
+
+            if (response.data.currentUser === 'admin') dispatch(setAdmin());
+
+            if (response.data.currentUser === 'manager') dispatch(setManager());
+
+            if (response.data.currentUser === 'employee') dispatch(setEmployee());
         } catch (e) {
             dispatch(loginError(e.message));
         }
