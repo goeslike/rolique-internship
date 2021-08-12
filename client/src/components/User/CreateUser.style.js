@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 const UserWrapper = styled.div`
   width: 100%;
+  
+  position: relative;
 `;
 
 const UserContainer = styled.div`

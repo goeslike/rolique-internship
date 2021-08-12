@@ -8,12 +8,12 @@ import errorImg from "../../assets/messages-icons/error.png";
 import {login} from "../../actions/user";
 import {loginSchema} from '../../validators/user-schema';
 
-import {LoginButton, LoginContainer, LoginError, LoginForm, LoginTitle} from "./Login.style";
+import { LoginButton, LoginContainer, LoginError, LoginForm, LoginTitle } from './Login.style';
 import {HelperText, Input, Label} from "../Inputs/CreateInputs.style";
 
 const Login = () => {
     const dispatch = useDispatch();
-    const loginError = useSelector(({userReducer: {loginError}}) => loginError);
+    const loginError = useSelector(({errorsReducer: {loginError}}) => loginError);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onBlur',

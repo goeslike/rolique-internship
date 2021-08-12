@@ -2,27 +2,20 @@ import axios from "axios";
 
 import {BASE_URL} from '../constants';
 
-import { loginError, setAccessToken, setAdmin, setEmployee, setManager, setUser } from '../redux/action-creators';
+import {
+    setLoginError,
+    setAccessToken,
+    setAdmin,
+    setEmployee,
+    setManager,
+    setUser, setCreateError, setUpdateError
+} from '../redux/action-creators';
 import {setUsers} from '../redux/action-creators';
-
-const createUser = async (data) => {
-    const token = localStorage.getItem('accessToken');
-
-    const config = {
-        headers: {Authorization: token}
-    };
-
-    try {
-        await axios.post(BASE_URL + 'users', data, config);
-    } catch (e) {
-        console.log(e);
-    }
-};
 
 const login = (data) => {
     return async (dispatch) => {
         try {
-            dispatch(loginError(''));
+            dispatch(setLoginError(''));
 
             const response = await axios.post(BASE_URL + 'auth/login', data);
             dispatch(setAccessToken(response.data.tokens.access_token));
@@ -37,7 +30,39 @@ const login = (data) => {
 
             if (response.data.currentUser === 'employee') dispatch(setEmployee());
         } catch (e) {
-            dispatch(loginError(e.message));
+            dispatch(setLoginError(e.message));
+        }
+    };
+};
+
+const createUser = (data) => {
+    return async (dispatch) => {
+        const token = localStorage.getItem('accessToken');
+
+        const config = {
+            headers: {Authorization: token}
+        };
+
+        try {
+            await axios.post(BASE_URL + 'users', data, config);
+        } catch (e) {
+            dispatch(setCreateError(e.message));
+        }
+    };
+};
+
+const updateUser = (id, data) => {
+    return async (dispatch) => {
+        const token = localStorage.getItem('accessToken');
+
+        const config = {
+            headers: {Authorization: token}
+        };
+
+        try {
+            await axios.put(BASE_URL + `users/${id}`, data, config);
+        } catch (e) {
+            dispatch(setUpdateError(e.message));
         }
     };
 };
@@ -68,20 +93,6 @@ const getUser = (id) => {
             console.log(e);
         }
     };
-};
-
-const updateUser = async (id, data) => {
-    const token = localStorage.getItem('accessToken');
-
-    const config = {
-        headers: {Authorization: token}
-    };
-
-    try {
-        await axios.put(BASE_URL + `users/${id}`, data, config);
-    } catch (e) {
-        console.log(e);
-    }
 };
 
 const logOut = () => {

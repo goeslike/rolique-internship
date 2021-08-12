@@ -1,13 +1,11 @@
 import {
     LOGOUT,
-    LOGIN_ERROR,
     SET_LOGGED_USER_ROLE,
     SET_ACCESS_TOKEN,
     SET_USER
 } from '../action-types';
 
 const initialState = {
-    loginError: '',
     accessToken: '',
     user: {}
 };
@@ -40,13 +38,6 @@ const reducer = (state = initialState, action) => {
             return  {
                 ...state,
                 currentUser: {},
-            }
-        }
-
-        case LOGIN_ERROR: {
-            return {
-                ...state,
-                loginError: action.payload
             }
         }
 
