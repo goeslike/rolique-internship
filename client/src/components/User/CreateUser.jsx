@@ -2,8 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useSelector} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import infoIcon from '../../assets/info-icon.png';
+import ErrorMessage from '../Errors/ErrorMessage';
 
 import {
     UserWrapper,
@@ -28,10 +30,13 @@ import {createUser} from "../../actions/user";
 import CreateHeader from '../Header/CreateHeader';
 
 const CreateUser = () => {
+    const history = useHistory();
+
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
 
     const adminAccess = useSelector(({roleReducer: {adminAccess}}) => adminAccess);
+    const createError = useSelector(({errorsReducer: {createError}}) => createError);
 
     useEffect(() => {
         if (image) {
@@ -51,7 +56,6 @@ const CreateUser = () => {
     });
 
     const sendData = async (data) => {
-        setPreview(null);
         const formData = new FormData();
 
         for (let key in data) {
@@ -64,12 +68,17 @@ const CreateUser = () => {
         }
 
         await createUser(formData);
+
+        history.goBack();
+
+        setPreview(null);
         reset();
     };
 
     return (
         <UserWrapper>
             <CreateHeader title='Create Internal User' form='create-form'/>
+            <ErrorMessage error={createError}/>
 
             <form id={'create-form'} onSubmit={handleSubmit(sendData)} noValidate>
                 <UserContainer>

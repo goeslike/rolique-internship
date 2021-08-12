@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {useForm} from "react-hook-form";
+import { useHistory } from 'react-router-dom';
 import { createInfluencer } from '../../actions/influencer';
 
 import CreateHeader from "../Header/CreateHeader";
@@ -17,6 +18,8 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {createSchema} from "../../validators/influencer-schema";
 
 const CreateInfluencer = () => {
+    const history = useHistory();
+
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
 
@@ -38,7 +41,6 @@ const CreateInfluencer = () => {
     }, [image]);
 
     const sendData = async (data) => {
-        setPreview(null);
         const formData = new FormData();
 
         for (let key in data) {
@@ -50,6 +52,10 @@ const CreateInfluencer = () => {
             }
         }
         await createInfluencer(formData);
+
+        history.goBack();
+
+        setPreview(null);
         reset();
     };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
+import { useHistory } from 'react-router-dom';
 
 import {createSchema} from "../../validators/user-schema";
 import CreateHeader from "../Header/CreateHeader";
@@ -13,6 +14,8 @@ import {UserContainer, UserFirstSection, UserSecondSection, UserSectionTitle, Us
 import {FileLabel, HelperText, Input, Label, Select} from "../Inputs/CreateInputs.style";
 
 const EditUser = () => {
+    const history = useHistory();
+
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
 
@@ -58,6 +61,10 @@ const EditUser = () => {
         }
 
         await updateUser(user.id, formData);
+
+        history.goBack();
+
+        setPreview(null);
         reset();
     };
 
