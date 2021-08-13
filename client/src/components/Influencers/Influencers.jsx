@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import editIcon from '../../assets/edit-icon.png';
 
 import searchIcon from '../../assets/search-icon.png';
@@ -11,7 +12,7 @@ import tiktokIcon from '../../assets/social-icons/tiktok.png';
 import ViewHeader from "../Header/ViewHeader";
 
 import {useDispatch, useSelector} from "react-redux";
-import {getInfluencers} from "../../actions/influencer";
+import {getInfluencers, getInfluencer} from "../../actions/influencer";
 
 import { Search, SearchIcon, SearchInput } from '../Inputs/CreateInputs.style';
 import {
@@ -24,6 +25,7 @@ import {
 } from './Influencers.style';
 
 const Influencers = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const influencers = useSelector(({influencersReducer: {influencers}}) => influencers);
 
@@ -32,6 +34,14 @@ const Influencers = () => {
     useEffect(() => {
         dispatch(getInfluencers());
     }, [dispatch]);
+
+    const getInfluencerById = async (id) => {
+        await dispatch(getInfluencer(id));
+    }
+
+    const redirect = (id) => {
+        history.push(`/influencers/id${id}`);
+    };
 
     return (
         <InfluencersWrapper>
@@ -109,7 +119,10 @@ const Influencers = () => {
                                         rating
                                     </InfluencersTD>
 
-                                    <InfluencersTD style={{width: '28px'}}>
+                                    <InfluencersTD onClick={async() => {
+                                        await getInfluencerById(influencer.id);
+                                        redirect(influencer.id);
+                                    }} style={{width: '28px'}}>
                                         <span>
                                             <div>Open Influencer</div>
                                             <img src={editIcon} alt='editIcon' />
