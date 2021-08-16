@@ -1,8 +1,8 @@
 module.exports = {
     PORT: process.env.PORT || 3000,
     SENTRY_DSN: process.env.SENTRY_DSN || 'https://0644e63b2e03416fa2c2f755ad4f2c8c@o926642.ingest.sentry.io/5876207',
-    // URL_ATLAS: process.env.URL_ATLAS || 'mongodb+srv://admin_test:admin@testproject.v6ryu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    URL_ATLAS: process.env.URL_ATLAS || 'mongodb://admin_test:admin@testproject-shard-00-00.v6ryu.mongodb.net:27017,testproject-shard-00-01.v6ryu.mongodb.net:27017,testproject-shard-00-02.v6ryu.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-ovcn4x-shard-0&authSource=admin&retryWrites=true&w=majority',
+    URL_ATLAS: process.env.URL_ATLAS || 'mongodb+srv://admin_test:admin@testproject.v6ryu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+
     JWT_SECRET: process.env.JWT_SECRET || 'SECRET',
     JWT_SECRET_LIFETIME: process.env.JWT_SECRET_LIFETIME || '1d',
     JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'REFRESH_SECRET',
