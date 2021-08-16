@@ -7,7 +7,7 @@ const InfluencerWrapper = styled.div`
 const InfluencerContainer = styled.div`
   width: 100%;
 
-  padding: 40px 68px 0 28px;
+  padding: 40px 28px 0 28px;
 `;
 
 const InfluencerInfo = styled.div`
@@ -65,16 +65,14 @@ const InfluencerPosts = styled.div`
 `;
 
 const InfluencerPost = styled.div`
-  width: 21%;
-  
-  margin-bottom: 24px;
-
+  width: 25%;
+  padding: 0 40px 24px 0;
 `;
 
 const InfluencerPostImg = styled.img`
-  width: 396px;
-  height: 396px;
-
+  width: 100%;
+  height: 400px;
+  
   object-fit: cover;
 `;
 
