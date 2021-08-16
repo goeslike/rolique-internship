@@ -14,6 +14,8 @@ import {
     InfluencerPostImg
 } from './Influencer.style';
 
+import InfluencerSocial from './InfluencerSocial';
+
 const Influencer = () => {
     const influencer = useSelector(({influencersReducer : {influencer}}) => influencer);
     console.log(influencer);
@@ -37,13 +39,15 @@ const Influencer = () => {
                             <div>Occupation:</div>
                             <div>{influencer.profession}</div>
                         </InfluencerData>
+
+                        <InfluencerSocial socialMedia={influencer.socialProfiles}/>
                     </div>
                 </InfluencerInfo>
 
                 <InfluencerPosts>
                     {influencer.instagramPhotos.map(post => {
                         return (
-                            <InfluencerPost>
+                            <InfluencerPost key={post.photo}>
                                 <InfluencerPostImg src={post.photo}/>
                             </InfluencerPost>
                         )
