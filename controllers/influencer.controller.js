@@ -1,7 +1,8 @@
 const {
     instagramService,
     fileService,
-    influencerService
+    influencerService,
+    youtubeService
 } = require('../services');
 const { CREATED, UPDATED } = require('../constants/response.status.enum');
 const {
@@ -57,6 +58,11 @@ module.exports = {
                 }
                 req.body.instagramPosts = postsUrl;
             }
+
+            if (body.youTube) {
+                req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
+            }
+
             await influencerService.createInfluencer(req.body);
 
             res.status(CREATED)
