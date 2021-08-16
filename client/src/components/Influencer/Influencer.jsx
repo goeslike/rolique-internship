@@ -18,11 +18,10 @@ import InfluencerSocial from './InfluencerSocial';
 
 const Influencer = () => {
     const influencer = useSelector(({influencersReducer : {influencer}}) => influencer);
-    console.log(influencer);
 
     return (
         <InfluencerWrapper>
-            <InfluencerHeader title={influencer.firstName + ' ' + influencer.lastName}/>
+            <InfluencerHeader title={influencer.firstName + ' ' + influencer.lastName} id={influencer.id}/>
 
             <InfluencerContainer>
                 <InfluencerInfo>
@@ -50,7 +49,7 @@ const Influencer = () => {
                             <InfluencerPost key={post.photo}>
                                 <InfluencerPostImg src={post.photo}/>
                             </InfluencerPost>
-                        )
+                        );
                     })}
                 </InfluencerPosts>
             </InfluencerContainer>
