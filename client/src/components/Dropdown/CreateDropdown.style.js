@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CreateDropdow = styled.div`
+const Create = styled.div`
   user-select: none;
   position: relative;
 `;
@@ -70,7 +70,7 @@ const CreateDropdownItem = styled.div`
 `;
 
 export {
-    CreateDropdow,
+    Create,
     CreateDropdownButton,
     CreateDropdownContent,
     CreateDropdownItem

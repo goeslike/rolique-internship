@@ -32,9 +32,9 @@ const createSchema = yup.object().shape({
     phone: yup
         .string()
         .matches(/^([+]?[0-9\s-]{3,25})*$/i, 'Phone can only contain numbers and special characters'),
-    role: yup
-        .string()
-        .required('Role is a required field'),
+    // role: yup
+    //     .string()
+    //     .required('Role is a required field'),
     avatar: yup.mixed().test('File size', 'File is too large', (value) => {
         return value
     })

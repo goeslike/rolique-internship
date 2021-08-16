@@ -1,3 +1,4 @@
+import { capitalize } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
@@ -5,21 +6,23 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import { useHistory } from 'react-router-dom';
 
 import {createSchema} from "../../validators/user-schema";
+import RoleDropdown from '../Dropdown/RoleDropdown';
 import CreateHeader from "../Header/CreateHeader";
 import { updateUser } from '../../actions/user';
 
 import infoIcon from "../../assets/info-icon.png";
 
 import {UserContainer, UserFirstSection, UserSecondSection, UserSectionTitle, UserWrapper} from "./CreateUser.style";
-import {FileLabel, HelperText, Input, Label, Select} from "../Inputs/CreateInputs.style";
+import {FileLabel, HelperText, Input, Label} from "../Inputs/CreateInputs.style";
 
 const EditUser = () => {
     const history = useHistory();
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
+    const [selected, setSelected] = useState('');
+    const [roleRequired, setRoleRequired] = useState(false);
 
-    const adminAccess = useSelector(({roleReducer: {adminAccess}}) => adminAccess);
     const user = useSelector(({userReducer: {user}}) => user);
 
     const defaultValues = {
@@ -27,7 +30,6 @@ const EditUser = () => {
         lastname: user.lastname,
         email: user.email,
         phone: user?.phone,
-        role: user.role,
     };
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -35,6 +37,10 @@ const EditUser = () => {
         resolver: yupResolver(createSchema),
         defaultValues: defaultValues
     });
+
+    useEffect(() => {
+        setSelected(capitalize(user.role));
+    }, [user]);
 
     useEffect(() => {
         if (image) {
@@ -49,6 +55,11 @@ const EditUser = () => {
     }, [image]);
 
     const sendEditData = async (data) => {
+        if (!selected) {
+            setRoleRequired(true);
+            return
+        }
+
         const formData = new FormData();
 
         for (let key in data) {
@@ -60,6 +71,8 @@ const EditUser = () => {
             }
         }
 
+        formData.append('role', selected.toLowerCase());
+
         await updateUser(user.id, formData);
 
         history.goBack();
@@ -68,11 +81,25 @@ const EditUser = () => {
         reset();
     };
 
+    const checkRole = () => {
+        if (!selected) {
+            setRoleRequired(true);
+        } else {
+            setRoleRequired(false);
+        }
+    };
+
+    useEffect(() => {
+        if (selected) {
+            setRoleRequired(false);
+        }
+    }, [selected]);
+
     return (
         <UserWrapper>
             <CreateHeader title='Edit Internal User' buttonText='Save Changes' form='edit-form'/>
 
-            <form id={'edit-form'} onSubmit={handleSubmit(sendEditData)} noValidate>
+            <form id={'edit-form'} onSubmit={handleSubmit(sendEditData, checkRole)} noValidate>
                 <UserContainer>
                     <UserFirstSection>
                         <UserSectionTitle>General</UserSectionTitle>
@@ -133,16 +160,8 @@ const EditUser = () => {
                         </UserSectionTitle>
 
                         <Label>Role</Label>
-                        {errors?.role?.message && <HelperText>{errors?.role?.message}</HelperText>}
-                        <Select
-                            {...register('role', {required: true})}
-                            id='role'
-                            type='select'>
-                            {/*<option value='' disabled selected hidden>Select...</option>*/}
-                            {adminAccess && <option value='admin'>Admin</option>}
-                            <option value='manager'>Manager</option>
-                            <option value='employee'>Employee</option>
-                        </Select>
+                        {roleRequired && <HelperText>Role is required field</HelperText>}
+                        <RoleDropdown selected={selected} setSelected={setSelected} required={roleRequired}/>
 
                         <UserSectionTitle>Password</UserSectionTitle>
 
