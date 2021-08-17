@@ -10,6 +10,7 @@ const InfluencerSchema = new Schema({
         type: String
     },
     instagramPosts: Array,
+    youtubeVideos: Array,
     firstName: {
         type: String,
         required: true
