@@ -1,7 +1,7 @@
 import axios from "axios";
 import {BASE_URL} from '../constants';
 
-import { setInfluencer, setInfluencers } from '../redux/action-creators';
+import { setInfluencer, setInfluencers, setUpdateError } from '../redux/action-creators';
 
 const getInfluencers = () => {
     return async (dispatch) => {
@@ -38,10 +38,21 @@ const createInfluencer = async (data) => {
     } catch (e) {
         console.log(e);
     }
-}
+};
+
+const updateInfluencer = (id, data) => {
+    return async (dispatch) => {
+        try {
+            await axios.put(BASE_URL + `influencers/${id}`, data);
+        } catch (e) {
+            dispatch(setUpdateError(e.message));
+        }
+    };
+};
 
 export {
     getInfluencers,
     createInfluencer,
-    getInfluencer
+    getInfluencer,
+    updateInfluencer
 };

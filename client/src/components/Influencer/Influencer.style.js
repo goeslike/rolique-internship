@@ -68,11 +68,14 @@ const InfluencerPost = styled.div`
   width: 21%;
   
   margin-bottom: 24px;
+
 `;
 
 const InfluencerPostImg = styled.img`
   width: 396px;
   height: 396px;
+
+  object-fit: cover;
 `;
 
 export {

@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import infoIcon from '../../assets/info-icon.png';
+import RoleDropdown from '../Dropdown/RoleDropdown';
 import ErrorMessage from '../Errors/ErrorMessage';
 
 import {
@@ -21,7 +22,6 @@ import {
     HelperText,
     Input,
     Label,
-    Select
 } from "../Inputs/CreateInputs.style";
 
 import {createSchema} from "../../validators/user-schema";
@@ -34,8 +34,9 @@ const CreateUser = () => {
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
+    const [selected, setSelected] = useState('');
+    const [roleRequired, setRoleRequired] = useState(false);
 
-    const adminAccess = useSelector(({roleReducer: {adminAccess}}) => adminAccess);
     const createError = useSelector(({errorsReducer: {createError}}) => createError);
 
     useEffect(() => {
@@ -56,6 +57,11 @@ const CreateUser = () => {
     });
 
     const sendData = async (data) => {
+        if (!selected) {
+            setRoleRequired(true);
+            return
+        }
+
         const formData = new FormData();
 
         for (let key in data) {
@@ -67,6 +73,8 @@ const CreateUser = () => {
             }
         }
 
+        formData.append('role', selected.toLowerCase());
+
         await createUser(formData);
 
         history.goBack();
@@ -75,12 +83,26 @@ const CreateUser = () => {
         reset();
     };
 
+    const checkRole = () => {
+        if (!selected) {
+            setRoleRequired(true);
+        } else {
+            setRoleRequired(false);
+        }
+    };
+
+    useEffect(() => {
+        if (selected) {
+            setRoleRequired(false);
+        }
+    }, [selected]);
+
     return (
         <UserWrapper>
             <CreateHeader title='Create Internal User' form='create-form'/>
             <ErrorMessage error={createError}/>
 
-            <form id={'create-form'} onSubmit={handleSubmit(sendData)} noValidate>
+            <form id={'create-form'} onSubmit={handleSubmit(sendData, checkRole)} noValidate>
                 <UserContainer>
                     <UserFirstSection>
                         <UserSectionTitle>General</UserSectionTitle>
@@ -160,18 +182,19 @@ const CreateUser = () => {
                         </UserSectionTitle>
 
                         <Label>Role</Label>
-                        {errors?.role?.message && <HelperText>{errors?.role?.message}</HelperText>}
-                        <Select
-                            {...register('role', {required: true})}
-                            id='role'
-                            type='select'
-                            required={errors?.role}
-                        >
-                            {/*<option value='' disabled selected hidden>Select...</option>*/}
-                            {adminAccess && <option value='admin'>Admin</option>}
-                            <option value='manager'>Manager</option>
-                            <option value='employee'>Employee</option>
-                        </Select>
+                        {roleRequired && <HelperText>Role is required field</HelperText>}
+                        <RoleDropdown selected={selected} setSelected={setSelected} required={roleRequired}/>
+                        {/*<Select*/}
+                        {/*    {...register('role', {required: true})}*/}
+                        {/*    id='role'*/}
+                        {/*    type='select'*/}
+                        {/*    required={errors?.role}*/}
+                        {/*>*/}
+                        {/*    <option value='' disabled selected hidden>Select...</option>*/}
+                        {/*    {adminAccess && <option value='admin'>Admin</option>}*/}
+                        {/*    <option value='manager'>Manager</option>*/}
+                        {/*    <option value='employee'>Employee</option>*/}
+                        {/*</Select>*/}
 
                         <UserSectionTitle>Password</UserSectionTitle>
 

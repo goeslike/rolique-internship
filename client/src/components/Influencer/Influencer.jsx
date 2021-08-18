@@ -14,13 +14,16 @@ import {
     InfluencerWrapper
 } from './Influencer.style';
 
+import InfluencerSocial from './InfluencerSocial';
+
 const Influencer = () => {
+
     const influencer = useSelector(({ influencersReducer: { influencer } }) => influencer);
     console.log(influencer);
-
+    
     return (
         <InfluencerWrapper>
-            <InfluencerHeader title={influencer.firstName + ' ' + influencer.lastName}/>
+            <InfluencerHeader title={influencer.firstName + ' ' + influencer.lastName} id={influencer.id}/>
 
             <InfluencerContainer>
                 <InfluencerInfo>
@@ -37,10 +40,13 @@ const Influencer = () => {
                             <div>Occupation:</div>
                             <div>{influencer.profession}</div>
                         </InfluencerData>
+
+                        <InfluencerSocial socialMedia={influencer.socialProfiles}/>
                     </div>
                 </InfluencerInfo>
 
                 <InfluencerPosts>
+
                     {influencer.instagramPosts.map(post => {
                         if (post.postVideo) {
                             return (
@@ -69,7 +75,7 @@ const Influencer = () => {
                                 </InfluencerPost>
                             );
                         }
-                    })}
+                     })}
                 </InfluencerPosts>
             </InfluencerContainer>
         </InfluencerWrapper>

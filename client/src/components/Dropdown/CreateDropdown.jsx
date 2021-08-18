@@ -5,7 +5,7 @@ import arrowUpper from '../../assets/dropdown/uper.png';
 import arrowDown from '../../assets/dropdown/down.png';
 
 import {
-    CreateDropdow,
+    Create,
     CreateDropdownButton,
     CreateDropdownContent,
     CreateDropdownItem
@@ -15,7 +15,7 @@ const CreateDropdown = () => {
     const [isActive, setIsActive] = useState(false);
 
     return (
-        <CreateDropdow>
+        <Create>
             <CreateDropdownButton onClick={() => setIsActive(!isActive)}>
                 <img src={isActive ? arrowDown : arrowUpper} alt="arrow-icon"/>
                 Create New
@@ -45,7 +45,7 @@ const CreateDropdown = () => {
                     </CreateDropdownItem>
                 </CreateDropdownContent>
             )}
-        </CreateDropdow>
+        </Create>
     );
 };
 
