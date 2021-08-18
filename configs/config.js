@@ -26,6 +26,10 @@ module.exports = {
     CLOUD_NAME: process.env.CLOUD_NAME || 'nataliia',
     API_KEY_CLOUD: process.env.API_KEY_CLOUD || '112271864237133',
     API_SECRET_CLOUD: process.env.API_SECRET_CLOUD || 'kYVdgdr_Lb0u2NY11GiDRvcwrmc',
+
     INSTAGRAM_LOGIN: process.env.INSTAGRAM_LOGIN || 'nata.test.dev',
-    INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD || '12345qwertyui'
+    INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD || '12345qwertyui',
+
+    YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY || 'AIzaSyCISScuqwpxYcG-gIcvfWogwMn2qeL2dm4',
+    BASE_YOUTUBE_URL: process.env.BASE_YOUTUBE_URL || 'https://www.youtube.com/watch?v='
 };
