@@ -18,8 +18,6 @@ import blogIcon from '../../assets/influencer-social/blog.png';
 import twitterIcon from '../../assets/influencer-social/twitter.png';
 
 const InfluencerSocial = ({socialMedia}) => {
-    console.log(socialMedia);
-
     return (
         <SocialMediaList>
             {socialMedia.instagram &&

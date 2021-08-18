@@ -44,6 +44,8 @@ const CreateInfluencer = () => {
         const formData = new FormData();
 
         for (let key in data) {
+            console.log(data[key]);
+
             if (key === 'avatar') {
                 formData.append(key, data[key][0]);
             }
@@ -90,7 +92,7 @@ const CreateInfluencer = () => {
                         <Input
                             {...register('birthdate', {required: true})}
                             id='birthdate'
-                            type='date' />
+                            type='date'/>
 
                         <Label>Profession</Label>
                         {errors?.profession?.message && <HelperText>{errors?.profession?.message}</HelperText>}
