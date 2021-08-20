@@ -3,8 +3,13 @@ const {
     fileService,
     influencerService,
     twitterService
+    youtubeService
+
 } = require('../services');
-const { CREATED, UPDATED } = require('../constants/response.status.enum');
+const {
+    CREATED,
+    UPDATED
+} = require('../constants/response.status.enum');
 const {
     INFLUENCER_IS_CREATED,
     INFLUENCER_IS_UPDATED,
@@ -29,14 +34,38 @@ module.exports = {
                 req.body.avatar = cloudResponse.url;
             }
             if (body.instagram) {
-                const images = await instagramService.getImagesData(body.instagram);
+                const postsData = await instagramService.getInstagramPostData(body.instagram);
 
-                const photos = [];
-                for (const image of images) {
-                    const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
-                    photos.push({ photo: photo.url });
+                const postsUrl = [];
+                for (const post of postsData) {
+                    if (post.postCarousel) {
+                        const carousel = [];
+                        for (const image of post.postCarousel) {
+                            const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
+                            carousel.push(photo.url);
+                        }
+                        postsUrl.push({ postCarousel: carousel });
+                    }
+
+                    if (post.postVideo) {
+                        const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
+                        const data = {
+                            image: image.url,
+                            video: post.postVideo.videoUrl
+                        };
+                        postsUrl.push({ postVideo: data });
+                    }
+
+                    if (post.postImage) {
+                        const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
+                        postsUrl.push({ postImage: photo.url });
+                    }
                 }
-                req.body.instagramPhotos = photos;
+                req.body.instagramPosts = postsUrl;
+            }
+
+            if (body.youTube) {
+                req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
             }
 
             if (body.twitter) {
@@ -69,6 +98,7 @@ module.exports = {
         }
     },
 
+    // update in process
     updateInfluencer: async (req, res, next) => {
         try {
             const {
@@ -92,22 +122,37 @@ module.exports = {
             }
 
             if (body.instagram) {
-                if (findInfluencer.instagramPhotos) {
-                    const array = findInfluencer.instagramPhotos;
-
-                    for (const item of array) {
-                        await fileService.deleteFile(item.photo, INFLUENCER_DELETE);
+                const postsData = await instagramService.getInstagramPostData(body.instagram);
+                const postsUrl = [];
+                for (const post of postsData) {
+                    if (post.postCarousel) {
+                        const carousel = [];
+                        for (const image of post.postCarousel) {
+                            const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
+                            carousel.push(photo.url);
+                        }
+                        postsUrl.push({ postCarousel: carousel });
                     }
 
-                    const images = await instagramService.getImagesData(body.instagram);
-
-                    const photos = [];
-                    for (const image of images) {
-                        const photo = await fileService.uploadBinaryFile(image, INFLUENCER_DELETE);
-                        photos.push({ photo: photo.url });
+                    if (post.postVideo) {
+                        const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
+                        const data = {
+                            image: image.url,
+                            video: post.postVideo.videoUrl
+                        };
+                        postsUrl.push({ postVideo: data });
                     }
-                    req.body.instagramPhotos = photos;
+
+                    if (post.postImage) {
+                        const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
+                        postsUrl.push({ postImage: photo.url });
+                    }
                 }
+                req.body.instagramPosts = postsUrl;
+            }
+
+            if (body.youTube) {
+                req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
             }
 
             await influencerService.updateOne(id, { ...req.body });

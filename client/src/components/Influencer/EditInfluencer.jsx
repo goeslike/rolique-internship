@@ -1,31 +1,50 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react';
-import {useForm} from "react-hook-form";
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createInfluencer } from '../../actions/influencer';
-
-import CreateHeader from "../Header/CreateHeader";
-
+import { updateInfluencer } from '../../actions/influencer';
+import { createSchema } from '../../validators/influencer-schema';
+import CreateHeader from '../Header/CreateHeader';
+import { FileLabel, HelperText, Input, Label, SocialInput } from '../Inputs/CreateInputs.style';
 import {
-    InfluencerWrapper,
     InfluencerContainer,
     InfluencerSection,
     InfluencerSectionTitle,
-    InfluencerSocial
-} from "./CreateInfluencer.style";
+    InfluencerSocial,
+    InfluencerWrapper
+} from './CreateInfluencer.style';
 
-import {FileLabel, HelperText, Input, Label, SocialInput} from "../Inputs/CreateInputs.style";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {createSchema} from "../../validators/influencer-schema";
-
-const CreateInfluencer = () => {
+const EditInfluencer = () => {
     const history = useHistory();
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
+    const influencer = useSelector(({influencersReducer : {influencer}}) => influencer);
+
+    const defaultValues = {
+        firstName: influencer.firstName,
+        lastName: influencer.lastName,
+        birthdate: influencer.birthdate,
+        profession: influencer?.profession,
+        instagram: influencer.socialProfiles?.instagram?.username,
+        instagramFollowers: influencer.socialProfiles?.instagram.followers,
+        youTube: influencer.socialProfiles?.youtube?.username,
+        youTubeFollowers: influencer.socialProfiles?.youtube?.followers,
+        facebook: influencer.socialProfiles?.facebook?.username,
+        facebookFollowers: influencer.socialProfiles?.facebook?.followers,
+        tiktok: influencer.socialProfiles?.tiktok?.username,
+        tiktokFollowers: influencer.socialProfiles?.tiktok?.followers,
+        twitter: influencer.socialProfiles?.twitter?.username,
+        twitterFollowers: influencer.socialProfiles?.twitter?.followers,
+        blog: influencer.socialProfiles?.blog?.username,
+        blogFollowers: influencer.socialProfiles?.blog?.followers,
+    };
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(createSchema),
+        defaultValues: defaultValues
     });
 
     useEffect(() => {
@@ -44,8 +63,6 @@ const CreateInfluencer = () => {
         const formData = new FormData();
 
         for (let key in data) {
-            console.log(data[key]);
-
             if (key === 'avatar') {
                 formData.append(key, data[key][0]);
             }
@@ -53,7 +70,7 @@ const CreateInfluencer = () => {
                 formData.append(key, data[key]);
             }
         }
-        await createInfluencer(formData);
+        await updateInfluencer(influencer.id, formData);
 
         history.goBack();
 
@@ -63,9 +80,9 @@ const CreateInfluencer = () => {
 
     return (
         <InfluencerWrapper>
-            <CreateHeader title='Create Influencer' form='create-influencer'/>
+            <CreateHeader title='Edit Influencer' form='create-influencer'/>
 
-            <form id='create-influencer' onSubmit={handleSubmit(sendData)} noValidate>
+            <form id='edit-influencer' onSubmit={handleSubmit(sendData)} noValidate>
                 <InfluencerContainer>
                     <InfluencerSection>
                         <InfluencerSectionTitle>General</InfluencerSectionTitle>
@@ -92,7 +109,7 @@ const CreateInfluencer = () => {
                         <Input
                             {...register('birthdate', {required: true})}
                             id='birthdate'
-                            type='date'/>
+                            type='date' />
 
                         <Label>Profession</Label>
                         {errors?.profession?.message && <HelperText>{errors?.profession?.message}</HelperText>}
@@ -118,7 +135,9 @@ const CreateInfluencer = () => {
                                 }
                             }}
                         />
-                        <FileLabel style={{backgroundImage: `url(${preview})`}} htmlFor={'influencer-avater'}/>
+                        <FileLabel style={{
+                            backgroundImage: `url(${preview ? preview : influencer.avatar})`
+                        }} htmlFor={'influencer-avater'}/>
                     </InfluencerSection>
 
                     <InfluencerSection>
@@ -251,4 +270,4 @@ const CreateInfluencer = () => {
     );
 };
 
-export default CreateInfluencer;
+export default EditInfluencer;

@@ -3,42 +3,50 @@ const fetch = require('node-fetch');
 const { instagramApi } = require('../helpers');
 
 module.exports = {
-    getImagesData: async (username) => {
-        const accountImagePromises = [];
+    getInstagramPostData: async (username) => {
+        const accountPosts = [];
         const ig = await instagramApi.getInstagramData();
         const client = await ig.user.searchExact(username);
         if (!client) {
-            return accountImagePromises;
+            return accountPosts;
         }
         const clientFeed = await ig.feed.user(
             client.pk
         );
         const page = await clientFeed.items();
+
         for (const post of page) {
-            if (accountImagePromises.length < 12) {
+            if (accountPosts.length < 12) {
                 if (post.carousel_media) {
+                    const carouselMedia = [];
                     for (const item of post.carousel_media) {
-                        accountImagePromises.push({ imageUrl: item.image_versions2.candidates[0].url });
+                        const promise = fetch(item.image_versions2.candidates[0].url)
+                            .then((data) => data.blob());
+                        const image = await promise;
+                        carouselMedia.push(image);
                     }
+                    accountPosts.push({ postCarousel: carouselMedia });
                 }
-                if (post.image_versions2) {
-                    accountImagePromises.push({ imageUrl: post.image_versions2.candidates[0].url });
+
+                if (post.image_versions2 && !post.video_versions) {
+                    const promise = fetch(post.image_versions2.candidates[0].url)
+                        .then((data) => data.blob());
+                    const image = await promise;
+                    accountPosts.push({ postImage: image });
+                }
+
+                if (post.video_versions) {
+                    const promise = fetch(post.image_versions2.candidates[0].url)
+                        .then((data) => data.blob());
+                    const image = await promise;
+                    const videoData = {
+                        imageVersion: image,
+                        videoUrl: post.video_versions[0].url
+                    };
+                    accountPosts.push({ postVideo: videoData });
                 }
             }
         }
-        const binaryInstagramPhotos = [];
-
-        for (const promise of accountImagePromises) {
-            const filePromise = fetch(promise.imageUrl)
-                .then((data) => data.blob());
-            binaryInstagramPhotos.push(filePromise);
-        }
-
-        const arrayOfImages = [];
-        for (const imagePromise of binaryInstagramPhotos) {
-            const image = await imagePromise;
-            arrayOfImages.push(image);
-        }
-        return arrayOfImages;
+        return accountPosts;
     }
 };

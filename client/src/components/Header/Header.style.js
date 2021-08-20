@@ -43,8 +43,35 @@ const HeaderButton = styled.button`
   background: linear-gradient(to right, rgba(255, 101, 14, 1), rgba(255, 101, 14, 1));
 `;
 
+const EditButton = styled.div`
+  width: 73px;
+  height: 33px;
+
+  display: flex;
+  align-items: center;
+  
+  padding: 8px 16px 8px 10px;
+  margin: 0 12px 0 0;
+  
+  border-radius: 8px;
+  border: 1px solid rgba(191, 191, 191, 1);
+  
+  font-weight: 400;
+  font-size: 14px;
+  
+  color: rgba(0, 0, 0, 0.6);
+
+  user-select: none;
+  cursor: pointer;
+  
+  & img {
+    margin: 0 10px 0 0;
+  }
+`;
+
 export {
     Header,
     HeaderTitle,
     HeaderButton,
+    EditButton
 };

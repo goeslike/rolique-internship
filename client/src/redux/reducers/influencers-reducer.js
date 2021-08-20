@@ -1,7 +1,11 @@
-import {SET_INFLUENCERS} from "../action-types";
+import {
+    SET_INFLUENCERS,
+    SET_INFLUENCER
+} from "../action-types";
 
 const initialState = {
-    influencers: []
+    influencers: [],
+    influencer: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +14,15 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 influencers: action.payload
+            }
+        }
+
+        case SET_INFLUENCER: {
+            console.log(action.payload);
+
+            return {
+                ...state,
+                influencer: action.payload
             }
         }
 

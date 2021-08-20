@@ -74,8 +74,8 @@ const Users = () => {
                                     <UsersTD style={{width: '295px'}}>{user.phone}</UsersTD>
                                     {!employeeAccess &&
                                     <UsersTD onClick={async() => {
-                                        await getUserById(user.id)
-                                        redirect(user.id)
+                                        await getUserById(user.id);
+                                        redirect(user.id);
                                     }} style={{width: '28px'}}>
                                         <span>
                                             <div>Edit User</div>
