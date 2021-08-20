@@ -21,16 +21,33 @@ const getTweets = async (username) => {
         { media }
     ];
 
-    const reduce = z.reduce((acc, value, index, array) => {
+    return z.reduce((acc, value, index, array) => {
         if (value.data !== undefined) {
             value.data.map((tweet) => {
                 if (tweet.attachments !== undefined) {
+                    if (tweet.entities !== undefined && tweet.entities.urls !== undefined) {
+                        acc.push({
+                            id: tweet.id,
+                            text: tweet.text,
+                            media: array[1].media.find((item) => item.media_key === tweet.attachments.media_keys[0]),
+                            retweeted: tweet.entities.urls[0].expanded_url
+                        });
+                        return;
+                    }
                     acc.push({
                         id: tweet.id,
                         text: tweet.text,
-                        media: array[1].media.find((item) => item.media_key === tweet.attachments.media_keys[0])
+                        media: array[1].media.find((item) => item.media_key === tweet.attachments.media_keys[0]),
                     });
                 } else {
+                    if (tweet.entities !== undefined && tweet.entities.urls !== undefined) {
+                        acc.push({
+                            id: tweet.id,
+                            text: tweet.text,
+                            retweeted: tweet.entities.urls[0].expanded_url
+                        });
+                        return;
+                    }
                     acc.push({
                         id: tweet.id,
                         text: tweet.text,
@@ -43,6 +60,6 @@ const getTweets = async (username) => {
         return acc;
     }, []);
 
-    return reduce;
+    // return reduce;
 };
 module.exports = { getTweets };
