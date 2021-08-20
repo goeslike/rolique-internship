@@ -5,37 +5,44 @@ const twitterClient = new TwitterApi(TWITTER_BEARER_TOKEN).readOnly;
 
 const getTweets = async (username) => {
     const { data: { id } } = await twitterClient.v2.userByUsername(username);
-    const tweets = [];
     const response = await twitterClient.v2.userLikedTweets(id,
         {
             max_results: 12,
             expansions: 'attachments.media_keys',
             'tweet.fields': 'entities',
-            'media.fields': 'url'
+            'media.fields': [
+                'preview_image_url',
+                'url'
+            ]
         });
-    const { data } = response.data;
+    const { data, includes: { media } } = response._realData;
+    const z = [
+        { data },
+        { media }
+    ];
 
-    data.map((tweet) => {
-        //     let mediaKey;
-        //     if (tweet.attachments !== undefined) {
-        //      mediaKey = tweet.attachments.media_keys[0];
-        //      return;
-        // }
-        if (tweet.entities === undefined || tweet.entities.urls === undefined) {
-            tweets.push({
-                id: tweet.id,
-                text: tweet.text,
+    const reduce = z.reduce((acc, value, index, array) => {
+        if (value.data !== undefined) {
+            value.data.map((tweet) => {
+                if (tweet.attachments !== undefined) {
+                    acc.push({
+                        id: tweet.id,
+                        text: tweet.text,
+                        media: array[1].media.find((item) => item.media_key === tweet.attachments.media_keys[0])
+                    });
+                } else {
+                    acc.push({
+                        id: tweet.id,
+                        text: tweet.text,
+                    });
+                }
+                return 'ok';
             });
-            return;
+            return acc;
         }
+        return acc;
+    }, []);
 
-        tweets.push({
-            id: tweet.id,
-            text: tweet.text,
-            retweeted: tweet.entities.urls[0].expanded_url
-        });
-        return tweet;
-    });
-    return tweets;
+    return reduce;
 };
 module.exports = { getTweets };
