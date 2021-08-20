@@ -1,7 +1,8 @@
 const {
     instagramService,
     fileService,
-    influencerService
+    influencerService,
+    twitterService
 } = require('../services');
 const { CREATED, UPDATED } = require('../constants/response.status.enum');
 const {
@@ -37,6 +38,12 @@ module.exports = {
                 }
                 req.body.instagramPhotos = photos;
             }
+
+            if (body.twitter) {
+                const tweets = await twitterService.getTweets(body.twitter);
+                req.body.tweets = tweets;
+            }
+
             await influencerService.createInfluencer(req.body);
 
             res.status(CREATED)

@@ -26,6 +26,7 @@ module.exports = {
     CLOUD_NAME: process.env.CLOUD_NAME || 'nataliia',
     API_KEY_CLOUD: process.env.API_KEY_CLOUD || '112271864237133',
     API_SECRET_CLOUD: process.env.API_SECRET_CLOUD || 'kYVdgdr_Lb0u2NY11GiDRvcwrmc',
-    INSTAGRAM_LOGIN: process.env.INSTAGRAM_LOGIN || 'nata.test.dev',
-    INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD || '12345qwertyui'
+    INSTAGRAM_LOGIN: process.env.INSTAGRAM_LOGIN || '',
+    INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD || '',
+    TWITTER_BEARER_TOKEN: process.env.TWITTER_BEARER_TOKEN || ''
 };
