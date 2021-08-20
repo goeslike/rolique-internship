@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import InfluencerHeader from '../Header/InfluencerHeader';
+import Modal from '../Modal/Modal';
+import InstagramPosts from '../Posts/InstagramPosts';
 
 import {
     InfluencerAvatar,
@@ -8,10 +10,7 @@ import {
     InfluencerInfo,
     InfluencerName,
     InfluencerWrapper,
-    InfluencerData,
-    InfluencerPosts,
-    InfluencerPost,
-    InfluencerPostImg
+    InfluencerData
 } from './Influencer.style';
 
 import InfluencerSocial from './InfluencerSocial';
@@ -43,15 +42,8 @@ const Influencer = () => {
                     </div>
                 </InfluencerInfo>
 
-                <InfluencerPosts>
-                    {influencer.instagramPhotos.map(post => {
-                        return (
-                            <InfluencerPost key={post.photo}>
-                                <InfluencerPostImg src={post.photo}/>
-                            </InfluencerPost>
-                        );
-                    })}
-                </InfluencerPosts>
+                <InstagramPosts posts={influencer.instagramPosts}/>
+
             </InfluencerContainer>
         </InfluencerWrapper>
     );

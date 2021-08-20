@@ -56,8 +56,6 @@ const InfluencerData = styled.span`
   }
 `;
 
-
-
 export {
     InfluencerWrapper,
     InfluencerContainer,

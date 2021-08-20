@@ -7,7 +7,7 @@ const SocialMediaList = styled.div`
     display: flex;
     align-items: center;
 
-    width: 127px;
+    width: 140px;
     height: 40px;
     
     margin: 24px 0 0 0;

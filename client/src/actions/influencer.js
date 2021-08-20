@@ -18,8 +18,7 @@ const getInfluencer = (id) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(BASE_URL + `influencers/${id}`);
-            const data = JSON.parse(JSON.stringify(response.data))
-            console.log(data);
+            console.log(response.data);
             dispatch(setInfluencer(response.data));
         } catch (e) {
             console.log(e);

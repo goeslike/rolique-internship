@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                influencer: JSON.parse(JSON.stringify(action.payload))
+                influencer: action.payload
             }
         }
 
