@@ -2,6 +2,9 @@ import React from 'react';
 
 import {
     SocialMediaList,
+    InfluencerData,
+    InfluencerName,
+    InfluencerFollowers,
     Instagram,
     TikTok,
     Facebook,
@@ -23,10 +26,10 @@ const InfluencerSocial = ({socialMedia}) => {
             {socialMedia.instagram &&
                 <Instagram>
                     <img src={instagramIcon} alt=""/>
-                    <div>
-                        <div>{socialMedia.instagram.username}</div>
-                        <div>{socialMedia.instagram.followers}</div>
-                    </div>
+                    <InfluencerData>
+                        <InfluencerName>{socialMedia.instagram.username}</InfluencerName>
+                        <InfluencerFollowers>{socialMedia.instagram.followers}</InfluencerFollowers>
+                    </InfluencerData>
                 </Instagram>
             }
         </SocialMediaList>

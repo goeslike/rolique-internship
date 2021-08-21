@@ -2,41 +2,46 @@ import styled from 'styled-components';
 
 const SocialMediaList = styled.div`
   display: flex;
-  
-  & div {
-    display: flex;
-    align-items: center;
-
-    width: 140px;
-    height: 40px;
-    
-    margin: 24px 0 0 0;
-    padding: 4px 8px;
-    
-    border-radius: 17px;
-    
-    & img {
-      margin: 0 7px 0 0;
-    }
-    
-    & div {
-      flex-wrap: wrap;
-      
-      width: auto;
-      height: auto;
-
-      margin: 0;
-      padding: 0;
-      
-      font-weight: 400;
-      font-size: 13px;
-      
-      color: #fff;
-    }
-  }
 `;
 
+const InfluencerData = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  font-weight: 400;
+  font-size: 13px;
+
+  color: #fff;
+`;
+
+const InfluencerName = styled.div`
+  display: flex;
+  
+  width: auto;
+  min-width: 92px;
+`;
+
+const InfluencerFollowers = styled.div`
+  display: flex;
+`;
+
+
 const Instagram = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 140px;
+  height: 40px;
+
+  margin: 24px 0 0 0;
+  padding: 4px 8px;
+
+  border-radius: 17px;
+
+  & img {
+    margin: 0 7px 0 0;
+  }
+  
   background: radial-gradient(
     114.11% 114.11% at 22.66% 97.97%, 
     #FED574 0%, 
@@ -70,6 +75,9 @@ const Twitter = styled.div`
 
 export {
     SocialMediaList,
+    InfluencerData,
+    InfluencerName,
+    InfluencerFollowers,
     Instagram,
     TikTok,
     Facebook,
