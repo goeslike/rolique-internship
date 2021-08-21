@@ -20,7 +20,7 @@ const createSchema = yup.object().shape({
         .string()
         .notRequired()
         .when('instagramFollowers', {
-            is: String,
+            is: Number,
             then: yup.string().required()
         }),
     instagramFollowers: yup
@@ -35,7 +35,7 @@ const createSchema = yup.object().shape({
         .string()
         .notRequired()
         .when('youTubeFollowers', {
-            is: String,
+            is: Number,
             then: yup.string().required()
         }),
     youtubeFollowers: yup
@@ -50,7 +50,7 @@ const createSchema = yup.object().shape({
         .string()
         .notRequired()
         .when('facebookFollowers', {
-            is: String,
+            is: Number,
             then: yup.string().required()
         }),
     facebookFollowers: yup
@@ -65,7 +65,7 @@ const createSchema = yup.object().shape({
         .string()
         .notRequired()
         .when('tiktokFollowers', {
-            is: String,
+            is: Number,
             then: yup.string().required()
         }),
     tiktokFollowers: yup
@@ -80,7 +80,7 @@ const createSchema = yup.object().shape({
         .string()
         .notRequired()
         .when('twitterFollowers', {
-            is: String,
+            is: Number,
             then: yup.string().required()
         }),
     twitterFollowers: yup
@@ -95,7 +95,7 @@ const createSchema = yup.object().shape({
         .string()
         .notRequired()
         .when('blogFollowers', {
-            is: String,
+            is: Number,
             then: yup.string().required()
         }),
     blogFollowers: yup
