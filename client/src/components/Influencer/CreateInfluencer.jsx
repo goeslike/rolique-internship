@@ -158,7 +158,7 @@ const CreateInfluencer = () => {
                                 <Label>YouTube</Label>
                                 <SocialInput
                                     {...register('youTube')}
-                                    id='youtube'
+                                    id='youTube'
                                     type='text'
                                     required={errors.youtube}
                                 />
@@ -197,8 +197,8 @@ const CreateInfluencer = () => {
                             <div>
                                 <Label>Tiktok</Label>
                                 <SocialInput
-                                    {...register('tiktok')}
-                                    id='tiktok'
+                                    {...register('tikTok')}
+                                    id='tikTok'
                                     type='text'
                                     required={errors.tiktok}
                                 />
@@ -206,8 +206,8 @@ const CreateInfluencer = () => {
                             <div>
                                 <Label>Tiktok Followers</Label>
                                 <SocialInput
-                                    {...register('tiktokFollowers')}
-                                    id='tiktokFollowers'
+                                    {...register('tikTokFollowers')}
+                                    id='tikTokFollowers'
                                     type='number'
                                     required={errors.tiktokFollowers}/>
                             </div>
