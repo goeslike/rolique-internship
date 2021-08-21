@@ -2,9 +2,8 @@ const {
     instagramService,
     fileService,
     influencerService,
-    twitterService
-    youtubeService
-
+    youtubeService,
+    tikTokService
 } = require('../services');
 const {
     CREATED,
@@ -68,9 +67,8 @@ module.exports = {
                 req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
             }
 
-            if (body.twitter) {
-                const tweets = await twitterService.getTweets(body.twitter);
-                req.body.tweets = tweets;
+            if (body.tikTok) {
+                req.body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok)
             }
 
             await influencerService.createInfluencer(req.body);
