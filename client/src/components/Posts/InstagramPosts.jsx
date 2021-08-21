@@ -4,6 +4,7 @@ import Modal from '../Modal/Modal.jsx';
 
 import galleryIcon from '../../assets/posts/gallery.png';
 import videoIcon from '../../assets/posts/play-button.png'
+import Slider from '../Slider/Slider';
 
 import {
     Posts,
@@ -73,10 +74,8 @@ const InstagramPosts = ({posts}) => {
             <Modal active={modalActive} setModalActive={setModalActive}>
                 {photo && <img src={photo}/>}
                 {gallery &&
-                <>
-                    <img src={gallery[0]}/>
-                    <img src={gallery[1]}/>
-                </>}
+                    <Slider photos={gallery} />
+                }
             </Modal>
 
         </Posts>
