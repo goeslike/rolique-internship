@@ -2,9 +2,9 @@ const {
     instagramService,
     fileService,
     influencerService,
-    twitterService
-    youtubeService
-
+    youtubeService,
+    twitterService,
+    tikTokService
 } = require('../services');
 const {
     CREATED,
@@ -18,6 +18,7 @@ const {
 } = require('../constants/constants');
 
 module.exports = {
+    // eslint-disable-next-line complexity
     createInfluencer: async (req, res, next) => {
         try {
             const {
@@ -73,6 +74,10 @@ module.exports = {
                 req.body.tweets = tweets;
             }
 
+            if (body.tikTok) {
+                req.body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok);
+            }
+
             await influencerService.createInfluencer(req.body);
 
             res.status(CREATED)
@@ -99,6 +104,7 @@ module.exports = {
     },
 
     // update in process
+    // eslint-disable-next-line complexity
     updateInfluencer: async (req, res, next) => {
         try {
             const {

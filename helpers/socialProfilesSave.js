@@ -19,23 +19,15 @@ module.exports = async (createObject, influencer) => {
         );
         await influencer.save();
     }
-
-    if (createObject.twitter) {
+    if (createObject.tikTok) {
         await influencer.socialProfiles.set(
-            'twitter', {
-                username: createObject.twitter,
-                followers: createObject.twitterFollowers
-            }
+            'tikTok', { username: createObject.tikTok, followers: createObject.tikTokFollowers }
         );
         await influencer.save();
     }
-
-    if (createObject.tiktok) {
+    if (createObject.twitter) {
         await influencer.socialProfiles.set(
-            'tiktok', {
-                username: createObject.tiktok,
-                followers: createObject.tiktokFollowers
-            }
+            'twitter', { username: createObject.twitter, followers: createObject.twitterFollowers }
         );
         await influencer.save();
     }
