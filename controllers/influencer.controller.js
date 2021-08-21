@@ -2,7 +2,8 @@ const {
     instagramService,
     fileService,
     influencerService,
-    youtubeService
+    youtubeService,
+    tikTokService
 } = require('../services');
 const {
     CREATED,
@@ -64,6 +65,10 @@ module.exports = {
 
             if (body.youTube) {
                 req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
+            }
+
+            if (body.tikTok) {
+                req.body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok)
             }
 
             await influencerService.createInfluencer(req.body);

@@ -4,5 +4,6 @@ module.exports = {
     instagramService: require('./instagram.service'),
     influencerService: require('./influencer.service'),
     youtubeService: require('./youTube.service'),
-    userService: require('./user.service')
+    userService: require('./user.service'),
+    tikTokService: require('./tiktok.service')
 };

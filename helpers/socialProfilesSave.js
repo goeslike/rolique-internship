@@ -19,4 +19,10 @@ module.exports = async (createObject, influencer) => {
         );
         await influencer.save();
     }
+    if (createObject.tikTok) {
+        await influencer.socialProfiles.set(
+            'tikTok', { username: createObject.tikTok, followers: createObject.tikTokFollowers }
+        );
+        await influencer.save();
+    }
 };
