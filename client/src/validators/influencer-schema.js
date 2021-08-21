@@ -107,7 +107,7 @@ const createSchema = yup.object().shape({
         }),
 }, [
     ['instagram', 'instagramFollowers'],
-    ['youtube', 'youTubeFollowers'],
+    ['youTube', 'youTubeFollowers'],
     ['facebook', 'facebookFollowers'],
     ['tiktok', 'tiktokFollowers'],
     ['twitter', 'twitterFollowers'],

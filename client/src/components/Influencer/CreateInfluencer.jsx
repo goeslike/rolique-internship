@@ -167,7 +167,7 @@ const CreateInfluencer = () => {
                                 <Label>YouTube Followers</Label>
                                 <SocialInput
                                     {...register('youTubeFollowers')}
-                                    id='youtubeFollowers'
+                                    id='youTubeFollowers'
                                     type='number'
                                     required={errors.youtubeFollowers}/>
                             </div>
