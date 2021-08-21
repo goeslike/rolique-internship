@@ -11,7 +11,9 @@ const Input = styled.input`
 
   border: 1px solid #BFBFBF;
   border-radius: 6px;
-  
+
+  font-size: 14px;
+
   &:focus {
     border: 1px solid rgba(255, 101, 14, 0.5);
     filter: drop-shadow(0 0 rgba(255, 101, 14, 0.25));
@@ -101,39 +103,6 @@ const FileLabel = styled.label`
     bottom: 26px;
     z-index: 1000;
   }
-`
-
-const Select = styled.select`
-  width: 100%;
-  height: 32px;
-
-  padding: 0 12px;
-  margin: 0 0 16px 0;
-
-  outline: none;
-
-  background-color: #fff;
-
-  border: 1px solid #BFBFBF;
-  border-radius: 6px;
-
-  font-weight: normal;
-  font-size: 14px;
-
-  color: rgba(0, 0, 0, 0.6);
-
-  &:focus {
-    border: 1px solid rgba(255, 101, 14, 0.5);
-    filter: drop-shadow(0 0 rgba(255, 101, 14, 0.25));
-  }
-
-  &:required {
-    border: 1px solid #DA1414;
-  }
-  
-  & option {
-    color: #000;
-  }
 `;
 
 const HelperText = styled.p`
@@ -187,7 +156,6 @@ export {
     Input,
     Label,
     FileLabel,
-    Select,
     HelperText,
     SocialInput,
     SearchInput,

@@ -1,7 +1,7 @@
 import axios from "axios";
 import {BASE_URL} from '../constants';
 
-import { setInfluencer, setInfluencers, setUpdateError } from '../redux/action-creators';
+import { setCreateError, setInfluencer, setInfluencers, setUpdateError } from '../redux/action-creators';
 
 const getInfluencers = () => {
     return async (dispatch) => {
@@ -26,17 +26,19 @@ const getInfluencer = (id) => {
     };
 };
 
-const createInfluencer = async (data) => {
+const createInfluencer = (data) => {
     const token = localStorage.getItem('accessToken');
 
     const config = {
         headers: {Authorization: token}
     };
 
-    try {
-        await axios.post(BASE_URL + 'influencers', data, config);
-    } catch (e) {
-        console.log(e);
+    return async (dispatch) => {
+        try {
+            await axios.post(BASE_URL + 'influencers', data, config);
+        } catch (e) {
+            dispatch(setCreateError(e.message));
+        }
     }
 };
 

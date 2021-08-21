@@ -4,6 +4,8 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import {CSSTransition} from 'react-transition-group';
+
 import infoIcon from '../../assets/info-icon.png';
 import RoleDropdown from '../Dropdown/RoleDropdown';
 import ErrorMessage from '../Errors/ErrorMessage';
@@ -100,7 +102,9 @@ const CreateUser = () => {
     return (
         <UserWrapper>
             <CreateHeader title='Create Internal User' form='create-form'/>
-            <ErrorMessage error={createError}/>
+            <CSSTransition in={createError} classNames={'alert'} timeout={300} unmountOnExit>
+                <ErrorMessage error={createError}/>
+            </CSSTransition>
 
             <form id={'create-form'} onSubmit={handleSubmit(sendData, checkRole)} noValidate>
                 <UserContainer>

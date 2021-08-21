@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {useForm} from "react-hook-form";
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 import { createInfluencer } from '../../actions/influencer';
+import ErrorMessage from '../Errors/ErrorMessage';
 
 import CreateHeader from "../Header/CreateHeader";
 
@@ -22,6 +25,8 @@ const CreateInfluencer = () => {
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
+
+    const createError = useSelector(({errorsReducer: {createError}}) => createError);
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: 'onBlur',
@@ -64,6 +69,9 @@ const CreateInfluencer = () => {
     return (
         <InfluencerWrapper>
             <CreateHeader title='Create Influencer' form='create-influencer'/>
+            <CSSTransition in={createError} classNames={'alert'} timeout={300} unmountOnExit>
+                <ErrorMessage error={createError}/>
+            </CSSTransition>
 
             <form id='create-influencer' onSubmit={handleSubmit(sendData)} noValidate>
                 <InfluencerContainer>

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 import { updateInfluencer } from '../../actions/influencer';
 import { createSchema } from '../../validators/influencer-schema';
+import ErrorMessage from '../Errors/ErrorMessage';
 import CreateHeader from '../Header/CreateHeader';
 import { FileLabel, HelperText, Input, Label, SocialInput } from '../Inputs/CreateInputs.style';
 import {
@@ -20,7 +22,9 @@ const EditInfluencer = () => {
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
+
     const influencer = useSelector(({influencersReducer : {influencer}}) => influencer);
+    const updateError = useSelector(({errorsReducer: {updateError}}) => updateError);
 
     const defaultValues = {
         firstName: influencer.firstName,
@@ -81,6 +85,9 @@ const EditInfluencer = () => {
     return (
         <InfluencerWrapper>
             <CreateHeader title='Edit Influencer' form='create-influencer'/>
+            <CSSTransition in={updateError} classNames={'alert'} timeout={300} unmountOnExit>
+                <ErrorMessage error={updateError}/>
+            </CSSTransition>
 
             <form id='edit-influencer' onSubmit={handleSubmit(sendData)} noValidate>
                 <InfluencerContainer>

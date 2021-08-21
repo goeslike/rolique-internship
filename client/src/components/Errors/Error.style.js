@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 const Error = styled.div`
-  width: 100%;
+  position: absolute;
+  top: 87px;
+  right: 180px;
+  z-index: 100;
+  
+  width: 408px;
   height: 29px;
 
   display: flex;
@@ -13,6 +18,7 @@ const Error = styled.div`
   background-color: #FEEFEF;
   
   border-radius: 8px;
+  border: 1px solid red;
 
   font-weight: normal;
   font-size: 14px;

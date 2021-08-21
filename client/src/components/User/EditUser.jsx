@@ -4,9 +4,11 @@ import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import { useHistory } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 import {createSchema} from "../../validators/user-schema";
 import RoleDropdown from '../Dropdown/RoleDropdown';
+import ErrorMessage from '../Errors/ErrorMessage';
 import CreateHeader from "../Header/CreateHeader";
 import { updateUser } from '../../actions/user';
 
@@ -24,6 +26,7 @@ const EditUser = () => {
     const [roleRequired, setRoleRequired] = useState(false);
 
     const user = useSelector(({userReducer: {user}}) => user);
+    const updateError = useSelector(({errorsReducer: {updateError}}) => updateError);
 
     const defaultValues = {
         firstname: user.firstname,
@@ -98,6 +101,9 @@ const EditUser = () => {
     return (
         <UserWrapper>
             <CreateHeader title='Edit Internal User' buttonText='Save Changes' form='edit-form'/>
+            <CSSTransition in={updateError} classNames={'alert'} timeout={300} unmountOnExit>
+                <ErrorMessage error={updateError}/>
+            </CSSTransition>
 
             <form id={'edit-form'} onSubmit={handleSubmit(sendEditData, checkRole)} noValidate>
                 <UserContainer>
