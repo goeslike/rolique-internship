@@ -13,14 +13,14 @@ module.exports = {
                 case 'create':
 
                     if (!whoHaveAccess.includes(userId.role)) {
-                        throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.FORBIDDEN);
+                        throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.FORBIDDEN.message);
                     }
                     break;
 
                 case 'update':
                     if (!whoHaveAccess.includes(userId.role)) {
                         if (userId.role === 'employee' && userId._id !== id) {
-                            throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.FORBIDDEN);
+                            throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.FORBIDDEN.message);
                         }
                     }
                     break;
@@ -36,7 +36,7 @@ module.exports = {
             const { body: { role }, userId } = req;
 
             if (userId.role === 'manager' && role === 'admin') {
-                throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.CREATE_ADMIN_IS_FORBIDDEN);
+                throw new ErrorHandler(statusCode.FORBIDDEN, errorMassages.CREATE_ADMIN_IS_FORBIDDEN.message);
             }
 
             next();

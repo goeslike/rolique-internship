@@ -29,6 +29,7 @@ module.exports = {
 
     INSTAGRAM_LOGIN: process.env.INSTAGRAM_LOGIN || 'nata.test.dev',
     INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD || '12345qwertyui',
+    TWITTER_BEARER_TOKEN: process.env.TWITTER_BEARER_TOKEN || ''
 
     YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY || 'AIzaSyCISScuqwpxYcG-gIcvfWogwMn2qeL2dm4',
     BASE_YOUTUBE_URL: process.env.BASE_YOUTUBE_URL || 'https://www.youtube.com/watch?v='
