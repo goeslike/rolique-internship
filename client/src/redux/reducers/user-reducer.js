@@ -6,7 +6,7 @@ import {
 } from '../action-types';
 
 const initialState = {
-    accessToken: '',
+    accessToken: 'asdf',
     user: {}
 };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {useForm} from "react-hook-form";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { createInfluencer } from '../../actions/influencer';
@@ -22,6 +22,7 @@ import {createSchema} from "../../validators/influencer-schema";
 
 const CreateInfluencer = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
@@ -58,7 +59,7 @@ const CreateInfluencer = () => {
                 formData.append(key, data[key]);
             }
         }
-        await createInfluencer(formData);
+        await dispatch(createInfluencer(formData));
 
         history.goBack();
 

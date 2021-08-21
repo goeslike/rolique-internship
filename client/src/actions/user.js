@@ -38,7 +38,6 @@ const login = (data) => {
 const createUser = (data) => {
     return async (dispatch) => {
         const token = localStorage.getItem('accessToken');
-
         const config = {
             headers: {Authorization: token}
         };

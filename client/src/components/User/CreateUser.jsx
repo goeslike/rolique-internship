@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import {CSSTransition} from 'react-transition-group';
@@ -33,6 +33,7 @@ import CreateHeader from '../Header/CreateHeader';
 
 const CreateUser = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
@@ -77,7 +78,7 @@ const CreateUser = () => {
 
         formData.append('role', selected.toLowerCase());
 
-        await createUser(formData);
+        await dispatch(createUser(formData));
 
         history.goBack();
 
