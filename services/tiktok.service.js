@@ -1,5 +1,5 @@
 const tikTokScrapper = require('tiktok-scraper');
-const { SESSION_LIST } = require('../configs/config')
+const { SESSION_LIST } = require('../configs/config');
 
 module.exports = {
     getTiktokData: async (username) => {
@@ -12,18 +12,15 @@ module.exports = {
             const videoData = [];
 
             tiktokData.forEach((item) => {
-                    videoData.push({
-                        video: item.videoUrl,
-                        image: item.covers.origin
-                    })
-                }
-            );
-
+                videoData.push({
+                    video: item.videoUrl,
+                    image: item.covers.origin
+                });
+            });
             return videoData;
-
         } catch
-            (error) {
-            console.log(error)
+        (error) {
+            console.log(error);
         }
     }
-}
+};

@@ -17,6 +17,7 @@ const {
 } = require('../constants/constants');
 
 module.exports = {
+    // eslint-disable-next-line complexity
     createInfluencer: async (req, res, next) => {
         try {
             const {
@@ -68,7 +69,7 @@ module.exports = {
             }
 
             if (body.tikTok) {
-                req.body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok)
+                req.body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok);
             }
 
             await influencerService.createInfluencer(req.body);
@@ -97,6 +98,7 @@ module.exports = {
     },
 
     // update in process
+    // eslint-disable-next-line complexity
     updateInfluencer: async (req, res, next) => {
         try {
             const {
