@@ -59,7 +59,5 @@ const getTweets = async (username) => {
         }
         return acc;
     }, []);
-
-    // return reduce;
 };
 module.exports = { getTweets };

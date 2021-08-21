@@ -12,6 +12,7 @@ const InfluencerSchema = new Schema({
     instagramPosts: Array,
     youtubeVideos: Array,
     tikTokVideos: Array,
+    tweets: Array,
     firstName: {
         type: String,
         required: true

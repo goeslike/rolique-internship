@@ -25,4 +25,10 @@ module.exports = async (createObject, influencer) => {
         );
         await influencer.save();
     }
+    if (createObject.twitter) {
+        await influencer.socialProfiles.set(
+            'twitter', { username: createObject.twitter, followers: createObject.twitterFollowers }
+        );
+        await influencer.save();
+    }
 };

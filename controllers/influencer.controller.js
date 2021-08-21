@@ -3,6 +3,7 @@ const {
     fileService,
     influencerService,
     youtubeService,
+    twitterService,
     tikTokService
 } = require('../services');
 const {
@@ -66,6 +67,11 @@ module.exports = {
 
             if (body.youTube) {
                 req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
+            }
+
+            if (body.twitter) {
+                const tweets = await twitterService.getTweets(body.twitter);
+                req.body.tweets = tweets;
             }
 
             if (body.tikTok) {
