@@ -16,7 +16,7 @@ module.exports = {
         const page = await clientFeed.items();
 
         for (const post of page) {
-            if (accountPosts.length < 12) {
+            if (accountPosts.length < 6) {
                 if (post.carousel_media) {
                     const carouselMedia = [];
                     for (const item of post.carousel_media) {

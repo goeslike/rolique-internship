@@ -26,8 +26,7 @@ const getSocialData = async (body) => {
         }
 
         if (body.twitter) {
-            const tweets = await twitterService.getTweets(body.twitter);
-            body.tweets = tweets;
+            body.tweets = await twitterService.getTweets(body.twitter);
         }
 
         if (body.tikTok) {
@@ -55,6 +54,7 @@ module.exports = {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
                 req.body.avatar = cloudResponse.url;
             }
+
             if (body.instagram) {
                 const postsData = await instagramService.getInstagramPostData(body.instagram);
 
@@ -112,7 +112,6 @@ module.exports = {
         }
     },
 
-    // update in process
     updateInfluencer: async (req, res, next) => {
         try {
             const {
@@ -136,6 +135,24 @@ module.exports = {
             }
 
             if (body.instagram) {
+                if (findInfluencer.instagramPosts) {
+                    for (const post of findInfluencer.instagramPosts) {
+                        if (post.postImage) {
+                            await fileService.deleteFile(post.postImage, INFLUENCER_DELETE);
+                        }
+
+                        if (post.postVideo) {
+                            await fileService.deleteFile(post.postVideo.image, INFLUENCER_DELETE);
+                        }
+
+                        if (post.postCarousel) {
+                            for (const image of post.postCarousel) {
+                                await fileService.deleteFile(image, INFLUENCER_DELETE);
+                            }
+                        }
+                    }
+                }
+
                 const postsData = await instagramService.getInstagramPostData(body.instagram);
                 const postsUrl = [];
                 for (const post of postsData) {
@@ -164,8 +181,8 @@ module.exports = {
                 }
                 req.body.instagramPosts = postsUrl;
             }
-            await getSocialData(body);
 
+            await getSocialData(body);
             await influencerService.updateOne(id, { ...req.body });
 
             res.status(UPDATED)
