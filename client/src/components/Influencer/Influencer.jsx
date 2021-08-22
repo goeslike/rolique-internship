@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import InfluencerHeader from '../Header/InfluencerHeader';
 import Modal from '../Modal/Modal';
 import InstagramPosts from '../Posts/InstagramPosts';
+import Tweets from '../Posts/Tweets';
 
 import {
     InfluencerAvatar,
@@ -42,7 +43,8 @@ const Influencer = () => {
                     </div>
                 </InfluencerInfo>
 
-                <InstagramPosts posts={influencer.instagramPosts}/>
+                 {/*<InstagramPosts posts={influencer.instagramPosts}/>*/}
+                 <Tweets user={influencer.socialProfiles.twitter.username}/>
 
             </InfluencerContainer>
         </InfluencerWrapper>
