@@ -17,8 +17,58 @@ const {
     FOLDER_ASSETS: { INFLUENCER_DELETE }
 } = require('../constants/constants');
 
+const helper = async (body) => {
+    try {
+        if (body.instagram) {
+            const postsData = await instagramService.getInstagramPostData(body.instagram);
+
+            const postsUrl = [];
+            for (const post of postsData) {
+                if (post.postCarousel) {
+                    const carousel = [];
+                    for (const image of post.postCarousel) {
+                        const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
+                        carousel.push(photo.url);
+                    }
+                    postsUrl.push({ postCarousel: carousel });
+                }
+
+                if (post.postVideo) {
+                    const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
+                    const data = {
+                        image: image.url,
+                        video: post.postVideo.videoUrl
+                    };
+                    postsUrl.push({ postVideo: data });
+                }
+
+                if (post.postImage) {
+                    const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
+                    postsUrl.push({ postImage: photo.url });
+                }
+            }
+            body.instagramPosts = postsUrl;
+        }
+
+        if (body.youTube) {
+            body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
+        }
+
+        if (body.twitter) {
+            body.tweets = await twitterService.getTweets(body.twitter);
+        }
+
+        if (body.tikTok) {
+            body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok);
+        }
+        return body;
+    } catch (e) {
+        console.log(e);
+        return e;
+    }
+};
+
 module.exports = {
-    // eslint-disable-next-line complexity
     createInfluencer: async (req, res, next) => {
         try {
             const {
@@ -34,50 +84,50 @@ module.exports = {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
                 req.body.avatar = cloudResponse.url;
             }
-            if (body.instagram) {
-                const postsData = await instagramService.getInstagramPostData(body.instagram);
-
-                const postsUrl = [];
-                for (const post of postsData) {
-                    if (post.postCarousel) {
-                        const carousel = [];
-                        for (const image of post.postCarousel) {
-                            const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
-                            carousel.push(photo.url);
-                        }
-                        postsUrl.push({ postCarousel: carousel });
-                    }
-
-                    if (post.postVideo) {
-                        const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
-                        const data = {
-                            image: image.url,
-                            video: post.postVideo.videoUrl
-                        };
-                        postsUrl.push({ postVideo: data });
-                    }
-
-                    if (post.postImage) {
-                        const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
-                        postsUrl.push({ postImage: photo.url });
-                    }
-                }
-                req.body.instagramPosts = postsUrl;
-            }
-
-            if (body.youTube) {
-                req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
-            }
-
-            if (body.twitter) {
-                req.body.tweets = await twitterService.getTweets(body.twitter);
-            }
-
-            if (body.tikTok) {
-                req.body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok);
-            }
-
-            await influencerService.createInfluencer(req.body);
+            // if (body.instagram) {
+            //     const postsData = await instagramService.getInstagramPostData(body.instagram);
+            //
+            //     const postsUrl = [];
+            //     for (const post of postsData) {
+            //         if (post.postCarousel) {
+            //             const carousel = [];
+            //             for (const image of post.postCarousel) {
+            //                 const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
+            //                 carousel.push(photo.url);
+            //             }
+            //             postsUrl.push({ postCarousel: carousel });
+            //         }
+            //
+            //         if (post.postVideo) {
+            //             const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
+            //             const data = {
+            //                 image: image.url,
+            //                 video: post.postVideo.videoUrl
+            //             };
+            //             postsUrl.push({ postVideo: data });
+            //         }
+            //
+            //         if (post.postImage) {
+            //             const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
+            //             postsUrl.push({ postImage: photo.url });
+            //         }
+            //     }
+            //     req.body.instagramPosts = postsUrl;
+            // }
+            //
+            // if (body.youTube) {
+            //     req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
+            // }
+            //
+            // if (body.twitter) {
+            //     req.body.tweets = await twitterService.getTweets(body.twitter);
+            // }
+            //
+            // if (body.tikTok) {
+            //     req.body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok);
+            // }
+            await helper(body);
+            await influencerService.createInfluencer(body);
 
             res.status(CREATED)
                 .json(INFLUENCER_IS_CREATED);
@@ -103,7 +153,6 @@ module.exports = {
     },
 
     // update in process
-    // eslint-disable-next-line complexity
     updateInfluencer: async (req, res, next) => {
         try {
             const {
@@ -126,43 +175,44 @@ module.exports = {
                 await influencerService.updateOne(id, { avatar: cloudResponse.url });
             }
 
-            if (body.instagram) {
-                const postsData = await instagramService.getInstagramPostData(body.instagram);
-                const postsUrl = [];
-                for (const post of postsData) {
-                    if (post.postCarousel) {
-                        const carousel = [];
-                        for (const image of post.postCarousel) {
-                            const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
-                            carousel.push(photo.url);
-                        }
-                        postsUrl.push({ postCarousel: carousel });
-                    }
+            // if (body.instagram) {
+            //     const postsData = await instagramService.getInstagramPostData(body.instagram);
+            //     const postsUrl = [];
+            //     for (const post of postsData) {
+            //         if (post.postCarousel) {
+            //             const carousel = [];
+            //             for (const image of post.postCarousel) {
+            //                 const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
+            //                 carousel.push(photo.url);
+            //             }
+            //             postsUrl.push({ postCarousel: carousel });
+            //         }
+            //
+            //         if (post.postVideo) {
+            //             const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
+            //             const data = {
+            //                 image: image.url,
+            //                 video: post.postVideo.videoUrl
+            //             };
+            //             postsUrl.push({ postVideo: data });
+            //         }
+            //
+            //         if (post.postImage) {
+            //             const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
+            //             postsUrl.push({ postImage: photo.url });
+            //         }
+            //     }
+            //     req.body.instagramPosts = postsUrl;
+            // }
 
-                    if (post.postVideo) {
-                        const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
-                        const data = {
-                            image: image.url,
-                            video: post.postVideo.videoUrl
-                        };
-                        postsUrl.push({ postVideo: data });
-                    }
-
-                    if (post.postImage) {
-                        const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
-                        postsUrl.push({ postImage: photo.url });
-                    }
-                }
-                req.body.instagramPosts = postsUrl;
-            }
-
-            if (body.youTube) {
-                req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
-            }
-
-            if (body.twitter) {
-                req.body.tweets = await twitterService.getTweets(body.twitter);
-            }
+            // if (body.youTube) {
+            //     req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
+            // }
+            //
+            // if (body.twitter) {
+            //     req.body.tweets = await twitterService.getTweets(body.twitter);
+            // }
+            await helper(body);
 
             await influencerService.updateOne(id, { ...req.body });
 
