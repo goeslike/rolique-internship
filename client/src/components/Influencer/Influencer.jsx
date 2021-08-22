@@ -49,10 +49,12 @@ const Influencer = () => {
                         </InfluencerData>
 
                         <InfluencerSocial
-                            socialMedia={influencer.socialProfiles} setShowInstagram
-                            setShowYoutube
-                            setShowTiktok
-                            setShowTwitter/>
+                            socialMedia={influencer.socialProfiles}
+                            setShowInstagram={setShowInstagram}
+                            setShowYoutube={setShowYoutube}
+                            setShowTiktok={setShowTiktok}
+                            setShowTwitter={setShowTwitter}
+                        />
                     </div>
                 </InfluencerInfo>
 
