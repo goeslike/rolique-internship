@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
+import ErrorMessage from '../Errors/ErrorMessage';
 import InfluencerHeader from '../Header/InfluencerHeader';
+import TikTok from '../InfluencerContent/TikTok';
+import Twitter from '../InfluencerContent/Twitter';
+import YouTube from '../InfluencerContent/YouTube';
 import Modal from '../Modal/Modal';
-import InstagramPosts from '../Posts/InstagramPosts';
+import Instagram from '../InfluencerContent/Instagram';
 
 import {
     InfluencerAvatar,
@@ -17,6 +22,11 @@ import InfluencerSocial from './InfluencerSocial';
 
 const Influencer = () => {
     const influencer = useSelector(({influencersReducer : {influencer}}) => influencer);
+
+    const [showInstagram, setShowInstagram] = useState(true);
+    const [showYoutube, setShowYoutube] = useState(false);
+    const [showTiktok, setShowTiktok] = useState(false);
+    const [showTwitter, setShowTwitter] = useState(false);
 
     return (
         <InfluencerWrapper>
@@ -38,11 +48,34 @@ const Influencer = () => {
                             <div>{influencer.profession}</div>
                         </InfluencerData>
 
-                        <InfluencerSocial socialMedia={influencer.socialProfiles}/>
+                        <InfluencerSocial
+                            socialMedia={influencer.socialProfiles} setShowInstagram
+                            setShowYoutube
+                            setShowTiktok
+                            setShowTwitter/>
                     </div>
                 </InfluencerInfo>
 
-                <InstagramPosts posts={influencer.instagramPosts}/>
+                <CSSTransition in={showInstagram} classNames={'alert'} timeout={200} unmountOnExit>
+                    <Instagram posts={influencer.instagramPosts}/>
+                </CSSTransition>
+
+                <CSSTransition in={showYoutube} classNames={'alert'} timeout={200} unmountOnExit>
+                    <YouTube videos={influencer.youtubeVideos}/>
+                </CSSTransition>
+
+                <CSSTransition in={showTiktok} classNames={'alert'} timeout={200} unmountOnExit>
+                    <TikTok videos={influencer.tikTokVideos}/>
+                </CSSTransition>
+
+                <CSSTransition in={showTwitter} classNames={'alert'} timeout={200} unmountOnExit>
+                    <Twitter tweets={influencer.tweets}
+                         avatar={influencer.avatar}
+                         username={influencer.socialProfiles.twitter.username}
+                         lastName={influencer.lastName}
+                         firstName={influencer.firstName}
+                    />
+                </CSSTransition>
 
             </InfluencerContainer>
         </InfluencerWrapper>

@@ -11,13 +11,12 @@ import {
     Post,
     PostImg,
     Icon
-} from './InstagramPosts.style';
+} from './Instagram.style';
 
-const InstagramPosts = ({posts}) => {
+const Instagram = ({posts}) => {
     const [modalActive, setModalActive] = useState(false);
 
     const [photo, setPhoto] = useState();
-    const [video, setVideo] = useState();
     const [gallery, setGallery] = useState([]);
 
     const setPosts = (post) => {
@@ -38,7 +37,6 @@ const InstagramPosts = ({posts}) => {
                 <>
                     <PostImg src={post.postCarousel[0]} onClick={() => {
                         setPhoto(null);
-                        setVideo(null);
 
                         setGallery(post.postCarousel);
                         setModalActive(true);
@@ -51,7 +49,6 @@ const InstagramPosts = ({posts}) => {
         if (post.postImage) {
             return (
                 <PostImg src={post.postImage} onClick={() => {
-                    setVideo(null);
                     setGallery(null);
 
                     setPhoto(post.postImage);
@@ -82,4 +79,4 @@ const InstagramPosts = ({posts}) => {
     );
 };
 
-export default InstagramPosts;
+export default Instagram;

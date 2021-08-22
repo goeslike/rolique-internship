@@ -5,6 +5,7 @@ import { logOut } from '../../actions/user';
 import {SidebarContainer, SidebarLogo} from './Sidebar.style';
 
 import logo from '../../assets/logo/logo.png';
+import logoutIcon from '../../assets/logout-16.png';
 import usersIcon from '../../assets/links-icons/users.png';
 import compaignIcon from '../../assets/links-icons/compaign.png';
 import influencerIcon from '../../assets/links-icons/influencer.png';
@@ -31,7 +32,9 @@ const Sidebar = ({user, compaign, influencer}) => {
                 <img src={influencerIcon} alt='influencerIcon'/>
             </Link>
 
-            <button onClick={logout}>log out</button>
+            <Link onClick={() => logout}>
+                <img src={logoutIcon} alt="logoutIcon"/>
+            </Link>
         </SidebarContainer>
     );
 };
