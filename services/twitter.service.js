@@ -15,49 +15,50 @@ const getTweets = async (username) => {
                 'url'
             ]
         });
-    const { data, includes: { media } } = response._realData;
-    const z = [
-        { data },
-        { media }
-    ];
 
-    return z.reduce((acc, value, index, array) => {
-        if (value.data !== undefined) {
-            value.data.map((tweet) => {
-                if (tweet.attachments !== undefined) {
-                    if (tweet.entities !== undefined && tweet.entities.urls !== undefined) {
-                        acc.push({
+    const {
+        data,
+        includes
+    } = response._realData;
+    const media = includes ? includes.media : [];
+    const tweets = [];
+
+    if (data) {
+        data.map((tweet) => {
+            if (tweet.attachments) {
+                const include = media.find((item) => item.media_key === tweet.attachments.media_keys[0]);
+                switch (include.type) {
+                    case 'photo':
+                        tweets.push({
                             id: tweet.id,
                             text: tweet.text,
-                            media: array[1].media.find((item) => item.media_key === tweet.attachments.media_keys[0]),
-                            retweeted: tweet.entities.urls[0].expanded_url
+                            photo: include.url,
                         });
-                        return;
-                    }
-                    acc.push({
-                        id: tweet.id,
-                        text: tweet.text,
-                        media: array[1].media.find((item) => item.media_key === tweet.attachments.media_keys[0]),
-                    });
-                } else {
-                    if (tweet.entities !== undefined && tweet.entities.urls !== undefined) {
-                        acc.push({
+                        break;
+                    case 'video':
+                        tweets.push({
                             id: tweet.id,
                             text: tweet.text,
-                            retweeted: tweet.entities.urls[0].expanded_url
+                            video: include.preview_image_url,
                         });
-                        return;
-                    }
-                    acc.push({
-                        id: tweet.id,
-                        text: tweet.text,
-                    });
+                        break;
+                    case 'animated_gif':
+                        tweets.push({
+                            id: tweet.id,
+                            text: tweet.text,
+                            gif: include.preview_image_url,
+                        });
+                        break;
                 }
-                return 'ok';
+                return;
+            }
+            tweets.push({
+                id: tweet.id,
+                text: tweet.text,
             });
-            return acc;
-        }
-        return acc;
-    }, []);
+            return 'ok';
+        });
+    }
+    return tweets;
 };
 module.exports = { getTweets };

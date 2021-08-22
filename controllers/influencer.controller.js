@@ -70,8 +70,7 @@ module.exports = {
             }
 
             if (body.twitter) {
-                const tweets = await twitterService.getTweets(body.twitter);
-                req.body.tweets = tweets;
+                req.body.tweets = await twitterService.getTweets(body.twitter);
             }
 
             if (body.tikTok) {
@@ -159,6 +158,10 @@ module.exports = {
 
             if (body.youTube) {
                 req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
+            }
+
+            if (body.twitter) {
+                req.body.tweets = await twitterService.getTweets(body.twitter);
             }
 
             await influencerService.updateOne(id, { ...req.body });

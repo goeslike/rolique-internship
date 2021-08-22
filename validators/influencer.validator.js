@@ -19,11 +19,8 @@ module.exports = {
                 .min(3)
                 .max(25),
             instagramFollowers: Joi.string()
-                .empty(''),
-                // .when('instagram', {
-                //     is: true,
-                //     then: Joi.required()
-                // }),
+                .min(3)
+                .max(25),
             youTube: Joi.string(),
             youTubeFollowers: Joi.string(),
             facebook: Joi.string()
