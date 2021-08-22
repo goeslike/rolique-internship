@@ -1,14 +1,20 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
 import { CSSTransition } from 'react-transition-group';
+
 import { updateInfluencer } from '../../actions/influencer';
+
+import { yupResolver } from '@hookform/resolvers/yup';
 import { createSchema } from '../../validators/influencer-schema';
+
 import ErrorMessage from '../Errors/ErrorMessage';
 import CreateHeader from '../Header/CreateHeader';
+
 import { FileLabel, HelperText, Input, Label, SocialInput } from '../Inputs/CreateInputs.style';
+
 import {
     InfluencerContainer,
     InfluencerSection,

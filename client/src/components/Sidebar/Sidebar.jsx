@@ -2,13 +2,14 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { logOut } from '../../actions/user';
-import {SidebarContainer, SidebarLogo} from './Sidebar.style';
 
 import logo from '../../assets/logo/logo.png';
 import logoutIcon from '../../assets/logout-16.png';
 import usersIcon from '../../assets/links-icons/users.png';
 import compaignIcon from '../../assets/links-icons/compaign.png';
 import influencerIcon from '../../assets/links-icons/influencer.png';
+
+import {SidebarContainer, SidebarLogo} from './Sidebar.style';
 
 const Sidebar = ({user, compaign, influencer}) => {
     const dispatch = useDispatch();

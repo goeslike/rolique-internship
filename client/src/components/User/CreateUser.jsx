@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group';
 
 import infoIcon from '../../assets/info-icon.png';
+
 import RoleDropdown from '../Dropdown/RoleDropdown';
 import ErrorMessage from '../Errors/ErrorMessage';
 

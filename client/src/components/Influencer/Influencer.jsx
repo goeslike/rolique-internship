@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import ErrorMessage from '../Errors/ErrorMessage';
+
 import InfluencerHeader from '../Header/InfluencerHeader';
+
 import TikTok from '../InfluencerContent/TikTok';
 import Twitter from '../InfluencerContent/Twitter';
 import YouTube from '../InfluencerContent/YouTube';
-import Modal from '../Modal/Modal';
 import Instagram from '../InfluencerContent/Instagram';
 
 import {

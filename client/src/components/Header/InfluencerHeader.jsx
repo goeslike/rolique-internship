@@ -6,6 +6,7 @@ import redirectIcon from '../../assets/redirect-icon.png';
 import editIcon from '../../assets/edit-influencer.png';
 
 import CreateDropdown from '../Dropdown/CreateDropdown';
+
 import { Header, HeaderTitle, EditButton } from './Header.style';
 
 const InfluencerHeader = ({title, id}) => {

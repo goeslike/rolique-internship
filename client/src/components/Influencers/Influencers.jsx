@@ -15,6 +15,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getInfluencers, getInfluencer} from "../../actions/influencer";
 
 import { Search, SearchIcon, SearchInput } from '../Inputs/CreateInputs.style';
+
 import {
     InfluencersContainer,
     InfluencersWrapper,

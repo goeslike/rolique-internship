@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
     Tweets,
     Tweet,
@@ -25,7 +26,7 @@ const Twitter = ({tweets, avatar, username, lastName, firstName}) => {
                                 {tweet.text}
                             </PostText>
                             {tweet.media &&
-                                <img src={tweet.media.url} />
+                                <img src={tweet.media.url} alt={'twitter-avatar'}/>
                             }
                         </div>
                     </Tweet>

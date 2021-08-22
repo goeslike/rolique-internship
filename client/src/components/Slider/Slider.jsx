@@ -7,7 +7,7 @@ const Slider = ({photos}) => {
             {photos.map(photo => {
                 return (
                     <Carousel.Item key={photo}>
-                        <img className='d-block' src={photo} alt="photo"/>
+                        <img className='d-block' src={photo} alt="slider-post"/>
                     </Carousel.Item>
                 );
             })}

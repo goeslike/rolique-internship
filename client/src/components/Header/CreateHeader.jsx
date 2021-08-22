@@ -1,8 +1,9 @@
 import React from 'react';
+import {useHistory} from "react-router-dom";
+
 import {Header, HeaderButton, HeaderTitle} from "./Header.style";
 
 import redirectIcon from '../../assets/redirect-icon.png';
-import {useHistory} from "react-router-dom";
 
 const CreateHeader = ({title, form}) => {
     const history = useHistory();

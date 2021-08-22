@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import Modal from '../Modal/Modal.jsx';
-
 import galleryIcon from '../../assets/posts/gallery.png';
 import videoIcon from '../../assets/posts/play-button.png'
+
+import Modal from '../Modal/Modal.jsx';
 import Slider from '../Slider/Slider';
 
 import {
@@ -23,7 +23,7 @@ const Instagram = ({posts}) => {
         if (post.postVideo) {
             return (
                 <>
-                    <a href={post.postVideo.video} target={'_blank'}>
+                    <a href={post.postVideo.video} target={'_blank'} rel='noreferrer'>
                         <PostImg src={post.postVideo.image} />
                     </a>
                     <Icon src={videoIcon}/>
@@ -69,7 +69,7 @@ const Instagram = ({posts}) => {
             })}
 
             <Modal active={modalActive} setModalActive={setModalActive}>
-                {photo && <img src={photo}/>}
+                {photo && <img src={photo} alt={'influencer-post-img'}/>}
                 {gallery &&
                     <Slider photos={gallery} />
                 }

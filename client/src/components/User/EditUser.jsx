@@ -1,15 +1,19 @@
-import { capitalize } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
 import { useHistory } from 'react-router-dom';
+
 import { CSSTransition } from 'react-transition-group';
 
+import { capitalize } from '@material-ui/core';
+
+import {yupResolver} from "@hookform/resolvers/yup";
 import {createSchema} from "../../validators/user-schema";
+
 import RoleDropdown from '../Dropdown/RoleDropdown';
 import ErrorMessage from '../Errors/ErrorMessage';
 import CreateHeader from "../Header/CreateHeader";
+
 import { updateUser } from '../../actions/user';
 
 import infoIcon from "../../assets/info-icon.png";

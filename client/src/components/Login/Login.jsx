@@ -1,12 +1,13 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
+
 import {yupResolver} from "@hookform/resolvers/yup";
+import {loginSchema} from '../../validators/user-schema';
 
 import errorImg from "../../assets/messages-icons/error.png";
 
 import {login} from "../../actions/user";
-import {loginSchema} from '../../validators/user-schema';
 
 import { LoginButton, LoginContainer, LoginError, LoginForm, LoginTitle } from './Login.style';
 import {HelperText, Input, Label} from "../Inputs/CreateInputs.style";

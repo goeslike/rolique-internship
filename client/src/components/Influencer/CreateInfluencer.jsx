@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {useForm} from "react-hook-form";
-import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
-import { createInfluencer } from '../../actions/influencer';
-import ErrorMessage from '../Errors/ErrorMessage';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { CSSTransition } from 'react-transition-group';
+
+import { createInfluencer } from '../../actions/influencer';
+
+import ErrorMessage from '../Errors/ErrorMessage';
 import CreateHeader from "../Header/CreateHeader";
 
 import {
