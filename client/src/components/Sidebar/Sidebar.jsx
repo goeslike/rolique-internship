@@ -25,7 +25,7 @@ const Sidebar = ({user, compaign, influencer}) => {
                 <img src={usersIcon} alt='usersIcon'/>
             </Link>
 
-            <Link to='/create-compaign' style={{background: compaign ? 'rgba(255, 101, 14, 1)' : ''}}>
+            <Link to='/compaigns' style={{background: compaign ? 'rgba(255, 101, 14, 1)' : ''}}>
                 <img src={compaignIcon} alt='compaignIcon'/>
             </Link>
 

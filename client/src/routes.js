@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import UsersPage from "./pages/UsersPage";
 import InfluencersPage from "./pages/InfluencersPage";
+import CompaignsPage from "./pages/CompaignsPage";
 
 const useRoutes = isAuth => {
     if (isAuth) {
@@ -14,6 +15,9 @@ const useRoutes = isAuth => {
                 </Route>
                 <Route path='/influencers' exect>
                     <InfluencersPage />
+                </Route>
+                <Route path='/compaigns' exect>
+                    <CompaignsPage />
                 </Route>
                 <Redirect to={'/users'} />
             </Switch>

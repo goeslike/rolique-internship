@@ -17,6 +17,8 @@ const Avatar = styled.img`
   width: 64px;
   height: 64px;
   
+  margin: 0 15px 0 0;
+  
   border-radius: 50%;
 `;
 
