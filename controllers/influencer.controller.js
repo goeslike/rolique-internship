@@ -16,46 +16,18 @@ const {
     FOLDER_NAME: { INFLUENCER },
     FOLDER_ASSETS: { INFLUENCER_DELETE }
 } = require('../constants/constants');
+const { ErrorHandler, errorMassages } = require('../errors');
+const { SERVER_ERROR } = require('../constants/response.status.enum');
 
-const helper = async (body) => {
+const getSocialData = async (body) => {
     try {
-        if (body.instagram) {
-            const postsData = await instagramService.getInstagramPostData(body.instagram);
-
-            const postsUrl = [];
-            for (const post of postsData) {
-                if (post.postCarousel) {
-                    const carousel = [];
-                    for (const image of post.postCarousel) {
-                        const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
-                        carousel.push(photo.url);
-                    }
-                    postsUrl.push({ postCarousel: carousel });
-                }
-
-                if (post.postVideo) {
-                    const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
-                    const data = {
-                        image: image.url,
-                        video: post.postVideo.videoUrl
-                    };
-                    postsUrl.push({ postVideo: data });
-                }
-
-                if (post.postImage) {
-                    const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
-                    postsUrl.push({ postImage: photo.url });
-                }
-            }
-            body.instagramPosts = postsUrl;
-        }
-
         if (body.youTube) {
             body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
         }
 
         if (body.twitter) {
-            body.tweets = await twitterService.getTweets(body.twitter);
+            const tweets = await twitterService.getTweets(body.twitter);
+            body.tweets = tweets;
         }
 
         if (body.tikTok) {
@@ -63,8 +35,7 @@ const helper = async (body) => {
         }
         return body;
     } catch (e) {
-        console.log(e);
-        return e;
+        return new ErrorHandler(SERVER_ERROR, errorMassages.SERVER_ERROR.message);
     }
 };
 
@@ -84,49 +55,38 @@ module.exports = {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
                 req.body.avatar = cloudResponse.url;
             }
-            // if (body.instagram) {
-            //     const postsData = await instagramService.getInstagramPostData(body.instagram);
-            //
-            //     const postsUrl = [];
-            //     for (const post of postsData) {
-            //         if (post.postCarousel) {
-            //             const carousel = [];
-            //             for (const image of post.postCarousel) {
-            //                 const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
-            //                 carousel.push(photo.url);
-            //             }
-            //             postsUrl.push({ postCarousel: carousel });
-            //         }
-            //
-            //         if (post.postVideo) {
-            //             const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
-            //             const data = {
-            //                 image: image.url,
-            //                 video: post.postVideo.videoUrl
-            //             };
-            //             postsUrl.push({ postVideo: data });
-            //         }
-            //
-            //         if (post.postImage) {
-            //             const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
-            //             postsUrl.push({ postImage: photo.url });
-            //         }
-            //     }
-            //     req.body.instagramPosts = postsUrl;
-            // }
-            //
-            // if (body.youTube) {
-            //     req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
-            // }
-            //
-            // if (body.twitter) {
-            //     req.body.tweets = await twitterService.getTweets(body.twitter);
-            // }
-            //
-            // if (body.tikTok) {
-            //     req.body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok);
-            // }
-            await helper(body);
+            if (body.instagram) {
+                const postsData = await instagramService.getInstagramPostData(body.instagram);
+
+                const postsUrl = [];
+                for (const post of postsData) {
+                    if (post.postCarousel) {
+                        const carousel = [];
+                        for (const image of post.postCarousel) {
+                            const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
+                            carousel.push(photo.url);
+                        }
+                        postsUrl.push({ postCarousel: carousel });
+                    }
+
+                    if (post.postVideo) {
+                        const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
+                        const data = {
+                            image: image.url,
+                            video: post.postVideo.videoUrl
+                        };
+                        postsUrl.push({ postVideo: data });
+                    }
+
+                    if (post.postImage) {
+                        const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
+                        postsUrl.push({ postImage: photo.url });
+                    }
+                }
+                req.body.instagramPosts = postsUrl;
+            }
+
+            await getSocialData(body);
             await influencerService.createInfluencer(body);
 
             res.status(CREATED)
@@ -175,44 +135,36 @@ module.exports = {
                 await influencerService.updateOne(id, { avatar: cloudResponse.url });
             }
 
-            // if (body.instagram) {
-            //     const postsData = await instagramService.getInstagramPostData(body.instagram);
-            //     const postsUrl = [];
-            //     for (const post of postsData) {
-            //         if (post.postCarousel) {
-            //             const carousel = [];
-            //             for (const image of post.postCarousel) {
-            //                 const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
-            //                 carousel.push(photo.url);
-            //             }
-            //             postsUrl.push({ postCarousel: carousel });
-            //         }
-            //
-            //         if (post.postVideo) {
-            //             const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
-            //             const data = {
-            //                 image: image.url,
-            //                 video: post.postVideo.videoUrl
-            //             };
-            //             postsUrl.push({ postVideo: data });
-            //         }
-            //
-            //         if (post.postImage) {
-            //             const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
-            //             postsUrl.push({ postImage: photo.url });
-            //         }
-            //     }
-            //     req.body.instagramPosts = postsUrl;
-            // }
+            if (body.instagram) {
+                const postsData = await instagramService.getInstagramPostData(body.instagram);
+                const postsUrl = [];
+                for (const post of postsData) {
+                    if (post.postCarousel) {
+                        const carousel = [];
+                        for (const image of post.postCarousel) {
+                            const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
+                            carousel.push(photo.url);
+                        }
+                        postsUrl.push({ postCarousel: carousel });
+                    }
 
-            // if (body.youTube) {
-            //     req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
-            // }
-            //
-            // if (body.twitter) {
-            //     req.body.tweets = await twitterService.getTweets(body.twitter);
-            // }
-            await helper(body);
+                    if (post.postVideo) {
+                        const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
+                        const data = {
+                            image: image.url,
+                            video: post.postVideo.videoUrl
+                        };
+                        postsUrl.push({ postVideo: data });
+                    }
+
+                    if (post.postImage) {
+                        const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
+                        postsUrl.push({ postImage: photo.url });
+                    }
+                }
+                req.body.instagramPosts = postsUrl;
+            }
+            await getSocialData(body);
 
             await influencerService.updateOne(id, { ...req.body });
 
