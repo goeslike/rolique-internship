@@ -16,9 +16,29 @@ const {
     FOLDER_NAME: { INFLUENCER },
     FOLDER_ASSETS: { INFLUENCER_DELETE }
 } = require('../constants/constants');
+const { ErrorHandler, errorMassages } = require('../errors');
+const { SERVER_ERROR } = require('../constants/response.status.enum');
+
+const getSocialData = async (body) => {
+    try {
+        if (body.youTube) {
+            body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
+        }
+
+        if (body.twitter) {
+            body.tweets = await twitterService.getTweets(body.twitter);
+        }
+
+        if (body.tikTok) {
+            body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok);
+        }
+        return body;
+    } catch (e) {
+        return new ErrorHandler(SERVER_ERROR, errorMassages.SERVER_ERROR.message);
+    }
+};
 
 module.exports = {
-    // eslint-disable-next-line complexity
     createInfluencer: async (req, res, next) => {
         try {
             const {
@@ -34,6 +54,7 @@ module.exports = {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
                 req.body.avatar = cloudResponse.url;
             }
+
             if (body.instagram) {
                 const postsData = await instagramService.getInstagramPostData(body.instagram);
 
@@ -65,19 +86,8 @@ module.exports = {
                 req.body.instagramPosts = postsUrl;
             }
 
-            if (body.youTube) {
-                req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
-            }
-
-            if (body.twitter) {
-                req.body.tweets = await twitterService.getTweets(body.twitter);
-            }
-
-            if (body.tikTok) {
-                req.body.tikTokVideos = await tikTokService.getTiktokData(body.tikTok);
-            }
-
-            await influencerService.createInfluencer(req.body);
+            await getSocialData(body);
+            await influencerService.createInfluencer(body);
 
             res.status(CREATED)
                 .json(INFLUENCER_IS_CREATED);
@@ -102,8 +112,6 @@ module.exports = {
         }
     },
 
-    // update in process
-    // eslint-disable-next-line complexity
     updateInfluencer: async (req, res, next) => {
         try {
             const {
@@ -127,6 +135,24 @@ module.exports = {
             }
 
             if (body.instagram) {
+                if (findInfluencer.instagramPosts) {
+                    for (const post of findInfluencer.instagramPosts) {
+                        if (post.postImage) {
+                            await fileService.deleteFile(post.postImage, INFLUENCER_DELETE);
+                        }
+
+                        if (post.postVideo) {
+                            await fileService.deleteFile(post.postVideo.image, INFLUENCER_DELETE);
+                        }
+
+                        if (post.postCarousel) {
+                            for (const image of post.postCarousel) {
+                                await fileService.deleteFile(image, INFLUENCER_DELETE);
+                            }
+                        }
+                    }
+                }
+
                 const postsData = await instagramService.getInstagramPostData(body.instagram);
                 const postsUrl = [];
                 for (const post of postsData) {
@@ -156,14 +182,7 @@ module.exports = {
                 req.body.instagramPosts = postsUrl;
             }
 
-            if (body.youTube) {
-                req.body.youtubeVideos = await youtubeService.getVideoData(body.youTube);
-            }
-
-            if (body.twitter) {
-                req.body.tweets = await twitterService.getTweets(body.twitter);
-            }
-
+            await getSocialData(body);
             await influencerService.updateOne(id, { ...req.body });
 
             res.status(UPDATED)

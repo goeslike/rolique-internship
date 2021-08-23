@@ -30,21 +30,18 @@ const getTweets = async (username) => {
                 switch (include.type) {
                     case 'photo':
                         tweets.push({
-                            id: tweet.id,
                             text: tweet.text,
                             photo: include.url,
                         });
                         break;
                     case 'video':
                         tweets.push({
-                            id: tweet.id,
                             text: tweet.text,
                             video: include.preview_image_url,
                         });
                         break;
                     case 'animated_gif':
                         tweets.push({
-                            id: tweet.id,
                             text: tweet.text,
                             gif: include.preview_image_url,
                         });
@@ -53,7 +50,6 @@ const getTweets = async (username) => {
                 return;
             }
             tweets.push({
-                id: tweet.id,
                 text: tweet.text,
             });
             return 'ok';
