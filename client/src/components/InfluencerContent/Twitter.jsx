@@ -14,7 +14,7 @@ const Twitter = ({tweets, avatar, username, lastName, firstName}) => {
         <Tweets>
             {tweets.map(tweet => {
                 return (
-                    <Tweet key={tweet.id}>
+                    <Tweet key={tweet.text}>
                         <div>
                             <Avatar src={avatar} alt={'avatar'}/>
                         </div>

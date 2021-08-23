@@ -44,11 +44,34 @@ const SearchIcon = styled.img`
   z-index: 1000;
 `;
 
+const MinMaxInput = styled.input`
+  width: 84px;
+  height: 32px;
+  
+  margin: 0 0 16px;
+  padding: 8px 3px 6px 12px;
+  
+  font-weight: 400;
+  font-size: 14px;
+  
+  border: 1px solid rgba(191, 191, 191, 1);
+  border-radius: 6px;
+  
+  &:nth-of-type(1) {
+    margin-right: 16px;
+  }
+  
+  &:nth-of-type(3) {
+    margin-right: 16px;
+  }
+`;
+
 export {
     CompaignsWrapper,
     CompaignsContainer,
     Filters,
     FiltersTitle,
     Search,
-    SearchIcon
+    SearchIcon,
+    MinMaxInput
 };
