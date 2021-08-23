@@ -66,6 +66,35 @@ const MinMaxInput = styled.input`
   }
 `;
 
+const CompaignsTable = styled.table`
+  width: 85%;
+
+  border-spacing: 0;
+`;
+
+const CompaignsTR = styled.tr`
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 0 0 5px 0;
+
+  background-color: #fff;
+
+  & th{
+    padding: 0 0 0 16px;
+    
+    text-align: left;
+
+    font-weight: 400;
+    font-size: 14px;
+
+    color: rgba(0, 0, 0, 0.6);
+  }
+`;
+
 export {
     CompaignsWrapper,
     CompaignsContainer,
@@ -73,5 +102,7 @@ export {
     FiltersTitle,
     Search,
     SearchIcon,
-    MinMaxInput
+    MinMaxInput,
+    CompaignsTable,
+    CompaignsTR
 };

@@ -26,16 +26,17 @@ const InfluencersTR = styled.tr`
   
   margin: 0 0 5px 0;
   
-  text-align: left;
-  
-  font-weight: 400;
-  font-size: 14px;
-
-  color: rgba(0, 0, 0, 0.6);
   background-color: #fff;
   
   & th{
     padding: 0 0 0 16px;
+
+    text-align: left;
+
+    font-weight: 400;
+    font-size: 14px;
+
+    color: rgba(0, 0, 0, 0.6);
   }
 `;
 

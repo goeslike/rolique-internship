@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import searchIcon from '../../assets/search-icon.png';
+import arrowsIcon from '../../assets/compaigns/arrows.png';
 
 import {
     CompaignsWrapper,
@@ -9,7 +10,9 @@ import {
     FiltersTitle,
     Search,
     SearchIcon,
-    MinMaxInput
+    MinMaxInput,
+    CompaignsTable,
+    CompaignsTR
 } from './Compaigns.style';
 
 import ViewHeader from "../Header/ViewHeader";
@@ -60,8 +63,24 @@ const Compaigns = () => {
 
                     <Label>Profit</Label>
                     <MinMaxInput placeholder={'Min'} /> <MinMaxInput placeholder={'Max'} />
-
                 </Filters>
+
+                <CompaignsTable>
+                    <thead style={{marginBottom: '5px'}}>
+                        <CompaignsTR>
+                            <th style={{width: '302px'}}>Compaign Title <img src={arrowsIcon} alt="arrowsIcon"/></th>
+                            <th style={{width: '103px'}}>Brand <img src={arrowsIcon} alt="arrowsIcon"/></th>
+                            <th style={{width: '64px'}}>Start <img src={arrowsIcon} alt="arrowsIcon"/></th>
+                            <th style={{width: '86px'}}>End <img src={arrowsIcon} alt="arrowsIcon"/></th>
+                            <th style={{width: '128px'}}>Status</th>
+                            <th style={{width: '53px'}}>TL</th>
+                            <th style={{width: '82px'}}>Budget <img src={arrowsIcon} alt="arrowsIcon"/></th>
+                            <th style={{width: '90px'}}>Profit <img src={arrowsIcon} alt="arrowsIcon"/></th>
+                            <th style={{width: '28px'}}></th>
+                        </CompaignsTR>
+                    </thead>
+
+                </CompaignsTable>
             </CompaignsContainer>
         </CompaignsWrapper>
     );

@@ -27,7 +27,7 @@ const CreateDropdown = () => {
                         onClick={() => {
                             setIsActive(false);
                         }}>
-                        <Link to={'/compoign/create'}>Compaign</Link>
+                        <Link to={'/compaigns/create'}>Compaign</Link>
                     </CreateDropdownItem>
 
                     <CreateDropdownItem
