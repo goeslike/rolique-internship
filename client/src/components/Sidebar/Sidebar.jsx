@@ -33,7 +33,7 @@ const Sidebar = ({user, compaign, influencer}) => {
                 <img src={influencerIcon} alt='influencerIcon'/>
             </Link>
 
-            <Link onClick={() => logout}>
+            <Link onClick={() => logout()}>
                 <img src={logoutIcon} alt="logoutIcon"/>
             </Link>
         </SidebarContainer>

@@ -50,10 +50,10 @@ const Influencer = () => {
 
                         <InfluencerSocial
                             socialMedia={influencer.socialProfiles}
-                            setShowInstagram={setShowInstagram}
-                            setShowYoutube={setShowYoutube}
-                            setShowTiktok={setShowTiktok}
-                            setShowTwitter={setShowTwitter}
+                            setInstagram={setShowInstagram}
+                            setYoutube={setShowYoutube}
+                            setTiktok={setShowTiktok}
+                            setTwitter={setShowTwitter}
                         />
                     </div>
                 </InfluencerInfo>
