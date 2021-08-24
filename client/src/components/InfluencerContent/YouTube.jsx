@@ -8,7 +8,7 @@ const YouTube = ({videos}) => {
         <Videos>
             {videos.map(video => {
                 return (
-                    <ReactPlayer controls url={video.videoUrl} />
+                    <ReactPlayer height={'550px'} width={'870px'} style={{marginBottom: '60px'}} controls url={video.videoUrl} />
                 );
             })}
         </Videos>

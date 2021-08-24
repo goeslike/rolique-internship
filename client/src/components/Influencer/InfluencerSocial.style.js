@@ -33,7 +33,7 @@ const Instagram = styled.div`
   width: 140px;
   height: 40px;
 
-  margin: 24px 0 0 0;
+  margin: 24px 16px 0 0;
   padding: 4px 8px;
 
   border-radius: 17px;
@@ -41,6 +41,8 @@ const Instagram = styled.div`
   & img {
     margin: 0 7px 0 0;
   }
+  
+  cursor: pointer;
   
   background: radial-gradient(
     114.11% 114.11% at 22.66% 97.97%, 
@@ -54,22 +56,86 @@ const Instagram = styled.div`
 `;
 
 const TikTok = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 140px;
+  height: 40px;
+
+  margin: 24px 16px 0 0;
+  padding: 4px 8px;
+
+  border-radius: 17px;
+
+  & img {
+    margin: 0 7px 0 0;
+  }
+
+  cursor: pointer;
+
   background: #000000;
 `;
 
 const Facebook = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 140px;
+  height: 40px;
+
+  margin: 24px 16px 0 0;
+  padding: 4px 8px;
+
+  border-radius: 17px;
+
+  & img {
+    margin: 0 7px 0 0;
+  }
+
+  cursor: pointer;
+
   background: #415A94;
 `;
 
 const YouTube = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 140px;
+  height: 40px;
+
+  margin: 24px 16px 0 0;
+  padding: 4px 8px;
+
+  border-radius: 17px;
+
+  & img {
+    margin: 0 7px 0 0;
+  }
+
+  cursor: pointer;
+
   background: #C13732;
 `;
 
-const Blog = styled.div`
-  background: #E8934C;
-`;
-
 const Twitter = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 140px;
+  height: 40px;
+
+  margin: 24px 16px 0 0;
+  padding: 4px 8px;
+
+  border-radius: 17px;
+
+  & img {
+    margin: 0 7px 0 0;
+  }
+
+  cursor: pointer;
+
   background: #68ABE7;
 `;
 
@@ -82,6 +148,5 @@ export {
     TikTok,
     Facebook,
     YouTube,
-    Blog,
     Twitter
 };

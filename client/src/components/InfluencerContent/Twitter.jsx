@@ -20,7 +20,7 @@ const Twitter = ({tweets, avatar, username, lastName, firstName}) => {
                         </div>
 
                         <div>
-                            <Name>{firstName + ' ' + lastName}</Name>
+                            <Name>{firstName + ' ' + lastName} </Name>
                             <UserName>@{username}</UserName>
                             <PostText>
                                 {tweet.text}
