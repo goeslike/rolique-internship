@@ -26,7 +26,7 @@ const EditUser = () => {
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
-    const [selected, setSelected] = useState('');
+    const [selected, setSelected] = useState('Manager');
     const [roleRequired, setRoleRequired] = useState(false);
 
     const user = useSelector(({userReducer: {user}}) => user);

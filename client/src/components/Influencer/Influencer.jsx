@@ -58,19 +58,19 @@ const Influencer = () => {
                     </div>
                 </InfluencerInfo>
 
-                <CSSTransition in={showInstagram} classNames={'alert'} timeout={200} unmountOnExit>
+                <CSSTransition in={!!showInstagram} classNames={'alert'} timeout={200} unmountOnExit>
                     <Instagram posts={influencer.instagramPosts}/>
                 </CSSTransition>
 
-                <CSSTransition in={showYoutube} classNames={'alert'} timeout={200} unmountOnExit>
+                <CSSTransition in={!!showYoutube} classNames={'alert'} timeout={200} unmountOnExit>
                     <YouTube videos={influencer.youtubeVideos}/>
                 </CSSTransition>
 
-                <CSSTransition in={showTiktok} classNames={'alert'} timeout={200} unmountOnExit>
+                <CSSTransition in={!!showTiktok} classNames={'alert'} timeout={200} unmountOnExit>
                     <TikTok videos={influencer.tikTokVideos}/>
                 </CSSTransition>
 
-                <CSSTransition in={showTwitter} classNames={'alert'} timeout={200} unmountOnExit>
+                <CSSTransition in={!!showTwitter} classNames={'alert'} timeout={200} unmountOnExit>
                     <Twitter username={influencer.socialProfiles?.twitter?.username}/>
                 </CSSTransition>
 
