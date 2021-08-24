@@ -30,12 +30,12 @@ const InfluencerSocial = ({socialMedia, setInstagram, setYoutube, setTiktok, set
                     }}>
                         <img src={instagramIcon} alt=""/>
                         <InfluencerData>
-                            <InfluencerName>{socialMedia.instagram.username}</InfluencerName>
-                            <InfluencerFollowers>{socialMedia.instagram.followers}</InfluencerFollowers>
+                            <InfluencerName>{socialMedia?.instagram?.username}</InfluencerName>
+                            <InfluencerFollowers>{socialMedia?.instagram?.followers}</InfluencerFollowers>
                         </InfluencerData>
                     </Instagram>
             }
-            {socialMedia.tiktok &&
+            {socialMedia.tikTok &&
                 <TikTok onClick={() => {
                     setInstagram(false)
                     setYoutube(false)
@@ -44,8 +44,8 @@ const InfluencerSocial = ({socialMedia, setInstagram, setYoutube, setTiktok, set
                 }}>
                     <img src={tiktokIcon} alt=""/>
                     <InfluencerData>
-                        <InfluencerName>{socialMedia.tiktok.username}</InfluencerName>
-                        <InfluencerFollowers>{socialMedia.tiktok.followers}</InfluencerFollowers>
+                        <InfluencerName>{socialMedia?.tikTok?.username}</InfluencerName>
+                        <InfluencerFollowers>{socialMedia?.tikTok?.followers}</InfluencerFollowers>
                     </InfluencerData>
                 </TikTok>
             }
@@ -53,8 +53,8 @@ const InfluencerSocial = ({socialMedia, setInstagram, setYoutube, setTiktok, set
                 <Facebook>
                     <img src={facebookIcon} alt=""/>
                     <InfluencerData>
-                        <InfluencerName>{socialMedia.facebook.username}</InfluencerName>
-                        <InfluencerFollowers>{socialMedia.facebook.followers}</InfluencerFollowers>
+                        <InfluencerName>{socialMedia?.facebook?.username}</InfluencerName>
+                        <InfluencerFollowers>{socialMedia?.facebook?.followers}</InfluencerFollowers>
                     </InfluencerData>
                 </Facebook>
             }
@@ -67,8 +67,8 @@ const InfluencerSocial = ({socialMedia, setInstagram, setYoutube, setTiktok, set
                 }}>
                     <img src={youtubeIcon} alt=""/>
                     <InfluencerData>
-                        <InfluencerName>{socialMedia.youTube.username}</InfluencerName>
-                        <InfluencerFollowers>{socialMedia.youTube.followers}</InfluencerFollowers>
+                        <InfluencerName>{socialMedia?.youTube?.username}</InfluencerName>
+                        <InfluencerFollowers>{socialMedia?.youTube?.followers}</InfluencerFollowers>
                     </InfluencerData>
                 </YouTube>
             }
@@ -81,8 +81,8 @@ const InfluencerSocial = ({socialMedia, setInstagram, setYoutube, setTiktok, set
                 }}>
                     <img src={twitterIcon} alt=""/>
                     <InfluencerData>
-                        <InfluencerName>{socialMedia.twitter.username}</InfluencerName>
-                        <InfluencerFollowers>{socialMedia.twitter.followers}</InfluencerFollowers>
+                        <InfluencerName>{socialMedia?.twitter?.username}</InfluencerName>
+                        <InfluencerFollowers>{socialMedia?.twitter?.followers}</InfluencerFollowers>
                     </InfluencerData>
                 </Twitter>
             }

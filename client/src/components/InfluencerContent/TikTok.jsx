@@ -6,8 +6,8 @@ const TikTok = ({videos}) => {
         <Videos>
             {videos.map(video => {
                 return (
-                    <a href={video.video} target={'_blank'} rel='noreferrer' alt={'video-preview'}>
-                        <VideoImg src={video.image} />
+                    <a key={video.video} href={video.video} target={'_blank'} rel='noreferrer'>
+                        <VideoImg src={video.image} alt={'video-preview'}/>
                     </a>
                 );
             })}

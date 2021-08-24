@@ -30,6 +30,8 @@ const Influencers = () => {
     const dispatch = useDispatch();
     const influencers = useSelector(({influencersReducer: {influencers}}) => influencers);
 
+    console.log(influencers);
+
     const [searchName, setSearchName] = useState('');
 
     useEffect(() => {
@@ -95,12 +97,20 @@ const Influencers = () => {
                                         </a>}
 
                                         {influencer.socialProfiles.twitter &&
-                                        <a href={influencer.twitter} target={'_blank'} rel="noreferrer">
+                                        <a
+                                            href={`https://twitter.com/${influencer.socialProfiles?.twitter?.username}`}
+                                            target={'_blank'}
+                                            rel="noreferrer"
+                                        >
                                             <InfluencerSocialIcon src={twitterIcon} alt={'twitterIcon'}/>
                                         </a>}
 
-                                        {influencer.socialProfiles.youtube &&
-                                        <a href={influencer.socialProfiles.youtube} target={'_blank'} rel="noreferrer">
+                                        {influencer.socialProfiles.youTube &&
+                                        <a
+                                            href={`https://www.youtube.com/c/${influencer.socialProfiles?.youTube?.username}`}
+                                            target={'_blank'}
+                                            rel="noreferrer"
+                                        >
                                             <InfluencerSocialIcon src={youtubeIcon} alt={'youtubeIcon'}/>
                                         </a>}
 
@@ -109,8 +119,12 @@ const Influencers = () => {
                                             <InfluencerSocialIcon src={facebookIcon} alt={'facebookIcon'}/>
                                         </a>}
 
-                                        {influencer.socialProfiles.tiktok &&
-                                        <a href={influencer.socialProfiles.tiktok} target={'_blank'} rel="noreferrer">
+                                        {influencer.socialProfiles.tikTok &&
+                                        <a
+                                            href={`https://www.tiktok.com/@${influencer.socialProfiles?.tikTok?.username}`}
+                                            target={'_blank'}
+                                            rel="noreferrer"
+                                        >
                                             <InfluencerSocialIcon src={tiktokIcon} alt={'tiktokIcon'}/>
                                         </a>}
 

@@ -73,7 +73,7 @@ const Influencer = () => {
                 <CSSTransition in={showTwitter} classNames={'alert'} timeout={200} unmountOnExit>
                     <Twitter tweets={influencer.tweets}
                          avatar={influencer.avatar}
-                         username={influencer.socialProfiles.twitter.username}
+                         username={influencer.socialProfiles?.twitter?.username}
                          lastName={influencer.lastName}
                          firstName={influencer.firstName}
                     />
