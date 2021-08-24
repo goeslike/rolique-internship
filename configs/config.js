@@ -29,9 +29,11 @@ module.exports = {
 
     INSTAGRAM_LOGIN: process.env.INSTAGRAM_LOGIN || 'nata.test.dev',
     INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD || '12345qwertyui',
-    TWITTER_BEARER_TOKEN: process.env.TWITTER_BEARER_TOKEN || '',
+    // TWITTER_BEARER_TOKEN: process.env.TWITTER_BEARER_TOKEN || '',
 
     YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY || 'AIzaSyCISScuqwpxYcG-gIcvfWogwMn2qeL2dm4',
     BASE_YOUTUBE_URL: process.env.BASE_YOUTUBE_URL || 'https://www.youtube.com/watch?v=',
-    SESSION_LIST: process.env.SESSION_LIST || 'sid_tt=58ba9e34431774703d3c34e60d584475;'
+    SESSION_LIST: process.env.SESSION_LIST || 'sid_tt=58ba9e34431774703d3c34e60d584475;',
+    // eslint-disable-next-line max-len
+    TWITTER_BEARER_TOKEN: 'AAAAAAAAAAAAAAAAAAAAACsXSwEAAAAA6JGd%2B1KO2Hu0D1DhxB1AFyVrjnI%3DMn6mli3GIU4quO2q3zPlA2chxIEg5uWFociY5gQ4URBZ8ufLBo'
 };
