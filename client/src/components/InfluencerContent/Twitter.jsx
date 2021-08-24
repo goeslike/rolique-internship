@@ -1,37 +1,22 @@
 import React from 'react';
 
-import {
-    Tweets,
-    Tweet,
-    Avatar,
-    Name,
-    UserName,
-    PostText
-} from './Twitter.style';
+import { Tweets } from './Twitter.style';
 
-const Twitter = ({tweets, avatar, username, lastName, firstName}) => {
+import { Timeline } from 'react-twitter-widgets';
+
+const Twitter = ({username}) => {
     return (
         <Tweets>
-            {tweets.map(tweet => {
-                return (
-                    <Tweet key={tweet.text}>
-                        <div>
-                            <Avatar src={avatar} alt={'avatar'}/>
-                        </div>
+            <Timeline
+                dataSource={{
+                    sourceType: 'profile',
+                    screenName: username
+                }}
 
-                        <div>
-                            <Name>{firstName + ' ' + lastName} </Name>
-                            <UserName>@{username}</UserName>
-                            <PostText>
-                                {tweet.text}
-                            </PostText>
-                            {tweet.media &&
-                                <img src={tweet.media.url} alt={'twitter-avatar'}/>
-                            }
-                        </div>
-                    </Tweet>
-                );
-            })}
+                options={{
+                    width: '900'
+                }}
+            />
         </Tweets>
     );
 };
