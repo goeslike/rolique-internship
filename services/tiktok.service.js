@@ -5,7 +5,7 @@ module.exports = {
     getTiktokData: async (username) => {
         try {
             const posts = await tikTokScrapper.user(username, {
-                number: 2,
+                number: 8,
                 sessionList: [SESSION_LIST]
             });
             const tiktokData = posts.collector;
