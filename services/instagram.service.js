@@ -6,6 +6,7 @@ module.exports = {
     getInstagramPostData: async (username) => {
         const accountPosts = [];
         const ig = await instagramApi.getInstagramData();
+        console.log(username);
         const client = await ig.user.searchExact(username);
         if (!client) {
             return accountPosts;
@@ -16,7 +17,7 @@ module.exports = {
         const page = await clientFeed.items();
 
         for (const post of page) {
-            if (accountPosts.length < 6) {
+            if (accountPosts.length < 8) {
                 if (post.carousel_media) {
                     const carouselMedia = [];
                     for (const item of post.carousel_media) {
@@ -47,6 +48,7 @@ module.exports = {
                 }
             }
         }
+        console.log(accountPosts);
         return accountPosts;
     }
 };
