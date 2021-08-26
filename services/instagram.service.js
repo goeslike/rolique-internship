@@ -6,7 +6,6 @@ module.exports = {
     getInstagramPostData: async (username) => {
         const accountPosts = [];
         const ig = await instagramApi.getInstagramData();
-        console.log(username);
         const client = await ig.user.searchExact(username);
         if (!client) {
             return accountPosts;
@@ -48,7 +47,6 @@ module.exports = {
                 }
             }
         }
-        console.log(accountPosts);
         return accountPosts;
     }
 };
