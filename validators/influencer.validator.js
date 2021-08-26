@@ -1,4 +1,14 @@
 const Joi = require('joi');
+const {
+    INSTAGRAM,
+    INSTAGRAM_FOLLOWERS,
+    TIKTOK,
+    TIKTOK_FOLLOWERS,
+    TWITTER,
+    TWITTER_FOLLOWERS,
+    YOUTUBE,
+    YOUTUBE_FOLLOWERS
+} = require('../constants/constants');
 
 module.exports = {
     createInfluencer: Joi.object()
@@ -20,10 +30,6 @@ module.exports = {
                 .max(25),
             instagramFollowers: Joi.string()
                 .empty(''),
-                // .when('instagram', {
-                //     is: true,
-                //     then: Joi.required()
-                // }),
             youTube: Joi.string(),
             youTubeFollowers: Joi.string(),
             facebook: Joi.string()
@@ -42,9 +48,11 @@ module.exports = {
                 .min(3)
                 .max(25),
             blogFollowers: Joi.string(),
-        }),
-        // .and('instagram', 'instagramFollowers')
-        // .and('facebook', 'facebookFollowers'),
+        })
+        .and(INSTAGRAM, INSTAGRAM_FOLLOWERS)
+        .and(TIKTOK, TIKTOK_FOLLOWERS)
+        .and(TWITTER, TWITTER_FOLLOWERS)
+        .and(YOUTUBE, YOUTUBE_FOLLOWERS),
     updateInfluencer: Joi.object()
         .keys({
             avatar: Joi.any(),

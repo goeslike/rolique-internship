@@ -142,7 +142,7 @@ module.exports = {
                         }
 
                         if (post.postVideo) {
-                            await fileService.deleteFile(post.postVideo.image, INFLUENCER_DELETE);
+                            await fileService.deleteFile(post.postVideo.imageVersion, INFLUENCER_DELETE);
                         }
 
                         if (post.postCarousel) {

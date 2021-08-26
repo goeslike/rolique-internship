@@ -32,7 +32,7 @@ const InfluencerSchema = new Schema({
     socialProfiles: {
         type: Map,
         of: new Schema({
-            username: { type: String, required: true },
+            username: { type: String, required: true, unique: true },
             followers: { type: String }
         },
         { _id: false }),
