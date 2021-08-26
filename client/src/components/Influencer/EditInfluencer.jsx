@@ -38,7 +38,7 @@ const EditInfluencer = () => {
         birthdate: influencer.birthdate,
         profession: influencer?.profession,
         instagram: influencer.socialProfiles?.instagram?.username,
-        instagramFollowers: influencer.socialProfiles?.instagram.followers,
+        instagramFollowers: influencer.socialProfiles?.instagram?.followers,
         youTube: influencer.socialProfiles?.youTube?.username,
         youTubeFollowers: influencer.socialProfiles?.youTube?.followers,
         facebook: influencer.socialProfiles?.facebook?.username,
@@ -90,7 +90,7 @@ const EditInfluencer = () => {
 
     return (
         <InfluencerWrapper>
-            <CreateHeader title='Edit Influencer' form='create-influencer'/>
+            <CreateHeader title='Edit Influencer' form='edit-influencer'/>
             <CSSTransition in={updateError} classNames={'alert'} timeout={300} unmountOnExit>
                 <ErrorMessage error={updateError}/>
             </CSSTransition>
