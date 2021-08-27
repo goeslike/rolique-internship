@@ -45,6 +45,7 @@ const createInfluencer = (data) => {
 const updateInfluencer = (id, data) => {
     return async (dispatch) => {
         try {
+            console.log('AAAAAAAAAAAAA')
             await axios.put(BASE_URL + `influencers/${id}`, data);
         } catch (e) {
             dispatch(setUpdateError(e.message));

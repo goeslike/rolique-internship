@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { CSSTransition } from 'react-transition-group';
@@ -25,6 +25,7 @@ import {
 
 const EditInfluencer = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
@@ -70,6 +71,7 @@ const EditInfluencer = () => {
     }, [image]);
 
     const sendData = async (data) => {
+        console.log('bbbbbbbbbbbb')
         const formData = new FormData();
 
         for (let key in data) {
@@ -80,7 +82,7 @@ const EditInfluencer = () => {
                 formData.append(key, data[key]);
             }
         }
-        await updateInfluencer(influencer.id, formData);
+        await dispatch(updateInfluencer(influencer.id, formData));
 
         history.goBack();
 
@@ -90,12 +92,12 @@ const EditInfluencer = () => {
 
     return (
         <InfluencerWrapper>
-            <CreateHeader title='Edit Influencer' form='edit-influencer'/>
+            <CreateHeader title='Edit Influencer' form='update-influencer'/>
             <CSSTransition in={updateError} classNames={'alert'} timeout={300} unmountOnExit>
                 <ErrorMessage error={updateError}/>
             </CSSTransition>
 
-            <form id='edit-influencer' onSubmit={handleSubmit(sendData)} noValidate>
+            <form id='update-influencer' onSubmit={handleSubmit(sendData)} noValidate>
                 <InfluencerContainer>
                     <InfluencerSection>
                         <InfluencerSectionTitle>General</InfluencerSectionTitle>
@@ -181,7 +183,7 @@ const EditInfluencer = () => {
                                 <Label>YouTube</Label>
                                 <SocialInput
                                     {...register('youTube')}
-                                    id='youtube'
+                                    id='youTube'
                                     type='text'
                                     required={errors.youtube}
                                 />
@@ -190,7 +192,7 @@ const EditInfluencer = () => {
                                 <Label>YouTube Followers</Label>
                                 <SocialInput
                                     {...register('youTubeFollowers')}
-                                    id='youtubeFollowers'
+                                    id='youTubeFollowers'
                                     type='number'
                                     required={errors.youtubeFollowers}/>
                             </div>
@@ -220,8 +222,8 @@ const EditInfluencer = () => {
                             <div>
                                 <Label>Tiktok</Label>
                                 <SocialInput
-                                    {...register('tiktok')}
-                                    id='tiktok'
+                                    {...register('tikTok')}
+                                    id='tikTok'
                                     type='text'
                                     required={errors.tiktok}
                                 />
@@ -229,7 +231,7 @@ const EditInfluencer = () => {
                             <div>
                                 <Label>Tiktok Followers</Label>
                                 <SocialInput
-                                    {...register('tiktokFollowers')}
+                                    {...register('tikTokFollowers')}
                                     id='tiktokFollowers'
                                     type='number'
                                     required={errors.tiktokFollowers}/>
