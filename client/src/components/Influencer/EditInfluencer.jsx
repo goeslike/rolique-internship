@@ -44,8 +44,8 @@ const EditInfluencer = () => {
         youTubeFollowers: influencer.socialProfiles?.youTube?.followers,
         facebook: influencer.socialProfiles?.facebook?.username,
         facebookFollowers: influencer.socialProfiles?.facebook?.followers,
-        tiktok: influencer.socialProfiles?.tikTok?.username,
-        tiktokFollowers: influencer.socialProfiles?.tikTok?.followers,
+        tikTok: influencer.socialProfiles?.tikTok?.username,
+        tikTokFollowers: influencer.socialProfiles?.tikTok?.followers,
         twitter: influencer.socialProfiles?.twitter?.username,
         twitterFollowers: influencer.socialProfiles?.twitter?.followers,
         blog: influencer.socialProfiles?.blog?.username,
@@ -71,7 +71,6 @@ const EditInfluencer = () => {
     }, [image]);
 
     const sendData = async (data) => {
-        console.log('bbbbbbbbbbbb')
         const formData = new FormData();
 
         for (let key in data) {
@@ -93,7 +92,7 @@ const EditInfluencer = () => {
     return (
         <InfluencerWrapper>
             <CreateHeader title='Edit Influencer' form='update-influencer'/>
-            <CSSTransition in={updateError} classNames={'alert'} timeout={300} unmountOnExit>
+            <CSSTransition in={!!updateError} classNames={'alert'} timeout={300} unmountOnExit>
                 <ErrorMessage error={updateError}/>
             </CSSTransition>
 
@@ -232,7 +231,7 @@ const EditInfluencer = () => {
                                 <Label>Tiktok Followers</Label>
                                 <SocialInput
                                     {...register('tikTokFollowers')}
-                                    id='tiktokFollowers'
+                                    id='tikTokFollowers'
                                     type='number'
                                     required={errors.tiktokFollowers}/>
                             </div>

@@ -62,7 +62,7 @@ const Instagram = ({posts}) => {
         <Posts>
             {posts.map(post => {
                 return (
-                    <Post key={post.photo}>
+                    <Post key={JSON.stringify(post)}>
                         {setPosts(post)}
                     </Post>
                 );

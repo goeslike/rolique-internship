@@ -18,7 +18,6 @@ const getInfluencer = (id) => {
     return async (dispatch) => {
         try {
             const response = await axios.get(BASE_URL + `influencers/${id}`);
-            console.log(response.data);
             dispatch(setInfluencer(response.data));
         } catch (e) {
             console.log(e);
@@ -43,9 +42,15 @@ const createInfluencer = (data) => {
 };
 
 const updateInfluencer = (id, data) => {
+    const token = localStorage.getItem('accessToken');
+
+    const config = {
+        headers: {Authorization: token}
+    };
+
     return async (dispatch) => {
         try {
-            await axios.put(BASE_URL + `influencers/${id}`, data);
+            await axios.put(BASE_URL + `influencers/${id}`, data, config);
         } catch (e) {
             dispatch(setUpdateError(e.message));
         }

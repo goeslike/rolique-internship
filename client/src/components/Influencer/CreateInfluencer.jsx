@@ -52,8 +52,6 @@ const CreateInfluencer = () => {
         const formData = new FormData();
 
         for (let key in data) {
-            console.log(data[key]);
-
             if (key === 'avatar') {
                 formData.append(key, data[key][0]);
             }

@@ -9,12 +9,12 @@ const createSchema = yup.object().shape({
         .string()
         .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
         .required('Last name is a required field'),
-    profession: yup
-        .string()
-        .required('Profession is a required field'),
     birthdate: yup
         .date()
         .notRequired(),
+    profession: yup
+        .string()
+        .required('Profession is a required field'),
 
     instagram: yup
         .string()
@@ -112,7 +112,6 @@ const createSchema = yup.object().shape({
     ['tikTok', 'tikTokFollowers'],
     ['twitter', 'twitterFollowers'],
     ['blog', 'blogFollowers'],
-
 ]);
 
 export {

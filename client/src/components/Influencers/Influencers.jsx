@@ -30,8 +30,6 @@ const Influencers = () => {
     const dispatch = useDispatch();
     const influencers = useSelector(({influencersReducer: {influencers}}) => influencers);
 
-    console.log(influencers);
-
     const [searchName, setSearchName] = useState('');
 
     useEffect(() => {

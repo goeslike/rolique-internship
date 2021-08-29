@@ -18,8 +18,6 @@ const reducer = (state = initialState, action) => {
         }
 
         case SET_INFLUENCER: {
-            console.log(action.payload);
-
             return {
                 ...state,
                 influencer: action.payload
