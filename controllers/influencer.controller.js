@@ -112,6 +112,7 @@ module.exports = {
         }
     },
 
+    // eslint-disable-next-line complexity
     updateInfluencer: async (req, res, next) => {
         try {
             const {
