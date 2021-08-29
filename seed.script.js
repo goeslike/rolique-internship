@@ -34,7 +34,6 @@ async function seedDB() {
         const collection = client.db(DB_NAME)
             .collection(USER);
 
-        await collection.drop();
         await collection.insertOne(admin);
 
         await client.close();
