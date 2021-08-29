@@ -14,7 +14,6 @@ const Tweets = ({ user }) => {
                     }}
                     options={{
                         width: '700',
-                        // theme: 'dark',
                         tweetLimit: 12,
                         align: 'center'
                     }}
@@ -24,3 +23,27 @@ const Tweets = ({ user }) => {
     };
 
     export default Tweets;
+
+    // to change embedded timeline to embedded tweets it is necessary:
+
+// in src>components>Twitter.jsx>Twitter() :
+// …
+// port { Tweet } from 'react-twitter-widgets';
+//
+// const Twitter = ({tweets}) => {
+//     return (
+//         tweets.map((tweet) =>
+//             <Tweet tweetId={tweet.id} options={{ align: "center" }} />
+//         )
+//     );
+// };
+// …
+
+
+// in src>components>Influencer>Influencer.jsx>Influencer():
+// …
+// <CSSTransition in={!!showTwitter} classNames={'alert'} timeout={200} unmountOnExit>
+//     <Twitter tweets={influencer.tweets}/>
+// </CSSTransition>
+// …
+
