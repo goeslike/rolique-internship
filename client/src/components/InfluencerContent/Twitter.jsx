@@ -14,7 +14,8 @@ const Twitter = ({username}) => {
                 }}
 
                 options={{
-                    width: '900'
+                    width: '700',
+                    tweetLimit: 8,
                 }}
             />
         </Tweets>

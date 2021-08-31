@@ -766,11 +766,72 @@
           "type": "string",
           "example": "http://res.cloudinary.com/nataliia/image/upload/v1628007746/user/h9tyrj6uweygh88oonrb.jpg"
         },
-        "instagramPhotos": {
+        "instagramPosts": {
           "type": "array",
           "example": [
             {
-              "photo": "http://res.cloudinary.com/nataliia/image/upload/v1628098999/influencer/jlkh98wrhyjjq6ssuxt4.jpg"
+              "postCarousel": [
+                "http://res.cloudinary.com/nataliia/image/upload/v1630245056/influencer/q9gadky1rrh5footqmtg.jpg",
+                "http://res.cloudinary.com/nataliia/image/upload/v1630245058/influencer/nhvwykxwsfcjeu8uefgv.jpg",
+                "http://res.cloudinary.com/nataliia/image/upload/v1630245059/influencer/h7rfidjeqwdly7dqhf4e.jpg",
+                "http://res.cloudinary.com/nataliia/image/upload/v1630245060/influencer/awytgbxs3bwtqbxploj5.jpg"
+              ]
+            },
+            {
+              "postImage": "http://res.cloudinary.com/nataliia/image/upload/v1630245061/influencer/btzalmvck2de1yj5gwcg.jpg"
+            },
+            {
+              "image": "http://res.cloudinary.com/nataliia/image/upload/v1630270628/influencer/l167ziwruwqaqmqhd58m.jpg",
+              "video": "https://instagram.fiev9-1.fna.fbcdn.net/v/t50.2886-16/239209629_1153891755021161_4818018969481042754_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InZ0c192b2RfdXJsZ2VuLjcyMC5jbGlwcy5kZWZhdWx0In0&_nc_ht=instagram.fiev9-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=dihxADh0GG0AX_0CFQi&edm=ABmJApABAAAA&vs=17927680732709414_466794374&_nc_vs=HBksFQAYJEdKME1RZzVwMHlwY2RSa0VBRUxiQXMyNUN0MUNicV9FQUFBRhUAAsgBABUAGCRHT3NhT1E3LTBQbWpDVk1CQUpwdjRiX3dQNU1vYnFfRUFBQUYVAgLIAQAoABgAGwGIB3VzZV9vaWwBMBUAACaYooHfx4PSQBUCKAJDMywXQCYhysCDEm8YEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HAA%3D%3D&_nc_rid=b6da8e8837&ccb=7-4&oe=612E3018&oh=fb51e0e97d1ce2fd421d71ae910b67ff&_nc_sid=6136e7"
+            }
+          ]
+        },
+        "youtubeVideos": {
+          "type": "array",
+          "example": [
+            {
+              "title": "CRS-23 Mission",
+              "preview": "https://i.ytimg.com/vi/x-KiDqxAMU0/mqdefault.jpg",
+              "description": "SpaceX is targeting Sunday, August 29 for Falcon 9's launch of Dragon'...",
+              "videoUrl": "https://www.youtube.com/watch?v=x-KiDqxAMU0"
+            },
+            {
+              "title": "SpaceX",
+              "preview": "https://yt3.ggpht.com/ytc/AKedOLT8pkoFKZVd_jjWQES_MgOzl50RdEb7A_ufpkFg...",
+              "description": "SpaceX designs, manufactures and launches the world's most advanced ro...",
+              "videoUrl": "https://www.youtube.com/watch?v=undefined"
+            }
+          ]
+        },
+        "tikTokVideos": {
+          "type": "array",
+          "example": [
+            {
+              "video": "https://v16-web.tiktok.com/video/tos/useast2a/tos-useast2a-pve-0068/e2ac81831cdd40f9a72654c4f96e975c/?a=1988&br=2314&bt=1157&cd=0%7C0%7C1&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&expire=1630290703&ft=9wMeRetI4kag3&l=202108292031360101890720925E3CEB66&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&policy=3&qs=0&rc=M2w3aDo6ZnVnNzMzNzczM0ApNjU3PDYzNTw4Nzo4aGQ6ZGdvMmxocjRnNGNgLS1kMTZzc2M0LWAxM2EuYWNeMTVhYWM6Yw%3D%3D&signature=e0563c7bd4822cf633cb4f0b23eee6a9&tk=0&vl=&vr=",
+              "image": "https://p16-sign-va.tiktokcdn.com/obj/tos-maliva-p-0068/09bd5274e61d4fdda995014ad363f3fc_1629410368?x-expires=1630288800&x-signature=SqfuzcOlIGueK5PCfE6YTFoNvwE%3D"
+            },
+            {
+              "video": "https://v16-web.tiktok.com/video/tos/useast2a/tos-useast2a-ve-0068c004/aba7645db69345d7acb2bc924e67660b/?a=1988&br=3004&bt=1502&cd=0%7C0%7C1&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&expire=1630290720&ft=9wMeRetI4kag3&l=202108292031360101890720925E3CEB66&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&policy=3&qs=0&rc=anNpZmc6Zm48NzMzNzczM0ApZTk2NjM0OWVpNzVoPDY3NWcxYGBucjQwYWNgLS1kMTZzczVeNTE2MTAzMjJeYTZfLjI6Yw%3D%3D&signature=03f31c281d449b60992da151955363e9&tk=0&vl=&vr=",
+              "image": "https://p16-sign-va.tiktokcdn.com/obj/tos-maliva-p-0068/bc85690b7ae147628201ebee16555934_1629394727?x-expires=1630288800&x-signature=pP%2F5akGtRL%2BKrqS6uPGCvA3WU0w%3D"
+            }
+          ]
+        },
+        "tweets" : {
+          "type": "array",
+          "example": [
+            {
+              "id": "1430516308249092096",
+              "text": "Come on, Rogue. ✨ That's right, our most-wanted runway bag is back—and forever-icon #JenniferLopez is here to share the news. Lensed by #JuergenTeller, our new-edition Rogue story begins right now. (Trust us, you don't want to miss this one.) #TheRogueBag https://t.co/fUR6VTiRK3 https://t.co/sXUXEjaRfb",
+              "photo": "https://pbs.twimg.com/media/E9o21sOWEAU5HFE.jpg"
+            },
+            {
+              "id": "1428396513076543490",
+              "text":  "queen things 👑👑👑 https://t.co/69Q0GCT6Mk",
+              "video": "https://pbs.twimg.com/media/E9o21sOWEAU5HFE.jpg"
+            },
+            {
+              "id": "1427760961134338053",
+              "text":  "@patrickdron19 @JLo @jarule Classic throwback! 🙌 https://t.co/5v5VfPW..."
             }
           ]
         },
@@ -787,6 +848,45 @@
                 "followers": {
                   "type": "string",
                   "example": "3500"
+                }
+              }
+            },
+            "youTube": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "youTube.official"
+                },
+                "followers": {
+                  "type": "string",
+                  "example": "50000"
+                }
+              }
+            },
+            "twitter": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "twitter.official"
+                },
+                "followers": {
+                  "type": "string",
+                  "example": "50000"
+                }
+              }
+            },
+            "tikTok": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "tikTok.official"
+                },
+                "followers": {
+                  "type": "string",
+                  "example": "5000"
                 }
               }
             }
