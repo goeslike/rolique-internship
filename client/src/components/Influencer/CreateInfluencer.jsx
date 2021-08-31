@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {useForm} from "react-hook-form";
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { CSSTransition } from 'react-transition-group';
 
@@ -30,12 +29,11 @@ const minDate = new Date('1950-01-01');
 
 const CreateInfluencer = () => {
     const history = useHistory();
-    const dispatch = useDispatch();
+
+    const [error, setError] = useState('');
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
-
-    const createError = useSelector(({errorsReducer: {createError}}) => createError);
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: 'onBlur',
@@ -55,6 +53,8 @@ const CreateInfluencer = () => {
     }, [image]);
 
     const sendData = async (data) => {
+        setError('');
+
         const formData = new FormData();
 
         for (let key in data) {
@@ -62,23 +62,28 @@ const CreateInfluencer = () => {
                 formData.append(key, data[key][0]);
             }
             if (data[key] !== '') {
+                console.log(key, data[key])
                 formData.append(key, data[key]);
             }
         }
-        await dispatch(createInfluencer(formData));
-        if (createError) return;
 
-        history.goBack();
+        const resp = await createInfluencer(formData);
 
-        setPreview(null);
-        reset();
+        if (resp) {
+            setError(resp);
+        } else {
+            history.goBack();
+            setPreview(null);
+
+            reset();
+        }
     };
 
     return (
         <InfluencerWrapper>
             <CreateHeader title='Create Influencer' form='create-influencer'/>
-            <CSSTransition in={!!createError} classNames={'alert'} timeout={300} unmountOnExit>
-                <ErrorMessage error={createError}/>
+            <CSSTransition in={!!error} classNames={'alert'} timeout={300} unmountOnExit>
+                <ErrorMessage error={error}/>
             </CSSTransition>
 
             <form id='create-influencer' onSubmit={handleSubmit(sendData)} noValidate>

@@ -59,6 +59,8 @@ const CreateUser = () => {
     });
 
     const sendData = async (data) => {
+        setError('');
+
         if (!selected) {
             setRoleRequired(true);
             return

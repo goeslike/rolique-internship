@@ -64,6 +64,8 @@ const EditUser = () => {
     }, [image]);
 
     const sendEditData = async (data) => {
+        setError('');
+
         if (!selected) {
             setRoleRequired(true);
             return

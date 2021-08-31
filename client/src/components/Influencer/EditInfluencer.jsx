@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Ifluencer.css';
 import { useForm } from 'react-hook-form';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { CSSTransition } from 'react-transition-group';
@@ -30,13 +30,13 @@ const minDate = new Date('1950-01-01');
 
 const EditInfluencer = () => {
     const history = useHistory();
-    const dispatch = useDispatch();
+
+    const [error, setError] = useState('');
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
 
     const influencer = useSelector(({influencersReducer : {influencer}}) => influencer);
-    const updateError = useSelector(({errorsReducer: {updateError}}) => updateError);
 
     const defaultValues = {
         firstName: influencer.firstName,
@@ -76,6 +76,7 @@ const EditInfluencer = () => {
     }, [image]);
 
     const sendData = async (data) => {
+        setError('');
         const formData = new FormData();
 
         for (let key in data) {
@@ -86,19 +87,23 @@ const EditInfluencer = () => {
                 formData.append(key, data[key]);
             }
         }
-        await dispatch(updateInfluencer(influencer.id, formData));
+        const resp = await updateInfluencer(influencer.id, formData);
 
-        history.goBack();
+        if (resp) {
+            setError(resp);
+        } else {
+            history.goBack();
+            setPreview(null);
 
-        setPreview(null);
-        reset();
+            reset();
+        }
     };
 
     return (
         <InfluencerWrapper>
             <CreateHeader title='Edit Influencer' form='update-influencer'/>
-            <CSSTransition in={!!updateError} classNames={'alert'} timeout={300} unmountOnExit>
-                <ErrorMessage error={updateError}/>
+            <CSSTransition in={!!error} classNames={'alert'} timeout={300} unmountOnExit>
+                <ErrorMessage error={error}/>
             </CSSTransition>
 
             <form id='update-influencer' onSubmit={handleSubmit(sendData)} noValidate>
