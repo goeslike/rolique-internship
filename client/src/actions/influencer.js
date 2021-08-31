@@ -34,6 +34,7 @@ const createInfluencer = (data) => {
         };
 
         try {
+            dispatch(setCreateError(null));
             await axios.post(BASE_URL + 'influencers', data, config);
         } catch (e) {
             dispatch(setCreateError(e.message));
@@ -50,6 +51,7 @@ const updateInfluencer = (id, data) => {
 
     return async (dispatch) => {
         try {
+            dispatch(setUpdateError(null));
             await axios.put(BASE_URL + `influencers/${id}`, data, config);
         } catch (e) {
             dispatch(setUpdateError(e.message));

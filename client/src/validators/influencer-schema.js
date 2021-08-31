@@ -10,8 +10,7 @@ const createSchema = yup.object().shape({
         .matches(/^([^0-9]*)$/, 'Last name should not contain numbers')
         .required('Last name is a required field'),
     birthdate: yup
-        .date()
-        .notRequired(),
+        .date(),
     profession: yup
         .string()
         .required('Profession is a required field'),

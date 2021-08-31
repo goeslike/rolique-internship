@@ -5,9 +5,6 @@ const SocialMediaList = styled.div`
 `;
 
 const InfluencerData = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
   font-weight: 400;
   font-size: 13px;
 
@@ -30,7 +27,8 @@ const Instagram = styled.div`
   display: flex;
   align-items: center;
 
-  width: 140px;
+  min-width: 140px;
+  width: auto;
   height: 40px;
 
   margin: 24px 16px 0 0;

@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { CSSTransition } from 'react-transition-group';
 
+import {DatePickerComponent} from "@syncfusion/ej2-react-calendars";
+
+import './Ifluencer.css';
+
 import { createInfluencer } from '../../actions/influencer';
 
 import ErrorMessage from '../Errors/ErrorMessage';
@@ -21,6 +25,8 @@ import {
 import {FileLabel, HelperText, Input, Label, SocialInput} from "../Inputs/CreateInputs.style";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {createSchema} from "../../validators/influencer-schema";
+
+const minDate = new Date('1950-01-01');
 
 const CreateInfluencer = () => {
     const history = useHistory();
@@ -60,6 +66,7 @@ const CreateInfluencer = () => {
             }
         }
         await dispatch(createInfluencer(formData));
+        if (createError) return;
 
         history.goBack();
 
@@ -70,7 +77,7 @@ const CreateInfluencer = () => {
     return (
         <InfluencerWrapper>
             <CreateHeader title='Create Influencer' form='create-influencer'/>
-            <CSSTransition in={createError} classNames={'alert'} timeout={300} unmountOnExit>
+            <CSSTransition in={!!createError} classNames={'alert'} timeout={300} unmountOnExit>
                 <ErrorMessage error={createError}/>
             </CSSTransition>
 
@@ -80,28 +87,32 @@ const CreateInfluencer = () => {
                         <InfluencerSectionTitle>General</InfluencerSectionTitle>
 
                         <Label>First Name</Label>
-                        {errors?.firstname?.message && <HelperText>{errors?.firstname?.message}</HelperText>}
+                        {errors?.firstName?.message && <HelperText>{errors?.firstName?.message}</HelperText>}
                         <Input
                             {...register('firstName', {required: true})}
                             id='firstName'
                             type='text'
-                            required={errors?.firstname}
+                            required={errors?.firstName}
                         />
 
                         <Label>Last Name</Label>
-                        {errors?.lastname?.message && <HelperText>{errors?.lastname?.message}</HelperText>}
+                        {errors?.lastName?.message && <HelperText>{errors?.lastName?.message}</HelperText>}
                         <Input
                             {...register('lastName', {required: true})}
                             id='lastName'
                             type='text'
-                            required={errors?.lastname}
+                            required={errors?.lastName}
                         />
 
                         <Label>Birthdate</Label>
-                        <Input
-                            {...register('birthdate', {required: true})}
-                            id='birthdate'
-                            type='date'/>
+                        <DatePickerComponent
+                            className={'date'}
+                            placeholder={'dd/mm/yyyy'}
+                            min={minDate}
+                            max={new Date()}
+                            format={'dd-MM-yyyy'}
+                            {...register('birthdate')}
+                        />
 
                         <Label>Profession</Label>
                         {errors?.profession?.message && <HelperText>{errors?.profession?.message}</HelperText>}

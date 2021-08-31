@@ -1,14 +1,19 @@
 import React from 'react';
-import { Videos, VideoImg } from './TikTok.style';
+import playIcon from '../../assets/play.png';
+
+import {Videos, VideoImg, Post, PlayIcon} from './TikTok.style';
 
 const TikTok = ({videos}) => {
     return (
         <Videos>
             {videos.map(video => {
                 return (
-                    <a key={video.video} href={video.video} target={'_blank'} rel='noreferrer'>
-                        <VideoImg src={video.image} alt={'video-preview'}/>
-                    </a>
+                    <Post key={video.video}>
+                        <a href={video.video} target={'_blank'} rel='noreferrer'>
+                            <VideoImg src={video.image} alt={'video-preview'}/>
+                            <PlayIcon src={playIcon} alt="play"/>
+                        </a>
+                    </Post>
                 );
             })}
         </Videos>

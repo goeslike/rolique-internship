@@ -44,6 +44,15 @@ const Influencers = () => {
         history.push(`/influencers/id${id}`);
     };
 
+    const getUsername = (socialProfiles) => {
+        if (socialProfiles?.instagram) return '@' + socialProfiles.instagram.username;
+        if (socialProfiles?.tikTok) return '@' + socialProfiles.tikTok.username;
+        if (socialProfiles?.youTube) return '@' + socialProfiles.youTube.username;
+        if (socialProfiles?.twitter) return '@' + socialProfiles.twitter.username;
+
+        return '—';
+    };
+
     return (
         <InfluencersWrapper>
             <ViewHeader title='Influencers' />
@@ -78,7 +87,7 @@ const Influencers = () => {
                                 <InfluencersTR key={influencer.id}>
                                     <InfluencersTD style={{width: '250px'}}>
                                         {influencer.avatar && <img src={influencer.avatar} alt=''/>}
-                                        {'@' + influencer.socialProfiles?.instagram?.username}
+                                        {getUsername(influencer.socialProfiles)}
                                     </InfluencersTD>
 
                                     <InfluencersTD style={{width: '225px'}}>

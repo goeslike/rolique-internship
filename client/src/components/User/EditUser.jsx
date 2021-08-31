@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 import { CSSTransition } from 'react-transition-group';
 
@@ -14,7 +14,7 @@ import RoleDropdown from '../Dropdown/RoleDropdown';
 import ErrorMessage from '../Errors/ErrorMessage';
 import CreateHeader from "../Header/CreateHeader";
 
-import { updateUser } from '../../actions/user';
+import {updateUser} from '../../actions/user';
 
 import infoIcon from "../../assets/info-icon.png";
 

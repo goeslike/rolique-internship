@@ -4,6 +4,8 @@ import ReactPlayer from 'react-player';
 import {Videos} from './YouTube. style';
 
 const YouTube = ({videos}) => {
+    console.log('V I D E O S', videos)
+
     return (
         <Videos>
             {videos.map(video => {

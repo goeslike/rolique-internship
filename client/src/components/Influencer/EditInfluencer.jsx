@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Ifluencer.css';
 import { useForm } from 'react-hook-form';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -22,6 +23,10 @@ import {
     InfluencerSocial,
     InfluencerWrapper
 } from './CreateInfluencer.style';
+
+import {DatePickerComponent} from "@syncfusion/ej2-react-calendars";
+
+const minDate = new Date('1950-01-01');
 
 const EditInfluencer = () => {
     const history = useHistory();
@@ -120,10 +125,14 @@ const EditInfluencer = () => {
                         />
 
                         <Label>Birthdate</Label>
-                        <Input
-                            {...register('birthdate', {required: true})}
-                            id='birthdate'
-                            type='date' />
+                        <DatePickerComponent
+                            className={'date'}
+                            placeholder={'dd/mm/yyyy'}
+                            min={minDate}
+                            max={new Date()}
+                            format={'dd-MM-yyyy'}
+                            {...register('birthdate')}
+                        />
 
                         <Label>Profession</Label>
                         {errors?.profession?.message && <HelperText>{errors?.profession?.message}</HelperText>}
