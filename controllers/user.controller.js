@@ -26,17 +26,16 @@ module.exports = {
             }
 
             const hashedPassword = await passwordHasher.hash(password);
-            const newUser = await userService.createUser({
-                ...req.body,
-                password: hashedPassword
-            });
-
-            const { _id } = newUser;
 
             if (avatar) {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, USER);
-                await userService.updateOne({ _id }, { avatar: cloudResponse.url });
+                req.body.avatar = cloudResponse.url;
             }
+
+            await userService.createUser({
+                ...req.body,
+                password: hashedPassword
+            });
 
             res.status(statusCode.OK)
                 .json(USER_IS_CREATED);
@@ -90,10 +89,10 @@ module.exports = {
                     await fileService.deleteFile(checkUser.avatar, USER_DELETE);
                 }
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, USER);
-                await userService.updateOne(id, { avatar: cloudResponse.url });
+                req.body.avatar = cloudResponse.url;
             }
 
-            await userService.updateOne(id, { ...body });
+            await userService.updateOne(id, { ...req.body });
 
             res.status(statusCode.OK)
                 .json(USER_IS_UPDATED);
