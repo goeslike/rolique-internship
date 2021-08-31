@@ -1,4 +1,4 @@
-const { passwordHasher } = require('../helpers');
+const { EMPTY_AVATAR_URL } = require('../configs/config');
 const {
     fileService,
     userService
@@ -9,6 +9,7 @@ const {
     USER_IS_CREATED,
     USER_IS_UPDATED
 } = require('../constants/constants');
+const { passwordHasher } = require('../helpers');
 const { statusCode } = require('../constants');
 
 module.exports = {
@@ -22,7 +23,7 @@ module.exports = {
             } = req;
 
             if (!avatar) {
-                req.body.avatar = undefined;
+                req.body.avatar = EMPTY_AVATAR_URL;
             }
 
             const hashedPassword = await passwordHasher.hash(password);
