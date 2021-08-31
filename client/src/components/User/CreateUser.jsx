@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import {CSSTransition} from 'react-transition-group';
@@ -34,14 +33,13 @@ import CreateHeader from '../Header/CreateHeader';
 
 const CreateUser = () => {
     const history = useHistory();
-    const dispatch = useDispatch();
+
+    const [error, setError] = useState('');
 
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
     const [selected, setSelected] = useState('');
     const [roleRequired, setRoleRequired] = useState(false);
-
-    const createError = useSelector(({errorsReducer: {createError}}) => createError);
 
     useEffect(() => {
         if (image) {
@@ -79,12 +77,16 @@ const CreateUser = () => {
 
         formData.append('role', selected.toLowerCase());
 
-        await dispatch(createUser(formData));
+        const resp = await createUser(formData);
 
-        history.goBack();
+        if (resp) {
+            setError(resp);
+        } else {
+            history.goBack();
 
-        setPreview(null);
-        reset();
+            setPreview(null);
+            reset();
+        }
     };
 
     const checkRole = () => {
@@ -104,8 +106,8 @@ const CreateUser = () => {
     return (
         <UserWrapper>
             <CreateHeader title='Create Internal User' form='create-form'/>
-            <CSSTransition in={createError} classNames={'alert'} timeout={300} unmountOnExit>
-                <ErrorMessage error={createError}/>
+            <CSSTransition in={!!error} classNames={'alert'} timeout={300} unmountOnExit>
+                <ErrorMessage error={error}/>
             </CSSTransition>
 
             <form id={'create-form'} onSubmit={handleSubmit(sendData, checkRole)} noValidate>

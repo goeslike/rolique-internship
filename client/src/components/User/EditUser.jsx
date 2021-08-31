@@ -8,7 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import { capitalize } from '@material-ui/core';
 
 import {yupResolver} from "@hookform/resolvers/yup";
-import {createSchema} from "../../validators/user-schema";
+import {updateSchema} from "../../validators/user-schema";
 
 import RoleDropdown from '../Dropdown/RoleDropdown';
 import ErrorMessage from '../Errors/ErrorMessage';
@@ -24,24 +24,26 @@ import {FileLabel, HelperText, Input, Label} from "../Inputs/CreateInputs.style"
 const EditUser = () => {
     const history = useHistory();
 
+    const [error, setError] = useState('');
+
     const [image, setImage] = useState();
     const [preview, setPreview] = useState();
     const [selected, setSelected] = useState('Manager');
     const [roleRequired, setRoleRequired] = useState(false);
 
     const user = useSelector(({userReducer: {user}}) => user);
-    const updateError = useSelector(({errorsReducer: {updateError}}) => updateError);
 
     const defaultValues = {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
         phone: user?.phone,
+        password: ''
     };
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: 'onBlur',
-        resolver: yupResolver(createSchema),
+        resolver: yupResolver(updateSchema),
         defaultValues: defaultValues
     });
 
@@ -80,12 +82,16 @@ const EditUser = () => {
 
         formData.append('role', selected.toLowerCase());
 
-        await updateUser(user.id, formData);
+        const resp = await updateUser(user.id, formData);
 
-        history.goBack();
+        if (resp) {
+            setError(resp);
+        } else {
+            history.goBack();
+            setPreview(null);
 
-        setPreview(null);
-        reset();
+            reset();
+        }
     };
 
     const checkRole = () => {
@@ -105,8 +111,8 @@ const EditUser = () => {
     return (
         <UserWrapper>
             <CreateHeader title='Edit Internal User' buttonText='Save Changes' form='edit-form'/>
-            <CSSTransition in={updateError} classNames={'alert'} timeout={300} unmountOnExit>
-                <ErrorMessage error={updateError}/>
+            <CSSTransition in={!!error} classNames={'alert'} timeout={300} unmountOnExit>
+                <ErrorMessage error={error}/>
             </CSSTransition>
 
             <form id={'edit-form'} onSubmit={handleSubmit(sendEditData, checkRole)} noValidate>
@@ -178,7 +184,7 @@ const EditUser = () => {
                         <Label>Set Password</Label>
                         {errors?.password?.message && <HelperText>{errors?.password?.message}</HelperText>}
                         <Input
-                            {...register('password', {required: true})}
+                            {...register('password')}
                             id='password'
                             type='password'/>
 

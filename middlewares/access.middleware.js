@@ -25,7 +25,6 @@ module.exports = {
                     }
                     break;
             }
-
             next();
         } catch (e) {
             next(e);

@@ -185,7 +185,6 @@ module.exports = {
 
             await getSocialData(body);
             await influencerService.updateOne(id, { ...req.body });
-
             res.status(UPDATED)
                 .json(INFLUENCER_IS_UPDATED);
         } catch (error) {

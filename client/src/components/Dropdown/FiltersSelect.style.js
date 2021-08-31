@@ -25,7 +25,24 @@ const FiltersSelectButton = styled.div`
 
   cursor: pointer;
   border-radius: 6px;
+  
+  & span {
+    display: flex;
+    align-items: center;
+  }
 `;
+
+const SelectedColor = styled.div`
+  width: 10px;
+  height: 10px;
+
+  margin: 0 4px 0 0;
+
+  border-radius: 50%;
+
+  background-color: ${(props) => props.selectedColor};
+`;
+
 
 const FiltersSelectOptions = styled.div`
   width: 100%;
@@ -61,11 +78,38 @@ const FiltersSelectOption = styled.div`
   &:hover {
     background-color: #E5E5E5;  
   }
+  
+  & div {
+    width: 10px;
+    height: 10px;
+
+    margin: 0 4px 0 0;
+
+    border-radius: 50%;
+  }
+  
+  &:nth-child(1) div {
+    border: ${(props) => props.border};
+    background-color: ${(props) => props.firstColor};
+  }
+
+  &:nth-child(2) div {
+    background-color: ${(props) => props.secondColor};
+  }
+
+  &:nth-child(3) div {
+    background-color: ${(props) => props.thirdColor};
+  }
+
+  &:nth-child(4) div {
+    background-color: ${(props) => props.fourthColor};
+  }
 `;
 
 export {
     FiltersSelectWrapper,
     FiltersSelectButton,
     FiltersSelectOptions,
-    FiltersSelectOption
+    FiltersSelectOption,
+    SelectedColor
 };

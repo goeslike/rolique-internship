@@ -152,6 +152,19 @@ const SearchInput = styled.input`
   }
 `;
 
+const CheckBoxLabel = styled.label`
+  width: 16px;
+  height: 16px;
+  
+  margin: 0 12px 0 0;
+  
+  border-radius: 2px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export {
     Input,
     Label,
@@ -160,5 +173,6 @@ export {
     SocialInput,
     SearchInput,
     Search,
-    SearchIcon
+    SearchIcon,
+    CheckBoxLabel
 };

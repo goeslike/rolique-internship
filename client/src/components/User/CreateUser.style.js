@@ -67,6 +67,8 @@ const UserSectionTitle = styled.h3`
       left: -175px;
       
       transition: all .5s linear;
+      
+      z-index: 1001;
     }
     
     &:hover::before {
@@ -78,7 +80,7 @@ const UserSectionTitle = styled.h3`
       top: 120%;
       left: 0;
       
-      z-index: 1000;
+      z-index: 1001;
 
       width: 0;
       height: 0;

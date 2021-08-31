@@ -12,7 +12,6 @@ module.exports = {
             if (error) {
                 throw new ErrorHandler(statusCode.BAD_REQUEST, error.details[0].message);
             }
-
             next();
         } catch (err) {
             next(err);

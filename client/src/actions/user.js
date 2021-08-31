@@ -8,8 +8,9 @@ import {
     setAdmin,
     setEmployee,
     setManager,
-    setUser, setCreateError, setUpdateError
+    setUser
 } from '../redux/action-creators';
+
 import {setUsers} from '../redux/action-creators';
 
 const login = (data) => {
@@ -35,35 +36,31 @@ const login = (data) => {
     };
 };
 
-const createUser = (data) => {
-    return async (dispatch) => {
-        const token = localStorage.getItem('accessToken');
-        const config = {
-            headers: {Authorization: token}
-        };
-
-        try {
-            await axios.post(BASE_URL + 'users', data, config);
-        } catch (e) {
-            dispatch(setCreateError(e.message));
-        }
+const createUser = async (data) => {
+    const token = localStorage.getItem('accessToken');
+    const config = {
+        headers: {Authorization: token}
     };
+
+    try {
+        await axios.post(BASE_URL + 'users', data, config);
+    } catch (e) {
+        return e.message;
+    }
 };
 
-const updateUser = (id, data) => {
-    return async (dispatch) => {
-        const token = localStorage.getItem('accessToken');
+const updateUser = async (id, data) => {
+    const token = localStorage.getItem('accessToken');
 
-        const config = {
-            headers: {Authorization: token}
-        };
-
-        try {
-            await axios.put(BASE_URL + `users/${id}`, data, config);
-        } catch (e) {
-            dispatch(setUpdateError(e.message));
-        }
+    const config = {
+        headers: {Authorization: token}
     };
+
+    try {
+        await axios.put(BASE_URL + `users/${id}`, data, config);
+    } catch (e) {
+        return e.message;
+    }
 };
 
 const getUsers = () => {
