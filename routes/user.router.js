@@ -5,7 +5,8 @@ const {
     accessMiddleware,
     authMiddleware,
     dynamicMiddleware,
-    imageMiddleware
+    imageMiddleware,
+    checkIdValid
 } = require('../middlewares');
 const { userValidator } = require('../validators');
 const {
@@ -34,7 +35,7 @@ router.post('/',
     userController.createUser);
 
 router.put('/:id',
-    // checkIdValid.checkIsRequestIdValid,
+    checkIdValid.checkIsRequestIdValid,
     authMiddleware.checkAccessToken,
     accessMiddleware.checkRole([
         ADMIN,
