@@ -67,7 +67,6 @@ module.exports = {
         try {
             const {
                 params: { id },
-                body,
                 body: { password },
                 avatar
             } = req;
@@ -78,11 +77,7 @@ module.exports = {
             }
 
             if (password) {
-                const hashedPassword = await passwordHasher.hash(password);
-                await userService.updateOne(id, {
-                    ...body,
-                    password: hashedPassword
-                });
+                req.body.password = await passwordHasher.hash(password);
             }
 
             if (avatar) {
