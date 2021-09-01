@@ -1,6 +1,8 @@
+const { EMPTY_AVATAR_URL } = require('../configs/config');
+const { ErrorHandler, errorMassages } = require('../errors');
 const {
-    instagramService,
     fileService,
+    instagramService,
     influencerService,
     youtubeService,
     twitterService,
@@ -16,7 +18,6 @@ const {
     FOLDER_NAME: { INFLUENCER },
     FOLDER_ASSETS: { INFLUENCER_DELETE }
 } = require('../constants/constants');
-const { ErrorHandler, errorMassages } = require('../errors');
 const { SERVER_ERROR } = require('../constants/response.status.enum');
 
 const getSocialData = async (body) => {
@@ -47,7 +48,7 @@ module.exports = {
             } = req;
 
             if (!avatar) {
-                req.body.avatar = undefined;
+                req.body.avatar = EMPTY_AVATAR_URL;
             }
 
             if (avatar) {
@@ -132,7 +133,7 @@ module.exports = {
                     await fileService.deleteFile(findInfluencer.avatar, INFLUENCER_DELETE);
                 }
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
-                await influencerService.updateOne(id, { avatar: cloudResponse.url });
+                req.body.avatar = cloudResponse.url;
             }
 
             if (body.instagram) {
@@ -185,6 +186,7 @@ module.exports = {
 
             await getSocialData(body);
             await influencerService.updateOne(id, { ...req.body });
+
             res.status(UPDATED)
                 .json(INFLUENCER_IS_UPDATED);
         } catch (error) {

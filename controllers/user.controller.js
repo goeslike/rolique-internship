@@ -1,4 +1,4 @@
-const { passwordHasher } = require('../helpers');
+const { EMPTY_AVATAR_URL } = require('../configs/config');
 const {
     fileService,
     userService
@@ -9,6 +9,7 @@ const {
     USER_IS_CREATED,
     USER_IS_UPDATED
 } = require('../constants/constants');
+const { passwordHasher } = require('../helpers');
 const { statusCode } = require('../constants');
 
 module.exports = {
@@ -22,21 +23,20 @@ module.exports = {
             } = req;
 
             if (!avatar) {
-                req.body.avatar = undefined;
+                req.body.avatar = EMPTY_AVATAR_URL;
             }
 
             const hashedPassword = await passwordHasher.hash(password);
-            const newUser = await userService.createUser({
-                ...req.body,
-                password: hashedPassword
-            });
-
-            const { _id } = newUser;
 
             if (avatar) {
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, USER);
-                await userService.updateOne({ _id }, { avatar: cloudResponse.url });
+                req.body.avatar = cloudResponse.url;
             }
+
+            await userService.createUser({
+                ...req.body,
+                password: hashedPassword
+            });
 
             res.status(statusCode.OK)
                 .json(USER_IS_CREATED);
@@ -90,10 +90,10 @@ module.exports = {
                     await fileService.deleteFile(checkUser.avatar, USER_DELETE);
                 }
                 const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, USER);
-                await userService.updateOne(id, { avatar: cloudResponse.url });
+                req.body.avatar = cloudResponse.url;
             }
 
-            await userService.updateOne(id, { ...body });
+            await userService.updateOne(id, { ...req.body });
 
             res.status(statusCode.OK)
                 .json(USER_IS_UPDATED);

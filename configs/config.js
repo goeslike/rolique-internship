@@ -35,5 +35,6 @@ module.exports = {
 
     SESSION_LIST: process.env.SESSION_LIST || 'sid_tt=58ba9e34431774703d3c34e60d584475;',
     // eslint-disable-next-line max-len
-    TWITTER_BEARER_TOKEN: 'AAAAAAAAAAAAAAAAAAAAACsXSwEAAAAA6JGd%2B1KO2Hu0D1DhxB1AFyVrjnI%3DMn6mli3GIU4quO2q3zPlA2chxIEg5uWFociY5gQ4URBZ8ufLBo'
+    TWITTER_BEARER_TOKEN: 'AAAAAAAAAAAAAAAAAAAAACsXSwEAAAAA6JGd%2B1KO2Hu0D1DhxB1AFyVrjnI%3DMn6mli3GIU4quO2q3zPlA2chxIEg5uWFociY5gQ4URBZ8ufLBo',
+    EMPTY_AVATAR_URL: process.env.EMPTY_AVATAR_URL || 'https://res.cloudinary.com/nataliia/image/upload/v1630476354/config/unnamed_ao7ivd.png'
 };
