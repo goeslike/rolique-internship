@@ -78,10 +78,9 @@ const Influencers = () => {
                             if (searchName === '') {
                                 return influencer
                             }
-                            if (influencer.socialProfiles?.instagram?.username.toLowerCase().includes(searchName.toLowerCase())) {
+                            if (getUsername(influencer.socialProfiles).toLowerCase().includes(searchName.toLowerCase())) {
                                 return influencer
                             }
-                            return influencer
                         }).map(influencer => {
                             return (
                                 <InfluencersTR key={influencer.id}>
