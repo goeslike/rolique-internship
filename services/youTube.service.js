@@ -10,18 +10,19 @@ module.exports = {
             key: YOUTUBE_API_KEY,
             part: 'snippet',
             q: username,
-            maxResults: 12,
+            maxResults: 13,
         });
 
         const { items } = response.data;
         const videoData = [];
         items.map((item) => {
-            videoData.push({
-                title: item.snippet.title,
-                preview: item.snippet.thumbnails.medium.url,
-                description: item.snippet.description,
-                videoUrl: `${BASE_YOUTUBE_URL}${item.id.videoId}`
-            });
+            if (item.id.videoId) {
+                videoData.push({
+                    title: item.snippet.title,
+                    preview: item.snippet.thumbnails.medium.url,
+                    videoUrl: `${BASE_YOUTUBE_URL}${item.id.videoId}`
+                });
+            }
         });
         return videoData;
     }
