@@ -23,6 +23,9 @@ import InfluencerSocial from './InfluencerSocial';
 const Influencer = () => {
     const influencer = useSelector(({influencersReducer : {influencer}}) => influencer);
 
+    const birthdate = [...influencer.birthdate];
+    birthdate.slice(9, 23);
+
     const [showInstagram, setShowInstagram] = useState(true);
     const [showYoutube, setShowYoutube] = useState(false);
     const [showTiktok, setShowTiktok] = useState(false);
@@ -34,13 +37,13 @@ const Influencer = () => {
 
             <InfluencerContainer>
                 <InfluencerInfo>
-                    <InfluencerAvatar src={influencer.avatar} alt={'influencer avatar'}/>
+                    {influencer.avatar && <InfluencerAvatar src={influencer.avatar} alt={'influencer avatar'}/>}
 
                     <div>
                         <InfluencerName>{influencer.firstName + ' ' + influencer.lastName}</InfluencerName>
                         <InfluencerData>
                             <div>Birthday:</div>
-                            <div>{influencer.birthdate}</div>
+                            <div>{birthdate.slice(0, 10)}</div>
                         </InfluencerData>
 
                         <InfluencerData>

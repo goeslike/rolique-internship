@@ -29,10 +29,12 @@ const InfluencerHeader = ({title, id}) => {
                 {title}
             </HeaderTitle>
             <div style={{display: 'flex'}}>
-                <EditButton onClick={openEditPage}>
-                    <img src={editIcon} alt="editIcon"/>
-                    Edit
-                </EditButton>
+                {!employeeAccess &&
+                    <EditButton onClick={openEditPage}>
+                        <img src={editIcon} alt="editIcon"/>
+                        Edit
+                    </EditButton>
+                }
                 {!employeeAccess && <CreateDropdown />}
             </div>
         </Header>
