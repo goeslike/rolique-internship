@@ -136,7 +136,9 @@ module.exports = {
                 req.body.avatar = cloudResponse.url;
             }
 
-            if (body.instagram) {
+            const instagramAccount = findInfluencer.socialProfiles.get('instagram');
+
+            if (body.instagram && body.instagram !== instagramAccount.username) {
                 if (findInfluencer.instagramPosts) {
                     for (const post of findInfluencer.instagramPosts) {
                         if (post.postImage) {
@@ -144,7 +146,7 @@ module.exports = {
                         }
 
                         if (post.postVideo) {
-                            await fileService.deleteFile(post.postVideo.imageVersion, INFLUENCER_DELETE);
+                            await fileService.deleteFile(post.postVideo.image, INFLUENCER_DELETE);
                         }
 
                         if (post.postCarousel) {
@@ -184,7 +186,8 @@ module.exports = {
                 req.body.instagramPosts = postsUrl;
             }
 
-            await getSocialData(body);
+            await getSocialData(req.body);
+
             await influencerService.updateOne(id, { ...req.body });
 
             res.status(UPDATED)
