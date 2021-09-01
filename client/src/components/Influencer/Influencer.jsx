@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
@@ -23,6 +23,8 @@ import InfluencerSocial from './InfluencerSocial';
 const Influencer = () => {
     const influencer = useSelector(({influencersReducer : {influencer}}) => influencer);
 
+    console.log(influencer)
+
     const birthdate = [...influencer.birthdate];
     birthdate.slice(9, 23);
 
@@ -30,6 +32,23 @@ const Influencer = () => {
     const [showYoutube, setShowYoutube] = useState(false);
     const [showTiktok, setShowTiktok] = useState(false);
     const [showTwitter, setShowTwitter] = useState(false);
+
+    useEffect(() => {
+        if (!influencer.socialProfiles.instagramPosts && influencer.socialProfiles.tikTok) {
+            setShowTiktok(true);
+            return;
+        }
+
+        if (!influencer.socialProfiles.instagram && influencer.socialProfiles.youTube) {
+            setShowYoutube(true);
+            return;
+        }
+
+        if (!influencer.socialProfiles.instagramPosts && !influencer.socialProfiles.twitter) {
+            setShowTwitter(true);
+            return;
+        }
+    }, []);
 
     return (
         <InfluencerWrapper>

@@ -76,7 +76,6 @@ const EditInfluencer = () => {
     }, [image]);
 
     const sendData = async (data) => {
-        setError('');
         const formData = new FormData();
 
         for (let key in data) {
