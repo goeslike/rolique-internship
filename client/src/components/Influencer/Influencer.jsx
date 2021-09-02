@@ -23,8 +23,6 @@ import InfluencerSocial from './InfluencerSocial';
 const Influencer = () => {
     const influencer = useSelector(({influencersReducer : {influencer}}) => influencer);
 
-    console.log(influencer)
-
     const birthdate = [...influencer.birthdate];
     birthdate.slice(9, 23);
 
@@ -34,7 +32,7 @@ const Influencer = () => {
     const [showTwitter, setShowTwitter] = useState(false);
 
     useEffect(() => {
-        if (!influencer.socialProfiles.instagramPosts && influencer.socialProfiles.tikTok) {
+        if (!influencer.socialProfiles.instagram && influencer.socialProfiles.tikTok) {
             setShowTiktok(true);
             return;
         }
@@ -44,11 +42,16 @@ const Influencer = () => {
             return;
         }
 
-        if (!influencer.socialProfiles.instagramPosts && !influencer.socialProfiles.twitter) {
+        if (!influencer.socialProfiles.instagram && !influencer.socialProfiles.twitter) {
             setShowTwitter(true);
             return;
         }
-    }, []);
+    }, [
+        influencer.socialProfiles.instagram,
+        influencer.socialProfiles.tikTok,
+        influencer.socialProfiles.youTube,
+        influencer.socialProfiles.twitter
+    ]);
 
     return (
         <InfluencerWrapper>
