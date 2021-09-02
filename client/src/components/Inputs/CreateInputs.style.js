@@ -165,6 +165,63 @@ const CheckBoxLabel = styled.label`
   align-items: center;
 `;
 
+const Switch = styled.label`
+  position: relative;
+
+  width: 44px;
+  height: 24px;
+  
+  margin: 0 28px 0 0;
+  
+  display: inline-block;
+
+  & input:checked + span {
+    background-color: rgba(255, 101, 14, 1);
+  }
+
+  & input:checked + span:before {
+    transform: translateX(18px);
+  }
+`;
+
+const SwitchCheckbox = styled.input`
+  display: none;
+`;
+
+const SwitchSlider = styled.span`
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(144, 152, 161, 1);
+
+  cursor: pointer;
+
+  border-radius: 16px;
+
+  transition: .4s;
+  
+  &:before {
+    position: absolute;
+    content: "";
+
+    width: 18px;
+    height: 18px;
+
+    left: 4px;
+    bottom: 3px;
+
+    background-color: rgba(255, 255, 255, 1);
+
+    border-radius: 50%;
+
+    transition: .4s;
+  }
+`;
+
 export {
     Input,
     Label,
@@ -174,5 +231,8 @@ export {
     SearchInput,
     Search,
     SearchIcon,
-    CheckBoxLabel
+    CheckBoxLabel,
+    Switch,
+    SwitchCheckbox,
+    SwitchSlider
 };
