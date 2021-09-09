@@ -57,34 +57,7 @@ module.exports = {
             }
 
             if (body.instagram) {
-                const postsData = await instagramService.getInstagramPostData(body.instagram);
-
-                const postsUrl = [];
-                for (const post of postsData) {
-                    if (post.postCarousel) {
-                        const carousel = [];
-                        for (const image of post.postCarousel) {
-                            const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
-                            carousel.push(photo.url);
-                        }
-                        postsUrl.push({ postCarousel: carousel });
-                    }
-
-                    if (post.postVideo) {
-                        const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
-                        const data = {
-                            image: image.url,
-                            video: post.postVideo.videoUrl
-                        };
-                        postsUrl.push({ postVideo: data });
-                    }
-
-                    if (post.postImage) {
-                        const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
-                        postsUrl.push({ postImage: photo.url });
-                    }
-                }
-                req.body.instagramPosts = postsUrl;
+                req.body.instagramPosts = await instagramService.getInstagramPostData(body.instagram);
             }
 
             await getSocialData(body);
@@ -113,7 +86,6 @@ module.exports = {
         }
     },
 
-    // eslint-disable-next-line complexity
     updateInfluencer: async (req, res, next) => {
         try {
             const {
@@ -157,33 +129,7 @@ module.exports = {
                     }
                 }
 
-                const postsData = await instagramService.getInstagramPostData(body.instagram);
-                const postsUrl = [];
-                for (const post of postsData) {
-                    if (post.postCarousel) {
-                        const carousel = [];
-                        for (const image of post.postCarousel) {
-                            const photo = await fileService.uploadBinaryFile(image, INFLUENCER);
-                            carousel.push(photo.url);
-                        }
-                        postsUrl.push({ postCarousel: carousel });
-                    }
-
-                    if (post.postVideo) {
-                        const image = await fileService.uploadBinaryFile(post.postVideo.imageVersion, INFLUENCER);
-                        const data = {
-                            image: image.url,
-                            video: post.postVideo.videoUrl
-                        };
-                        postsUrl.push({ postVideo: data });
-                    }
-
-                    if (post.postImage) {
-                        const photo = await fileService.uploadBinaryFile(post.postImage, INFLUENCER);
-                        postsUrl.push({ postImage: photo.url });
-                    }
-                }
-                req.body.instagramPosts = postsUrl;
+                req.body.instagramPosts = await instagramService.getInstagramPostData(body.instagram);
             }
 
             await getSocialData(req.body);

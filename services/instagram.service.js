@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 
 const { instagramApi } = require('../helpers');
+const { uploadBinaryFile } = require('./file.service');
 
 module.exports = {
     getInstagramPostData: async (username) => {
@@ -21,27 +22,30 @@ module.exports = {
                     const carouselMedia = [];
                     for (const item of post.carousel_media) {
                         const promise = fetch(item.image_versions2.candidates[0].url)
-                            .then((data) => data.blob());
-                        const image = await promise;
-                        carouselMedia.push(image);
+                            .then((data) => data.blob())
+                            .then((image) => uploadBinaryFile(image, 'influencer'));
+                        const photo = await promise;
+                        carouselMedia.push(photo.url);
                     }
                     accountPosts.push({ postCarousel: carouselMedia });
                 }
 
                 if (post.image_versions2 && !post.video_versions) {
                     const promise = fetch(post.image_versions2.candidates[0].url)
-                        .then((data) => data.blob());
-                    const image = await promise;
-                    accountPosts.push({ postImage: image });
+                        .then((data) => data.blob())
+                        .then((image) => uploadBinaryFile(image, 'influencer'));
+                    const photo = await promise;
+                    accountPosts.push({ postImage: photo.url });
                 }
 
                 if (post.video_versions) {
                     const promise = fetch(post.image_versions2.candidates[0].url)
-                        .then((data) => data.blob());
-                    const image = await promise;
+                        .then((data) => data.blob())
+                        .then((image) => uploadBinaryFile(image, 'influencer'));
+                    const photo = await promise;
                     const videoData = {
-                        imageVersion: image,
-                        videoUrl: post.video_versions[0].url
+                        image: photo.url,
+                        video: post.video_versions[0].url
                     };
                     accountPosts.push({ postVideo: videoData });
                 }
