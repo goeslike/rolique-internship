@@ -1,40 +1,39 @@
 module.exports = {
     PORT: process.env.PORT || 3000,
-    SENTRY_DSN: process.env.SENTRY_DSN || 'https://0644e63b2e03416fa2c2f755ad4f2c8c@o926642.ingest.sentry.io/5876207',
-    URL_ATLAS: process.env.URL_ATLAS || 'mongodb+srv://admin_test:admin@testproject.v6ryu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    SENTRY_DSN: process.env.SENTRY_DSN,
+    URL_ATLAS: process.env.URL_ATLAS,
 
-    JWT_SECRET: process.env.JWT_SECRET || 'SECRET',
-    JWT_SECRET_LIFETIME: process.env.JWT_SECRET_LIFETIME || '1d',
-    JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'REFRESH_SECRET',
-    JWT_REFRESH_SECRET_LIFETIME: process.env.JWT_REFRESH_SECRET_LIFETIME || '30d',
+    JWT_SECRET: process.env.JWT_SECRET,
+    JWT_SECRET_LIFETIME: process.env.JWT_SECRET_LIFETIME,
+    JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
+    JWT_REFRESH_SECRET_LIFETIME: process.env.JWT_REFRESH_SECRET_LIFETIME,
 
-    INTERN_USER_ROLE: process.env.INTERN_USER_ROLE || 'admin',
-    INTERN_USER_FIRST_NAME: process.env.INTERN_USER_FIRST_NAME || 'Admin',
-    INTERN_USER_LAST_NAME: process.env.INTERN_USER_LAST_NAME || 'Rolique',
-    INTERN_USER_EMAIL: process.env.INTERN_USER_EMAIL || 'admin@rolique.io',
-    INTERN_USER_PASSWORD: process.env.INTERN_USER_PASSWORD || 'p@aS$ww0rD',
+    INTERN_USER_ROLE: 'admin',
+    INTERN_USER_FIRST_NAME: 'Admin',
+    INTERN_USER_LAST_NAME: 'Rolique',
+    INTERN_USER_EMAIL: process.env.INTERN_USER_EMAIL,
+    INTERN_USER_PASSWORD: process.env.INTERN_USER_PASSWORD,
 
-    ALLOWED_ORIGIN: process.env.ALLOWED_ORIGIN || 'http://localhost:4200;http://localhost:3000',
-    ALLOWED_METHODS: process.env.ALLOWED_METHODS || 'GET;POST;PUT;DELETE',
+    ALLOWED_ORIGIN: process.env.ALLOWED_ORIGIN,
+    ALLOWED_METHODS: 'GET;POST;PUT;DELETE',
 
     SERVER_RATE_LIMITS: {
         period: 15 * 60 * 1000, // 15 minutes
         maxRequests: 10000
     },
 
-    CLOUDINARY_URL: process.env.CLOUDINARY_URL || 'cloudinary://112271864237133:kYVdgdr_Lb0u2NY11GiDRvcwrmc@nataliia',
-    CLOUD_NAME: process.env.CLOUD_NAME || 'nataliia',
-    API_KEY_CLOUD: process.env.API_KEY_CLOUD || '112271864237133',
-    API_SECRET_CLOUD: process.env.API_SECRET_CLOUD || 'kYVdgdr_Lb0u2NY11GiDRvcwrmc',
+    CLOUDINARY_URL: process.env.CLOUDINARY_URL,
+    CLOUD_NAME: process.env.CLOUD_NAME,
+    API_KEY_CLOUD: process.env.API_KEY_CLOUD,
+    API_SECRET_CLOUD: process.env.API_SECRET_CLOUD,
 
-    INSTAGRAM_LOGIN: process.env.INSTAGRAM_LOGIN || 'nata.test.dev',
-    INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD || '12345qwertyui',
+    INSTAGRAM_LOGIN: process.env.INSTAGRAM_LOGIN,
+    INSTAGRAM_PASSWORD: process.env.INSTAGRAM_PASSWORD,
 
-    YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY || 'AIzaSyCISScuqwpxYcG-gIcvfWogwMn2qeL2dm4',
-    BASE_YOUTUBE_URL: process.env.BASE_YOUTUBE_URL || 'https://www.youtube.com/watch?v=',
+    YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
+    BASE_YOUTUBE_URL: process.env.BASE_YOUTUBE_URL,
 
-    SESSION_LIST: process.env.SESSION_LIST || 'sid_tt=58ba9e34431774703d3c34e60d584475;',
-    // eslint-disable-next-line max-len
-    TWITTER_BEARER_TOKEN: 'AAAAAAAAAAAAAAAAAAAAACsXSwEAAAAA6JGd%2B1KO2Hu0D1DhxB1AFyVrjnI%3DMn6mli3GIU4quO2q3zPlA2chxIEg5uWFociY5gQ4URBZ8ufLBo',
-    EMPTY_AVATAR_URL: process.env.EMPTY_AVATAR_URL || 'https://res.cloudinary.com/nataliia/image/upload/v1630476354/config/unnamed_ao7ivd.png'
+    SESSION_LIST: process.env.SESSION_LIST,
+    TWITTER_BEARER_TOKEN: process.env.TWITTER_BEARER_TOKEN,
+    EMPTY_AVATAR_URL: process.env.EMPTY_AVATAR_URL
 };
