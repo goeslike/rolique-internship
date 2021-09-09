@@ -14,7 +14,6 @@ module.exports = {
                 return next(new ErrorHandler(statusCode.BAD_REQUEST, errorMassages.RECORD_NOT_FOUND));
             }
 
-            req.influencer = influencer;
             next();
         } catch (e) {
             next(e);

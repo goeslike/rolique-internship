@@ -57,8 +57,8 @@ module.exports = {
         }
     },
 
-    getUserById: (req, res) => {
-        const { user } = req;
+    getUserById: async (req, res) => {
+        const user = await userService.findOneByParams({ _id: req.params.id });
 
         res.json(user);
     },

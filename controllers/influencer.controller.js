@@ -97,8 +97,8 @@ module.exports = {
         }
     },
 
-    getInfluencerById: (req, res) => {
-        const { influencer } = req;
+    getInfluencerById: async (req, res) => {
+        const influencer = await influencerService.findOneByParams({ _id: req.params.id });
 
         res.json(influencer);
     },

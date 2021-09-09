@@ -19,7 +19,6 @@ router.get('/',
 
 router.get('/:id',
     authMiddleware.checkAccessToken,
-    dynamicMiddleware.checkIsUserDataExist('id', 'params', '_id'),
     userController.getUserById);
 
 router.post('/',
