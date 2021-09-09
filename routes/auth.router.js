@@ -6,7 +6,6 @@ const { authValidator } = require('../validators');
 
 router.post('/login',
     dynamicMiddleware.checkIsBodyDataValid(authValidator.login),
-    dynamicMiddleware.checkIsUserDataExist('email'),
     authController.authUser);
 
 router.post('/refresh', authMiddleware.checkRefreshToken, authController.refreshToken);
