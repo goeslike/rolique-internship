@@ -11,7 +11,7 @@ const {
     }
 } = require('./configs');
 const { passwordHasher } = require('./helpers');
-const { dataBaseTablesEnum: { USER, DB_NAME } } = require('./constants');
+const { USER, DB_NAME } = require('./constants/dataBase.tables.enums');
 
 async function seedDB() {
     const client = new MongoClient(URL_ATLAS, {
@@ -34,6 +34,7 @@ async function seedDB() {
         const collection = client.db(DB_NAME)
             .collection(USER);
 
+        await collection.drop();
         await collection.insertOne(admin);
 
         await client.close();
