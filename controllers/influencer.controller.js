@@ -42,17 +42,16 @@ const getSocialData = async (body) => {
 module.exports = {
     createInfluencer: async (req, res, next) => {
         try {
-            const {
-                avatar,
-                body
-            } = req;
+            const { body } = req;
+
+            const avatar = Object.values(req.files);
 
             if (!avatar) {
                 req.body.avatar = EMPTY_AVATAR_URL;
             }
 
             if (avatar) {
-                const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
+                const cloudResponse = await fileService.uploadFile(avatar[0].tempFilePath, INFLUENCER);
                 req.body.avatar = cloudResponse.url;
             }
 
@@ -91,9 +90,9 @@ module.exports = {
             const {
                 params: { id },
                 body,
-                avatar
             } = req;
 
+            const avatar = Object.values(req.files)
             const findInfluencer = await influencerService.findOneByParams({ _id: id });
 
             if (!avatar) {
@@ -104,7 +103,7 @@ module.exports = {
                 if (findInfluencer.avatar) {
                     await fileService.deleteFile(findInfluencer.avatar, INFLUENCER_DELETE);
                 }
-                const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, INFLUENCER);
+                const cloudResponse = await fileService.uploadFile(avatar[0].tempFilePath, INFLUENCER);
                 req.body.avatar = cloudResponse.url;
             }
 

@@ -29,7 +29,6 @@ router.post('/',
     ], CREATE),
     accessMiddleware.isManager,
     imageMiddleware.checkImage,
-    imageMiddleware.checkAvatar,
     dynamicMiddleware.checkIsBodyDataValid(userValidator.createUser),
     userController.createUser);
 
@@ -44,7 +43,6 @@ router.put('/:id',
     accessMiddleware.isManager,
     dynamicMiddleware.checkIsBodyDataValid(userValidator.updateUser),
     imageMiddleware.checkImage,
-    imageMiddleware.checkAvatar,
     userController.updateUser);
 
 module.exports = router;

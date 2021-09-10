@@ -1,47 +1,48 @@
 module.exports = {
     RECORD_NOT_FOUND: {
-        message: 'Record not found',
-    },
-    NOT_EXIST_USER_WITH_SUCH_TOKEN: {
+        message: 'Record not found'
     },
     BAD_REQUEST: {
-        message: 'Body has not valid value',
+        message: 'Body has not valid value'
     },
     WRONG_EMAIL_OR_PASSWORD: {
-        message: 'Wrong email or password',
+        message: 'Wrong email or password'
     },
     TOKEN_IS_REQUIRED: {
-        message: 'Token is required',
+        message: 'Token is required'
     },
     LARGE_FILE_SIZE: {
-        message: (name) => `File ${name} is too big`,
+        message: (name) => `File ${name} is too big`
+    },
+    WRONG_FILE_FORMAT: {
+        message: 'Wrong file format. Allowed only .jpeg and .png'
     },
     AVATAR_ERROR: {
-        massages: 'Choose only one photo for avatar',
+        massages: 'Choose only one photo for avatar'
     },
     BAD_REQUEST_ID: {
-        message: 'Param ID has not valid value',
+        message: 'Param ID has not valid value'
     },
     USER_ALREADY_REGISTERED: {
-        message: 'User is already registered',
+        message: 'User is already registered'
     },
     NOT_VALID_TOKEN: {
-        message: 'Not valid token',
+        message: 'Not valid token'
     },
     NOT_VALID_REFRESH_TOKEN: {
-        message: 'Not valid refresh token',
+        message: 'Not valid refresh token'
     },
     FORBIDDEN: {
-        message: 'Access denied',
+        message: 'Access denied'
     },
     CREATE_ADMIN_IS_FORBIDDEN: {
-        message: 'Create admin role is forbidden',
+        message: 'Create admin role is forbidden'
     },
     WRONG_ACTION: {
-        message: 'Wrong action',
+        message: 'Wrong action'
     },
     WRONG_MAIL_ACTION: {
-        message: 'Wrong email action',
+        message: 'Wrong email action'
     },
     CORS_NOT_ALLOWED: {
         message: 'Cors not allowed'

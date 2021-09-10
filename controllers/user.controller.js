@@ -16,12 +16,12 @@ module.exports = {
     createUser: async (req, res, next) => {
         try {
             const {
-                avatar,
                 body: {
                     password,
                 }
             } = req;
 
+            const avatar = Object.values(req.files);
             if (!avatar) {
                 req.body.avatar = EMPTY_AVATAR_URL;
             }
@@ -29,7 +29,7 @@ module.exports = {
             const hashedPassword = await passwordHasher.hash(password);
 
             if (avatar) {
-                const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, USER);
+                const cloudResponse = await fileService.uploadFile(avatar[0].tempFilePath, USER);
                 req.body.avatar = cloudResponse.url;
             }
 
@@ -68,24 +68,26 @@ module.exports = {
             const {
                 params: { id },
                 body: { password },
-                avatar
             } = req;
+
             const checkUser = await userService.findOneByParams({ _id: id });
 
+            const avatar = Object.values(req.files);
             if (!avatar) {
                 req.body.avatar = checkUser.avatar;
-            }
-
-            if (password) {
-                req.body.password = await passwordHasher.hash(password);
             }
 
             if (avatar) {
                 if (checkUser.avatar) {
                     await fileService.deleteFile(checkUser.avatar, USER_DELETE);
                 }
-                const cloudResponse = await fileService.uploadFile(avatar.tempFilePath, USER);
+                const cloudResponse = await fileService.uploadFile(avatar[0].tempFilePath, USER);
                 req.body.avatar = cloudResponse.url;
+            }
+
+            if (password) {
+                req.body.password = await passwordHasher.hash(password);
+
             }
 
             await userService.updateOne(id, { ...req.body });

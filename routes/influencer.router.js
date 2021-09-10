@@ -27,7 +27,6 @@ router.post('/',
         MANAGER
     ], CREATE),
     imageMiddleware.checkImage,
-    imageMiddleware.checkAvatar,
     dynamicMiddleware.checkIsBodyDataValid(influencerValidator.createInfluencer),
     influencerController.createInfluencer);
 
@@ -40,7 +39,6 @@ router.put('/:id',
     ], UPDATE),
     dynamicMiddleware.checkIsBodyDataValid(influencerValidator.updateInfluencer),
     imageMiddleware.checkImage,
-    imageMiddleware.checkAvatar,
     influencerController.updateInfluencer);
 
 module.exports = router;
