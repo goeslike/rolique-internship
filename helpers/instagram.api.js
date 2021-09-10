@@ -1,6 +1,6 @@
 const { IgApiClient } = require('instagram-private-api');
 
-const { INSTAGRAM_LOGIN, INSTAGRAM_PASSWORD } = require('../configs/config');
+const { INSTAGRAM_LOGIN, INSTAGRAM_PASSWORD } = process.env;
 
 module.exports = (function() {
     const apiClient = new IgApiClient();

@@ -1,6 +1,7 @@
 const tikTokScrapper = require('tiktok-scraper');
+
+const { SESSION_LIST } = process.env;
 const { COUNT_OF_POSTS } = require('../constants/constants');
-const { SESSION_LIST } = require('../configs/config');
 
 module.exports = {
     getTiktokData: async (username) => {

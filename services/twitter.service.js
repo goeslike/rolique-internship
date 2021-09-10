@@ -1,5 +1,6 @@
 const { TwitterApi } = require('twitter-api-v2');
-const { TWITTER_BEARER_TOKEN } = require('../configs/config');
+
+const { TWITTER_BEARER_TOKEN } = process.env;
 const { COUNT_OF_POSTS } = require('../constants/constants');
 
 const twitterClient = new TwitterApi(TWITTER_BEARER_TOKEN).readOnly;

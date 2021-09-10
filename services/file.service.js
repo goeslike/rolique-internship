@@ -3,18 +3,10 @@ const DatauriParser = require('datauri/parser');
 
 const parser = new DatauriParser();
 
-const {
-    config: {
-        CLOUD_NAME,
-        API_KEY_CLOUD,
-        API_SECRET_CLOUD
-    }
-} = require('../configs');
-
 cloudinary.config({
-    cloud_name: CLOUD_NAME,
-    api_key: API_KEY_CLOUD,
-    api_secret: API_SECRET_CLOUD
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY_CLOUD,
+    api_secret: process.env.API_SECRET_CLOUD
 });
 
 

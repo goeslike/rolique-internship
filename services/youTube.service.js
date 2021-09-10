@@ -1,8 +1,8 @@
 const { google } = require('googleapis');
-const { BASE_YOUTUBE_URL, YOUTUBE_API_KEY } = require('../configs/config');
-const { COUNT_OF_POSTS } = require('../constants/constants');
 
 const youtube = google.youtube('v3');
+const { BASE_YOUTUBE_URL, YOUTUBE_API_KEY } = process.env;
+const { COUNT_OF_POSTS } = require('../constants/constants');
 
 module.exports = {
     getVideoData: async (username) => {
@@ -10,7 +10,7 @@ module.exports = {
             key: YOUTUBE_API_KEY,
             part: 'snippet',
             q: username,
-            maxResults: COUNT_OF_POSTS,
+            maxResults: COUNT_OF_POSTS + 1,
         });
 
         const { items } = response.data;
