@@ -21,11 +21,11 @@ router.get('/:id',
     influencerController.getInfluencerById);
 
 router.post('/',
-    // authMiddleware.checkAccessToken,
-    // accessMiddleware.checkRole([
-    //     ADMIN,
-    //     MANAGER
-    // ], CREATE),
+    authMiddleware.checkAccessToken,
+    accessMiddleware.checkRole([
+        ADMIN,
+        MANAGER
+    ], CREATE),
     imageMiddleware.checkImage,
     dynamicMiddleware.checkIsBodyDataValid(influencerValidator.createInfluencer),
     influencerController.createInfluencer);
