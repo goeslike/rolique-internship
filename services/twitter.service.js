@@ -1,5 +1,6 @@
 const { TwitterApi } = require('twitter-api-v2');
 const { TWITTER_BEARER_TOKEN } = require('../configs/config');
+const { COUNT_OF_POSTS } = require('../constants/constants');
 
 const twitterClient = new TwitterApi(TWITTER_BEARER_TOKEN).readOnly;
 
@@ -7,7 +8,7 @@ const getTweets = async (username) => {
     const { data: { id } } = await twitterClient.v2.userByUsername(username);
     const response = await twitterClient.v2.userLikedTweets(id,
         {
-            max_results: 8,
+            max_results: COUNT_OF_POSTS,
             expansions: 'attachments.media_keys',
             'tweet.fields': 'entities',
             'media.fields': [

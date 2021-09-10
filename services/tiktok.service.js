@@ -1,11 +1,12 @@
 const tikTokScrapper = require('tiktok-scraper');
+const { COUNT_OF_POSTS } = require('../constants/constants');
 const { SESSION_LIST } = require('../configs/config');
 
 module.exports = {
     getTiktokData: async (username) => {
         try {
             const posts = await tikTokScrapper.user(username, {
-                number: 8,
+                number: COUNT_OF_POSTS,
                 sessionList: [SESSION_LIST]
             });
             const tiktokData = posts.collector;
@@ -18,8 +19,7 @@ module.exports = {
                 });
             });
             return videoData;
-        } catch
-        (error) {
+        } catch (error) {
             console.log(error);
         }
     }

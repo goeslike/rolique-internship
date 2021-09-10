@@ -1,5 +1,6 @@
 module.exports = {
     AUTHORIZATION: 'Authorization',
+    COUNT_OF_POSTS: 8,
     INFLUENCER_IS_CREATED: 'Influencer is created',
     INFLUENCER_IS_UPDATED: 'Influencer is updated',
     FOLDER_NAME: {

@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
-const { BASE_YOUTUBE_URL } = require('../configs/config');
-const { YOUTUBE_API_KEY } = require('../configs/config');
+const { BASE_YOUTUBE_URL, YOUTUBE_API_KEY } = require('../configs/config');
+const { COUNT_OF_POSTS } = require('../constants/constants');
 
 const youtube = google.youtube('v3');
 
@@ -10,7 +10,7 @@ module.exports = {
             key: YOUTUBE_API_KEY,
             part: 'snippet',
             q: username,
-            maxResults: 13,
+            maxResults: COUNT_OF_POSTS,
         });
 
         const { items } = response.data;
