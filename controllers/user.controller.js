@@ -18,17 +18,18 @@ module.exports = {
             const {
                 body: {
                     password,
-                }
+                },
+                files
             } = req;
 
-            const avatar = Object.values(req.files);
-            if (!avatar) {
+            if (!files) {
                 req.body.avatar = EMPTY_AVATAR_URL;
             }
 
             const hashedPassword = await passwordHasher.hash(password);
 
-            if (avatar) {
+            if (files) {
+                const avatar = Object.values(req.files);
                 const cloudResponse = await fileService.uploadFile(avatar[0].tempFilePath, USER);
                 req.body.avatar = cloudResponse.url;
             }
@@ -68,19 +69,20 @@ module.exports = {
             const {
                 params: { id },
                 body: { password },
+                files
             } = req;
 
             const checkUser = await userService.findOneByParams({ _id: id });
 
-            const avatar = Object.values(req.files);
-            if (!avatar) {
+            if (!files) {
                 req.body.avatar = checkUser.avatar;
             }
 
-            if (avatar) {
+            if (files) {
                 if (checkUser.avatar) {
                     await fileService.deleteFile(checkUser.avatar, USER_DELETE);
                 }
+                const avatar = Object.values(req.files);
                 const cloudResponse = await fileService.uploadFile(avatar[0].tempFilePath, USER);
                 req.body.avatar = cloudResponse.url;
             }
